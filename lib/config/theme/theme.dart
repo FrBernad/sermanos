@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ser_manos/config/theme/text_theme.dart';
 
 import 'app_colors.dart';
 
@@ -14,8 +15,8 @@ class AppTheme {
     return ThemeData(
       useMaterial3: true,
       brightness: _brightness,
-      // fontFamily: 'Lexend',
-      // textTheme: appTextTheme,
+      fontFamily: 'Roboto',
+      textTheme: appTextTheme,
       // appBarTheme: appBarTheme,
       // scaffoldBackgroundColor: AppColors.brandWhite,
       inputDecorationTheme: InputDecorationTheme(
