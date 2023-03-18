@@ -1,0 +1,36 @@
+{
+    "@@locale" : "en",
+
+    "invalidEmail": "Sign In",
+    "@invalidEmail": {
+        "description": "Sign Up login text in signUp screen"
+    },
+    "userDisabled": "Sign In",
+    "@userDisabled": {
+        "description": "Sign Up login text in signUp screen"
+    },
+    "userNotFound": "Sign In",
+    "@userNotFound": {
+        "description": "Sign Up login text in signUp screen"
+    },
+    "wrongPassword": "Sign In",
+    "@wrongPassword": {
+        "description": "Sign Up login text in signUp screen"
+    },
+    "emailAlreadyInUse": "Sign In",
+    "@emailAlreadyInUse": {
+        "description": "Sign Up login text in signUp screen"
+    },
+    "operationNotAllowed": "Sign In",
+    "@operationNotAllowed": {
+        "description": "Sign Up login text in signUp screen"
+    },
+    "weakPassword": "Sign In",
+    "@weakPassword": {
+        "description": "Sign Up login text in signUp screen"
+    },
+    "unknownAuthError": "Sign In",
+    "@unknownAuthError": {
+        "description": "Sign Up login text in signUp screen"
+    }
+}

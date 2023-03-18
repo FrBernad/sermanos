@@ -3,4 +3,4 @@
 - [Nicolás Rampoldi](https://github.com/NicolasRampoldi)
 - [Agustín Manfredi](https://github.com/imanfredi)
 
-# Diseño de Aplicaciones Multiplataforma
+# Ser Manos - Diseño de Aplicaciones Multiplataforma

@@ -1,0 +1,12 @@
+{
+    "@@locale" : "es",
+
+    "invalidEmail": "Email invalido",
+    "userDisabled": "Usuario deshabilitado",
+    "userNotFound": "Email o constraseña incorrecta.",
+    "wrongPassword": "Email o constraseña incorrecta",
+    "emailAlreadyInUse": "Ya existe un usuario registrado bajo ese email",
+    "operationNotAllowed": "Operacion no habilitada",
+    "weakPassword": "Contraseña debil",
+    "unknownAuthError": "Error desconocido"
+}
