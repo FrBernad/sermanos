@@ -1,37 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:ser_manos/config/theme/app_typography.dart';
+import 'package:sermanos/config/theme/app_text_styles.dart';
+
+import 'app_typography.dart';
 
 TextTheme appTextTheme = const TextTheme(
-  displayLarge: TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: AppTypography.headline01,
-  ),
-  displayMedium: TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: AppTypography.headline02,
-  ),
-  titleMedium: TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: AppTypography.subtitle01,
-  ),
-  bodyLarge: TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: AppTypography.body01,
-  ),
-  bodyMedium: TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: AppTypography.body02,
-  ),
-  labelLarge: TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: AppTypography.button,
-  ),
-  bodySmall: TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: AppTypography.caption,
-  ),
-  labelSmall: TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: AppTypography.overline,
-  ),
+  displayLarge: AppTextStyles.headline01,
+  displayMedium: AppTextStyles.headline02,
+  titleMedium: AppTextStyles.subtitle01,
+  bodyLarge: AppTextStyles.body01,
+  bodyMedium: AppTextStyles.body02,
+  labelLarge: AppTextStyles.button,
+  bodySmall: AppTextStyles.caption,
+  labelSmall: AppTextStyles.overline,
 );

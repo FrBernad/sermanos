@@ -2,7 +2,11 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sermanos/features/core/presentation/widgets/colored_tab.dart';
+import 'package:sermanos/features/core/presentation/widgets/colored_tab.dart';
+import 'package:sermanos/features/core/presentation/widgets/colored_tab.dart';
 
+import '../../../../config/theme/app_colors.dart';
 import '../../../news/presentation/screens/news_screen.dart';
 import '../../../postulate/presentation/screens/postulate_screen.dart';
 import '../../../profile/presentation/screens/profile_screen.dart';
@@ -24,32 +28,46 @@ class RootNavigationLayout extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('App Title'),
-        bottom: TabBar(
-          controller: tabController,
-          onTap: (int idx) => _onTap(context, tabController.index),
-          indicatorSize: TabBarIndicatorSize.tab,
-          splashBorderRadius: BorderRadius.zero,
-          tabs: <Widget>[
-            Tab(
-              text: 'Postularse',
-            ),
-            Tab(
-              text: 'Mi Perfil',
-            ),
-            Tab(
-              text: 'Novedades',
-            ),
-          ],
+        title: const Image(
+          image: AssetImage('assets/images/sermanos_logo_reactangle.png'),
+          height: 30,
+          fit: BoxFit.contain,
         ),
       ),
-      body: TabBarView(
-        controller: tabController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: const <Widget>[
-          PostulateScreen(),
-          ProfileScreen(),
-          NewsScreen(),
+      body: Column(
+        children: [
+          Container(
+            color: AppColors.secondary100,
+            child: TabBar(
+              controller: tabController,
+              onTap: (int idx) => _onTap(context, tabController.index),
+              tabs: <Widget>[
+                Tab(
+                  text: 'Postularse',
+                  // color: AppColors.secondary100,
+                ),
+                Tab(
+                  text: 'Mi Perfil',
+                  // color: AppColors.secondary100,
+                ),
+                Tab(
+                  text: 'Novedades',
+                  // color: AppColors.secondary100,
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: TabBarView(
+              controller: tabController,
+              physics: const NeverScrollableScrollPhysics(),
+              children: const <Widget>[
+                PostulateScreen(),
+                ProfileScreen(),
+                NewsScreen(),
+              ],
+            ),
+          ),
         ],
       ),
     );

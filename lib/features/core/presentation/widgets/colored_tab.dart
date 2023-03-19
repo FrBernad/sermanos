@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 class ColoredTab extends StatelessWidget {
   const ColoredTab({
     Key? key,
-    required this.child,
+    required this.text,
     required this.color,
   }) : super(key: key);
 
   final Color color;
-  final Widget child;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: color,
       width: double.infinity,
-      child: Tab(child: child),
+      child: Tab(text: text),
     );
   }
 }
