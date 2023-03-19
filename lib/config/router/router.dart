@@ -1,12 +1,12 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:ser_manos/features/news/presentation/screens/news_screen.dart';
-import 'package:ser_manos/features/news/router.dart';
-import 'package:ser_manos/features/postulate/presentation/screens/postulate_screen.dart';
-import 'package:ser_manos/features/postulate/router.dart';
-import 'package:ser_manos/features/profile/presentation/screens/profile_screen.dart';
-import 'package:ser_manos/features/profile/router.dart';
 
+import '../../features/news/presentation/screens/news_screen.dart';
+import '../../features/news/router.dart';
+import '../../features/postulate/presentation/screens/postulate_screen.dart';
+import '../../features/postulate/router.dart';
+import '../../features/profile/presentation/screens/profile_screen.dart';
+import '../../features/profile/router.dart';
 import 'guards/logger.dart';
 
 // GoRouter configuration

@@ -1,4 +1,4 @@
-name: ser_manos
+name: sermanos
 description: Ser Manos - Diseño de Aplicaciones Multiplataforma
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -52,7 +52,6 @@ dependencies:
   cached_network_image: ^3.2.3
   flutter_hooks: ^0.18.6
   hooks_riverpod: ^2.1.3
-  flutter_secure_storage: ^8.0.0
   shared_preferences: ^2.0.18
 #  firebase_core: ^2.4.1
 #  firebase_database: ^10.0.9
@@ -102,15 +101,15 @@ flavorizr:
         name: "Ser Manos Development"
 
       android:
-        applicationId: "ar.edu.itba.ser_manos.development"
+        applicationId: "ar.edu.itba.sermanos.development"
       ios:
-        bundleId: "ar.edu.itba.ser_manos.development"
+        bundleId: "ar.edu.itba.sermanos.development"
 
     production:
       app:
         name: "Ser Manos"
 
       android:
-        applicationId: "ar.edu.itba.ser_manos.production"
+        applicationId: "ar.edu.itba.sermanos.production"
       ios:
-        bundleId: "ar.edu.itba.ser_manos.production"
+        bundleId: "ar.edu.itba.sermanos.production"

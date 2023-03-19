@@ -1,0 +1,24 @@
+flutter_native_splash:
+
+  android: true
+  ios: true
+
+  # Light Mode
+  color: "#ffffff"
+  image: assets/images/splash_screen_icon.png
+
+  # Dark Mode
+  #color_dark: "#042a49"
+  #image_dark: assets/splash-invert.png
+
+  android_12:
+
+    # Light Mode
+    image: assets/images/splash_screen_icon.png
+    color: "#ffffff"
+
+    # Dark Mode
+    #image_dark: assets/android12splash-invert.png
+    #color_dark: "#042a49"
+
+  fullscreen: true

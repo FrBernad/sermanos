@@ -33,12 +33,12 @@ android {
     productFlavors {
         development {
             dimension "flavor-type"
-            applicationId "ar.edu.itba.ser_manos.development"
+            applicationId "ar.edu.itba.sermanos.development"
             resValue "string", "app_name", "Ser Manos Development"
         }
         production {
             dimension "flavor-type"
-            applicationId "ar.edu.itba.ser_manos.production"
+            applicationId "ar.edu.itba.sermanos.production"
             resValue "string", "app_name", "Ser Manos"
         }
     }
@@ -63,7 +63,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "ar.edu.itba.ser_manos"
+        applicationId "ar.edu.itba.sermanos"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
         minSdkVersion 21 // For Firebase

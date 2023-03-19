@@ -1,8 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/router.dart';
-import 'package:ser_manos/features/news/presentation/screens/news_screen.dart';
-import 'package:ser_manos/features/postulate/presentation/screens/postulate_screen.dart';
+import 'package:sermanos/features/news/presentation/screens/news_screen.dart';
 
 import '../core/router.dart';
 

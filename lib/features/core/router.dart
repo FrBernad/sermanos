@@ -1,7 +1,8 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:ser_manos/features/core/presentation/root_navigation_layout.dart';
-import 'package:ser_manos/features/postulate/presentation/screens/postulate_screen.dart';
+import 'package:sermanos/features/core/presentation/layouts/root_navigation_layout.dart';
+
+import '../postulate/presentation/screens/postulate_screen.dart';
 
 class RootNavigationLocation extends BeamLocation<BeamState> {
   RootNavigationLocation();

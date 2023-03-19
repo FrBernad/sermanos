@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 // import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ser_manos/config/http_clients/dio_interceptor.dart';
 
 import '../flavors.dart';
 import 'env/env.dart';
@@ -21,22 +20,22 @@ final envProvider = Provider(
 ///
 /// Data Dependencies
 ///
-final dioProvider = Provider(
-  name: 'dioProvider',
-  (ref) {
-    var env = ref.watch(envProvider);
-    var options = BaseOptions(
-      baseUrl: env.apiBaseUrl,
-    );
-
-    var dio = Dio(options);
-    if (F.appFlavor == Flavor.development) {
-      dio.interceptors.add(DioInterceptor());
-    }
-
-    return dio;
-  },
-);
+// final dioProvider = Provider(
+//   name: 'dioProvider',
+//   (ref) {
+//     var env = ref.watch(envProvider);
+//     var options = BaseOptions(
+//       baseUrl: env.apiBaseUrl,
+//     );
+//
+//     var dio = Dio(options);
+//     if (F.appFlavor == Flavor.development) {
+//       dio.interceptors.add(DioInterceptor());
+//     }
+//
+//     return dio;
+//   },
+// );
 //
 // final firebaseAuthProvider = Provider(
 //   name: 'firebaseAuthClientProvider',
@@ -62,8 +61,8 @@ Future<void> initializeProviders(ProviderContainer container) async {
   container.read(envProvider); // read to initialize
 
   /// Dio Setup
-  container.read(dioProvider);
-
+  // container.read(dioProvider);
+  //
   /// Firebase Auth Setup
   // container.read(firebaseAuthProvider);
 

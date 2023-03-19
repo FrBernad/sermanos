@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:ser_manos/features/core/utils/extensions/build_context_extensions.dart';
+import 'package:sermanos/features/core/utils/extensions/build_context_extensions.dart';
 
 import '../error/firebase_error_codes.dart';
 

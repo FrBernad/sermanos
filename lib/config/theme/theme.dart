@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ser_manos/config/theme/text_theme.dart';
+import 'package:sermanos/config/theme/tab_bar_theme.dart';
 
 import 'app_colors.dart';
 
@@ -19,6 +19,7 @@ class AppTheme {
       textTheme: appTextTheme,
       // appBarTheme: appBarTheme,
       // scaffoldBackgroundColor: AppColors.brandWhite,
+      tabBarTheme: appTabBarTheme,
       inputDecorationTheme: InputDecorationTheme(
         errorStyle: TextStyle(
           color: Colors.red.shade500,
