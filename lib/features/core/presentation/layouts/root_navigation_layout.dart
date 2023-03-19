@@ -41,18 +41,15 @@ class RootNavigationLayout extends HookConsumerWidget {
             child: TabBar(
               controller: tabController,
               onTap: (int idx) => _onTap(context, tabController.index),
-              tabs: <Widget>[
+              tabs: const <Widget>[
                 Tab(
                   text: 'Postularse',
-                  // color: AppColors.secondary100,
                 ),
                 Tab(
                   text: 'Mi Perfil',
-                  // color: AppColors.secondary100,
                 ),
                 Tab(
                   text: 'Novedades',
-                  // color: AppColors.secondary100,
                 ),
               ],
             ),
