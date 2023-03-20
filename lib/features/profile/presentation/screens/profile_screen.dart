@@ -30,6 +30,8 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
             ),
+            //FIXME: No estoy seguro si el espacio es con un SizedBox o de otra forma
+            const SizedBox(height: 8),
             Container(
               width: 328,
               child: Column(
@@ -40,12 +42,14 @@ class ProfileScreen extends StatelessWidget {
                       color: AppColors.neutral750,
                     ),
                   ),
+                  const SizedBox(height: 8),
                   Text(
                     "Juan Cruz",
                     style: AppTextStyles.subtitle01.copyWith(
                       color: AppColors.neutral100,
                     ),
                   ),
+                  const SizedBox(height: 8),
                   Text(
                     "¡Completá tu perfil para tener acceso a mejores oportunidades!",
                     textAlign: TextAlign.center,
