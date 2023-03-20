@@ -39,7 +39,7 @@ class ProfileScreen extends StatelessWidget {
                   Text(
                     "VOLUNTARIO",
                     style: AppTextStyles.overline.copyWith(
-                      color: AppColors.neutral750,
+                      color: AppColors.neutral75,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -54,7 +54,7 @@ class ProfileScreen extends StatelessWidget {
                     "¡Completá tu perfil para tener acceso a mejores oportunidades!",
                     textAlign: TextAlign.center,
                     style: AppTextStyles.body01.copyWith(
-                      color: AppColors.neutral750,
+                      color: AppColors.neutral75,
                     ),
                   ),
                 ],
@@ -70,7 +70,7 @@ class ProfileScreen extends StatelessWidget {
             size: 24,
           ),
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary0,
+            backgroundColor: AppColors.primary100,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4), // <-- Radius
             ),
