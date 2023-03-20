@@ -1,4 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:sermanos/config/theme/app_text_styles.dart';
+
+import '../../../../config/theme/app_colors.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const route = "/?tab=profile";
@@ -8,8 +12,76 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("profile"),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Column(
+          children: [
+            ClipOval(
+              child: SizedBox.fromSize(
+                size: const Size.fromRadius(48), // Image radius
+                child: CachedNetworkImage(
+                  imageUrl:
+                      "https://s3-alpha-sig.figma.com/img/113f/a25a/235312cc53dcd4c8780648145d59e3c2?Expires=1680480000&Signature=Vk56T0L8GpTjfwOxZhYvCS3uCSow958NYuvKqoXrke-b5SwAMwtRB3fPfN4dMwbCVeHBvbGrdL053DuPqHnistbH1APR~jK-It9KnuBp3lqPkxPKucOZHTXTO1dwICQWCf10S6wC6AG5eO62GIrA~5NwSFCSsql4maPHM8JCBQw~~RqnWKqUVkoKbKmTWe89F-WYlvcewlkIZwlfF7kn3TcUj93oP8fl~eUXjWsYe53kXPlTi1hYyycTN1cG~6avdi6ozbDvCe4B1qDQFLPKUo3XqZUIEVmY4iy3qNV8DK1SSsX2DvKWjHOKALnj4Seqx6GKgp2A8ZRgyvqjBIxkdw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4",
+                  height: 120,
+                  width: 120,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            Container(
+              width: 328,
+              child: Column(
+                children: [
+                  Text(
+                    "VOLUNTARIO",
+                    style: AppTextStyles.overline.copyWith(
+                      color: AppColors.neutral750,
+                    ),
+                  ),
+                  Text(
+                    "Juan Cruz",
+                    style: AppTextStyles.subtitle01.copyWith(
+                      color: AppColors.neutral100,
+                    ),
+                  ),
+                  Text(
+                    "¡Completá tu perfil para tener acceso a mejores oportunidades!",
+                    textAlign: TextAlign.center,
+                    style: AppTextStyles.body01.copyWith(
+                      color: AppColors.neutral750,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+        TextButton.icon(
+          onPressed: () {},
+          icon: const Icon(
+            Icons.add,
+            color: AppColors.neutral0,
+            size: 24,
+          ),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AppColors.primary0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4), // <-- Radius
+            ),
+            padding: const EdgeInsets.all(
+              14.0,
+            ),
+          ),
+          label: const Text(
+            "Completar",
+            style: TextStyle(
+              color: AppColors.neutral0,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
