@@ -42,15 +42,9 @@ class RootNavigationLayout extends HookConsumerWidget {
               controller: tabController,
               onTap: (int idx) => _onTap(context, tabController.index),
               tabs: const <Widget>[
-                Tab(
-                  text: 'Postularse',
-                ),
-                Tab(
-                  text: 'Mi Perfil',
-                ),
-                Tab(
-                  text: 'Novedades',
-                ),
+                Tab(text: 'Postularse'),
+                Tab(text: 'Mi Perfil'),
+                Tab(text: 'Novedades'),
               ],
             ),
           ),
