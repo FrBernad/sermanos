@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sermanos/config/theme/app_colors.dart';
 import 'package:sermanos/config/theme/app_text_styles.dart';
 import 'package:sermanos/config/theme/app_typography.dart';
+import 'package:sermanos/features/postulate/presentation/widgets/postulation_confirmation_dialog.dart';
 import 'package:sermanos/features/postulate/presentation/widgets/search_input.dart';
 
 import '../widgets/postulate_list.dart';
@@ -53,7 +54,7 @@ class PostulateDetailScreen extends HookConsumerWidget {
               ),
               Positioned.fill(
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Colors.white,
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
@@ -62,7 +63,7 @@ class PostulateDetailScreen extends HookConsumerWidget {
                         Colors.black,
                         Colors.transparent,
                       ],
-                      stops: const [0.0, 0.3555],
+                      stops: [0.0, 0.3555],
                     ),
                   ),
                 ),
@@ -122,7 +123,10 @@ class PostulateDetailScreen extends HookConsumerWidget {
                             ),
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () async {
+                          final bool? confirmed =
+                              await _showConfirmationDialog(context);
+                        },
                         child: Text(
                           'Postularme',
                           style: AppTextStyles.button.copyWith(
@@ -139,6 +143,17 @@ class PostulateDetailScreen extends HookConsumerWidget {
           ),
         ],
       ),
+    );
+  }
+
+  Future<bool?> _showConfirmationDialog(BuildContext context) async {
+    return await showDialog<bool?>(
+      barrierDismissible: false,
+      // barrierColor: AppColors.neutral0.withOpacity(0.1),
+      context: context,
+      builder: (BuildContext c) {
+        return PostulationConfirmationDialog();
+      },
     );
   }
 }
