@@ -61,7 +61,7 @@ class RootNavigationLayout extends HookConsumerWidget {
             child: TabBarView(
               controller: tabController,
               physics: const NeverScrollableScrollPhysics(),
-              children: const <Widget>[
+              children: <Widget>[
                 PostulateScreen(),
                 ProfileScreen(),
                 NewsScreen(),
