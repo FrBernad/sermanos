@@ -1,5 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:sermanos/features/auth/presentation/screens/landing_screen.dart';
+import 'package:sermanos/features/auth/router.dart';
 
 import '../../features/news/presentation/screens/news_screen.dart';
 import '../../features/news/router.dart';
@@ -11,7 +13,7 @@ import 'guards/logger.dart';
 
 // GoRouter configuration
 final mainBeamerDelegate = BeamerDelegate(
-  initialPath: PostulateScreen.route,
+  initialPath: LandingScreen.route,
   locationBuilder: _locationBuilder,
   guards: [
     routerLogger,
@@ -19,7 +21,12 @@ final mainBeamerDelegate = BeamerDelegate(
 );
 
 BeamLocation<RouteInformationSerializable<dynamic>> _locationBuilder(
-    RouteInformation routeInformation, BeamParameters? beamParameters) {
+  RouteInformation routeInformation,
+  BeamParameters? beamParameters,
+) {
+  if (routeInformation.location!.contains(LandingScreen.routeName)) {
+    return AuthLocation(routeInformation);
+  }
   if (routeInformation.location!.contains(PostulateScreen.routeName)) {
     return PostulateLocation(routeInformation);
   }
@@ -29,5 +36,5 @@ BeamLocation<RouteInformationSerializable<dynamic>> _locationBuilder(
   if (routeInformation.location!.contains(NewsScreen.routeName)) {
     return NewsLocation(routeInformation);
   }
-  return PostulateLocation(routeInformation);
+  return AuthLocation(routeInformation);
 }
