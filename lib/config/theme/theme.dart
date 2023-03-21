@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sermanos/config/theme/tab_bar_theme.dart';
 import 'package:sermanos/config/theme/text_theme.dart';
 
-import 'app_colors.dart';
 import 'appbar_theme.dart';
 
 /// Default [ThemeData] for Courtyard

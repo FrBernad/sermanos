@@ -35,20 +35,6 @@ class Information extends StatelessWidget {
             description,
             style: Theme.of(context).textTheme.bodyMedium,
           ),
-          Align(
-            alignment: Alignment.bottomRight,
-            child: TextButton(
-              onPressed: null,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 12.0, horizontal: 8.0),
-                child: Text(
-                  'Leer Más',
-                  style: Theme.of(context).textTheme.labelLarge,
-                ),
-              ),
-            ),
-          ),
         ],
       ),
     );

@@ -2,9 +2,6 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sermanos/features/core/presentation/widgets/colored_tab.dart';
-import 'package:sermanos/features/core/presentation/widgets/colored_tab.dart';
-import 'package:sermanos/features/core/presentation/widgets/colored_tab.dart';
 
 import '../../../../config/theme/app_colors.dart';
 import '../../../news/presentation/screens/news_screen.dart';

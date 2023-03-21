@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:sermanos/config/theme/app_colors.dart';
 import 'package:sermanos/features/news/domain/models/news.dart';
 import 'package:sermanos/features/news/presentation/widgets/information.dart';
 
@@ -17,7 +18,6 @@ class NewsCard extends StatelessWidget {
         bottom: 24.0,
         right: 16,
         left: 16,
-
       ),
       decoration: BoxDecoration(
           color: Colors.white,
@@ -45,11 +45,34 @@ class NewsCard extends StatelessWidget {
               width: 118,
               fit: BoxFit.cover,
             ),
-          Expanded(
-              child: Information(
-                  title: news.title,
-                  subTitle: news.subtitle,
-                  description: news.description),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Information(
+                    title: news.title,
+                    subTitle: news.subtitle,
+                    description: news.description,
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: null,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 12.0, horizontal: 8.0),
+                        child: Text(
+                          'Leer Más',
+                          style: Theme.of(context)
+                              .textTheme
+                              .labelLarge
+                              ?.copyWith(color: AppColors.primary100),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             )
           ],
         ),
