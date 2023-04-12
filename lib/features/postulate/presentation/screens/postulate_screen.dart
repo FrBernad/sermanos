@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sermanos/features/postulate/presentation/widgets/search_input.dart';
 
+import '../../../../config/design_system/molecules/inputs/sermanos_search_bar.dart';
 import '../widgets/postulate_list.dart';
 
 class PostulateScreen extends ConsumerWidget {
@@ -16,7 +16,7 @@ class PostulateScreen extends ConsumerWidget {
       padding: const EdgeInsets.all(16.0),
       child: Column(
         children: const [
-          SearchInput(),
+          SermanosSearchBar(),
           SizedBox(height: 32),
           Expanded(child: PostulateList()),
         ],

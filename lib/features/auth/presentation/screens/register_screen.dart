@@ -1,14 +1,15 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:sermanos/config/design_system/molecules/sermanos_input.dart';
-import 'package:sermanos/config/design_system/molecules/sermanos_input.dart';
-import 'package:sermanos/config/design_system/molecules/sermanos_input.dart';
-import 'package:sermanos/config/design_system/molecules/sermanos_input.dart';
+import 'package:sermanos/config/design_system/cellules/forms/sermanos_register_form.dart';
+import 'package:sermanos/config/design_system/molecules/inputs/sermanos_text_field.dart';
+import 'package:sermanos/config/design_system/molecules/inputs/sermanos_text_field.dart';
+import 'package:sermanos/config/design_system/molecules/inputs/sermanos_text_field.dart';
+import 'package:sermanos/config/design_system/molecules/inputs/sermanos_text_field.dart';
 import 'package:sermanos/features/auth/presentation/screens/login_screen.dart';
 import 'package:sermanos/features/auth/presentation/screens/welcome_screen.dart';
 
-import '../../../../config/design_system/molecules/sermanos_CTA_button.dart';
+import '../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
 
@@ -41,48 +42,10 @@ class RegisterScreen extends StatelessWidget {
                     height: 150,
                   ),
                   const SizedBox(height: 32),
-                  FormBuilder(
-                    key: _registerFormKey,
-                    child: Column(
-                      children: const [
-                        SermanosInput(
-                          formField: 'name',
-                          initialValue: '',
-                          label: 'Email',
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          placeholder: 'Ej: Juan',
-                        ),
-                        SizedBox(height: 24),
-                        SermanosInput(
-                          formField: 'surname',
-                          initialValue: '',
-                          label: 'Apellido',
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          placeholder: 'Ej: Barcena',
-                        ),
-                        SizedBox(height: 24),
-                        SermanosInput(
-                          formField: 'email',
-                          initialValue: '',
-                          label: 'Email',
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          placeholder: 'Ej: juanbarcena@gmail.com',
-                        ),
-                        SizedBox(height: 24),
-                        SermanosInput(
-                          formField: 'password',
-                          initialValue: '',
-                          label: 'Contraseña',
-                          password: true,
-                          floatingLabelBehavior: FloatingLabelBehavior.always,
-                          placeholder: 'Ej: ABCD1234',
-                        ),
-                      ],
-                    ),
-                  ),
+                  const SermanosRegisterForm(),
+                  const SizedBox(height: 50),
                 ],
               ),
-              const SizedBox(height: 50),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,

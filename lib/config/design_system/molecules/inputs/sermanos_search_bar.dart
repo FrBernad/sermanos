@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sermanos/config/design_system/atoms/icons/sermanos_close_icon.dart';
+import 'package:sermanos/config/design_system/atoms/icons/sermanos_search_icon.dart';
 
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
 
-class SearchInput extends HookConsumerWidget {
-  const SearchInput({Key? key}) : super(key: key);
+class SermanosSearchBar extends HookConsumerWidget {
+  const SermanosSearchBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -65,11 +67,9 @@ class SearchInput extends HookConsumerWidget {
                 borderRadius: BorderRadius.all(Radius.circular(2)),
               ),
               suffixIcon: IconButton(
-                icon: Icon(
-                  isEmpty ? Icons.search : Icons.close,
-                  size: 24,
-                  color: SermanosColors.neutral75,
-                ),
+                icon: isEmpty
+                    ? const SermanosSearchIcon.enabled()
+                    : const SermanosCloseIcon.enabled(),
                 onPressed: () {
                   if (!isEmpty) {
                     controller.clear();

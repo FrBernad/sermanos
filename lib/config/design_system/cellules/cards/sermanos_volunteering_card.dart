@@ -1,9 +1,12 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:sermanos/config/design_system/atoms/icons/sermanos_location_icon.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_shadows.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 import 'package:sermanos/features/postulate/presentation/screens/postulate_detail_screen.dart';
+
+import '../../atoms/icons/sermanos_favorite_icon.dart';
 
 class SermanosVolunteeringCard extends StatelessWidget {
   const SermanosVolunteeringCard({
@@ -65,17 +68,9 @@ class SermanosVolunteeringCard extends StatelessWidget {
                   ),
                   Row(
                     children: const [
-                      Icon(
-                        Icons.favorite_outline,
-                        color: SermanosColors.primary100,
-                        size: 24,
-                      ),
+                      SermanosFavoriteIcon.enabled(),
                       SizedBox(width: 23),
-                      Icon(
-                        Icons.location_on,
-                        color: SermanosColors.primary100,
-                        size: 24,
-                      ),
+                      SermanosLocationIcon.enabled(),
                     ],
                   ),
                 ],

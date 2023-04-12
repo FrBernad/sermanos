@@ -5,11 +5,15 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sermanos/config/design_system/atoms/icons/sermanos_close_icon.dart';
+import 'package:sermanos/config/design_system/atoms/icons/sermanos_show_icon.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 
-class SermanosInput extends HookConsumerWidget {
-  const SermanosInput({
+import '../../atoms/icons/sermanos_error_icon.dart';
+
+class SermanosTextField extends HookConsumerWidget {
+  const SermanosTextField({
     Key? key,
     required this.formField,
     required this.initialValue,
@@ -60,7 +64,8 @@ class SermanosInput extends HookConsumerWidget {
             ),
             hintText: placeholder,
             hintStyle: SermanosTypography.subtitle01.copyWith(
-              color: enabled ? SermanosColors.neutral50 : SermanosColors.neutral25,
+              color:
+                  enabled ? SermanosColors.neutral50 : SermanosColors.neutral25,
             ),
             labelText: label,
             labelStyle: SermanosTypography.subtitle01.copyWith(
@@ -111,24 +116,14 @@ class SermanosInput extends HookConsumerWidget {
             ),
             suffixIcon: password
                 ? IconButton(
-                    icon: Icon(
-                      isObscured.value
-                          ? Icons.visibility
-                          : Icons.visibility_off,
-                      size: 24,
-                      color: SermanosColors.neutral75,
-                    ),
+                    icon: SermanosShowIcon.enabled(hide: isObscured.value),
                     onPressed: () {
                       isObscured.value = !isObscured.value;
                     },
                   )
                 : field.hasError
                     ? IconButton(
-                        icon: const Icon(
-                          Icons.error,
-                          size: 24,
-                          color: SermanosColors.error100,
-                        ),
+                        icon: const SermanosErrorIcon.activated(),
                         onPressed: () {
                           if (!isEmpty) {
                             controller.clear();
@@ -139,11 +134,7 @@ class SermanosInput extends HookConsumerWidget {
                     : isEmpty
                         ? null
                         : IconButton(
-                            icon: const Icon(
-                              Icons.close,
-                              size: 24,
-                              color: SermanosColors.neutral75,
-                            ),
+                            icon: const SermanosCloseIcon.enabled(),
                             onPressed: () {
                               if (!isEmpty) {
                                 controller.clear();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../tokens/sermanos_colors.dart';
-import '../tokens/sermanos_typography.dart';
+import '../../tokens/sermanos_colors.dart';
+import '../../tokens/sermanos_typography.dart';
 
 class SermanosCTAButton extends StatelessWidget {
   const SermanosCTAButton({
