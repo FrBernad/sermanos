@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
-import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 
 import 'tokens/sermanos_typography.dart';
 

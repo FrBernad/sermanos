@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_close_icon.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_search_icon.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_shadows.dart';
 
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
@@ -26,20 +27,7 @@ class SermanosSearchBar extends HookConsumerWidget {
       decoration: BoxDecoration(
         color: SermanosColors.neutral0,
         borderRadius: BorderRadius.circular(2),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.15),
-            offset: const Offset(0, 1), // changes position of shadow
-            blurRadius: 3,
-            spreadRadius: 1,
-          ),
-          BoxShadow(
-            color: Colors.black.withOpacity(0.30),
-            offset: const Offset(0, 1), // changes position of shadow
-            blurRadius: 2,
-            spreadRadius: 0,
-          ),
-        ],
+        boxShadow: SermanosShadows.shadow1,
       ),
       child: FormBuilderField<String>(
         initialValue: '',

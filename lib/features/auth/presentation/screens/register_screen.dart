@@ -2,16 +2,10 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:sermanos/config/design_system/cellules/forms/sermanos_register_form.dart';
-import 'package:sermanos/config/design_system/molecules/inputs/sermanos_text_field.dart';
-import 'package:sermanos/config/design_system/molecules/inputs/sermanos_text_field.dart';
-import 'package:sermanos/config/design_system/molecules/inputs/sermanos_text_field.dart';
-import 'package:sermanos/config/design_system/molecules/inputs/sermanos_text_field.dart';
 import 'package:sermanos/features/auth/presentation/screens/login_screen.dart';
 import 'package:sermanos/features/auth/presentation/screens/welcome_screen.dart';
 
 import '../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
-import '../../../../config/design_system/tokens/sermanos_colors.dart';
-import '../../../../config/design_system/tokens/sermanos_typography.dart';
 
 final _registerFormKey = GlobalKey<FormBuilderState>();
 

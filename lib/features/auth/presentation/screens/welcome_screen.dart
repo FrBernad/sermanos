@@ -1,6 +1,5 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:sermanos/features/auth/presentation/screens/landing_screen.dart';
 import 'package:sermanos/features/postulate/presentation/screens/postulate_screen.dart';
 
 import '../../../../config/design_system/tokens/sermanos_colors.dart';

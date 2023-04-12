@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_back_icon.dart';
-import 'package:sermanos/features/postulate/presentation/widgets/postulation_confirmation_dialog.dart';
+import 'package:sermanos/config/design_system/cellules/modals/modal.dart';
 
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
@@ -58,7 +58,7 @@ class PostulateDetailScreen extends HookConsumerWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                       colors: [
-                        Colors.black,
+                        SermanosColors.neutral100,
                         Colors.transparent,
                       ],
                       stops: [0.0, 0.3555],
@@ -147,7 +147,11 @@ class PostulateDetailScreen extends HookConsumerWidget {
       // barrierColor: AppColors.neutral0.withOpacity(0.1),
       context: context,
       builder: (BuildContext c) {
-        return const PostulationConfirmationDialog();
+        return const Modal(
+          title: 'Un techo para mi País',
+          schedule: 'Días sábados de 9.00 a 17.00 horas.',
+          location: 'Caballito',
+        );
       },
     );
   }
