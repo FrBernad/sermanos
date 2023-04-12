@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'sermanos_colors.dart';
-import 'sermanos_typography.dart';
 
 class SermanosTypography {
   SermanosTypography._();

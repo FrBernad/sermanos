@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class SermanosColors {
-  SermanosColors._();
+class SermanosShadows {
+  SermanosShadows._();
 
   static List<BoxShadow> shadow1 = [
     BoxShadow(
