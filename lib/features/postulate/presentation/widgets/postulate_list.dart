@@ -18,7 +18,9 @@ class PostulateList extends StatelessWidget {
         subtitle: info[index]["subtitle"]!,
         overline: info[index]["overline"]!,
       ),
-      separatorBuilder: (context, index) => const SizedBox(height: 24),
+      separatorBuilder: (context, index) => const SizedBox(
+        height: 24,
+      ),
     );
   }
 }

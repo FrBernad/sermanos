@@ -1,5 +1,6 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import 'package:sermanos/features/postulate/presentation/screens/postulate_screen.dart';
 
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
@@ -52,30 +53,11 @@ class WelcomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  FilledButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(SermanosColors.primary100),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                      padding: MaterialStateProperty.all(
-                        const EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 8,
-                        ),
-                      ),
-                    ),
-                    onPressed: () => context.beamToReplacementNamed(PostulateScreen.route),
-                    child: Text(
-                      'Comenzar',
-                      style: SermanosTypography.button.copyWith(
-                        color: SermanosColors.neutral0,
-                      ),
-                    ),
-                  ),
+                  SermanosCTAButton(
+                      text: "Comenzar",
+                      onPressed: () =>
+                          context.beamToReplacementNamed(PostulateScreen.route),
+                      filled: true),
                 ],
               ),
             ),

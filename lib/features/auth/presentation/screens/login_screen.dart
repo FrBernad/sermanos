@@ -41,7 +41,7 @@ class LoginScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   SermanosCTAButton(
-                    text: 'Inciar Sesión',
+                    text: 'Iniciar Sesión',
                     onPressed: () => context.beamToReplacementNamed(PostulateScreen.route),
                     filled: true,
                   ),

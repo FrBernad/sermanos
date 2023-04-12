@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_add_icon.dart';
+import 'package:sermanos/config/design_system/molecules/buttons/sermanos_short_button.dart';
 
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
@@ -63,24 +64,10 @@ class ProfileScreen extends StatelessWidget {
             ),
           ],
         ),
-        TextButton.icon(
-          onPressed: () {},
+        SermanosShortButton(
           icon: const SermanosAddIcon.enabled(),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: SermanosColors.primary100,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(4), // <-- Radius
-            ),
-            padding: const EdgeInsets.all(
-              14.0,
-            ),
-          ),
-          label: const Text(
-            "Completar",
-            style: TextStyle(
-              color: SermanosColors.neutral0,
-            ),
-          ),
+          text: "Completar",
+          onPressed: () => null,
         ),
       ],
     );

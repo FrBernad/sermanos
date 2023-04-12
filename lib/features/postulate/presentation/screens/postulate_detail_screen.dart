@@ -4,6 +4,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_back_icon.dart';
 import 'package:sermanos/config/design_system/cellules/modals/modal.dart';
+import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
@@ -25,7 +26,7 @@ class PostulateDetailScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     const String imageUrl =
-        "https://s3-alpha-sig.figma.com/img/6160/48a8/56fafc1f797d16aeaaa7f76477bdc239?Expires=1680480000&Signature=aWk2j9v609VGMNfCiuM6N0PDksdpCRH0KWj-Rj-8qa5uVsQkaI1vbK-X2lsoV7mnnA3hj-jwaHwb89cBig-KdkIdRUIBsbBpdBHp9pA-7Hzi9vxEkI622c6D2UoI9vrDHAtlUUVyxtyWqom3i9GpXWpjQXzdMww3UIGx8F52PK6bIv5tVcVP1~Jqx0UD0vUE34Yh04ONKE1820jWxcHOAq9oTJShXH3PPBUN90rC6VFRMgonQDnRjYEoM4lpvOOSrfRdOefd3yyFzfs8tDOJ64lve1SA6fQ9baeVRWRrkMzyrbVkqzJEdRSZ7I9jWB0kick3-77ieLNf94Ti-WXFbQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4";
+        'https://s3-alpha-sig.figma.com/img/6160/48a8/56fafc1f797d16aeaaa7f76477bdc239?Expires=1682294400&Signature=YANfeiuGuydv6nDtHVG2qlUxSWBdpHQ1KP4TdDWlxB8kDDuR6U~LPRGnEoO~xerlyn1mO4Mt8mhUrTL9O6vON8Jt6edFFMk~3xcu0AFQKp0sQ9TyptAdjybQgRW13RcXNMyPqojtzvD6bmH4SPnU31L9vEYdu~oKvl9XOQT0rm~YqkqiagJO0SliSNavpR3gx5~D8x384269bhfKvaznBwjmuReLRxs2QaGP1capML3IwGWNwcIr~t~gMyDicwI4cvu7M0GU2M~xhLJT8Uq6D-3pZYjI14E4LSAS-OWDYDIF5BlDwOpCLlmD-Oe7ELqTjk5qx7OmSTx8xmwiLxDutA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4';
 
     useEffect(() {
       SystemChrome.setEnabledSystemUIMode(
@@ -102,33 +103,13 @@ class PostulateDetailScreen extends HookConsumerWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      FilledButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              SermanosColors.primary100),
-                          shape: MaterialStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                          ),
-                          padding: MaterialStateProperty.all(
-                            const EdgeInsets.symmetric(
-                              vertical: 12,
-                              horizontal: 8,
-                            ),
-                          ),
-                        ),
-                        onPressed: () async {
-                          final bool? confirmed =
-                              await _showConfirmationDialog(context);
-                        },
-                        child: Text(
-                          'Postularme',
-                          style: SermanosTypography.button.copyWith(
-                            color: SermanosColors.neutral0,
-                          ),
-                        ),
-                      ),
+                      SermanosCTAButton(
+                          text: 'Postularme',
+                          onPressed: () async {
+                            final bool? confirmed =
+                                await _showConfirmationDialog(context);
+                          },
+                          filled: true),
                       const SizedBox(height: 56),
                     ],
                   ),

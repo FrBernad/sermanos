@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sermanos/config/design_system/cellules/cards/news_card/sermanos_news_card.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_grid.dart';
 import 'package:sermanos/features/news/domain/models/news.dart';
 
 class NewsScreen extends StatelessWidget {
@@ -11,15 +12,21 @@ class NewsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
-        child: ListView.separated(
-          itemCount: news.length,
-          itemBuilder: (context, index) {
-            return SermanosNewsCard(news: news[index]);
-          },
-          separatorBuilder: (context, index) => const SizedBox(height: 24),
-        ),
+      child: Column(
+        children: [
+          const SizedBox(height: SermanosGrid.defaultPadding),
+          Expanded(
+            child: ListView.separated(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: SermanosGrid.defaultPadding),
+              itemCount: news.length,
+              itemBuilder: (context, index) {
+                return SermanosNewsCard(news: news[index]);
+              },
+              separatorBuilder: (context, index) => const SizedBox(height: 24),
+            ),
+          ),
+        ],
       ),
     );
   }
