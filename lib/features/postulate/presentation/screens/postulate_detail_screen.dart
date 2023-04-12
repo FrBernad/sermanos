@@ -53,7 +53,7 @@ class PostulateDetailScreen extends HookConsumerWidget {
               Positioned.fill(
                 child: Container(
                   decoration: const BoxDecoration(
-                    color: Colors.white,
+                    color: SermanosColors.neutral0,
                     gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,

@@ -9,6 +9,7 @@ class SermanosShadows {
       color: Colors.black.withOpacity(0.3),
       offset: const Offset(0, 1), // changes position of shadow
       blurRadius: 2,
+      spreadRadius: 0,
     ),
     BoxShadow(
       color: Colors.black.withOpacity(0.15),
@@ -22,6 +23,7 @@ class SermanosShadows {
       color: Colors.black.withOpacity(0.3),
       offset: const Offset(0, 1), // changes position of shadow
       blurRadius: 2,
+      spreadRadius: 0,
     ),
     BoxShadow(
       color: Colors.black.withOpacity(0.15),
@@ -41,6 +43,7 @@ class SermanosShadows {
       color: Colors.black.withOpacity(0.3),
       offset: const Offset(0, 4), // changes position of shadow
       blurRadius: 4,
+      spreadRadius: 0,
     ),
   ];
 }

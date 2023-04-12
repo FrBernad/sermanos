@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:sermanos/features/postulate/presentation/widgets/postulate_card.dart';
 
 import '../../../../config/design_system/cellules/cards/sermanos_volunteering_card.dart';
 
