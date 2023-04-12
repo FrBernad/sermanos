@@ -8,6 +8,7 @@ import 'package:sermanos/config/design_system/molecules/sermanos_input.dart';
 import 'package:sermanos/features/auth/presentation/screens/login_screen.dart';
 import 'package:sermanos/features/auth/presentation/screens/welcome_screen.dart';
 
+import '../../../../config/design_system/molecules/sermanos_CTA_button.dart';
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
 
@@ -86,54 +87,16 @@ class RegisterScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  FilledButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(SermanosColors.primary100),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                      padding: MaterialStateProperty.all(
-                        const EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 8,
-                        ),
-                      ),
-                    ),
+                  SermanosCTAButton(
+                    text: 'Registrarse',
                     onPressed: () => context.beamToNamed(WelcomeScreen.route),
-                    child: Text(
-                      'Registrarse',
-                      style: SermanosTypography.button.copyWith(
-                        color: SermanosColors.neutral0,
-                      ),
-                    ),
+                    filled: true,
                   ),
                   const SizedBox(height: 16),
-                  TextButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                      padding: MaterialStateProperty.all(
-                        const EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 8,
-                        ),
-                      ),
-                    ),
+                  SermanosCTAButton(
+                    text: 'Ya tengo cuenta',
                     onPressed: () => context.beamToNamed(LoginScreen.route),
-                    child: Text(
-                      'Ya tengo cuenta',
-                      style: SermanosTypography.button.copyWith(
-                        color: SermanosColors.primary100,
-                      ),
-                    ),
+                    filled: false,
                   ),
                 ],
               ),

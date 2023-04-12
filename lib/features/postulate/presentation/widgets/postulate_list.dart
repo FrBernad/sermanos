@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:sermanos/config/design_system/cells/cards/ser_manos_volunteering_card.dart';
 import 'package:sermanos/features/postulate/presentation/widgets/postulate_card.dart';
+
+import '../../../../config/design_system/cellules/cards/ser_manos_volunteering_card.dart';
 
 class PostulateList extends StatelessWidget {
   const PostulateList({Key? key}) : super(key: key);
