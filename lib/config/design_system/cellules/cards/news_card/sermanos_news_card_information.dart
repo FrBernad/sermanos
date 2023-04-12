@@ -3,12 +3,13 @@ import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_but
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 
-class Information extends StatelessWidget {
-  const Information(
-      {super.key,
-      required this.title,
-      required this.subtitle,
-      required this.description});
+class SermanosNewsCardInformation extends StatelessWidget {
+  const SermanosNewsCardInformation({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.description,
+  });
 
   final String title;
   final String subtitle;

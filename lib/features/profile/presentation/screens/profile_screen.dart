@@ -6,7 +6,7 @@ import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
 
 class ProfileScreen extends StatelessWidget {
-  static const route = "/?tab=profile";
+  static const route = "/profile";
   static const routeName = "profile";
 
   const ProfileScreen({Key? key}) : super(key: key);

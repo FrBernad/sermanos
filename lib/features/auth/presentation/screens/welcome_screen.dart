@@ -6,7 +6,7 @@ import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  static const route = "/auth/welcome";
+  static const route = "/welcome";
   static const routeName = "welcome";
 
   const WelcomeScreen({
@@ -68,7 +68,7 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onPressed: () => context.beamToNamed(PostulateScreen.route),
+                    onPressed: () => context.beamToReplacementNamed(PostulateScreen.route),
                     child: Text(
                       'Comenzar',
                       style: SermanosTypography.button.copyWith(

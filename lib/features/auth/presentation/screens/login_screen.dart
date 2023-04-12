@@ -42,7 +42,7 @@ class LoginScreen extends StatelessWidget {
                 children: [
                   SermanosCTAButton(
                     text: 'Inciar Sesión',
-                    onPressed: () => context.beamToNamed(PostulateScreen.route),
+                    onPressed: () => context.beamToReplacementNamed(PostulateScreen.route),
                     filled: true,
                   ),
                   const SizedBox(height: 16),

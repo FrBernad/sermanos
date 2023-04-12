@@ -47,16 +47,6 @@ class AuthLocation extends BeamLocation<BeamState> {
       );
     }
 
-    if (state.pathPatternSegments.contains(WelcomeScreen.routeName)) {
-      pages.add(
-        BeamPage(
-          key: const ValueKey('welcome'),
-          child: const WelcomeScreen(),
-          onPopPage: _onPopPage,
-        ),
-      );
-    }
-
     return pages;
   }
 

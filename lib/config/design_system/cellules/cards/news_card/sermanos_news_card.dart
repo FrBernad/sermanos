@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:sermanos/config/design_system/cellules/cards/news_card/information.dart';
+import 'package:sermanos/config/design_system/cellules/cards/news_card/sermanos_news_card_information.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_shadows.dart';
 import 'package:sermanos/features/news/domain/models/news.dart';
@@ -31,7 +31,7 @@ class SermanosNewsCard extends StatelessWidget {
               fit: BoxFit.cover,
             ),
             Expanded(
-              child: Information(
+              child: SermanosNewsCardInformation(
                 title: news.title,
                 subtitle: news.subtitle,
                 description: news.description,

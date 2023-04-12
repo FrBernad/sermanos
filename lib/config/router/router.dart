@@ -1,6 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:sermanos/features/auth/presentation/screens/landing_screen.dart';
+import 'package:sermanos/features/auth/presentation/screens/welcome_screen.dart';
 import 'package:sermanos/features/auth/router.dart';
 
 import '../../features/news/presentation/screens/news_screen.dart';
@@ -9,6 +10,7 @@ import '../../features/postulate/presentation/screens/postulate_screen.dart';
 import '../../features/postulate/router.dart';
 import '../../features/profile/presentation/screens/profile_screen.dart';
 import '../../features/profile/router.dart';
+import '../../features/welcome/router.dart';
 import 'guards/logger.dart';
 
 // GoRouter configuration
@@ -26,6 +28,9 @@ BeamLocation<RouteInformationSerializable<dynamic>> _locationBuilder(
 ) {
   if (routeInformation.location!.contains(LandingScreen.routeName)) {
     return AuthLocation(routeInformation);
+  }
+  if (routeInformation.location!.contains(WelcomeScreen.routeName)) {
+    return WelcomeLocation(routeInformation);
   }
   if (routeInformation.location!.contains(PostulateScreen.routeName)) {
     return PostulateLocation(routeInformation);

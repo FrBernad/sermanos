@@ -46,7 +46,7 @@ class RegisterScreen extends StatelessWidget {
                 children: [
                   SermanosCTAButton(
                     text: 'Registrarse',
-                    onPressed: () => context.beamToNamed(WelcomeScreen.route),
+                    onPressed: () => context.beamToReplacementNamed(WelcomeScreen.route),
                     filled: true,
                   ),
                   const SizedBox(height: 16),
