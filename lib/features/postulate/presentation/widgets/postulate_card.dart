@@ -1,8 +1,8 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:sermanos/config/theme/app_text_styles.dart';
 
-import '../../../../config/theme/app_colors.dart';
+import '../../../../config/design_system/tokens/ds_colors.dart';
+import '../../../../config/design_system/tokens/ds_typography.dart';
 import '../screens/postulate_detail_screen.dart';
 
 class PostulateCard extends StatelessWidget {
@@ -21,7 +21,7 @@ class PostulateCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: AppColors.neutral0,
+          color: DesignSystemColors.neutral0,
           borderRadius: BorderRadius.circular(2),
           boxShadow: [
             BoxShadow(
@@ -57,13 +57,13 @@ class PostulateCard extends StatelessWidget {
                     children: [
                       Text(
                         'Acción Social'.toUpperCase(),
-                        style: AppTextStyles.overline.copyWith(
-                          color: AppColors.neutral75,
+                        style: DesignSystemTypography.overline.copyWith(
+                          color: DesignSystemColors.neutral75,
                         ),
                       ),
                       const Text(
                         'Un Techo para mi País',
-                        style: AppTextStyles.subtitle01,
+                        style: DesignSystemTypography.subtitle01,
                       ),
                     ],
                   ),
@@ -71,13 +71,13 @@ class PostulateCard extends StatelessWidget {
                     children: const [
                       Icon(
                         Icons.favorite_outline,
-                        color: AppColors.primary100,
+                        color: DesignSystemColors.primary100,
                         size: 24,
                       ),
                       SizedBox(width: 23),
                       Icon(
                         Icons.location_on,
-                        color: AppColors.primary100,
+                        color: DesignSystemColors.primary100,
                         size: 24,
                       ),
                     ],

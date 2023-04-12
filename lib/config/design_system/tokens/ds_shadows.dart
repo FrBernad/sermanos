@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../design_system/tokens/app_colors.dart';
 
-class AppShadows {
-  AppShadows._();
+class DesignSystemColors {
+  DesignSystemColors._();
 
   static List<BoxShadow> shadow1 = [
     BoxShadow(

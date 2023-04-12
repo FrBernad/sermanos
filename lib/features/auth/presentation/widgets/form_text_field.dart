@@ -5,9 +5,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import '../../../../config/theme/app_colors.dart';
-import '../../../../config/theme/app_text_styles.dart';
+import 'package:sermanos/config/design_system/tokens/ds_colors.dart';
+import 'package:sermanos/config/design_system/tokens/ds_typography.dart';
 
 class FormTextField extends HookConsumerWidget {
   const FormTextField({
@@ -60,55 +59,55 @@ class FormTextField extends HookConsumerWidget {
               vertical: 12,
             ),
             hintText: placeholder,
-            hintStyle: AppTextStyles.subtitle01.copyWith(
-              color: enabled ? AppColors.neutral50 : AppColors.neutral25,
+            hintStyle: DesignSystemTypography.subtitle01.copyWith(
+              color: enabled ? DesignSystemColors.neutral50 : DesignSystemColors.neutral25,
             ),
             labelText: label,
-            labelStyle: AppTextStyles.subtitle01.copyWith(
+            labelStyle: DesignSystemTypography.subtitle01.copyWith(
               color: enabled
                   ? focusNode.hasFocus
-                      ? AppColors.secondary200
-                      : AppColors.neutral75
-                  : AppColors.neutral50,
+                      ? DesignSystemColors.secondary200
+                      : DesignSystemColors.neutral75
+                  : DesignSystemColors.neutral50,
             ),
             floatingLabelBehavior: floatingLabelBehavior,
-            floatingLabelStyle: AppTextStyles.caption.copyWith(
+            floatingLabelStyle: DesignSystemTypography.caption.copyWith(
               color: enabled
                   ? focusNode.hasFocus
-                      ? AppColors.secondary200
-                      : AppColors.neutral75
-                  : AppColors.neutral50,
+                      ? DesignSystemColors.secondary200
+                      : DesignSystemColors.neutral75
+                  : DesignSystemColors.neutral50,
             ),
             disabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 width: 1,
-                color: AppColors.neutral50,
+                color: DesignSystemColors.neutral50,
               ),
               borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 width: 2,
-                color: AppColors.secondary200,
+                color: DesignSystemColors.secondary200,
               ),
               borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
             enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 width: 1,
-                color: AppColors.neutral75,
+                color: DesignSystemColors.neutral75,
               ),
               borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
             errorBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 width: 2,
-                color: AppColors.error100,
+                color: DesignSystemColors.error100,
               ),
               borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
-            errorStyle: AppTextStyles.body01.copyWith(
-              color: AppColors.error100,
+            errorStyle: DesignSystemTypography.body01.copyWith(
+              color: DesignSystemColors.error100,
             ),
             suffixIcon: password
                 ? IconButton(
@@ -117,7 +116,7 @@ class FormTextField extends HookConsumerWidget {
                           ? Icons.visibility
                           : Icons.visibility_off,
                       size: 24,
-                      color: AppColors.neutral75,
+                      color: DesignSystemColors.neutral75,
                     ),
                     onPressed: () {
                       isObscured.value = !isObscured.value;
@@ -128,7 +127,7 @@ class FormTextField extends HookConsumerWidget {
                         icon: const Icon(
                           Icons.error,
                           size: 24,
-                          color: AppColors.error100,
+                          color: DesignSystemColors.error100,
                         ),
                         onPressed: () {
                           if (!isEmpty) {
@@ -143,7 +142,7 @@ class FormTextField extends HookConsumerWidget {
                             icon: const Icon(
                               Icons.close,
                               size: 24,
-                              color: AppColors.neutral75,
+                              color: DesignSystemColors.neutral75,
                             ),
                             onPressed: () {
                               if (!isEmpty) {

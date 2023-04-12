@@ -1,12 +1,18 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:sermanos/config/theme/app_text_styles.dart';
 import 'package:sermanos/features/auth/presentation/screens/landing_screen.dart';
+import 'package:sermanos/features/postulate/presentation/screens/postulate_screen.dart';
 
-import '../../../../config/theme/app_colors.dart';
+import '../../../../config/design_system/tokens/ds_colors.dart';
+import '../../../../config/design_system/tokens/ds_typography.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+  static const route = "/auth/welcome";
+  static const routeName = "welcome";
+
+  const WelcomeScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +35,13 @@ class WelcomeScreen extends StatelessWidget {
                   const SizedBox(height: 32),
                   const Text(
                     "¡Bienvenido!",
-                    style: AppTextStyles.headline01,
+                    style: DesignSystemTypography.headline01,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 32),
                   const Text(
                     "Nunca subestimes tu habilidad para mejorar la vida de alguien.",
-                    style: AppTextStyles.subtitle01,
+                    style: DesignSystemTypography.subtitle01,
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -50,7 +56,7 @@ class WelcomeScreen extends StatelessWidget {
                   FilledButton(
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(AppColors.primary100),
+                          MaterialStateProperty.all(DesignSystemColors.primary100),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4),
@@ -63,11 +69,11 @@ class WelcomeScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onPressed: () => context.beamToNamed(LandingScreen.route),
+                    onPressed: () => context.beamToNamed(PostulateScreen.route),
                     child: Text(
                       'Comenzar',
-                      style: AppTextStyles.button.copyWith(
-                        color: AppColors.neutral0,
+                      style: DesignSystemTypography.button.copyWith(
+                        color: DesignSystemColors.neutral0,
                       ),
                     ),
                   ),

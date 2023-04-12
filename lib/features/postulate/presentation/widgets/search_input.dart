@@ -3,8 +3,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../config/theme/app_colors.dart';
-import '../../../../config/theme/app_text_styles.dart';
+import '../../../../config/design_system/tokens/ds_colors.dart';
+import '../../../../config/design_system/tokens/ds_typography.dart';
 
 class SearchInput extends HookConsumerWidget {
   const SearchInput({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class SearchInput extends HookConsumerWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.neutral0,
+        color: DesignSystemColors.neutral0,
         borderRadius: BorderRadius.circular(2),
         boxShadow: [
           BoxShadow(
@@ -53,8 +53,8 @@ class SearchInput extends HookConsumerWidget {
                 vertical: 12,
               ),
               hintText: 'Buscar',
-              hintStyle: AppTextStyles.subtitle01.copyWith(
-                color: AppColors.neutral75,
+              hintStyle: DesignSystemTypography.subtitle01.copyWith(
+                color: DesignSystemColors.neutral75,
               ),
               focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.transparent),
@@ -68,7 +68,7 @@ class SearchInput extends HookConsumerWidget {
                 icon: Icon(
                   isEmpty ? Icons.search : Icons.close,
                   size: 24,
-                  color: AppColors.neutral75,
+                  color: DesignSystemColors.neutral75,
                 ),
                 onPressed: () {
                   if (!isEmpty) {

@@ -1,8 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:sermanos/config/theme/app_colors.dart';
-import 'package:sermanos/config/theme/app_text_styles.dart';
+
+import '../../../../config/design_system/tokens/ds_colors.dart';
+import '../../../../config/design_system/tokens/ds_typography.dart';
 
 class PostulationConfirmationDialog extends StatelessWidget {
   const PostulationConfirmationDialog({Key? key}) : super(key: key);
@@ -20,7 +21,7 @@ class PostulationConfirmationDialog extends StatelessWidget {
           width: 280,
           padding: const EdgeInsets.fromLTRB(16, 16, 8, 16),
           decoration: BoxDecoration(
-            color: AppColors.neutral0,
+            color: DesignSystemColors.neutral0,
             borderRadius: BorderRadius.circular(4),
             boxShadow: [
               BoxShadow(
@@ -46,23 +47,23 @@ class PostulationConfirmationDialog extends StatelessWidget {
                 children: [
                   const Text(
                     'Te estas por postular a',
-                    style: AppTextStyles.subtitle01,
+                    style: DesignSystemTypography.subtitle01,
                   ),
                   const Text(
                     'Un Techo para mi País',
-                    style: AppTextStyles.headline02,
+                    style: DesignSystemTypography.headline02,
                   ),
                   const SizedBox(height: 16),
                   Text(
                     'Días sábados de 9.00 a 17.00 horas.',
-                    style: AppTextStyles.body01.copyWith(
-                      color: AppColors.neutral75,
+                    style: DesignSystemTypography.body01.copyWith(
+                      color: DesignSystemColors.neutral75,
                     ),
                   ),
                   Text(
                     'Caballito',
-                    style: AppTextStyles.body01.copyWith(
-                      color: AppColors.neutral75,
+                    style: DesignSystemTypography.body01.copyWith(
+                      color: DesignSystemColors.neutral75,
                     ),
                   ),
                 ],
@@ -83,8 +84,8 @@ class PostulationConfirmationDialog extends StatelessWidget {
                     onPressed: () => Navigator.of(context).pop(false),
                     child: Text(
                       'Cancelar',
-                      style: AppTextStyles.button.copyWith(
-                        color: AppColors.primary100,
+                      style: DesignSystemTypography.button.copyWith(
+                        color: DesignSystemColors.primary100,
                       ),
                     ),
                   ),
@@ -100,8 +101,8 @@ class PostulationConfirmationDialog extends StatelessWidget {
                     onPressed: () => Navigator.of(context).pop(true),
                     child: Text(
                       'Confirmar',
-                      style: AppTextStyles.button.copyWith(
-                        color: AppColors.primary100,
+                      style: DesignSystemTypography.button.copyWith(
+                        color: DesignSystemColors.primary100,
                       ),
                     ),
                   )

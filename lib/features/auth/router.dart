@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/router.dart';
 import 'package:sermanos/features/auth/presentation/screens/landing_screen.dart';
 import 'package:sermanos/features/auth/presentation/screens/login_screen.dart';
 import 'package:sermanos/features/auth/presentation/screens/register_screen.dart';
+import 'package:sermanos/features/auth/presentation/screens/welcome_screen.dart';
 
 class AuthLocation extends BeamLocation<BeamState> {
   AuthLocation(RouteInformation routeInformation) : super(routeInformation);
@@ -41,6 +42,16 @@ class AuthLocation extends BeamLocation<BeamState> {
         BeamPage(
           key: const ValueKey('register'),
           child: const RegisterScreen(),
+          onPopPage: _onPopPage,
+        ),
+      );
+    }
+
+    if (state.pathPatternSegments.contains(WelcomeScreen.routeName)) {
+      pages.add(
+        BeamPage(
+          key: const ValueKey('welcome'),
+          child: const WelcomeScreen(),
           onPopPage: _onPopPage,
         ),
       );

@@ -1,8 +1,8 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 
+import 'config/design_system/theme.dart';
 import 'config/router/router.dart';
-import 'config/theme/theme.dart';
 import 'flavors.dart';
 import 'l10n/app_localizations.dart';
 

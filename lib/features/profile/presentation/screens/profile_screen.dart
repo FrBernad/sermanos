@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:sermanos/config/theme/app_text_styles.dart';
 
-import '../../../../config/theme/app_colors.dart';
+import '../../../../config/design_system/tokens/ds_colors.dart';
+import '../../../../config/design_system/tokens/ds_typography.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const route = "/?tab=profile";
@@ -38,23 +38,23 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Text(
                     "VOLUNTARIO",
-                    style: AppTextStyles.overline.copyWith(
-                      color: AppColors.neutral75,
+                    style: DesignSystemTypography.overline.copyWith(
+                      color: DesignSystemColors.neutral75,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     "Juan Cruz",
-                    style: AppTextStyles.subtitle01.copyWith(
-                      color: AppColors.neutral100,
+                    style: DesignSystemTypography.subtitle01.copyWith(
+                      color: DesignSystemColors.neutral100,
                     ),
                   ),
                   const SizedBox(height: 8),
                   Text(
                     "¡Completá tu perfil para tener acceso a mejores oportunidades!",
                     textAlign: TextAlign.center,
-                    style: AppTextStyles.body01.copyWith(
-                      color: AppColors.neutral75,
+                    style: DesignSystemTypography.body01.copyWith(
+                      color: DesignSystemColors.neutral75,
                     ),
                   ),
                 ],
@@ -66,11 +66,11 @@ class ProfileScreen extends StatelessWidget {
           onPressed: () {},
           icon: const Icon(
             Icons.add,
-            color: AppColors.neutral0,
+            color: DesignSystemColors.neutral0,
             size: 24,
           ),
           style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primary100,
+            backgroundColor: DesignSystemColors.primary100,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4), // <-- Radius
             ),
@@ -81,7 +81,7 @@ class ProfileScreen extends StatelessWidget {
           label: const Text(
             "Completar",
             style: TextStyle(
-              color: AppColors.neutral0,
+              color: DesignSystemColors.neutral0,
             ),
           ),
         ),

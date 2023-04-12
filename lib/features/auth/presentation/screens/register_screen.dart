@@ -2,11 +2,10 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:sermanos/features/auth/presentation/screens/login_screen.dart';
+import 'package:sermanos/features/auth/presentation/screens/welcome_screen.dart';
 
-import '../../../../config/theme/app_colors.dart';
-import '../../../../config/theme/app_text_styles.dart';
-import '../../../postulate/presentation/screens/postulate_detail_screen.dart';
-import '../../../postulate/presentation/screens/postulate_screen.dart';
+import '../../../../config/design_system/tokens/ds_colors.dart';
+import '../../../../config/design_system/tokens/ds_typography.dart';
 import '../widgets/form_text_field.dart';
 
 final _registerFormKey = GlobalKey<FormBuilderState>();
@@ -17,17 +16,18 @@ class RegisterScreen extends StatelessWidget {
 
   const RegisterScreen({Key? key}) : super(key: key);
 
+  //FIXME: ARREGLAR OVERFLOW CON SINGLECHILDSCROLLVIEW
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Flexible(
-              flex: 4,
-              child: Column(
+      body: SingleChildScrollView(
+        physics: const ClampingScrollPhysics(),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              const SizedBox(height: 50),
+              Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -78,17 +78,15 @@ class RegisterScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            Flexible(
-              flex: 1,
-              child: Column(
+              const SizedBox(height: 50),
+              Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   FilledButton(
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(AppColors.primary100),
+                          MaterialStateProperty.all(DesignSystemColors.primary100),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4),
@@ -101,12 +99,11 @@ class RegisterScreen extends StatelessWidget {
                         ),
                       ),
                     ),
-                    onPressed: () =>
-                        context.beamToNamed(PostulateScreen.route),
+                    onPressed: () => context.beamToNamed(WelcomeScreen.route),
                     child: Text(
                       'Registrarse',
-                      style: AppTextStyles.button.copyWith(
-                        color: AppColors.neutral0,
+                      style: DesignSystemTypography.button.copyWith(
+                        color: DesignSystemColors.neutral0,
                       ),
                     ),
                   ),
@@ -130,15 +127,15 @@ class RegisterScreen extends StatelessWidget {
                     onPressed: () => context.beamToNamed(LoginScreen.route),
                     child: Text(
                       'Ya tengo cuenta',
-                      style: AppTextStyles.button.copyWith(
-                        color: AppColors.primary100,
+                      style: DesignSystemTypography.button.copyWith(
+                        color: DesignSystemColors.primary100,
                       ),
                     ),
                   ),
                 ],
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:sermanos/config/theme/app_colors.dart';
 import 'package:sermanos/features/news/domain/models/news.dart';
 import 'package:sermanos/features/news/presentation/widgets/information.dart';
+
+import '../../../../config/design_system/tokens/ds_colors.dart';
 
 class NewsCard extends StatelessWidget {
   const NewsCard({
@@ -51,7 +52,7 @@ class NewsCard extends StatelessWidget {
                 children: [
                   Information(
                     title: news.title,
-                    subTitle: news.subtitle,
+                    subtitle: news.subtitle,
                     description: news.description,
                   ),
                   Align(
@@ -66,7 +67,7 @@ class NewsCard extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge
-                              ?.copyWith(color: AppColors.primary100),
+                              ?.copyWith(color: DesignSystemColors.primary100),
                         ),
                       ),
                     ),
