@@ -3,8 +3,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../config/design_system/tokens/ds_colors.dart';
-import '../../../../config/design_system/tokens/ds_typography.dart';
+import '../../../../config/design_system/tokens/sermanos_colors.dart';
+import '../../../../config/design_system/tokens/sermanos_typography.dart';
 
 class SearchInput extends HookConsumerWidget {
   const SearchInput({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class SearchInput extends HookConsumerWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: DesignSystemColors.neutral0,
+        color: SermanosColors.neutral0,
         borderRadius: BorderRadius.circular(2),
         boxShadow: [
           BoxShadow(
@@ -53,8 +53,8 @@ class SearchInput extends HookConsumerWidget {
                 vertical: 12,
               ),
               hintText: 'Buscar',
-              hintStyle: DesignSystemTypography.subtitle01.copyWith(
-                color: DesignSystemColors.neutral75,
+              hintStyle: SermanosTypography.subtitle01.copyWith(
+                color: SermanosColors.neutral75,
               ),
               focusedBorder: const OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.transparent),
@@ -68,7 +68,7 @@ class SearchInput extends HookConsumerWidget {
                 icon: Icon(
                   isEmpty ? Icons.search : Icons.close,
                   size: 24,
-                  color: DesignSystemColors.neutral75,
+                  color: SermanosColors.neutral75,
                 ),
                 onPressed: () {
                   if (!isEmpty) {

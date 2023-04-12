@@ -1,13 +1,14 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:sermanos/config/design_system/molecules/sermanos_input.dart';
+import 'package:sermanos/config/design_system/molecules/sermanos_input.dart';
 import 'package:sermanos/features/auth/presentation/screens/register_screen.dart';
 import 'package:sermanos/features/auth/presentation/screens/welcome_screen.dart';
-import 'package:sermanos/features/auth/presentation/widgets/form_text_field.dart';
 import 'package:sermanos/features/postulate/presentation/screens/postulate_detail_screen.dart';
 
-import '../../../../config/design_system/tokens/ds_colors.dart';
-import '../../../../config/design_system/tokens/ds_typography.dart';
+import '../../../../config/design_system/tokens/sermanos_colors.dart';
+import '../../../../config/design_system/tokens/sermanos_typography.dart';
 import '../../../postulate/presentation/screens/postulate_screen.dart';
 
 final _loginFormKey = GlobalKey<FormBuilderState>();
@@ -42,13 +43,13 @@ class LoginScreen extends StatelessWidget {
                     key: _loginFormKey,
                     child: Column(
                       children: const [
-                        FormTextField(
+                        SermanosInput(
                           formField: 'email',
                           initialValue: '',
                           label: 'Email',
                         ),
                         SizedBox(height: 24),
-                        FormTextField(
+                        SermanosInput(
                           formField: 'password',
                           initialValue: '',
                           label: 'Contraseña',
@@ -66,7 +67,7 @@ class LoginScreen extends StatelessWidget {
                   FilledButton(
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(DesignSystemColors.primary100),
+                          MaterialStateProperty.all(SermanosColors.primary100),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4),
@@ -82,8 +83,8 @@ class LoginScreen extends StatelessWidget {
                     onPressed: () => context.beamToNamed(PostulateScreen.route),
                     child: Text(
                       'Inciar Sesión',
-                      style: DesignSystemTypography.button.copyWith(
-                        color: DesignSystemColors.neutral0,
+                      style: SermanosTypography.button.copyWith(
+                        color: SermanosColors.neutral0,
                       ),
                     ),
                   ),
@@ -107,8 +108,8 @@ class LoginScreen extends StatelessWidget {
                     onPressed: () => context.beamToNamed(RegisterScreen.route),
                     child: Text(
                       'No tengo cuenta',
-                      style: DesignSystemTypography.button.copyWith(
-                        color: DesignSystemColors.primary100,
+                      style: SermanosTypography.button.copyWith(
+                        color: SermanosColors.primary100,
                       ),
                     ),
                   ),

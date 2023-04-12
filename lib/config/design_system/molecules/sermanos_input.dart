@@ -5,11 +5,11 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sermanos/config/design_system/tokens/ds_colors.dart';
-import 'package:sermanos/config/design_system/tokens/ds_typography.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 
-class FormTextField extends HookConsumerWidget {
-  const FormTextField({
+class SermanosInput extends HookConsumerWidget {
+  const SermanosInput({
     Key? key,
     required this.formField,
     required this.initialValue,
@@ -59,55 +59,55 @@ class FormTextField extends HookConsumerWidget {
               vertical: 12,
             ),
             hintText: placeholder,
-            hintStyle: DesignSystemTypography.subtitle01.copyWith(
-              color: enabled ? DesignSystemColors.neutral50 : DesignSystemColors.neutral25,
+            hintStyle: SermanosTypography.subtitle01.copyWith(
+              color: enabled ? SermanosColors.neutral50 : SermanosColors.neutral25,
             ),
             labelText: label,
-            labelStyle: DesignSystemTypography.subtitle01.copyWith(
+            labelStyle: SermanosTypography.subtitle01.copyWith(
               color: enabled
                   ? focusNode.hasFocus
-                      ? DesignSystemColors.secondary200
-                      : DesignSystemColors.neutral75
-                  : DesignSystemColors.neutral50,
+                      ? SermanosColors.secondary200
+                      : SermanosColors.neutral75
+                  : SermanosColors.neutral50,
             ),
             floatingLabelBehavior: floatingLabelBehavior,
-            floatingLabelStyle: DesignSystemTypography.caption.copyWith(
+            floatingLabelStyle: SermanosTypography.caption.copyWith(
               color: enabled
                   ? focusNode.hasFocus
-                      ? DesignSystemColors.secondary200
-                      : DesignSystemColors.neutral75
-                  : DesignSystemColors.neutral50,
+                      ? SermanosColors.secondary200
+                      : SermanosColors.neutral75
+                  : SermanosColors.neutral50,
             ),
             disabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 width: 1,
-                color: DesignSystemColors.neutral50,
+                color: SermanosColors.neutral50,
               ),
               borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 width: 2,
-                color: DesignSystemColors.secondary200,
+                color: SermanosColors.secondary200,
               ),
               borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
             enabledBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 width: 1,
-                color: DesignSystemColors.neutral75,
+                color: SermanosColors.neutral75,
               ),
               borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
             errorBorder: const OutlineInputBorder(
               borderSide: BorderSide(
                 width: 2,
-                color: DesignSystemColors.error100,
+                color: SermanosColors.error100,
               ),
               borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
-            errorStyle: DesignSystemTypography.body01.copyWith(
-              color: DesignSystemColors.error100,
+            errorStyle: SermanosTypography.body01.copyWith(
+              color: SermanosColors.error100,
             ),
             suffixIcon: password
                 ? IconButton(
@@ -116,7 +116,7 @@ class FormTextField extends HookConsumerWidget {
                           ? Icons.visibility
                           : Icons.visibility_off,
                       size: 24,
-                      color: DesignSystemColors.neutral75,
+                      color: SermanosColors.neutral75,
                     ),
                     onPressed: () {
                       isObscured.value = !isObscured.value;
@@ -127,7 +127,7 @@ class FormTextField extends HookConsumerWidget {
                         icon: const Icon(
                           Icons.error,
                           size: 24,
-                          color: DesignSystemColors.error100,
+                          color: SermanosColors.error100,
                         ),
                         onPressed: () {
                           if (!isEmpty) {
@@ -142,7 +142,7 @@ class FormTextField extends HookConsumerWidget {
                             icon: const Icon(
                               Icons.close,
                               size: 24,
-                              color: DesignSystemColors.neutral75,
+                              color: SermanosColors.neutral75,
                             ),
                             onPressed: () {
                               if (!isEmpty) {

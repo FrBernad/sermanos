@@ -1,10 +1,10 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:sermanos/config/design_system/tokens/ds_colors.dart';
-import 'package:sermanos/config/design_system/tokens/ds_typography.dart';
+import 'package:sermanos/config/design_system/molecules/sermanos_CTA_button.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 import 'package:sermanos/features/auth/presentation/screens/login_screen.dart';
 import 'package:sermanos/features/auth/presentation/screens/register_screen.dart';
-
 
 class LandingScreen extends StatelessWidget {
   static const route = "/auth";
@@ -33,7 +33,7 @@ class LandingScreen extends StatelessWidget {
                   const SizedBox(height: 32),
                   const Text(
                     "“El esfuerzo desinteresado para llevar alegría a los demás será el comienzo de una vida más feliz para nosotros”",
-                    style: DesignSystemTypography.subtitle01,
+                    style: SermanosTypography.subtitle01,
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -45,54 +45,16 @@ class LandingScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  FilledButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(DesignSystemColors.primary100),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                      padding: MaterialStateProperty.all(
-                        const EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 8,
-                        ),
-                      ),
-                    ),
+                  SermanosCTAButton(
+                    text: 'Inciar Sesión',
+                    filled: true,
                     onPressed: () => context.beamToNamed(LoginScreen.route),
-                    child: Text(
-                      'Inciar Sesión',
-                      style: DesignSystemTypography.button.copyWith(
-                        color: DesignSystemColors.neutral0,
-                      ),
-                    ),
                   ),
                   const SizedBox(height: 16),
-                  TextButton(
-                    style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(Colors.transparent),
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                      ),
-                      padding: MaterialStateProperty.all(
-                        const EdgeInsets.symmetric(
-                          vertical: 12,
-                          horizontal: 8,
-                        ),
-                      ),
-                    ),
+                  SermanosCTAButton(
+                    text: 'Registrarse',
+                    filled: false,
                     onPressed: () => context.beamToNamed(RegisterScreen.route),
-                    child: Text(
-                      'Registrarse',
-                      style: DesignSystemTypography.button.copyWith(
-                        color: DesignSystemColors.primary100,
-                      ),
-                    ),
                   ),
                 ],
               ),

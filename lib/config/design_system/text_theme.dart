@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:sermanos/config/design_system/tokens/ds_typography.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 
 TextTheme appTextTheme = const TextTheme(
-  displayLarge: DesignSystemTypography.headline01,
-  displayMedium: DesignSystemTypography.headline02,
-  titleMedium: DesignSystemTypography.subtitle01,
-  bodyLarge: DesignSystemTypography.body01,
-  bodyMedium: DesignSystemTypography.body02,
-  labelLarge: DesignSystemTypography.button,
-  bodySmall: DesignSystemTypography.caption,
-  labelSmall: DesignSystemTypography.overline,
+  displayLarge: SermanosTypography.headline01,
+  displayMedium: SermanosTypography.headline02,
+  titleMedium: SermanosTypography.subtitle01,
+  bodyLarge: SermanosTypography.body01,
+  bodyMedium: SermanosTypography.body02,
+  labelLarge: SermanosTypography.button,
+  bodySmall: SermanosTypography.caption,
+  labelSmall: SermanosTypography.overline,
 );

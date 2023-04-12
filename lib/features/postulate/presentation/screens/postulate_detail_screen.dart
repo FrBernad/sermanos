@@ -4,8 +4,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sermanos/features/postulate/presentation/widgets/postulation_confirmation_dialog.dart';
 
-import '../../../../config/design_system/tokens/ds_colors.dart';
-import '../../../../config/design_system/tokens/ds_typography.dart';
+import '../../../../config/design_system/tokens/sermanos_colors.dart';
+import '../../../../config/design_system/tokens/sermanos_typography.dart';
 
 class PostulateDetailScreen extends HookConsumerWidget {
   static const route = "/postulate/:id";
@@ -72,7 +72,7 @@ class PostulateDetailScreen extends HookConsumerWidget {
                   onTap: () => Navigator.of(context).pop(),
                   child: const Icon(
                     Icons.arrow_back,
-                    color: DesignSystemColors.neutral0,
+                    color: SermanosColors.neutral0,
                   ),
                 ),
               )
@@ -90,13 +90,13 @@ class PostulateDetailScreen extends HookConsumerWidget {
                     children: [
                       const Text(
                         'Un Techo para mi País',
-                        style: DesignSystemTypography.headline01,
+                        style: SermanosTypography.headline01,
                       ),
                       const SizedBox(height: 24),
                       Text(
                         'A dos horas al sur de Vicente López en la ciudad de Buenos Aires.',
-                        style: DesignSystemTypography.body01.copyWith(
-                          color: DesignSystemColors.neutral75,
+                        style: SermanosTypography.body01.copyWith(
+                          color: SermanosColors.neutral75,
                         ),
                       )
                     ],
@@ -107,7 +107,7 @@ class PostulateDetailScreen extends HookConsumerWidget {
                       FilledButton(
                         style: ButtonStyle(
                           backgroundColor:
-                              MaterialStateProperty.all(DesignSystemColors.primary100),
+                              MaterialStateProperty.all(SermanosColors.primary100),
                           shape: MaterialStateProperty.all(
                             RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
@@ -126,8 +126,8 @@ class PostulateDetailScreen extends HookConsumerWidget {
                         },
                         child: Text(
                           'Postularme',
-                          style: DesignSystemTypography.button.copyWith(
-                            color: DesignSystemColors.neutral0,
+                          style: SermanosTypography.button.copyWith(
+                            color: SermanosColors.neutral0,
                           ),
                         ),
                       ),

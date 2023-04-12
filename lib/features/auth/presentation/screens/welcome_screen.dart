@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:sermanos/features/auth/presentation/screens/landing_screen.dart';
 import 'package:sermanos/features/postulate/presentation/screens/postulate_screen.dart';
 
-import '../../../../config/design_system/tokens/ds_colors.dart';
-import '../../../../config/design_system/tokens/ds_typography.dart';
+import '../../../../config/design_system/tokens/sermanos_colors.dart';
+import '../../../../config/design_system/tokens/sermanos_typography.dart';
 
 class WelcomeScreen extends StatelessWidget {
   static const route = "/auth/welcome";
@@ -35,13 +35,13 @@ class WelcomeScreen extends StatelessWidget {
                   const SizedBox(height: 32),
                   const Text(
                     "¡Bienvenido!",
-                    style: DesignSystemTypography.headline01,
+                    style: SermanosTypography.headline01,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 32),
                   const Text(
                     "Nunca subestimes tu habilidad para mejorar la vida de alguien.",
-                    style: DesignSystemTypography.subtitle01,
+                    style: SermanosTypography.subtitle01,
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -56,7 +56,7 @@ class WelcomeScreen extends StatelessWidget {
                   FilledButton(
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(DesignSystemColors.primary100),
+                          MaterialStateProperty.all(SermanosColors.primary100),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4),
@@ -72,8 +72,8 @@ class WelcomeScreen extends StatelessWidget {
                     onPressed: () => context.beamToNamed(PostulateScreen.route),
                     child: Text(
                       'Comenzar',
-                      style: DesignSystemTypography.button.copyWith(
-                        color: DesignSystemColors.neutral0,
+                      style: SermanosTypography.button.copyWith(
+                        color: SermanosColors.neutral0,
                       ),
                     ),
                   ),

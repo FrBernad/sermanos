@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DesignSystemColors {
-  DesignSystemColors._();
+class SermanosColors {
+  SermanosColors._();
 
   static const neutral0 = Color(0xFFFFFFFF);
   static const neutral10 = Color(0xFFFAFAFA);

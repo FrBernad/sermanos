@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sermanos/features/news/domain/models/news.dart';
 import 'package:sermanos/features/news/presentation/widgets/information.dart';
 
-import '../../../../config/design_system/tokens/ds_colors.dart';
+import '../../../../config/design_system/tokens/sermanos_colors.dart';
 
 class NewsCard extends StatelessWidget {
   const NewsCard({
@@ -67,7 +67,7 @@ class NewsCard extends StatelessWidget {
                           style: Theme.of(context)
                               .textTheme
                               .labelLarge
-                              ?.copyWith(color: DesignSystemColors.primary100),
+                              ?.copyWith(color: SermanosColors.primary100),
                         ),
                       ),
                     ),

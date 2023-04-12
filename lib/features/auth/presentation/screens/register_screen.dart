@@ -1,12 +1,15 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:sermanos/config/design_system/molecules/sermanos_input.dart';
+import 'package:sermanos/config/design_system/molecules/sermanos_input.dart';
+import 'package:sermanos/config/design_system/molecules/sermanos_input.dart';
+import 'package:sermanos/config/design_system/molecules/sermanos_input.dart';
 import 'package:sermanos/features/auth/presentation/screens/login_screen.dart';
 import 'package:sermanos/features/auth/presentation/screens/welcome_screen.dart';
 
-import '../../../../config/design_system/tokens/ds_colors.dart';
-import '../../../../config/design_system/tokens/ds_typography.dart';
-import '../widgets/form_text_field.dart';
+import '../../../../config/design_system/tokens/sermanos_colors.dart';
+import '../../../../config/design_system/tokens/sermanos_typography.dart';
 
 final _registerFormKey = GlobalKey<FormBuilderState>();
 
@@ -41,7 +44,7 @@ class RegisterScreen extends StatelessWidget {
                     key: _registerFormKey,
                     child: Column(
                       children: const [
-                        FormTextField(
+                        SermanosInput(
                           formField: 'name',
                           initialValue: '',
                           label: 'Email',
@@ -49,7 +52,7 @@ class RegisterScreen extends StatelessWidget {
                           placeholder: 'Ej: Juan',
                         ),
                         SizedBox(height: 24),
-                        FormTextField(
+                        SermanosInput(
                           formField: 'surname',
                           initialValue: '',
                           label: 'Apellido',
@@ -57,7 +60,7 @@ class RegisterScreen extends StatelessWidget {
                           placeholder: 'Ej: Barcena',
                         ),
                         SizedBox(height: 24),
-                        FormTextField(
+                        SermanosInput(
                           formField: 'email',
                           initialValue: '',
                           label: 'Email',
@@ -65,7 +68,7 @@ class RegisterScreen extends StatelessWidget {
                           placeholder: 'Ej: juanbarcena@gmail.com',
                         ),
                         SizedBox(height: 24),
-                        FormTextField(
+                        SermanosInput(
                           formField: 'password',
                           initialValue: '',
                           label: 'Contraseña',
@@ -86,7 +89,7 @@ class RegisterScreen extends StatelessWidget {
                   FilledButton(
                     style: ButtonStyle(
                       backgroundColor:
-                          MaterialStateProperty.all(DesignSystemColors.primary100),
+                          MaterialStateProperty.all(SermanosColors.primary100),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4),
@@ -102,8 +105,8 @@ class RegisterScreen extends StatelessWidget {
                     onPressed: () => context.beamToNamed(WelcomeScreen.route),
                     child: Text(
                       'Registrarse',
-                      style: DesignSystemTypography.button.copyWith(
-                        color: DesignSystemColors.neutral0,
+                      style: SermanosTypography.button.copyWith(
+                        color: SermanosColors.neutral0,
                       ),
                     ),
                   ),
@@ -127,8 +130,8 @@ class RegisterScreen extends StatelessWidget {
                     onPressed: () => context.beamToNamed(LoginScreen.route),
                     child: Text(
                       'Ya tengo cuenta',
-                      style: DesignSystemTypography.button.copyWith(
-                        color: DesignSystemColors.primary100,
+                      style: SermanosTypography.button.copyWith(
+                        color: SermanosColors.primary100,
                       ),
                     ),
                   ),
