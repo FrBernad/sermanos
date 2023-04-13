@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sermanos/config/design_system/atoms/icons/sermanos_back_icon.dart';
+import 'package:sermanos/config/design_system/atoms/icons/sermanos_icons.dart';
 import 'package:sermanos/config/design_system/cellules/modals/modal.dart';
 import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_grid.dart';
 
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
@@ -52,17 +53,19 @@ class PostulateDetailScreen extends HookConsumerWidget {
                 fit: BoxFit.cover,
               ),
               Positioned.fill(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    color: SermanosColors.neutral0,
-                    gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                        SermanosColors.neutral100,
-                        Colors.transparent,
-                      ],
-                      stops: [0.0, 0.3555],
+                child: SermanosGrid(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: SermanosColors.neutral0,
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          SermanosColors.neutral100,
+                          Colors.transparent,
+                        ],
+                        stops: [0.0, 0.3555],
+                      ),
                     ),
                   ),
                 ),
@@ -72,7 +75,8 @@ class PostulateDetailScreen extends HookConsumerWidget {
                 left: 24,
                 child: GestureDetector(
                   onTap: () => Navigator.of(context).pop(),
-                  child: const SermanosBackIcon.enabled(),
+                  child:
+                      SermanosIcons.back(status: SermanosIconStatus.back),
                 ),
               )
             ],
@@ -86,15 +90,15 @@ class PostulateDetailScreen extends HookConsumerWidget {
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
+                    children: const [
+                      Text(
                         'Un Techo para mi País',
-                        style: SermanosTypography.headline01,
+                        style: SermanosTypography.headline01(),
                       ),
-                      const SizedBox(height: 24),
+                      SizedBox(height: 24),
                       Text(
                         'A dos horas al sur de Vicente López en la ciudad de Buenos Aires.',
-                        style: SermanosTypography.body01.copyWith(
+                        style: SermanosTypography.body01(
                           color: SermanosColors.neutral75,
                         ),
                       )

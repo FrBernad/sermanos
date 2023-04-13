@@ -3,12 +3,10 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sermanos/config/design_system/atoms/icons/sermanos_close_icon.dart';
-import 'package:sermanos/config/design_system/atoms/icons/sermanos_show_icon.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 
-import '../../atoms/icons/sermanos_error_icon.dart';
+import '../../atoms/icons/sermanos_icons.dart';
 
 class SermanosTextField extends HookConsumerWidget {
   const SermanosTextField({
@@ -61,12 +59,12 @@ class SermanosTextField extends HookConsumerWidget {
               vertical: 12,
             ),
             hintText: placeholder,
-            hintStyle: SermanosTypography.subtitle01.copyWith(
+            hintStyle: SermanosTypography.subtitle01(
               color:
                   enabled ? SermanosColors.neutral50 : SermanosColors.neutral25,
             ),
             labelText: label,
-            labelStyle: SermanosTypography.subtitle01.copyWith(
+            labelStyle: SermanosTypography.subtitle01(
               color: enabled
                   ? focusNode.hasFocus
                       ? SermanosColors.secondary200
@@ -74,7 +72,7 @@ class SermanosTextField extends HookConsumerWidget {
                   : SermanosColors.neutral50,
             ),
             floatingLabelBehavior: floatingLabelBehavior,
-            floatingLabelStyle: SermanosTypography.caption.copyWith(
+            floatingLabelStyle: SermanosTypography.caption(
               color: enabled
                   ? focusNode.hasFocus
                       ? SermanosColors.secondary200
@@ -109,19 +107,22 @@ class SermanosTextField extends HookConsumerWidget {
               ),
               borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
-            errorStyle: SermanosTypography.body01.copyWith(
-              color: SermanosColors.error100,
-            ),
+            errorStyle:
+                const SermanosTypography.body01(color: SermanosColors.error100),
             suffixIcon: password
                 ? IconButton(
-                    icon: SermanosShowIcon.enabled(hide: isObscured.value),
+                    icon: SermanosIcons.show(
+                      status: SermanosIconStatus.enabled,
+                      hide: isObscured.value,
+                    ),
                     onPressed: () {
                       isObscured.value = !isObscured.value;
                     },
                   )
                 : field.hasError
                     ? IconButton(
-                        icon: const SermanosErrorIcon.activated(),
+                        icon: SermanosIcons.error(
+                            status: SermanosIconStatus.activated),
                         onPressed: () {
                           if (!isEmpty) {
                             controller.clear();
@@ -132,7 +133,8 @@ class SermanosTextField extends HookConsumerWidget {
                     : isEmpty
                         ? null
                         : IconButton(
-                            icon: const SermanosCloseIcon.enabled(),
+                            icon: SermanosIcons.close(
+                                status: SermanosIconStatus.enabled),
                             onPressed: () {
                               if (!isEmpty) {
                                 controller.clear();

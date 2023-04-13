@@ -9,9 +9,13 @@ class PostulateList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
+      padding: const EdgeInsets.fromLTRB(
+        SermanosGrid.horizontalSpacing,
+        32,
+        SermanosGrid.horizontalSpacing,
+        32,
+      ),
       itemCount: info.length,
-      padding:
-          const EdgeInsets.symmetric(horizontal: SermanosGrid.defaultPadding),
       itemBuilder: (context, index) => SermanosVolunteeringCard(
         id: info[index]["id"]!,
         imageUrl: info[index]["imageUrl"]!,

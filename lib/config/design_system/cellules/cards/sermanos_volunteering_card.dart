@@ -1,12 +1,10 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:sermanos/config/design_system/atoms/icons/sermanos_location_icon.dart';
+import 'package:sermanos/config/design_system/atoms/icons/sermanos_icons.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_shadows.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 import 'package:sermanos/features/postulate/presentation/screens/postulate_detail_screen.dart';
-
-import '../../atoms/icons/sermanos_favorite_icon.dart';
 
 class SermanosVolunteeringCard extends StatelessWidget {
   const SermanosVolunteeringCard({
@@ -55,22 +53,26 @@ class SermanosVolunteeringCard extends StatelessWidget {
                       children: [
                         Text(
                           overline.toUpperCase(),
-                          style: SermanosTypography.overline.copyWith(
+                          style: const SermanosTypography.overline(
                             color: SermanosColors.neutral75,
                           ),
                         ),
                         Text(
                           subtitle,
-                          style: SermanosTypography.subtitle01,
+                          style: const SermanosTypography.subtitle01(),
                         ),
                       ],
                     ),
                   ),
                   Row(
-                    children: const [
-                      SermanosFavoriteIcon.enabled(),
-                      SizedBox(width: 23),
-                      SermanosLocationIcon.enabled(),
+                    children: [
+                      SermanosIcons.favorite(
+                        status: SermanosIconStatus.enabled,
+                      ),
+                      const SizedBox(width: 23),
+                      SermanosIcons.location(
+                        status: SermanosIconStatus.enabled,
+                      ),
                     ],
                   ),
                 ],

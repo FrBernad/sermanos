@@ -1,5 +1,12 @@
-class SermanosGrid {
-  SermanosGrid._();
+import 'package:flutter/cupertino.dart';
 
-  static const double defaultPadding = 16;
+class SermanosGrid extends Padding {
+  const SermanosGrid({Key? key, required Widget child})
+      : super(
+          key: key,
+          padding: const EdgeInsets.symmetric(horizontal: horizontalSpacing),
+          child: child,
+        );
+
+  static const double horizontalSpacing = 16;
 }

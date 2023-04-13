@@ -22,8 +22,9 @@ class App extends StatelessWidget {
       // Routing
       routerDelegate: mainBeamerDelegate,
       routeInformationParser: BeamerParser(),
-      backButtonDispatcher:
-          BeamerBackButtonDispatcher(delegate: mainBeamerDelegate),
+      backButtonDispatcher: BeamerBackButtonDispatcher(
+        delegate: mainBeamerDelegate,
+      ),
 
       // I10n
       localizationsDelegates: AppLocalizations.localizationsDelegates,

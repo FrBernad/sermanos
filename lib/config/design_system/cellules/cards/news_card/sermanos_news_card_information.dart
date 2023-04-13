@@ -27,19 +27,19 @@ class SermanosNewsCardInformation extends StatelessWidget {
             children: [
               Text(
                 subtitle.toUpperCase(),
-                style: SermanosTypography.overline.copyWith(
+                style: const SermanosTypography.overline(
                   color: SermanosColors.neutral75,
                 ),
               ),
               Text(
                 title,
-                style: SermanosTypography.subtitle01.copyWith(
+                style: const SermanosTypography.subtitle01(
                   color: SermanosColors.neutral100,
                 ),
               ),
               Text(
                 description,
-                style: SermanosTypography.body02.copyWith(
+                style: const SermanosTypography.body02(
                   color: SermanosColors.neutral75,
                 ),
               ),

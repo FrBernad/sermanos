@@ -32,7 +32,7 @@ class LandingScreen extends StatelessWidget {
                   const SizedBox(height: 32),
                   const Text(
                     "“El esfuerzo desinteresado para llevar alegría a los demás será el comienzo de una vida más feliz para nosotros”",
-                    style: SermanosTypography.subtitle01,
+                    style: SermanosTypography.subtitle01(),
                     textAlign: TextAlign.center,
                   ),
                 ],

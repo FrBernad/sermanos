@@ -15,7 +15,6 @@ class RegisterScreen extends StatelessWidget {
 
   const RegisterScreen({Key? key}) : super(key: key);
 
-  //FIXME: ARREGLAR OVERFLOW CON SINGLECHILDSCROLLVIEW
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,7 +45,7 @@ class RegisterScreen extends StatelessWidget {
                 children: [
                   SermanosCTAButton(
                     text: 'Registrarse',
-                    onPressed: () => context.beamToReplacementNamed(WelcomeScreen.route),
+                    onPressed: () => context.popToNamed(WelcomeScreen.route),
                     filled: true,
                   ),
                   const SizedBox(height: 16),

@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:sermanos/config/design_system/atoms/icons/sermanos_add_icon.dart';
 import 'package:sermanos/config/design_system/molecules/buttons/sermanos_short_button.dart';
 
+import '../../../../config/design_system/atoms/icons/sermanos_icons.dart';
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
+import '../../../../config/logger/logger.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const route = "/profile";
@@ -25,7 +26,7 @@ class ProfileScreen extends StatelessWidget {
                 size: const Size.fromRadius(48), // Image radius
                 child: CachedNetworkImage(
                   imageUrl:
-                      "https://s3-alpha-sig.figma.com/img/113f/a25a/235312cc53dcd4c8780648145d59e3c2?Expires=1680480000&Signature=Vk56T0L8GpTjfwOxZhYvCS3uCSow958NYuvKqoXrke-b5SwAMwtRB3fPfN4dMwbCVeHBvbGrdL053DuPqHnistbH1APR~jK-It9KnuBp3lqPkxPKucOZHTXTO1dwICQWCf10S6wC6AG5eO62GIrA~5NwSFCSsql4maPHM8JCBQw~~RqnWKqUVkoKbKmTWe89F-WYlvcewlkIZwlfF7kn3TcUj93oP8fl~eUXjWsYe53kXPlTi1hYyycTN1cG~6avdi6ozbDvCe4B1qDQFLPKUo3XqZUIEVmY4iy3qNV8DK1SSsX2DvKWjHOKALnj4Seqx6GKgp2A8ZRgyvqjBIxkdw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4",
+                      "https://s3-alpha-sig.figma.com/img/113f/a25a/235312cc53dcd4c8780648145d59e3c2?Expires=1682294400&Signature=pWKi-yMiAEKeP4uU0K8lEz6OR8NpewngrMALEcysNY2KDgUIYXmwOhPZwhLaRafEW~OpdXbvEhAwRNbE18eeIrvDF4T0PzyHZNKp2DGa3O999oXDZJLy~YHatOTXWhIHwaNUidgsUJGy4ctS3JEjhyqZ7w-6PhsIiXW3VeVeHy8mKFQg4sSDR63wO2Lj0WRF5jqGz8RK05GBuD4XHj98upcafIj~T7RN78C7uxTlK-G7Li1kUwtX5coR5zcO8Oi6EfAuDh3K6zuM8DaOCPcbOcki3fKB7yB-17aIiyGcBMgA7hCTtepFd9zNYnwQCac2pXfo2uUO29467T1X1dXVBg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4",
                   height: 120,
                   width: 120,
                   fit: BoxFit.cover,
@@ -34,28 +35,28 @@ class ProfileScreen extends StatelessWidget {
             ),
             //FIXME: No estoy seguro si el espacio es con un SizedBox o de otra forma
             const SizedBox(height: 8),
-            Container(
+            SizedBox(
               width: 328,
               child: Column(
-                children: [
+                children: const [
                   Text(
                     "VOLUNTARIO",
-                    style: SermanosTypography.overline.copyWith(
+                    style: SermanosTypography.overline(
                       color: SermanosColors.neutral75,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     "Juan Cruz",
-                    style: SermanosTypography.subtitle01.copyWith(
+                    style: SermanosTypography.subtitle01(
                       color: SermanosColors.neutral100,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  SizedBox(height: 8),
                   Text(
                     "¡Completá tu perfil para tener acceso a mejores oportunidades!",
                     textAlign: TextAlign.center,
-                    style: SermanosTypography.body01.copyWith(
+                    style: SermanosTypography.body01(
                       color: SermanosColors.neutral75,
                     ),
                   ),
@@ -65,9 +66,9 @@ class ProfileScreen extends StatelessWidget {
           ],
         ),
         SermanosShortButton(
-          icon: const SermanosAddIcon.enabled(),
+          icon: SermanosIcons.add(status: SermanosIconStatus.enabled),
           text: "Completar",
-          onPressed: () => null,
+          onPressed: () => {},
         ),
       ],
     );

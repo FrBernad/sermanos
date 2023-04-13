@@ -44,22 +44,22 @@ class Modal extends StatelessWidget {
                 children: [
                   const Text(
                     'Te estas por postular a',
-                    style: SermanosTypography.subtitle01,
+                    style: SermanosTypography.subtitle01(),
                   ),
                   Text(
                     title,
-                    style: SermanosTypography.headline02,
+                    style: const SermanosTypography.headline02(),
                   ),
                   const SizedBox(height: 16),
                   Text(
                     schedule,
-                    style: SermanosTypography.body01.copyWith(
+                    style: const SermanosTypography.body01(
                       color: SermanosColors.neutral75,
                     ),
                   ),
                   Text(
                     location,
-                    style: SermanosTypography.body01.copyWith(
+                    style: const SermanosTypography.body01(
                       color: SermanosColors.neutral75,
                     ),
                   ),

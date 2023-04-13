@@ -35,13 +35,13 @@ class WelcomeScreen extends StatelessWidget {
                   const SizedBox(height: 32),
                   const Text(
                     "¡Bienvenido!",
-                    style: SermanosTypography.headline01,
+                    style: SermanosTypography.headline01(),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 32),
                   const Text(
                     "Nunca subestimes tu habilidad para mejorar la vida de alguien.",
-                    style: SermanosTypography.subtitle01,
+                    style: SermanosTypography.subtitle01(),
                     textAlign: TextAlign.center,
                   ),
                 ],
@@ -56,7 +56,7 @@ class WelcomeScreen extends StatelessWidget {
                   SermanosCTAButton(
                       text: "Comenzar",
                       onPressed: () =>
-                          context.beamToReplacementNamed(PostulateScreen.route),
+                          context.popToNamed(PostulateScreen.route),
                       filled: true),
                 ],
               ),

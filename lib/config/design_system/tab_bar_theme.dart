@@ -21,5 +21,5 @@ TabBarTheme appTabBarTheme = const TabBarTheme(
   indicatorSize: TabBarIndicatorSize.tab,
   unselectedLabelColor: SermanosColors.neutral25,
   labelColor: SermanosColors.neutral0,
-  labelStyle: SermanosTypography.button,
+  labelStyle: SermanosTypography.button(),
 );

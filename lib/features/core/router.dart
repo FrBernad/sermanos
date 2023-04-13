@@ -14,27 +14,12 @@ class RootNavigationLocation extends BeamLocation<BeamState> {
 
   @override
   List<BeamPage> buildPages(BuildContext context, BeamState state) {
-    final int initialIndex = _getCurrentTabIndex(state.uri.pathSegments.first);
     return [
-      BeamPage(
-        key: ValueKey('root-navigation-$initialIndex'),
+      const BeamPage(
+        key: ValueKey('root-navigation'),
         type: BeamPageType.noTransition,
-        child: RootNavigationLayout(
-          initialIndex: initialIndex,
-        ),
+        child: RootNavigationLayout(),
       )
     ];
-  }
-
-  int _getCurrentTabIndex(String? tab) {
-    switch (tab) {
-      case PostulateScreen.routeName:
-        return 0;
-      case ProfileScreen.routeName:
-        return 1;
-      case NewsScreen.routeName:
-        return 2;
-    }
-    return -1;
   }
 }

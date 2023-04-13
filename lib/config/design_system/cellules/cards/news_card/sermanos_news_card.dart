@@ -15,7 +15,6 @@ class SermanosNewsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 328,
       decoration: BoxDecoration(
         color: SermanosColors.neutral0,
         borderRadius: BorderRadius.circular(2),

@@ -1,3 +1,4 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../l10n/app_localizations.dart';
@@ -17,4 +18,14 @@ extension BuildContextExtension on BuildContext {
 
   /// Extension for quickly accessing screen size
   Size get screenSize => MediaQuery.of(this).size;
+
+  /// Extension for quickly accessing screen size
+  String get beamerRootPath =>
+      (Beamer.of(this).currentBeamLocation.state as BeamState)
+          .uri
+          .pathSegments
+          .first;
+
+  List<String> get beamerPathSegments =>
+      (Beamer.of(this).currentBeamLocation.state as BeamState).uri.pathSegments;
 }

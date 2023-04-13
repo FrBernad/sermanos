@@ -37,7 +37,7 @@ class SermanosCTAButton extends StatelessWidget {
             onPressed: onPressed,
             child: Text(
               text,
-              style: SermanosTypography.button.copyWith(
+              style: const SermanosTypography.button(
                 color: SermanosColors.neutral0,
               ),
             ),
@@ -60,7 +60,7 @@ class SermanosCTAButton extends StatelessWidget {
             onPressed: onPressed,
             child: Text(
               text,
-              style: SermanosTypography.button.copyWith(
+              style: const SermanosTypography.button(
                 color: SermanosColors.primary100,
               ),
             ),

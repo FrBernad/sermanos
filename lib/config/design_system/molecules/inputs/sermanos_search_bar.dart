@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sermanos/config/design_system/atoms/icons/sermanos_close_icon.dart';
-import 'package:sermanos/config/design_system/atoms/icons/sermanos_search_icon.dart';
+import 'package:sermanos/config/design_system/atoms/icons/sermanos_icons.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_shadows.dart';
 
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
@@ -25,8 +24,6 @@ class SermanosSearchBar extends HookConsumerWidget {
         useListenableSelector(controller, () => controller.text.isEmpty);
 
     return Container(
-      margin:
-          const EdgeInsets.symmetric(horizontal: SermanosGrid.defaultPadding),
       decoration: BoxDecoration(
         color: SermanosColors.neutral0,
         borderRadius: BorderRadius.circular(2),
@@ -34,7 +31,7 @@ class SermanosSearchBar extends HookConsumerWidget {
       ),
       child: FormBuilderField<String>(
         initialValue: '',
-        name: 'postulation',
+        name: 'search',
         onReset: () => controller.text = initialValue,
         builder: (FormFieldState field) {
           return TextField(
@@ -46,7 +43,7 @@ class SermanosSearchBar extends HookConsumerWidget {
                 vertical: 12,
               ),
               hintText: 'Buscar',
-              hintStyle: SermanosTypography.subtitle01.copyWith(
+              hintStyle: const SermanosTypography.subtitle01().copyWith(
                 color: SermanosColors.neutral75,
               ),
               focusedBorder: const OutlineInputBorder(
@@ -59,8 +56,8 @@ class SermanosSearchBar extends HookConsumerWidget {
               ),
               suffixIcon: IconButton(
                 icon: isEmpty
-                    ? const SermanosSearchIcon.enabled()
-                    : const SermanosCloseIcon.enabled(),
+                    ? SermanosIcons.search(status: SermanosIconStatus.enabled)
+                    : SermanosIcons.close(status: SermanosIconStatus.enabled),
                 onPressed: () {
                   if (!isEmpty) {
                     controller.clear();

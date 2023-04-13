@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 
 import 'sermanos_colors.dart';
 
-class SermanosTypography {
-  SermanosTypography._();
+class SermanosTypography extends TextStyle {
+  const SermanosTypography({
+    required Color color,
+    required FontWeight fontWeight,
+    required double fontSize,
+  }) : super(
+          fontFamily: 'Roboto',
+          fontSize: fontSize,
+          fontWeight: fontWeight,
+          color: color,
+        );
 
   static const _headline01 = 24.0;
   static const _headline02 = 20.0;
@@ -14,59 +23,67 @@ class SermanosTypography {
   static const _caption = 12.0;
   static const _overline = 10.0;
 
-  static const headline01 = TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: _headline01,
-    fontWeight: FontWeight.w400,
-    color: SermanosColors.neutral100,
-  );
+  const SermanosTypography.headline01({
+    Color color = SermanosColors.neutral100,
+  }) : this(
+          fontSize: _headline01,
+          fontWeight: FontWeight.w400,
+          color: color,
+        );
 
-  static const headline02 = TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: _headline02,
-    fontWeight: FontWeight.w500,
-    color: SermanosColors.neutral100,
-  );
+  const SermanosTypography.headline02({
+    Color color = SermanosColors.neutral100,
+  }) : this(
+          fontSize: _headline02,
+          fontWeight: FontWeight.w500,
+          color: color,
+        );
 
-  static const subtitle01 = TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: _subtitle01,
-    fontWeight: FontWeight.w400,
-    color: SermanosColors.neutral100,
-  );
+  const SermanosTypography.subtitle01({
+    Color color = SermanosColors.neutral100,
+  }) : this(
+          fontSize: _subtitle01,
+          fontWeight: FontWeight.w400,
+          color: color,
+        );
 
-  static const body01 = TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: _body01,
-    fontWeight: FontWeight.w400,
-    color: SermanosColors.neutral100,
-  );
+  const SermanosTypography.body01({
+    Color color = SermanosColors.neutral100,
+  }) : this(
+          fontSize: _body01,
+          fontWeight: FontWeight.w400,
+          color: color,
+        );
 
-  static const body02 = TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: _body02,
-    fontWeight: FontWeight.w400,
-    color: SermanosColors.neutral100,
-  );
+  const SermanosTypography.body02({
+    Color color = SermanosColors.neutral100,
+  }) : this(
+          fontSize: _body02,
+          fontWeight: FontWeight.w400,
+          color: color,
+        );
 
-  static const button = TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: _button,
-    fontWeight: FontWeight.w500,
-    color: SermanosColors.neutral100,
-  );
+  const SermanosTypography.button({
+    Color color = SermanosColors.neutral100,
+  }) : this(
+          fontSize: _button,
+          fontWeight: FontWeight.w500,
+          color: color,
+        );
 
-  static const caption = TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: _caption,
-    fontWeight: FontWeight.w400,
-    color: SermanosColors.neutral100,
-  );
+  const SermanosTypography.caption({
+    Color color = SermanosColors.neutral100,
+  }) : this(
+          fontSize: _caption,
+          fontWeight: FontWeight.w400,
+          color: color,
+        );
 
-  static const overline = TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: _overline,
-    fontWeight: FontWeight.w500,
-    color: SermanosColors.neutral100,
-  );
+  const SermanosTypography.overline({
+    Color color = SermanosColors.neutral100,
+  }) : this(
+          fontSize: _overline,
+          fontWeight: FontWeight.w500,
+          color: color,
+        );
 }
