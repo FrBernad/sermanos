@@ -1,10 +1,10 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:sermanos/l10n/app_localizations.dart';
 
 import 'config/design_system/theme.dart';
 import 'config/router/router.dart';
 import 'flavors.dart';
-import 'l10n/app_localizations.dart';
 
 class App extends StatelessWidget {
   const App({super.key});

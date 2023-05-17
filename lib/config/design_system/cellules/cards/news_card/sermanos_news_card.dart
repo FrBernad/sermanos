@@ -1,4 +1,5 @@
 import 'package:beamer/beamer.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sermanos/config/design_system/cellules/cards/news_card/sermanos_news_card_information.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
@@ -26,11 +27,11 @@ class SermanosNewsCard extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // CachedNetworkImage(
-              //   imageUrl: news.imageUrl,
-              //   width: 118,
-              //   fit: BoxFit.cover,
-              // ),
+              CachedNetworkImage(
+                imageUrl: news.imageUrl,
+                width: 118,
+                fit: BoxFit.cover,
+              ),
               Expanded(
                 child: SermanosNewsCardInformation(
                   title: news.title,
