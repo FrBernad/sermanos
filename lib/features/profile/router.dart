@@ -10,8 +10,7 @@ class ProfileLocation extends BeamLocation<BeamState> {
 
   @override
   List<String> get pathPatterns => [
-        '/',
-        '/${ProfileScreen.routeName}/*',
+        ProfileScreen.route,
       ];
 
   @override

@@ -55,11 +55,11 @@ dependencies:
   shared_preferences: ^2.0.18
   riverpod_generator: ^2.2.0
   riverpod_annotation: ^2.1.1
+  connectivity_plus: ^3.0.3
+  internet_connection_checker: ^1.0.0+1
   firebase_core: ^2.13.0
   cloud_firestore: ^4.7.1
-#  firebase_core: ^2.4.1
-#  firebase_database: ^10.0.9
-#  firebase_auth: ^4.2.5
+  firebase_auth: ^4.6.1
 
 dev_dependencies:
   flutter_test:

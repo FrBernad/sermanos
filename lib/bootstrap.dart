@@ -20,7 +20,7 @@ Future<ProviderContainer> bootstrap() async {
     ],
   );
 
-  // await Firebase.initializeApp();
+  await Firebase.initializeApp();
 
   await providers.initializeProviders(container);
 

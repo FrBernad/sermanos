@@ -11,7 +11,7 @@ class WelcomeLocation extends BeamLocation<BeamState> {
 
   @override
   List<String> get pathPatterns => [
-        '/${WelcomeScreen.routeName}',
+        WelcomeScreen.route,
       ];
 
   @override

@@ -4,11 +4,19 @@ import 'package:sermanos/config/design_system/molecules/spinner/ser_manos_circul
 import 'package:sermanos/features/core/presentation/widgets/error_message.dart';
 import 'package:sermanos/features/news/application/news_search_controller.dart';
 
-class NewsScreenDetails extends ConsumerWidget {
-  static const route = "/news/:newsId";
-  static const routeName = "newsDetails";
+class NewsDetailsScreen extends ConsumerWidget {
+  static const route = "/news/:id";
 
-  const NewsScreenDetails({Key? key}) : super(key: key);
+  static String routeFromId(String id) => '/news/$id';
+
+  static const routeName = "newsDetail";
+
+  const NewsDetailsScreen({
+    Key? key,
+    required this.postulateId,
+  }) : super(key: key);
+
+  final String postulateId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

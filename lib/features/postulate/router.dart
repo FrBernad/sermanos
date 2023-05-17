@@ -1,6 +1,5 @@
 import 'package:beamer/beamer.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/router.dart';
+import 'package:flutter/material.dart';
 import 'package:sermanos/features/postulate/presentation/screens/postulate_detail_screen.dart';
 import 'package:sermanos/features/postulate/presentation/screens/postulate_screen.dart';
 
@@ -12,7 +11,8 @@ class PostulateLocation extends BeamLocation<BeamState> {
 
   @override
   List<String> get pathPatterns => [
-        '${PostulateDetailScreen.route}/detail',
+        PostulateScreen.route,
+        PostulateDetailScreen.route,
       ];
 
   @override
@@ -26,21 +26,10 @@ class PostulateLocation extends BeamLocation<BeamState> {
           key: ValueKey('postulate-$id'),
           title: 'Postulate $id',
           child: PostulateDetailScreen(postulateId: id),
-          onPopPage: _onPopPage,
         ),
       );
     }
 
     return pages;
-  }
-
-  bool _onPopPage(BuildContext context, BeamerDelegate delegate, _, page) {
-    delegate.update(
-      configuration: const RouteInformation(
-        location: PostulateScreen.route,
-      ),
-      rebuild: false,
-    );
-    return true;
   }
 }

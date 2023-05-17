@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class News extends Equatable {
   final String title;
-  final String newsId;
+  final String id;
   final String subtitle;
   final String description;
   final String imageUrl;
@@ -10,11 +10,11 @@ class News extends Equatable {
   const News({
     required this.title,
     required this.subtitle,
-    required this.newsId,
+    required this.id,
     required this.description,
     required this.imageUrl,
   });
 
   @override
-  List<Object?> get props => [newsId];
+  List<Object?> get props => [id];
 }

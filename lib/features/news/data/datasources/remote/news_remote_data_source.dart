@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:sermanos/features/news/data/entities/remote/remote_news_entity.dart';
 
@@ -10,6 +11,12 @@ abstract class NewsRemoteDataSource {
 }
 
 class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
+  NewsRemoteDataSourceImpl({
+    required firebaseDatabaseClient,
+  }) : _firebaseDatabaseClient = firebaseDatabaseClient;
+
+  final FirebaseFirestore _firebaseDatabaseClient;
+
   final Map<String, dynamic> news = {
     "0": {
       "subtitle": "reporte 2820",

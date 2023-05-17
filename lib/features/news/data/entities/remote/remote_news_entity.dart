@@ -11,7 +11,7 @@ class RemoteNewsEntity extends News {
             subtitle: subtitle,
             title: title,
             description: description,
-            newsId: newsId,
+            id: newsId,
             imageUrl: imageUrl);
 
   factory RemoteNewsEntity.fromJson({
@@ -32,7 +32,7 @@ class RemoteNewsEntity extends News {
         subtitle: subtitle,
         title: title,
         description: description,
-        newsId: newsId,
+        id: id,
         imageUrl: imageUrl);
   }
 }

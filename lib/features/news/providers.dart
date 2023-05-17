@@ -3,6 +3,8 @@ import 'package:sermanos/features/news/data/datasources/remote/news_remote_data_
 import 'package:sermanos/features/news/data/repositories/news_repository_impl.dart';
 import 'package:sermanos/features/news/domain/repositories/news_repository.dart';
 
+import '../../config/providers.dart';
+
 part 'generated/providers.g.dart';
 
 ///
@@ -13,7 +15,9 @@ part 'generated/providers.g.dart';
 NewsRemoteDataSource newsRemoteDataSource(
   NewsRemoteDataSourceRef ref,
 ) =>
-    NewsRemoteDataSourceImpl();
+    NewsRemoteDataSourceImpl(
+      firebaseDatabaseClient: ref.watch(firebaseDatabaseProvider),
+    );
 
 @Riverpod(keepAlive: true)
 NewsRepository newsRepository(NewsRepositoryRef ref) => NewsRepositoryImpl(

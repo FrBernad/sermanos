@@ -1,8 +1,10 @@
+import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:sermanos/config/design_system/cellules/cards/news_card/sermanos_news_card_information.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_shadows.dart';
 import 'package:sermanos/features/news/domain/models/news.dart';
+import 'package:sermanos/features/news/presentation/screens/news_details_screen.dart';
 
 class SermanosNewsCard extends StatelessWidget {
   const SermanosNewsCard({
@@ -40,7 +42,7 @@ class SermanosNewsCard extends StatelessWidget {
           ),
         ),
       ),
-      onTap: () => null,
+      onTap: () => context.beamToNamed(NewsDetailsScreen.routeFromId(news.id)),
     );
   }
 }

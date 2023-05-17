@@ -15,8 +15,8 @@ class PostulateScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      children: const [
+    return const Column(
+      children: [
         SizedBox(height: 24),
         SermanosGrid(child: SermanosSearchBar()),
         Expanded(child: PostulateList()),

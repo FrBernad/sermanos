@@ -1,55 +1,55 @@
 import 'dart:async';
 
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:firebase_database/firebase_database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../features/core/platform/network_info.dart';
 import '../flavors.dart';
 import 'env/env.dart';
+import 'http_clients/dio_interceptor.dart';
+
+part 'generated/providers.g.dart';
 
 ///
 /// Env Dependencies
 ///
-final envProvider = Provider(
-  name: 'environmentVariablesProvider',
-  (ref) => EnvImpl(),
-);
+@Riverpod(keepAlive: true)
+Env env(EnvRef ref) => EnvImpl();
 
 ///
 /// Data Dependencies
 ///
-// final dioProvider = Provider(
-//   name: 'dioProvider',
-//   (ref) {
-//     var env = ref.watch(envProvider);
-//     var options = BaseOptions(
-//       baseUrl: env.apiBaseUrl,
-//     );
-//
-//     var dio = Dio(options);
-//     if (F.appFlavor == Flavor.development) {
-//       dio.interceptors.add(DioInterceptor());
-//     }
-//
-//     return dio;
-//   },
-// );
-//
-// final firebaseAuthProvider = Provider(
-//   name: 'firebaseAuthClientProvider',
-//   (ref) {
-//     return FirebaseAuth.instance;
-//   },
-// );
-//
-// final firebaseDatabaseProvider = Provider(
-//   name: 'firebaseDatabaseClientProvider',
-//   (ref) {
-//     // FirebaseDatabase.instance.setPersistenceEnabled(false);
-//     return FirebaseDatabase.instance;
-//   },
-// );
+@Riverpod(keepAlive: true)
+Dio dio(DioRef ref) {
+  var dio = Dio();
+  if (F.appFlavor == Flavor.development) {
+    dio.interceptors.add(DioInterceptor());
+  }
+
+  return dio;
+}
+
+@Riverpod(keepAlive: true)
+FirebaseAuth firebaseAuth(FirebaseAuthRef ref) => FirebaseAuth.instance;
+
+@Riverpod(keepAlive: true)
+FirebaseFirestore firebaseDatabase(FirebaseDatabaseRef ref) {
+  FirebaseFirestore.instance.settings = const Settings(
+    persistenceEnabled: false,
+  );
+  return FirebaseFirestore.instance;
+}
+
+@Riverpod(keepAlive: true)
+NetworkInfo networkInfo(NetworkInfoRef ref) {
+  final networkInfo = NetworkInfo();
+  ref.onDispose(networkInfo.dispose);
+  return networkInfo;
+}
 
 ///
 /// Providers initialization for boostrap file
@@ -60,11 +60,15 @@ Future<void> initializeProviders(ProviderContainer container) async {
   container.read(envProvider); // read to initialize
 
   /// Dio Setup
-  // container.read(dioProvider);
-  //
+  container.read(dioProvider);
+
+  /// Network Info Setup
+  final networkInfo = container.read(networkInfoProvider);
+  await networkInfo.initialize();
+
   /// Firebase Auth Setup
-  // container.read(firebaseAuthProvider);
+  container.read(firebaseAuthProvider);
 
   /// Firebase Database Setup
-  // container.read(firebaseDatabaseProvider);
+  container.read(firebaseDatabaseProvider);
 }
