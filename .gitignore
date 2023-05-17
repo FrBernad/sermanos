@@ -47,6 +47,9 @@ app.*.map.json
 **/.env**
 !**/.env.dist
 
+# Firebase
+**/google-services.json
+**/GoogleService-Info.plist
 
 # Generated files
 lib/**/generated
