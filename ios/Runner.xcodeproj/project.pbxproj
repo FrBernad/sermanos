@@ -159,6 +159,7 @@
 			buildPhases = (
 				432242287AA4E56FB001804D /* [CP] Check Pods Manifest.lock */,
 				9740EEB61CF901F6004384FC /* Run Script */,
+				323EF96F2A154CD400C5E80E /* Copy GoogleService-info.plist to the correct location */,
 				97C146EA1CF9000F007C117D /* Sources */,
 				97C146EB1CF9000F007C117D /* Frameworks */,
 				97C146EC1CF9000F007C117D /* Resources */,
@@ -246,6 +247,24 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		323EF96F2A154CD400C5E80E /* Copy GoogleService-info.plist to the correct location */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy GoogleService-info.plist to the correct location";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Get a reference to the destination location for the GoogleService-Info.plist\n# This is the default location where Firebase init code expects to find GoogleServices-Info.plist file.\nPLIST_DESTINATION=${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME}.app\n# We have named our Build Configurations as Debug-dev, Debug-prod etc.\n# Here, dev and prod are the scheme names. This kind of naming is required by Flutter for flavors to work.\n# We are using the $CONFIGURATION variable available in the XCode build environment to get the build configuration.\nif [ \"${CONFIGURATION}\" == \"Debug-production\" ] || [ \"${CONFIGURATION}\" == \"Release-production\" ] || [ \"${CONFIGURATION}\" == \"Profile-production\" ] || [ \"${CONFIGURATION}\" == \"Release\" ]; then\ncp \"${PROJECT_DIR}/config/production/GoogleService-Info.plist\" \"${PLIST_DESTINATION}/GoogleService-Info.plist\"\necho \"Production plist copied\"\nelif [ \"${CONFIGURATION}\" == \"Debug-development\" ] || [ \"${CONFIGURATION}\" == \"Release-development\" ] || [ \"${CONFIGURATION}\" == \"Profile-development\" ] || [ \"${CONFIGURATION}\" == \"Debug\" ]; then\ncp \"${PROJECT_DIR}/config/development/GoogleService-Info.plist\" \"${PLIST_DESTINATION}/GoogleService-Info.plist\"\necho \"Development plist copied\"\nfi\n";
+		};
 		3B06AD1E1E4923F5004D2608 /* Thin Binary */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -253,6 +272,7 @@
 			files = (
 			);
 			inputPaths = (
+				"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}",
 			);
 			name = "Thin Binary";
 			outputPaths = (
@@ -296,7 +316,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
+			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -503,6 +523,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B0A0016B6EE30756D139F887 /* Pods-Runner.debug-production.xcconfig */;
 			buildSettings = {
+				PRODUCT_BUNDLE_IDENTIFIER = ar.edu.itba.sermanos.production;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Debug-production";
@@ -511,6 +532,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 25B7F49F0139DD4A5D2F8F19 /* Pods-Runner.profile-production.xcconfig */;
 			buildSettings = {
+				PRODUCT_BUNDLE_IDENTIFIER = ar.edu.itba.sermanos.production;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Profile-production";
@@ -519,6 +541,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B307113878B93B5C94F30BA4 /* Pods-Runner.release-production.xcconfig */;
 			buildSettings = {
+				PRODUCT_BUNDLE_IDENTIFIER = ar.edu.itba.sermanos.production;
 				PRODUCT_NAME = Runner;
 			};
 			name = "Release-production";

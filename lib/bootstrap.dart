@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -6,7 +7,7 @@ import 'config/logger/logger.dart';
 import 'config/providers.dart' as providers;
 import 'flavors.dart';
 
-/// Initializes services and controllers before application start
+/// Initializes app dependencies before it starts
 Future<ProviderContainer> bootstrap() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
 
@@ -14,8 +15,12 @@ Future<ProviderContainer> bootstrap() async {
 
   final container = ProviderContainer(
     overrides: [],
-    observers: [if (F.appFlavor == Flavor.development) _LoggerProviderObserver()],
+    observers: [
+      if (F.appFlavor == Flavor.development) _LoggerProviderObserver()
+    ],
   );
+
+  // await Firebase.initializeApp();
 
   await providers.initializeProviders(container);
 

@@ -19,13 +19,13 @@ extension BuildContextExtension on BuildContext {
   /// Extension for quickly accessing screen size
   Size get screenSize => MediaQuery.of(this).size;
 
-  /// Extension for quickly accessing screen size
+  /// Extension for quickly accessing beamer root path
   String get beamerRootPath =>
       (Beamer.of(this).currentBeamLocation.state as BeamState)
           .uri
           .pathSegments
           .first;
-
+  /// Extension for quickly accessing beamer path segments
   List<String> get beamerPathSegments =>
       (Beamer.of(this).currentBeamLocation.state as BeamState).uri.pathSegments;
 }

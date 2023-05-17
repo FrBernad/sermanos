@@ -24,31 +24,19 @@ class ServerFailure extends Failure {
 }
 
 class FirebaseAuthFailure extends Failure {
-  const FirebaseAuthFailure({required String message}) : super(message: message);
+  const FirebaseAuthFailure({required String message})
+      : super(message: message);
 }
 
-class CacheFailure extends Failure {
-  const CacheFailure() : super(message: _failureMessage);
-
-  static const _failureMessage = "Cache Failure";
+class NewsNotFoundFailure extends Failure {
+  const NewsNotFoundFailure() : super(message: _failureMessage);
+  static const _failureMessage = "Invalid news id";
 }
 
-class EmergencyNotFoundFailure extends Failure {
-  const EmergencyNotFoundFailure() : super(message: _failureMessage);
-
-  static const _failureMessage = "Invalid emergency id";
-}
-
-class ContactNotFoundFailure extends Failure {
-  const ContactNotFoundFailure() : super(message: _failureMessage);
-
-  static const _failureMessage = "Invalid contact id";
-}
-
-class LearnEmergencyNotFoundFailure extends Failure {
-  const LearnEmergencyNotFoundFailure() : super(message: _failureMessage);
-
-  static const _failureMessage = "Invalid learn emergency id";
+class ConnectionFailure extends Failure {
+  const ConnectionFailure() : super(message: _failureMessage);
+  static const _failureMessage =
+      "Failed when trying to connect with remote data source";
 }
 
 class UserNotFoundFailure extends Failure {

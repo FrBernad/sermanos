@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sermanos/config/design_system/cellules/cards/news_card/sermanos_news_card_information.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
@@ -14,31 +13,34 @@ class SermanosNewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: SermanosColors.neutral0,
-        borderRadius: BorderRadius.circular(2),
-        boxShadow: SermanosShadows.shadow2,
-      ),
-      child: IntrinsicHeight(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            CachedNetworkImage(
-              imageUrl: news.imageUrl,
-              width: 118,
-              fit: BoxFit.cover,
-            ),
-            Expanded(
-              child: SermanosNewsCardInformation(
-                title: news.title,
-                subtitle: news.subtitle,
-                description: news.description,
-              ),
-            )
-          ],
+    return InkWell(
+      child: Container(
+        decoration: BoxDecoration(
+          color: SermanosColors.neutral0,
+          borderRadius: BorderRadius.circular(2),
+          boxShadow: SermanosShadows.shadow2,
+        ),
+        child: IntrinsicHeight(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // CachedNetworkImage(
+              //   imageUrl: news.imageUrl,
+              //   width: 118,
+              //   fit: BoxFit.cover,
+              // ),
+              Expanded(
+                child: SermanosNewsCardInformation(
+                  title: news.title,
+                  subtitle: news.subtitle,
+                  description: news.description,
+                ),
+              )
+            ],
+          ),
         ),
       ),
+      onTap: () => null,
     );
   }
 }

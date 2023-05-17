@@ -77,7 +77,7 @@ class RootNavigationLayout extends HookConsumerWidget {
         configuration: RouteInformation(
           location: _getCurrentLocationPath(newIndex),
         ),
-        rebuild: false,
+        rebuild: true,
       );
     }
   }
