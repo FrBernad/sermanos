@@ -33,6 +33,11 @@ class NewsNotFoundFailure extends Failure {
   static const _failureMessage = "Invalid news id";
 }
 
+class SocialActionNotFoundFailure extends Failure {
+  const SocialActionNotFoundFailure() : super(message: _failureMessage);
+  static const _failureMessage = "Invalid social action id";
+}
+
 class ConnectionFailure extends Failure {
   const ConnectionFailure() : super(message: _failureMessage);
   static const _failureMessage =

@@ -13,11 +13,11 @@ class SermanosRegisterForm extends StatelessWidget {
     return FormBuilder(
       key: _registerFormKey,
       child: Column(
-        children: const [
+        children: [
           SermanosTextField(
             formField: 'name',
             initialValue: '',
-            label: 'Email',
+            label: 'Nombre',
             floatingLabelBehavior: FloatingLabelBehavior.always,
             placeholder: 'Ej: Juan',
           ),
