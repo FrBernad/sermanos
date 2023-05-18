@@ -24,7 +24,7 @@ class NewsLocation extends BeamLocation<BeamState> {
         BeamPage(
           key: ValueKey('news-$id'),
           title: 'News $id',
-          child: NewsDetailsScreen(postulateId: id),
+          child: NewsDetailsScreen(newsId: id),
         ),
       );
     }

@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sermanos/config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
 import 'package:sermanos/features/core/presentation/widgets/error_message.dart';
-
-import '../../application/controllers/news_search_controller.dart';
+import 'package:sermanos/features/news/application/controllers/get_news_by_id_controller.dart';
 
 class NewsDetailsScreen extends ConsumerWidget {
   static const route = "/news/:id";
@@ -14,21 +13,34 @@ class NewsDetailsScreen extends ConsumerWidget {
 
   const NewsDetailsScreen({
     Key? key,
-    required this.postulateId,
+    required this.newsId,
   }) : super(key: key);
 
-  final String postulateId;
+  final String newsId;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final newsController = ref.watch(newsSearchControllerProvider);
-
-    return newsController.when(
-      data: (news) {
-        return const SermanosCircularProgressIndicator();
-      },
-      error: (error, stackTrace) => const ErrorMessage(),
-      loading: () => const SermanosCircularProgressIndicator(),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Image(
+          image: AssetImage('assets/images/sermanos_logo_reactangle.png'),
+          height: 30,
+          fit: BoxFit.contain,
+        ),
+      ),
+      body: Consumer(
+        builder: (BuildContext context, WidgetRef ref, Widget? child) {
+          final newsByIdController =
+              ref.watch(getNewsByIdControllerProvider(newsId: newsId));
+          return newsByIdController.when(
+            data: (news) {
+              return const SermanosCircularProgressIndicator();
+            },
+            error: (error, stackTrace) => const ErrorMessage(),
+            loading: () => const SermanosCircularProgressIndicator(),
+          );
+        },
+      ),
     );
   }
 }

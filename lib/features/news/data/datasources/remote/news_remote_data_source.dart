@@ -47,14 +47,14 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
       final DocumentSnapshot response =
           await _firebaseDatabaseClient.collection("news").doc(newsId).get();
 
-      if (response.exists) {
+      if (!response.exists) {
         logger.d("News with id $newsId does not exist");
-        return Option.none();
+        return const Option.none();
       }
       RemoteNewsEntity remoteEntity = RemoteNewsEntity.fromJson(
           newsId: response.id,
           json: Map<String, dynamic>.from(
-              response.data() as Map<String, Object>));
+              response.data() as Map<String, dynamic>));
 
       return Option.of(remoteEntity);
     } catch (e) {
