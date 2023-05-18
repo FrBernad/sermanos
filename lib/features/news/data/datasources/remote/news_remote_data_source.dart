@@ -4,7 +4,7 @@ import 'package:sermanos/config/logger/logger.dart';
 import 'package:sermanos/features/core/error/exception.dart';
 import 'package:sermanos/features/news/data/entities/remote/remote_news_entity.dart';
 
-abstract class NewsRemoteDataSource {
+abstract interface class NewsRemoteDataSource {
   Future<List<RemoteNewsEntity>> getNews();
 
   Future<Option<RemoteNewsEntity>> getNewsById({
@@ -21,14 +21,15 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
   @override
   Future<List<RemoteNewsEntity>> getNews() async {
     try {
-      final QuerySnapshot response =
-          await _firebaseDatabaseClient.collection("news").get();
+      final response = await _firebaseDatabaseClient.collection("news").get();
+
       List<RemoteNewsEntity> newsEntities = [];
 
-      for (var d in response.docs) {
+      for (var news in response.docs) {
         RemoteNewsEntity remoteEntity = RemoteNewsEntity.fromJson(
-            newsId: d.id,
-            json: Map<String, dynamic>.from(d.data() as Map<String, Object>));
+          newsId: news.id,
+          json: news.data(),
+        );
         newsEntities.add(remoteEntity);
       }
       return newsEntities;

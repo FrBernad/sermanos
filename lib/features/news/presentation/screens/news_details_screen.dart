@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sermanos/config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
 import 'package:sermanos/features/core/presentation/widgets/error_message.dart';
-import 'package:sermanos/features/news/application/news_search_controller.dart';
+
+import '../../application/controllers/news_search_controller.dart';
 
 class NewsDetailsScreen extends ConsumerWidget {
   static const route = "/news/:id";

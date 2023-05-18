@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-abstract class Failure extends Equatable {
+abstract interface class Failure extends Equatable {
   const Failure({required this.message});
 
   final String message;

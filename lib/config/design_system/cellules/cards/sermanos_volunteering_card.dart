@@ -35,7 +35,7 @@ class SermanosVolunteeringCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Image(
-              image: NetworkImage(imageUrl),
+              image: NetworkImage("https://www.gstatic.com/mobilesdk/160323_mobilesdk/images/firebase_logotype_white_18dp.svg"),
               fit: BoxFit.cover,
               height: 138,
               width: double.infinity,

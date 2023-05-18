@@ -1,6 +1,6 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-abstract class Env {
+abstract interface class Env {
   late final String apiBaseUrl;
 }
 

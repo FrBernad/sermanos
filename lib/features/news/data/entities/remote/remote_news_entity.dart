@@ -8,11 +8,12 @@ class RemoteNewsEntity extends News {
     required description,
     required imageUrl,
   }) : super(
-            subtitle: subtitle,
-            title: title,
-            description: description,
-            id: newsId,
-            imageUrl: imageUrl);
+          subtitle: subtitle,
+          title: title,
+          description: description,
+          id: newsId,
+          imageUrl: imageUrl,
+        );
 
   factory RemoteNewsEntity.fromJson({
     required String newsId,
@@ -29,10 +30,11 @@ class RemoteNewsEntity extends News {
 
   News toModel() {
     return News(
-        subtitle: subtitle,
-        title: title,
-        description: description,
-        id: id,
-        imageUrl: imageUrl);
+      subtitle: subtitle,
+      title: title,
+      description: description,
+      id: id,
+      imageUrl: imageUrl,
+    );
   }
 }

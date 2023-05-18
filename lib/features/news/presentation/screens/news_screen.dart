@@ -4,7 +4,8 @@ import 'package:sermanos/config/design_system/cellules/cards/news_card/sermanos_
 import 'package:sermanos/config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_grid.dart';
 import 'package:sermanos/features/core/presentation/widgets/error_message.dart';
-import 'package:sermanos/features/news/application/news_search_controller.dart';
+
+import '../../application/controllers/news_search_controller.dart';
 
 class NewsScreen extends ConsumerWidget {
   static const route = "/news";
