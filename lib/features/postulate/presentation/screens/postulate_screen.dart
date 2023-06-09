@@ -33,7 +33,7 @@ class PostulateScreen extends ConsumerWidget {
           ),
         ),
         SizedBox(height: 24),
-        Expanded(child: PostulateList()),
+        PostulateList(),
       ],
     );
   }
