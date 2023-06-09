@@ -1,5 +1,5 @@
 import 'package:fpdart/fpdart.dart';
-import 'package:sermanos/features/postulate/data/entities/remote/remote_social_action_entity.dart';
+import 'package:sermanos/features/postulate/data/entities/social_action_entity.dart';
 import 'package:sermanos/features/postulate/domain/models/social_action.dart';
 
 import '../../../core/error/failure.dart';
@@ -17,7 +17,7 @@ class SocialActionsRepositoryImpl implements SocialActionsRepository {
   Future<Either<Failure, List<SocialAction>>> getSocialActions() async {
     List<SocialAction> socialActions = [];
     try {
-      final List<RemoteSocialActionEntity> socialActionsEntities =
+      final List<SocialActionEntity> socialActionsEntities =
           await socialActionsDataSource.getSocialActions();
 
       socialActions = socialActionsEntities.map((n) => n.toModel()).toList();
@@ -33,7 +33,7 @@ class SocialActionsRepositoryImpl implements SocialActionsRepository {
     required String socialActionId,
   }) async {
     try {
-      final Option<RemoteSocialActionEntity> socialActionEntity =
+      final Option<SocialActionEntity> socialActionEntity =
           await socialActionsDataSource.getSocialActionById(
         socialActionId: socialActionId,
       );

@@ -7,6 +7,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../features/auth/application/controllers/session_restore_controller.dart';
 import '../features/core/platform/network_info.dart';
 import '../flavors.dart';
 import 'env/env.dart';
@@ -57,7 +58,7 @@ NetworkInfo networkInfo(NetworkInfoRef ref) {
 Future<void> initializeProviders(ProviderContainer container) async {
   /// Env
   await dotenv.load(fileName: F.envFileName);
-  container.read(envProvider); // read to initialize
+  container.read(envProvider);
 
   /// Dio Setup
   container.read(dioProvider);
@@ -71,4 +72,7 @@ Future<void> initializeProviders(ProviderContainer container) async {
 
   /// Firebase Database Setup
   container.read(firebaseDatabaseProvider);
+
+  /// Try Session Restore
+  await container.read(sessionRestoreControllerProvider.future);
 }

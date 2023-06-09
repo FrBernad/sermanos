@@ -51,6 +51,7 @@ class SermanosTextField extends HookConsumerWidget {
         return TextField(
           obscureText: isObscured.value,
           enabled: enabled,
+          onChanged: (value) => field.didChange(value),
           focusNode: focusNode,
           controller: controller,
           decoration: InputDecoration(

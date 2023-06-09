@@ -2,8 +2,8 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
-import 'package:sermanos/features/auth/presentation/screens/login_screen.dart';
-import 'package:sermanos/features/auth/presentation/screens/register_screen.dart';
+import 'package:sermanos/features/auth/presentation/screens/sign_in_screen.dart';
+import 'package:sermanos/features/auth/presentation/screens/sign_up_screen.dart';
 
 class LandingScreen extends StatelessWidget {
   static const route = "/auth";
@@ -47,13 +47,13 @@ class LandingScreen extends StatelessWidget {
                   SermanosCTAButton(
                     text: 'Iniciar Sesión',
                     filled: true,
-                    onPressed: () => context.beamToNamed(LoginScreen.route),
+                    onPressed: () => context.beamToNamed(SignInScreen.route),
                   ),
                   const SizedBox(height: 16),
                   SermanosCTAButton(
                     text: 'Registrarse',
                     filled: false,
-                    onPressed: () => context.beamToNamed(RegisterScreen.route),
+                    onPressed: () => context.beamToNamed(SignUpScreen.route),
                   ),
                 ],
               ),

@@ -1,15 +1,17 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 
-import '../../entities/remote/remote_user_entity.dart';
+import '../../entities/app_user_entity.dart';
 
 abstract interface class UserRemoteDataSource {
-  Future<Option<RemoteUserEntity>> getUserById({
-    required String id,
+  Future<Option<AppUserEntity>> getUserById({
+    required String userId,
   });
 
-  Future<RemoteUserEntity> createUser({
-    required String id,
+  Future<AppUserEntity> createUser({
+    required String userId,
+    required String name,
+    required String surname,
     required String email,
   });
 }
@@ -22,40 +24,48 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
   final FirebaseFirestore _firebaseDatabaseClient;
 
   @override
-  Future<Option<RemoteUserEntity>> getUserById({
-    required String id,
+  Future<Option<AppUserEntity>> getUserById({
+    required String userId,
   }) async {
-    throw UnimplementedError();
-    // final userDatabase = _firebaseDatabaseClient.ref('users/$id');
-    //
-    // final response = await userDatabase.get();
-    // if (!response.exists) {
-    //   return Option.none();
-    // }
-    //
-    // return Option.of(
-    //   RemoteUserEntity.fromJson(
-    //     id,
-    //     Map<String, dynamic>.from(response.value as dynamic),
-    //   ),
-    // );
+    final query = _firebaseDatabaseClient
+        .collection(AppUserEntity.collectionName)
+        .doc(userId);
+
+    final response = await query.get();
+    if (!response.exists) {
+      return const None();
+    }
+
+    return Option.of(
+      AppUserEntity.fromJson(
+        userId,
+        response.data()!,
+      ),
+    );
   }
 
   @override
-  Future<RemoteUserEntity> createUser({
-    required String id,
+  Future<AppUserEntity> createUser({
+    required String userId,
+    required String name,
+    required String surname,
     required String email,
   }) async {
-    throw UnimplementedError();
-    // final userDatabase = _firebaseDatabaseClient.ref('users/$id');
-    //
-    // final userDataMap = {
-    //   'email': email,
-    //   'lastModified': DateTime.now().millisecondsSinceEpoch,
-    // };
-    //
-    // await userDatabase.set(userDataMap);
-    //
-    // return RemoteUserEntity.fromJson(id, userDataMap);
+    final query = _firebaseDatabaseClient
+        .collection(AppUserEntity.collectionName)
+        .doc(userId);
+
+    final userDataMap = {
+      'name': name,
+      'surname': surname,
+      'email': email,
+    };
+
+    await query.set(userDataMap);
+
+    return AppUserEntity.fromJson(
+      userId,
+      userDataMap,
+    );
   }
 }

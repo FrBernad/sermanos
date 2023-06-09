@@ -4,7 +4,7 @@ import 'package:sermanos/config/providers.dart';
 
 import 'data/datasources/remote/user_remote_data_source.dart';
 import 'data/repositories/user_repository_impl.dart';
-import 'domain/models/user_model.dart';
+import 'domain/models/app_user_model.dart';
 import 'domain/repositories/user_repository.dart';
 
 part 'generated/providers.g.dart';

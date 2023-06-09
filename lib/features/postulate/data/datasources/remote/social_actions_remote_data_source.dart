@@ -3,12 +3,12 @@ import 'package:fpdart/fpdart.dart';
 
 import '../../../../../config/logger/logger.dart';
 import '../../../../core/error/exception.dart';
-import '../../entities/remote/remote_social_action_entity.dart';
+import '../../entities/social_action_entity.dart';
 
 abstract class SocialActionsRemoteDataSource {
-  Future<List<RemoteSocialActionEntity>> getSocialActions();
+  Future<List<SocialActionEntity>> getSocialActions();
 
-  Future<Option<RemoteSocialActionEntity>> getSocialActionById({
+  Future<Option<SocialActionEntity>> getSocialActionById({
     required String socialActionId,
   });
 }
@@ -22,15 +22,15 @@ class SocialActionsRemoteDataSourceImpl
   final FirebaseFirestore _firebaseDatabaseClient;
 
   @override
-  Future<List<RemoteSocialActionEntity>> getSocialActions() async {
+  Future<List<SocialActionEntity>> getSocialActions() async {
     try {
       final QuerySnapshot response =
           await _firebaseDatabaseClient.collection("volunteerings").get();
-      List<RemoteSocialActionEntity> socialActionEntities = [];
+      List<SocialActionEntity> socialActionEntities = [];
 
       for (var d in response.docs) {
-        RemoteSocialActionEntity socialActionEntity =
-            RemoteSocialActionEntity.fromJson(
+        SocialActionEntity socialActionEntity =
+            SocialActionEntity.fromJson(
                 socialActionId: d.id,
                 json: Map<String, dynamic>.from(
                     d.data() as Map<String, dynamic>));
@@ -45,7 +45,7 @@ class SocialActionsRemoteDataSourceImpl
   }
 
   @override
-  Future<Option<RemoteSocialActionEntity>> getSocialActionById({
+  Future<Option<SocialActionEntity>> getSocialActionById({
     required String socialActionId,
   }) async {
     try {
@@ -59,8 +59,8 @@ class SocialActionsRemoteDataSourceImpl
         return const Option.none();
       }
 
-      RemoteSocialActionEntity socialActionEntity =
-          RemoteSocialActionEntity.fromJson(
+      SocialActionEntity socialActionEntity =
+          SocialActionEntity.fromJson(
         socialActionId: response.id,
         json:
             Map<String, dynamic>.from(response.data() as Map<String, dynamic>),

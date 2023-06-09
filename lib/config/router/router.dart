@@ -1,5 +1,8 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:sermanos/config/router/guards/auth_guard.dart';
+import 'package:sermanos/config/router/guards/unauth_guard.dart';
 import 'package:sermanos/features/auth/presentation/screens/landing_screen.dart';
 import 'package:sermanos/features/auth/presentation/screens/welcome_screen.dart';
 import 'package:sermanos/features/auth/router.dart';
@@ -13,14 +16,19 @@ import '../../features/profile/router.dart';
 import '../../features/welcome/router.dart';
 import 'guards/logger.dart';
 
-// GoRouter configuration
-final mainBeamerDelegate = BeamerDelegate(
-  initialPath: LandingScreen.route,
-  locationBuilder: _locationBuilder,
-  guards: [
-    routerLogger,
-  ],
-);
+part 'generated/router.g.dart';
+
+@Riverpod(keepAlive: true)
+Raw<BeamerDelegate> mainBeamerDelegate(MainBeamerDelegateRef ref) =>
+    BeamerDelegate(
+      initialPath: LandingScreen.route,
+      locationBuilder: _locationBuilder,
+      guards: [
+        routerLogger,
+        AuthGuard(providerRef: ref),
+        UnAuthGuard(providerRef: ref),
+      ],
+    );
 
 BeamLocation<RouteInformationSerializable<dynamic>> _locationBuilder(
   RouteInformation routeInformation,

@@ -1,7 +1,7 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:sermanos/features/core/error/failure.dart';
 import 'package:sermanos/features/news/data/datasources/remote/news_remote_data_source.dart';
-import 'package:sermanos/features/news/data/entities/remote/remote_news_entity.dart';
+import 'package:sermanos/features/news/data/entities/news_entity.dart';
 import 'package:sermanos/features/news/domain/models/news.dart';
 import 'package:sermanos/features/news/domain/repositories/news_repository.dart';
 
@@ -16,7 +16,7 @@ class NewsRepositoryImpl implements NewsRepository {
   Future<Either<Failure, List<News>>> getNews() async {
     List<News> news = [];
     try {
-      final List<RemoteNewsEntity> newsEntities =
+      final List<NewsEntity> newsEntities =
           await newsRemoteDataSource.getNews();
 
       news = newsEntities.map((n) => n.toModel()).toList();
@@ -31,12 +31,13 @@ class NewsRepositoryImpl implements NewsRepository {
     required String newsId,
   }) async {
     try {
-      final Option<RemoteNewsEntity> newsEntity =
+      final Option<NewsEntity> newsEntity =
           await newsRemoteDataSource.getNewsById(newsId: newsId);
 
       if (newsEntity.isNone()) {
         return const Left(NewsNotFoundFailure());
       }
+
       return Right(newsEntity.toNullable()!.toModel());
     } on Exception {
       return const Left(ConnectionFailure());

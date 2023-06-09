@@ -9,9 +9,13 @@ class SermanosCTAButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     required this.filled,
+    this.enabled = false,
+    this.loading = false,
   }) : super(key: key);
 
   final bool filled;
+  final bool enabled;
+  final bool loading;
   final String text;
   final VoidCallback onPressed;
 
@@ -34,12 +38,22 @@ class SermanosCTAButton extends StatelessWidget {
                 ),
               ),
             ),
-            onPressed: onPressed,
-            child: Text(
-              text,
-              style: const SermanosTypography.button(
-                color: SermanosColors.neutral0,
-              ),
+            onPressed: loading ? null : onPressed,
+            child: Center(
+              child: loading
+                  ? const SizedBox(
+                      height: 20.0,
+                      width: 20.0,
+                      child: CircularProgressIndicator(
+                        color: SermanosColors.neutral0,
+                      ),
+                    )
+                  : Text(
+                      text,
+                      style: const SermanosTypography.button(
+                        color: SermanosColors.neutral0,
+                      ),
+                    ),
             ),
           )
         : TextButton(
@@ -57,12 +71,22 @@ class SermanosCTAButton extends StatelessWidget {
                 ),
               ),
             ),
-            onPressed: onPressed,
-            child: Text(
-              text,
-              style: const SermanosTypography.button(
-                color: SermanosColors.primary100,
-              ),
+            onPressed: loading ? null : onPressed,
+            child: Center(
+              child: loading
+                  ? const SizedBox(
+                      height: 20.0,
+                      width: 20.0,
+                      child: CircularProgressIndicator(
+                        color: SermanosColors.neutral0,
+                      ),
+                    )
+                  : Text(
+                      text,
+                      style: const SermanosTypography.button(
+                        color: SermanosColors.primary100,
+                      ),
+                    ),
             ),
           );
   }

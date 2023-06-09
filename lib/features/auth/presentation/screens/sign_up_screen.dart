@@ -1,19 +1,20 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
-import 'package:sermanos/features/auth/presentation/screens/register_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sermanos/config/design_system/cellules/forms/sermanos_sign_up_form.dart';
+import 'package:sermanos/features/auth/presentation/screens/sign_in_screen.dart';
+import 'package:sermanos/features/auth/presentation/widgets/sign_up_button.dart';
 
-import '../../../../config/design_system/cellules/forms/sermanos_login_form.dart';
-import '../../../postulate/presentation/screens/postulate_screen.dart';
+import '../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 
-class LoginScreen extends StatelessWidget {
-  static const route = "/auth/login";
-  static const routeName = "login";
+class SignUpScreen extends ConsumerWidget {
+  static const route = "/auth/signUp";
+  static const routeName = "signUp";
 
-  const LoginScreen({Key? key}) : super(key: key);
+  const SignUpScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: SingleChildScrollView(
         physics: const ClampingScrollPhysics(),
@@ -21,7 +22,7 @@ class LoginScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              const SizedBox(height: 100),
+              const SizedBox(height: 50),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -32,25 +33,19 @@ class LoginScreen extends StatelessWidget {
                     height: 150,
                   ),
                   const SizedBox(height: 32),
-                  const SermanosLoginForm(),
+                  const SermanosSignUpForm(),
+                  const SizedBox(height: 50),
                 ],
               ),
-              const SizedBox(height: 120),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  SermanosCTAButton(
-                    text: 'Iniciar Sesión',
-                    onPressed: () {
-                      context.popToNamed(PostulateScreen.route);
-                    },
-                    filled: true,
-                  ),
+                  const SignUpButton(),
                   const SizedBox(height: 16),
                   SermanosCTAButton(
-                    text: 'No tengo cuenta',
-                    onPressed: () => context.beamToNamed(RegisterScreen.route),
+                    text: 'Ya tengo cuenta',
+                    onPressed: () => context.beamToNamed(SignInScreen.route),
                     filled: false,
                   ),
                 ],

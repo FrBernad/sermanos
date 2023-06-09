@@ -1,7 +1,7 @@
-import '../../../domain/models/social_action.dart';
+import '../../domain/models/social_action.dart';
 
-class RemoteSocialActionEntity extends SocialAction {
-  const RemoteSocialActionEntity({
+class SocialActionEntity extends SocialAction {
+  const SocialActionEntity({
     required socialActionId,
     required name,
     required category,
@@ -23,11 +23,11 @@ class RemoteSocialActionEntity extends SocialAction {
           imageUrl: imageUrl,
         );
 
-  factory RemoteSocialActionEntity.fromJson({
+  factory SocialActionEntity.fromJson({
     required String socialActionId,
     required Map<String, dynamic> json,
   }) {
-    return RemoteSocialActionEntity(
+    return SocialActionEntity(
       socialActionId: socialActionId,
       name: json['name'] as String,
       category: json['category'] as String,

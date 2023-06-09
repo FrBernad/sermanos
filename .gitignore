@@ -54,3 +54,6 @@ app.*.map.json
 # Generated files
 lib/**/generated
 
+# Flutter version manager
+.fvm/flutter_sdk
+

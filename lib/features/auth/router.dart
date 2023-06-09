@@ -1,19 +1,19 @@
 import 'package:beamer/beamer.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/router.dart';
+import 'package:flutter/material.dart';
 import 'package:sermanos/features/auth/presentation/screens/landing_screen.dart';
-import 'package:sermanos/features/auth/presentation/screens/login_screen.dart';
-import 'package:sermanos/features/auth/presentation/screens/register_screen.dart';
-import 'package:sermanos/features/auth/presentation/screens/welcome_screen.dart';
+import 'package:sermanos/features/auth/presentation/screens/sign_in_screen.dart';
+import 'package:sermanos/features/auth/presentation/screens/sign_up_screen.dart';
 
 class AuthLocation extends BeamLocation<BeamState> {
   AuthLocation(RouteInformation routeInformation) : super(routeInformation);
 
+  static const String pathPrefix = "/auth";
+
   @override
   List<String> get pathPatterns => [
         LandingScreen.route,
-        LoginScreen.route,
-        RegisterScreen.route,
+        SignInScreen.route,
+        SignUpScreen.route,
       ];
 
   @override
@@ -22,26 +22,26 @@ class AuthLocation extends BeamLocation<BeamState> {
 
     pages.add(
       const BeamPage(
-        key: ValueKey('landing'),
+        key: ValueKey(LandingScreen.routeName),
         child: LandingScreen(),
       ),
     );
 
-    if (state.pathPatternSegments.contains(LoginScreen.routeName)) {
+    if (state.pathPatternSegments.contains(SignInScreen.routeName)) {
       pages.add(
         BeamPage(
-          key: const ValueKey('login'),
-          child: const LoginScreen(),
+          key: const ValueKey(SignInScreen.routeName),
+          child: const SignInScreen(),
           onPopPage: _onPopPage,
         ),
       );
     }
 
-    if (state.pathPatternSegments.contains(RegisterScreen.routeName)) {
+    if (state.pathPatternSegments.contains(SignUpScreen.routeName)) {
       pages.add(
         BeamPage(
-          key: const ValueKey('register'),
-          child: const RegisterScreen(),
+          key: const ValueKey(SignUpScreen.routeName),
+          child: const SignUpScreen(),
           onPopPage: _onPopPage,
         ),
       );

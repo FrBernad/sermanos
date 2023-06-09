@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:sermanos/config/logger/logger.dart';
 import 'package:sermanos/features/core/error/exception.dart';
-import 'package:sermanos/features/news/data/entities/remote/remote_news_entity.dart';
+import 'package:sermanos/features/news/data/entities/news_entity.dart';
 
 abstract interface class NewsRemoteDataSource {
-  Future<List<RemoteNewsEntity>> getNews();
+  Future<List<NewsEntity>> getNews();
 
-  Future<Option<RemoteNewsEntity>> getNewsById({
+  Future<Option<NewsEntity>> getNewsById({
     required String newsId,
   });
 }
@@ -19,14 +19,14 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
   final FirebaseFirestore _firebaseDatabaseClient;
 
   @override
-  Future<List<RemoteNewsEntity>> getNews() async {
+  Future<List<NewsEntity>> getNews() async {
     try {
       final response = await _firebaseDatabaseClient.collection("news").get();
 
-      List<RemoteNewsEntity> newsEntities = [];
+      List<NewsEntity> newsEntities = [];
 
       for (var news in response.docs) {
-        RemoteNewsEntity remoteEntity = RemoteNewsEntity.fromJson(
+        NewsEntity remoteEntity = NewsEntity.fromJson(
           newsId: news.id,
           json: news.data(),
         );
@@ -40,7 +40,7 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
   }
 
   @override
-  Future<Option<RemoteNewsEntity>> getNewsById({
+  Future<Option<NewsEntity>> getNewsById({
     required String newsId,
   }) async {
     try {
@@ -51,7 +51,7 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
         logger.d("News with id $newsId does not exist");
         return const Option.none();
       }
-      RemoteNewsEntity remoteEntity = RemoteNewsEntity.fromJson(
+      NewsEntity remoteEntity = NewsEntity.fromJson(
           newsId: response.id,
           json: Map<String, dynamic>.from(
               response.data() as Map<String, dynamic>));

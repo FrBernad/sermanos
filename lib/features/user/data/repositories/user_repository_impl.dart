@@ -1,10 +1,11 @@
 import 'dart:async';
 
 import 'package:fpdart/fpdart.dart';
+import 'package:sermanos/features/user/data/entities/app_user_entity.dart';
 
 import '../../../core/error/failure.dart';
 import '../../../core/platform/network_info.dart';
-import '../../domain/models/user_model.dart';
+import '../../domain/models/app_user_model.dart';
 import '../../domain/repositories/user_repository.dart';
 import '../datasources/remote/user_remote_data_source.dart';
 
@@ -19,45 +20,36 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, AppUser>> getUserById(String userId) async {
-    throw UnimplementedError();
+    final userEntityOpt =
+        await userRemoteDataSource.getUserById(userId: userId);
 
-    // final userEntityOpt = await userLocalDataSource.getUserById(userId);
-    // if (userEntityOpt.isNone()) {
-    //   return const Left(UserNotFoundFailure());
-    // }
-    // final AppUser user = UserEntity.toModel(userEntityOpt.toNullable()!);
-    // return Right(user);
+    if (userEntityOpt.isNone()) {
+      return const Left(UserNotFoundFailure());
+    }
+
+    return Right(AppUserEntity.toModel(userEntityOpt.toNullable()!));
   }
 
   @override
   Future<Either<Failure, AppUser>> createUser({
-    required String email,
     required String userId,
+    required String name,
+    required String surname,
+    required String email,
   }) async {
-    throw UnimplementedError();
-    // final RemoteUserEntity userEntity;
-    //
+    final AppUserEntity userEntity;
+
     // if (networkInfo.hasConnection) {
-    //   userEntity = await userRemoteDataSource.createUser(
-    //     id: userId,
-    //     email: email,
-    //   );
+    userEntity = await userRemoteDataSource.createUser(
+      userId: userId,
+      name: name,
+      surname: surname,
+      email: email,
+    );
     // } else {
     //   return const Left(ConnectionFailure());
     // }
-    //
-    // try {
-    //   await userLocalDataSource.createUser(
-    //     userId: userId,
-    //     email: email,
-    //     lastModified: userEntity.lastModified,
-    //   );
-    // } on Exception {
-    //   //FIXME: habria que borrar el usuario remoto
-    // }
-    //
-    // await learnEmergencyRepository.createUserLearnProgresses(userId: userId);
-    //
-    // return Right(RemoteUserEntity.toModel(userEntity));
+
+    return Right(AppUserEntity.toModel(userEntity));
   }
 }

@@ -1,7 +1,7 @@
 import 'package:sermanos/features/news/domain/models/news.dart';
 
-class RemoteNewsEntity extends News {
-  const RemoteNewsEntity({
+class NewsEntity extends News {
+  const NewsEntity({
     required title,
     required subtitle,
     required newsId,
@@ -15,11 +15,11 @@ class RemoteNewsEntity extends News {
           imageUrl: imageUrl,
         );
 
-  factory RemoteNewsEntity.fromJson({
+  factory NewsEntity.fromJson({
     required String newsId,
     required Map<String, dynamic> json,
   }) {
-    return RemoteNewsEntity(
+    return NewsEntity(
       subtitle: json['subtitle'],
       title: json['title'],
       description: json['description'],

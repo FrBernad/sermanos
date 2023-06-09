@@ -1,20 +1,13 @@
 import 'package:equatable/equatable.dart';
 
 abstract interface class Failure extends Equatable {
-  const Failure({required this.message});
+  const Failure({required this.message, this.description = ""});
 
   final String message;
+  final String description;
 
   @override
-  List<Object?> get props => [message];
-
-  @override
-  bool get stringify => true;
-
-  @override
-  String toString() {
-    return message;
-  }
+  List<Object?> get props => [message, description];
 }
 
 class ServerFailure extends Failure {
@@ -24,8 +17,10 @@ class ServerFailure extends Failure {
 }
 
 class FirebaseAuthFailure extends Failure {
-  const FirebaseAuthFailure({required String message})
-      : super(message: message);
+  const FirebaseAuthFailure({
+    required String message,
+    required String description,
+  }) : super(message: message, description: description);
 }
 
 class NewsNotFoundFailure extends Failure {

@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
 import '../../../core/error/failure.dart';
-import '../../../user/domain/models/user_model.dart';
+import '../../../user/domain/models/app_user_model.dart';
 import '../../../user/domain/repositories/user_repository.dart';
 import '../../../user/providers.dart';
 import '../../domain/repositories/auth_repository.dart';
@@ -22,10 +22,12 @@ class AuthRepositoryImpl implements AuthRepository {
   Ref providerRef;
 
   @override
-  Future<Either<Failure, AppUser>> signUpWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
+  Future<Either<Failure, AppUser>> signUpWithEmailAndPassword({
+    required String name,
+    required String surname,
+    required String email,
+    required String password,
+  }) async {
     try {
       final userCredentials = await authClient.createUserWithEmailAndPassword(
         email: email,
@@ -33,49 +35,56 @@ class AuthRepositoryImpl implements AuthRepository {
       );
 
       final userEither = await userRepository.createUser(
+        name: name,
+        surname: surname,
         email: userCredentials.user!.email!,
         userId: userCredentials.user!.uid,
       );
 
       return Right(userEither.getRight().toNullable()!);
     } on firebase.FirebaseAuthException catch (e) {
-      return Left(FirebaseAuthFailure(message: e.code));
+      return Left(
+        FirebaseAuthFailure(
+          message: e.code,
+          description: e.message ?? '',
+        ),
+      );
     }
   }
 
   @override
-  Future<Either<Failure, AppUser>> signInWithEmailAndPassword(
-    String email,
-    String password,
-  ) async {
-    throw UnimplementedError();
-    // try {
-    //   final userCredentials = await authClient.signInWithEmailAndPassword(
-    //     email: email,
-    //     password: password,
-    //   );
-    //
-    //   return Right(userEither.getRight().toNullable()!);
-    // } on firebase.FirebaseAuthException catch (e) {
-    //   return Left(FirebaseAuthFailure(message: e.code));
-    // }
+  Future<Either<Failure, AppUser>> signInWithEmailAndPassword({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final userCredentials = await authClient.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+
+      final userEither = await userRepository.getUserById(
+        userCredentials.user!.uid,
+      );
+
+      return Right(userEither.getRight().toNullable()!);
+    } on firebase.FirebaseAuthException catch (e) {
+      return Left(
+        FirebaseAuthFailure(
+          message: e.code,
+          description: e.message ?? '',
+        ),
+      );
+    }
   }
 
   @override
   Future<Either<Failure, void>> signOut() async {
-    throw UnimplementedError();
-    //
-    // try {
-    //   // final secureStore = providerRef.read(secureStoreProvider);
-    //   String? anonUserSession = await secureStore.read(key: 'anonUserSession');
-    //   if (anonUserSession != null) {
-    //     await secureStore.delete(key: 'anonUserSession');
-    //   } else {
-    //     await authClient.signOut();
-    //   }
-    // } on firebase.FirebaseAuthException {
-    //   return const Left(ServerFailure());
-    // }
-    // return const Right(null);
+    try {
+      await authClient.signOut();
+    } on firebase.FirebaseAuthException {
+      return const Left(ServerFailure());
+    }
+    return const Right(null);
   }
 }
