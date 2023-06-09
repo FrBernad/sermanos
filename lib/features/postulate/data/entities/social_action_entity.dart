@@ -11,6 +11,8 @@ class SocialActionEntity extends SocialAction {
     required lat,
     required lng,
     required imageUrl,
+    required volunteersQty,
+    required capacity,
   }) : super(
           id: socialActionId,
           name: name,
@@ -21,6 +23,8 @@ class SocialActionEntity extends SocialAction {
           lat: lat,
           lng: lng,
           imageUrl: imageUrl,
+          volunteersQty: volunteersQty,
+          capacity: capacity,
         );
 
   factory SocialActionEntity.fromJson({
@@ -36,6 +40,8 @@ class SocialActionEntity extends SocialAction {
       address: json['address'] as String,
       lat: json['lat'] as String,
       lng: json['lng'] as String,
+      volunteersQty: json['volunteersQty'] as int,
+      capacity: json['capacity'] as int,
       imageUrl: json['imageUrl'] as String,
     );
   }
@@ -51,6 +57,8 @@ class SocialActionEntity extends SocialAction {
       lat: lat,
       lng: lng,
       imageUrl: imageUrl,
+      volunteersQty: volunteersQty,
+      capacity: capacity,
     );
   }
 }

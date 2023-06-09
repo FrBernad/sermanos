@@ -7,7 +7,6 @@ import 'package:sermanos/config/design_system/tokens/sermanos_shadows.dart';
 
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
-import '../../tokens/sermanos_grid.dart';
 
 class SermanosSearchBar extends HookConsumerWidget {
   const SermanosSearchBar({Key? key}) : super(key: key);

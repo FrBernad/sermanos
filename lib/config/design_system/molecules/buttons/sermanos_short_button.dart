@@ -25,7 +25,7 @@ class SermanosShortButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(4), // <-- Radius
         ),
         padding: const EdgeInsets.all(
-          14.0,
+          12.0,
         ),
       ),
       label: Text(

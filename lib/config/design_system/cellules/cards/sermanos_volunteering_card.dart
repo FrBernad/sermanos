@@ -1,6 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_icons.dart';
+import 'package:sermanos/config/design_system/molecules/components/vacancies.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_shadows.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
@@ -39,7 +40,6 @@ class SermanosVolunteeringCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisSize: MainAxisSize.max,
                 children: [
                   Expanded(
                     child: Column(
@@ -55,17 +55,24 @@ class SermanosVolunteeringCard extends StatelessWidget {
                           socialAction.name,
                           style: const SermanosTypography.subtitle01(),
                         ),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Vacancies(
+                          vacancy: socialAction.capacity -
+                              socialAction.volunteersQty,
+                        ),
                       ],
                     ),
                   ),
                   Row(
                     children: [
-                      SermanosIcons.favorite(
-                        status: SermanosIconStatus.enabled,
+                      SermanosIcons.favoriteOutlined(
+                        status: SermanosIconStatus.activated,
                       ),
                       const SizedBox(width: 23),
                       SermanosIcons.location(
-                        status: SermanosIconStatus.enabled,
+                        status: SermanosIconStatus.activated,
                       ),
                     ],
                   ),

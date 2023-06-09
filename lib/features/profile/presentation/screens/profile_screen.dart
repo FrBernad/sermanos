@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sermanos/config/design_system/molecules/buttons/sermanos_short_button.dart';
 import 'package:sermanos/features/auth/application/controllers/sign_out_controller.dart';
 import 'package:sermanos/features/user/providers.dart';
+import 'package:sermanos/config/design_system/molecules/components/profile_image.dart';
 
 import '../../../../config/design_system/atoms/icons/sermanos_icons.dart';
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
@@ -24,27 +25,16 @@ class ProfileScreen extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Column(
+        const Column(
           children: [
-            ClipOval(
-              child: SizedBox.fromSize(
-                size: const Size.fromRadius(48), // Image radius
-                child: CachedNetworkImage(
-                  imageUrl:
-                      "https://s3-alpha-sig.figma.com/img/113f/a25a/235312cc53dcd4c8780648145d59e3c2?Expires=1682294400&Signature=pWKi-yMiAEKeP4uU0K8lEz6OR8NpewngrMALEcysNY2KDgUIYXmwOhPZwhLaRafEW~OpdXbvEhAwRNbE18eeIrvDF4T0PzyHZNKp2DGa3O999oXDZJLy~YHatOTXWhIHwaNUidgsUJGy4ctS3JEjhyqZ7w-6PhsIiXW3VeVeHy8mKFQg4sSDR63wO2Lj0WRF5jqGz8RK05GBuD4XHj98upcafIj~T7RN78C7uxTlK-G7Li1kUwtX5coR5zcO8Oi6EfAuDh3K6zuM8DaOCPcbOcki3fKB7yB-17aIiyGcBMgA7hCTtepFd9zNYnwQCac2pXfo2uUO29467T1X1dXVBg__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4",
-                  height: 120,
-                  width: 120,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
+            ProfileImage(),
             //FIXME: No estoy seguro si el espacio es con un SizedBox o de otra forma
-            const SizedBox(height: 8),
+            SizedBox(height: 8),
             SizedBox(
               width: 328,
               child: Column(
                 children: [
-                  const Text(
+                  Text(
                     "VOLUNTARIO",
                     style: SermanosTypography.overline(
                       color: SermanosColors.neutral75,

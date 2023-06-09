@@ -50,19 +50,6 @@ class Modal extends StatelessWidget {
                     title,
                     style: const SermanosTypography.headline02(),
                   ),
-                  const SizedBox(height: 16),
-                  Text(
-                    schedule,
-                    style: const SermanosTypography.body01(
-                      color: SermanosColors.neutral75,
-                    ),
-                  ),
-                  Text(
-                    location,
-                    style: const SermanosTypography.body01(
-                      color: SermanosColors.neutral75,
-                    ),
-                  ),
                 ],
               ),
               const SizedBox(height: 8),

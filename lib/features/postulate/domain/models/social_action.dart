@@ -10,6 +10,8 @@ class SocialAction extends Equatable {
   final String lat;
   final String lng;
   final String imageUrl;
+  final int capacity;
+  final int volunteersQty;
 
   const SocialAction({
     required this.id,
@@ -21,6 +23,8 @@ class SocialAction extends Equatable {
     required this.lat,
     required this.lng,
     required this.imageUrl,
+    required this.capacity,
+    required this.volunteersQty,
   });
 
   @override
