@@ -135,13 +135,18 @@ class SermanosTextField extends HookConsumerWidget {
                         ? null
                         : IconButton(
                             icon: SermanosIcons.close(
-                                status: SermanosIconStatus.enabled),
-                            onPressed: () {
-                              if (!isEmpty) {
-                                controller.clear();
-                                field.reset();
-                              }
-                            },
+                              status: enabled
+                                  ? SermanosIconStatus.enabled
+                                  : SermanosIconStatus.disabled,
+                            ),
+                            onPressed: enabled
+                                ? () {
+                                    if (!isEmpty) {
+                                      controller.clear();
+                                      field.reset();
+                                    }
+                                  }
+                                : null,
                           ),
           ),
           onTapOutside: (e) {
