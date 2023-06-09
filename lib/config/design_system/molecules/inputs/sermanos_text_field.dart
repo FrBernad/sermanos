@@ -108,46 +108,45 @@ class SermanosTextField extends HookConsumerWidget {
               ),
               borderRadius: BorderRadius.all(Radius.circular(4)),
             ),
-            errorStyle:
-                const SermanosTypography.body01(color: SermanosColors.error100),
-            suffixIcon: password
-                ? IconButton(
-                    icon: SermanosIcons.show(
-                      status: SermanosIconStatus.enabled,
-                      hide: isObscured.value,
-                    ),
-                    onPressed: () {
-                      isObscured.value = !isObscured.value;
-                    },
-                  )
-                : field.hasError
+            errorStyle: const SermanosTypography.body01(
+              color: SermanosColors.error100,
+            ),
+            suffixIcon: enabled
+                ? null
+                : password
                     ? IconButton(
-                        icon: SermanosIcons.error(
-                            status: SermanosIconStatus.activated),
+                        icon: SermanosIcons.show(
+                          status: SermanosIconStatus.enabled,
+                          hide: isObscured.value,
+                        ),
                         onPressed: () {
-                          if (!isEmpty) {
-                            controller.clear();
-                            field.reset();
-                          }
+                          isObscured.value = !isObscured.value;
                         },
                       )
-                    : isEmpty
-                        ? null
-                        : IconButton(
-                            icon: SermanosIcons.close(
-                              status: enabled
-                                  ? SermanosIconStatus.enabled
-                                  : SermanosIconStatus.disabled,
-                            ),
-                            onPressed: enabled
-                                ? () {
-                                    if (!isEmpty) {
-                                      controller.clear();
-                                      field.reset();
-                                    }
+                    : field.hasError
+                        ? IconButton(
+                            icon: SermanosIcons.error(
+                                status: SermanosIconStatus.activated),
+                            onPressed: () {
+                              if (!isEmpty) {
+                                controller.clear();
+                                field.reset();
+                              }
+                            },
+                          )
+                        : isEmpty
+                            ? null
+                            : IconButton(
+                                icon: SermanosIcons.close(
+                                  status: SermanosIconStatus.enabled,
+                                ),
+                                onPressed: () {
+                                  if (!isEmpty) {
+                                    controller.clear();
+                                    field.reset();
                                   }
-                                : null,
-                          ),
+                                },
+                              ),
           ),
           onTapOutside: (e) {
             focusNode.unfocus();
