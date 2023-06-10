@@ -28,9 +28,9 @@ class NewsNotFoundFailure extends Failure {
   static const _failureMessage = "Invalid news id";
 }
 
-class SocialActionNotFoundFailure extends Failure {
-  const SocialActionNotFoundFailure() : super(message: _failureMessage);
-  static const _failureMessage = "Invalid social action id";
+class VolunteeringNotFoundFailure extends Failure {
+  const VolunteeringNotFoundFailure() : super(message: _failureMessage);
+  static const _failureMessage = "Invalid volunteering id";
 }
 
 class ConnectionFailure extends Failure {

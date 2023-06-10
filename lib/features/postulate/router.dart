@@ -25,7 +25,7 @@ class PostulateLocation extends BeamLocation<BeamState> {
         BeamPage(
           key: ValueKey('postulate-$id'),
           title: 'Postulate $id',
-          child: PostulateDetailScreen(socialActionId: id),
+          child: PostulateDetailScreen(volunteeringId: id),
         ),
       );
     }

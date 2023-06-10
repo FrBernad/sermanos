@@ -2,6 +2,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/features/auth/presentation/screens/sign_up_screen.dart';
 
 import '../../../../config/design_system/cellules/forms/sermanos_sign_in_form.dart';
@@ -48,6 +49,7 @@ class SignInScreen extends StatelessWidget {
                   SermanosCTAButton(
                     text: 'No tengo cuenta',
                     onPressed: () => context.beamToNamed(SignUpScreen.route),
+                    textColor: SermanosColors.primary100,
                     filled: false,
                   ),
                 ],

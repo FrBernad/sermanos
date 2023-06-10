@@ -7,6 +7,7 @@ import 'package:sermanos/config/design_system/tokens/sermanos_shadows.dart';
 
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
+import '../../../../features/postulate/application/controllers/postulate_view_mode_controller.dart';
 
 class SermanosSearchBar extends HookConsumerWidget {
   const SermanosSearchBar({Key? key}) : super(key: key);
@@ -29,13 +30,16 @@ class SermanosSearchBar extends HookConsumerWidget {
         boxShadow: SermanosShadows.shadow1,
       ),
       child: FormBuilderField<String>(
-        initialValue: '',
+        initialValue: initialValue,
         name: 'search',
         onReset: () => controller.text = initialValue,
         builder: (FormFieldState field) {
           return TextField(
             focusNode: focusNode,
             controller: controller,
+            onChanged: (value) {
+              field.didChange(value);
+            },
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.symmetric(
                 horizontal: 16,
@@ -53,17 +57,42 @@ class SermanosSearchBar extends HookConsumerWidget {
                 borderSide: BorderSide(color: Colors.transparent),
                 borderRadius: BorderRadius.all(Radius.circular(2)),
               ),
-              suffixIcon: IconButton(
-                icon: isEmpty
-                    ? SermanosIcons.search(status: SermanosIconStatus.enabled)
-                    : SermanosIcons.close(status: SermanosIconStatus.enabled),
-                onPressed: () {
-                  if (!isEmpty) {
-                    controller.clear();
-                    field.reset();
-                  }
-                },
+              prefixIcon: SermanosIcons.search(
+                status: SermanosIconStatus.enabledSecondary,
               ),
+              suffixIcon: isEmpty
+                  ? Consumer(builder:
+                      (BuildContext context, WidgetRef ref, Widget? child) {
+                      final viewMode =
+                          ref.watch(postulateViewModeControllerProvider);
+                      return viewMode == PostulateViewMode.map
+                          ? IconButton(
+                              icon: SermanosIcons.list(
+                                status: SermanosIconStatus.activated,
+                              ),
+                              onPressed: () => ref
+                                  .watch(postulateViewModeControllerProvider
+                                      .notifier)
+                                  .set(PostulateViewMode.list),
+                            )
+                          : IconButton(
+                              icon: SermanosIcons.map(
+                                  status: SermanosIconStatus.activated),
+                              onPressed: () => ref
+                                  .watch(postulateViewModeControllerProvider
+                                      .notifier)
+                                  .set(PostulateViewMode.map),
+                            );
+                    })
+                  : IconButton(
+                      icon: SermanosIcons.close(
+                        status: SermanosIconStatus.enabledSecondary,
+                      ),
+                      onPressed: () {
+                        controller.clear();
+                        field.reset();
+                      },
+                    ),
             ),
             onTapOutside: (e) {
               focusNode.unfocus();

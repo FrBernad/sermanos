@@ -2,6 +2,7 @@ import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sermanos/config/design_system/cellules/forms/sermanos_sign_up_form.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/features/auth/presentation/screens/sign_in_screen.dart';
 import 'package:sermanos/features/auth/presentation/widgets/sign_up_button.dart';
 
@@ -46,6 +47,7 @@ class SignUpScreen extends ConsumerWidget {
                   SermanosCTAButton(
                     text: 'Ya tengo cuenta',
                     onPressed: () => context.beamToNamed(SignInScreen.route),
+                    textColor: SermanosColors.primary100,
                     filled: false,
                   ),
                 ],

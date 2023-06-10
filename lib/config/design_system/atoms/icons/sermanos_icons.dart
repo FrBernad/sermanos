@@ -15,12 +15,7 @@ class SermanosIcons extends Icon {
           size: size,
         );
 
-  /*
-  ----------------------------
-     Mostrar Icon
-  ----------------------------
-  */
-
+  /// Show Icon
   SermanosIcons.showFilled({
     Key? key,
     required SermanosIconStatus status,
@@ -54,12 +49,7 @@ class SermanosIcons extends Icon {
   //   status: status,
   // );
 
-  /*
-  ----------------------------
-     Calendar Icon
-  ----------------------------
-  */
-
+  /// Calendar Icon
   //FIXME: two tone???
   SermanosIcons.calendarFilled({
     Key? key,
@@ -71,11 +61,7 @@ class SermanosIcons extends Icon {
           status: status,
         );
 
-  /*
-  ----------------------------
-    Favorito Icon
-  ----------------------------
-  */
+  /// Favourite Icon
   SermanosIcons.favoriteFilled({
     Key? key,
     required SermanosIconStatus status,
@@ -94,11 +80,7 @@ class SermanosIcons extends Icon {
           status: status,
         );
 
-  /*
-  ----------------------------
-    Buscar Icon
-  ----------------------------
-  */
+  /// Search Icon
   SermanosIcons.search({
     Key? key,
     required SermanosIconStatus status,
@@ -108,12 +90,7 @@ class SermanosIcons extends Icon {
           status: status,
         );
 
-  /*
-  ----------------------------
-    Añadir Icon
-  ----------------------------
-  */
-
+  /// Add Icon
   SermanosIcons.add({
     Key? key,
     required SermanosIconStatus status,
@@ -123,12 +100,7 @@ class SermanosIcons extends Icon {
           status: status,
         );
 
-  /*
-  ----------------------------
-     Atrás Icon
-  ----------------------------
-  */
-
+  /// Back Icon
   SermanosIcons.back({
     Key? key,
     required SermanosIconStatus status,
@@ -138,12 +110,7 @@ class SermanosIcons extends Icon {
           status: status,
         );
 
-  /*
-  ----------------------------
-     Radio Icon
-  ----------------------------
-  */
-
+  /// Check Icon
   SermanosIcons.check({
     Key? key,
     required SermanosIconStatus status,
@@ -156,12 +123,8 @@ class SermanosIcons extends Icon {
           status: status,
         );
 
-  /*
-  ----------------------------
-     Location Icon
-  ----------------------------
-  */
-
+  /// Location Icon
+  ///   /// Location Icon
   SermanosIcons.locationFilled({
     Key? key,
     required SermanosIconStatus status,
@@ -190,12 +153,7 @@ class SermanosIcons extends Icon {
           status: status,
         );
 
-  /*
-  ----------------------------
-     Cerrar Icon
-  ----------------------------
-  */
-
+  /// Close Icon
   SermanosIcons.close({
     Key? key,
     required SermanosIconStatus status,
@@ -205,12 +163,7 @@ class SermanosIcons extends Icon {
           status: status,
         );
 
-  /*
-  ----------------------------
-     Persona Icon
-  ----------------------------
-  */
-
+  /// Person Icon
   SermanosIcons.people({
     Key? key,
     required SermanosIconStatus status,
@@ -220,12 +173,7 @@ class SermanosIcons extends Icon {
           status: status,
         );
 
-  /*
-  ----------------------------
-     Error Icon
-  ----------------------------
-  */
-
+  /// Error Icon
   SermanosIcons.errorFilled({
     Key? key,
     required SermanosIconStatus status,
@@ -254,12 +202,7 @@ class SermanosIcons extends Icon {
   //   status: status,
   // );
 
-  /*
-  ----------------------------
-     Lista Icon
-  ----------------------------
-  */
-
+  /// List Icon
   SermanosIcons.list({
     Key? key,
     required SermanosIconStatus status,
@@ -269,43 +212,18 @@ class SermanosIcons extends Icon {
           status: status,
         );
 
-  /*
-  ----------------------------
-     Mapa Icon
-  ----------------------------
-  */
-
+  /// Map Icon
   //FIXME: two tone
   SermanosIcons.map({
     Key? key,
     required SermanosIconStatus status,
   }) : this(
           key: key,
-          icon: Icons.map,
+          icon: Icons.map_outlined,
           status: status,
         );
 
-  /*
-  ----------------------------
-     Location Icon
-  ----------------------------
-  */
-
-  SermanosIcons.location({
-    Key? key,
-    required SermanosIconStatus status,
-  }) : this(
-          key: key,
-          icon: Icons.location_on,
-          status: status,
-        );
-
-  /*
-  ----------------------------
-     Location Icon
-  ----------------------------
-  */
-
+  /// Account Icon
   SermanosIcons.account({
     Key? key,
     required SermanosIconStatus status,
@@ -319,6 +237,7 @@ class SermanosIcons extends Icon {
 
 enum SermanosIconStatus {
   enabled(SermanosColors.neutral0),
+  enabledSecondary(SermanosColors.neutral75),
   disabled(SermanosColors.neutral25),
   disabledSecondary(SermanosColors.secondary80),
   activated(SermanosColors.primary100),

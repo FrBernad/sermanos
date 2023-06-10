@@ -5,22 +5,21 @@ import 'package:sermanos/config/design_system/molecules/components/vacancies.dar
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_shadows.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
-import 'package:sermanos/features/postulate/domain/models/social_action.dart';
+import 'package:sermanos/features/postulate/domain/models/volunteering.dart';
 import 'package:sermanos/features/postulate/presentation/screens/postulate_detail_screen.dart';
 
 class SermanosVolunteeringCard extends StatelessWidget {
   const SermanosVolunteeringCard({
-    required this.socialAction,
+    required this.volunteering,
     Key? key,
   }) : super(key: key);
 
-  final SocialAction socialAction;
+  final Volunteering volunteering;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       child: Container(
-        width: 328,
         decoration: BoxDecoration(
           color: SermanosColors.neutral0,
           borderRadius: BorderRadius.circular(2),
@@ -28,9 +27,10 @@ class SermanosVolunteeringCard extends StatelessWidget {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisSize: MainAxisSize.min,
           children: [
             Image(
-              image: NetworkImage(socialAction.imageUrl),
+              image: NetworkImage(volunteering.imageUrl),
               fit: BoxFit.cover,
               height: 138,
               width: double.infinity,
@@ -46,21 +46,21 @@ class SermanosVolunteeringCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          socialAction.category.toUpperCase(),
+                          volunteering.category.toUpperCase(),
                           style: const SermanosTypography.overline(
                             color: SermanosColors.neutral75,
                           ),
                         ),
                         Text(
-                          socialAction.name,
+                          volunteering.name,
                           style: const SermanosTypography.subtitle01(),
                         ),
                         const SizedBox(
                           height: 4,
                         ),
                         Vacancies(
-                          vacancy: socialAction.capacity -
-                              socialAction.volunteersQty,
+                          vacancy: volunteering.capacity -
+                              volunteering.volunteersQty,
                         ),
                       ],
                     ),
@@ -71,7 +71,7 @@ class SermanosVolunteeringCard extends StatelessWidget {
                         status: SermanosIconStatus.activated,
                       ),
                       const SizedBox(width: 23),
-                      SermanosIcons.location(
+                      SermanosIcons.locationFilled(
                         status: SermanosIconStatus.activated,
                       ),
                     ],
@@ -83,7 +83,7 @@ class SermanosVolunteeringCard extends StatelessWidget {
         ),
       ),
       onTap: () => context.beamToNamed(
-        PostulateDetailScreen.routeFromId(socialAction.id),
+        PostulateDetailScreen.routeFromId(volunteering.id),
       ),
     );
   }

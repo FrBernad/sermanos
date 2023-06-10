@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class SocialAction extends Equatable {
+class Volunteering extends Equatable {
   final String id;
   final String name;
   final String category;
@@ -13,7 +13,7 @@ class SocialAction extends Equatable {
   final int capacity;
   final int volunteersQty;
 
-  const SocialAction({
+  const Volunteering({
     required this.id,
     required this.name,
     required this.category,

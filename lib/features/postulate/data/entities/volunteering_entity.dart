@@ -1,8 +1,8 @@
-import '../../domain/models/social_action.dart';
+import '../../domain/models/volunteering.dart';
 
-class SocialActionEntity extends SocialAction {
-  const SocialActionEntity({
-    required socialActionId,
+class VolunteeringEntity extends Volunteering {
+  const VolunteeringEntity({
+    required volunteeringId,
     required name,
     required category,
     required description,
@@ -14,7 +14,7 @@ class SocialActionEntity extends SocialAction {
     required volunteersQty,
     required capacity,
   }) : super(
-          id: socialActionId,
+          id: volunteeringId,
           name: name,
           category: category,
           description: description,
@@ -27,12 +27,12 @@ class SocialActionEntity extends SocialAction {
           capacity: capacity,
         );
 
-  factory SocialActionEntity.fromJson({
-    required String socialActionId,
+  factory VolunteeringEntity.fromJson({
+    required String volunteeringId,
     required Map<String, dynamic> json,
   }) {
-    return SocialActionEntity(
-      socialActionId: socialActionId,
+    return VolunteeringEntity(
+      volunteeringId: volunteeringId,
       name: json['name'] as String,
       category: json['category'] as String,
       description: json['description'] as String,
@@ -46,8 +46,8 @@ class SocialActionEntity extends SocialAction {
     );
   }
 
-  SocialAction toModel() {
-    return SocialAction(
+  Volunteering toModel() {
+    return Volunteering(
       id: id,
       name: name,
       category: category,

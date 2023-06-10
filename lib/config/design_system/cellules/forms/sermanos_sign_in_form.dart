@@ -39,6 +39,7 @@ class SermanosSignInForm extends ConsumerWidget {
             formField: 'password',
             initialValue: '',
             label: 'Contraseña',
+            password: true,
             enabled: !isLoading,
           ),
           if (errorText != null)

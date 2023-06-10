@@ -40,7 +40,7 @@ class SermanosTextField extends HookConsumerWidget {
     final bool isEmpty =
         useListenableSelector(controller, () => controller.text.isEmpty);
 
-    final isObscured = useState(password);
+    final isObscured = useState(true);
 
     return FormBuilderField<String>(
       initialValue: initialValue,
@@ -111,12 +111,12 @@ class SermanosTextField extends HookConsumerWidget {
             errorStyle: const SermanosTypography.body01(
               color: SermanosColors.error100,
             ),
-            suffixIcon: enabled
+            suffixIcon: !enabled
                 ? null
                 : password
                     ? IconButton(
                         icon: SermanosIcons.showFilled(
-                          status: SermanosIconStatus.enabled,
+                          status: SermanosIconStatus.enabledSecondary,
                           hide: isObscured.value,
                         ),
                         onPressed: () {
