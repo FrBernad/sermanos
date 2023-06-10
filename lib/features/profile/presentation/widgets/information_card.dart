@@ -16,69 +16,67 @@ class InformationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SermanosGrid(
-      child: SizedBox(
-        width: double.infinity,
-        child: Column(
-          children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(4),
-                  topLeft: Radius.circular(4),
-                ),
-                color: SermanosColors.secondary25,
+    return SizedBox(
+      width: double.infinity,
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(4),
+                topLeft: Radius.circular(4),
               ),
-              width: double.infinity,
-              child: Text(
-                title,
-                style: const SermanosTypography.subtitle01(
-                    color: SermanosColors.neutral100),
-              ),
+              color: SermanosColors.secondary25,
             ),
-            Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 8,
-              ),
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(4),
-                    bottomLeft: Radius.circular(4)),
-                color: SermanosColors.neutral10,
-              ),
-              width: double.infinity,
-              child: ListView.separated(
-                padding: const EdgeInsets.all(0),
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                separatorBuilder: (BuildContext context, int index) =>
-                    const SizedBox(height: 8),
-                itemCount: information.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        information[index].key.toUpperCase(),
-                        style: const SermanosTypography.overline(
-                          color: SermanosColors.neutral75,
-                        ),
+            width: double.infinity,
+            child: Text(
+              title,
+              style: const SermanosTypography.subtitle01(
+                  color: SermanosColors.neutral100),
+            ),
+          ),
+          Container(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 8,
+            ),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(4),
+                  bottomLeft: Radius.circular(4)),
+              color: SermanosColors.neutral10,
+            ),
+            width: double.infinity,
+            child: ListView.separated(
+              padding: const EdgeInsets.all(0),
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              separatorBuilder: (BuildContext context, int index) =>
+                  const SizedBox(height: 8),
+              itemCount: information.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      information[index].key.toUpperCase(),
+                      style: const SermanosTypography.overline(
+                        color: SermanosColors.neutral75,
                       ),
-                      Text(
-                        information[index].value,
-                        style: const SermanosTypography.body01(
-                          color: SermanosColors.neutral100,
-                        ),
+                    ),
+                    Text(
+                      information[index].value,
+                      style: const SermanosTypography.body01(
+                        color: SermanosColors.neutral100,
                       ),
-                    ],
-                  );
-                },
-              ),
-            )
-          ],
-        ),
+                    ),
+                  ],
+                );
+              },
+            ),
+          )
+        ],
       ),
     );
   }
