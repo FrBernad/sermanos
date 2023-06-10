@@ -36,6 +36,7 @@ class RootNavigationLayout extends HookConsumerWidget {
         ),
       ),
       body: Column(
+
         children: [
           Container(
             color: SermanosColors.secondary100,

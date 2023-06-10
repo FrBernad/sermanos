@@ -45,7 +45,7 @@ class Vacancies extends StatelessWidget {
           ),
           Text(
             vacancy.toString(),
-            style: SermanosTypography.body02(
+            style: SermanosTypography.subtitle01(
               color: hasVacancy
                   ? SermanosColors.secondary200
                   : SermanosColors.secondary80,

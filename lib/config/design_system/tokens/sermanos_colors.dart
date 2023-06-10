@@ -12,8 +12,8 @@ class SermanosColors {
   static const primary5 = Color(0xFFE7F4EC);
   static const primary10 = Color(0xFFF3F9F5);
   static const primary100 = Color(0xFF14903F);
-  static const secondary10 = Color(0xFF90CAF9);
-  static const secondary25 = Color(0xFF90CAF9);
+  static const secondary10 = Color(0xFFE1ECF5);
+  static const secondary25 = Color(0xFFCAE5FB);
   static const secondary50 = Color(0xFF90CAF9);
   static const secondary80 = Color(0xFF6CB6F3);
   static const secondary90 = Color(0xFF4AA9F5);

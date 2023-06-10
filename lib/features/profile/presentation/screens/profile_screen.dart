@@ -25,16 +25,16 @@ class ProfileScreen extends ConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Column(
+        Column(
           children: [
-            ProfileImage(),
+            const ProfileImage(),
             //FIXME: No estoy seguro si el espacio es con un SizedBox o de otra forma
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             SizedBox(
               width: 328,
               child: Column(
                 children: [
-                  Text(
+                  const Text(
                     "VOLUNTARIO",
                     style: SermanosTypography.overline(
                       color: SermanosColors.neutral75,
