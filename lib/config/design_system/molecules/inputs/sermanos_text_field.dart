@@ -115,7 +115,7 @@ class SermanosTextField extends HookConsumerWidget {
                 ? null
                 : password
                     ? IconButton(
-                        icon: SermanosIcons.show(
+                        icon: SermanosIcons.showFilled(
                           status: SermanosIconStatus.enabled,
                           hide: isObscured.value,
                         ),
@@ -125,7 +125,7 @@ class SermanosTextField extends HookConsumerWidget {
                       )
                     : field.hasError
                         ? IconButton(
-                            icon: SermanosIcons.error(
+                            icon: SermanosIcons.errorFilled(
                                 status: SermanosIconStatus.activated),
                             onPressed: () {
                               if (!isEmpty) {
