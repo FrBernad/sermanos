@@ -9,6 +9,7 @@ class SermanosCTAButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     required this.filled,
+    this.textColor = SermanosColors.neutral0,
     this.enabled = false,
     this.loading = false,
   }) : super(key: key);
@@ -18,6 +19,7 @@ class SermanosCTAButton extends StatelessWidget {
   final bool loading;
   final String text;
   final VoidCallback onPressed;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -50,8 +52,8 @@ class SermanosCTAButton extends StatelessWidget {
                     )
                   : Text(
                       text,
-                      style: const SermanosTypography.button(
-                        color: SermanosColors.neutral0,
+                      style: SermanosTypography.button(
+                        color: textColor,
                       ),
                     ),
             ),
@@ -83,11 +85,13 @@ class SermanosCTAButton extends StatelessWidget {
                     )
                   : Text(
                       text,
-                      style: const SermanosTypography.button(
-                        color: SermanosColors.primary100,
+                      style: SermanosTypography.button(
+                        color: textColor,
                       ),
                     ),
             ),
           );
   }
 }
+
+
