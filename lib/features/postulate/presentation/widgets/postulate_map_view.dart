@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sermanos/features/postulate/presentation/widgets/postulate_carousel.dart';
 
 import '../../../../config/design_system/molecules/inputs/sermanos_search_bar.dart';
@@ -9,13 +12,24 @@ class PostulateMapView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Completer<GoogleMapController> _controller =
+        Completer<GoogleMapController>();
+
+    const CameraPosition _kGooglePlex = CameraPosition(
+      target: LatLng(37.42796133580664, -122.085749655962),
+      zoom: 14.4746,
+    );
+
     return Stack(
       children: [
         Positioned.fill(
           //FIXME: remove image from assets
-          child: Image.asset(
-            'assets/images/map.png',
-            fit: BoxFit.cover,
+          child: GoogleMap(
+            initialCameraPosition: _kGooglePlex,
+            myLocationButtonEnabled: false,
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
           ),
         ),
         const Positioned.fill(
