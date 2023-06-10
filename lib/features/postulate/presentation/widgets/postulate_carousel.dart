@@ -21,7 +21,7 @@ class PostulateCarousel extends ConsumerWidget {
           return const NoVolunteeringAvailable();
         }
         return CarouselSlider.builder(
-          options: CarouselOptions(aspectRatio: 16 / 9.4),
+          options: CarouselOptions(height: 250),
           itemCount: volunteering.length,
           itemBuilder: (
             BuildContext context,
