@@ -65,6 +65,8 @@ dependencies:
   google_maps_flutter: ^2.3.0
   share_plus: ^7.0.2
   shimmer: ^3.0.0
+  geolocator: ^9.0.2
+  url_launcher: ^6.1.11
 
 
 dev_dependencies:

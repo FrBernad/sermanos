@@ -26,12 +26,8 @@ class PostulateMap extends HookConsumerWidget {
         CameraUpdate.newCameraPosition(
           CameraPosition(
             target: LatLng(
-              double.parse(
-                volunteerings[currentVolunteeringIndex].lat,
-              ),
-              double.parse(
-                volunteerings[currentVolunteeringIndex].lng,
-              ),
+              volunteerings[currentVolunteeringIndex].lat,
+              volunteerings[currentVolunteeringIndex].lng,
             ),
             zoom: 15,
           ),
@@ -42,13 +38,8 @@ class PostulateMap extends HookConsumerWidget {
     return GoogleMap(
       initialCameraPosition: CameraPosition(
         target: LatLng(
-          //FIXME: Cambiar en volunteerings lat y lng a double
-          double.parse(
-            volunteerings[currentVolunteeringIndex].lat,
-          ),
-          double.parse(
-            volunteerings[currentVolunteeringIndex].lng,
-          ),
+          volunteerings[currentVolunteeringIndex].lat,
+          volunteerings[currentVolunteeringIndex].lng,
         ),
         zoom: 15,
       ),
@@ -65,15 +56,16 @@ class PostulateMap extends HookConsumerWidget {
     Set<Marker> markers = {};
 
     for (Volunteering volunteering in volunteerings) {
-      markers.add(Marker(
-        markerId: MarkerId(volunteering.id),
-        position: LatLng(
-          //FIXME: Cambiar en volunteerings lat y lng a double
-          double.parse(volunteering.lat),
-          double.parse(volunteering.lng),
+      markers.add(
+        Marker(
+          markerId: MarkerId(volunteering.id),
+          position: LatLng(
+            volunteering.lat,
+            volunteering.lng,
+          ),
+          icon: BitmapDescriptor.defaultMarker,
         ),
-        icon: BitmapDescriptor.defaultMarker,
-      ));
+      );
     }
 
     return markers;

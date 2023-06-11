@@ -7,6 +7,7 @@ import 'package:sermanos/config/design_system/tokens/sermanos_shadows.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 import 'package:sermanos/features/postulate/domain/models/volunteering.dart';
 import 'package:sermanos/features/postulate/presentation/screens/postulate_detail_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SermanosVolunteeringCard extends StatelessWidget {
   const SermanosVolunteeringCard({
@@ -71,8 +72,25 @@ class SermanosVolunteeringCard extends StatelessWidget {
                         status: SermanosIconStatus.activated,
                       ),
                       const SizedBox(width: 23),
-                      SermanosIcons.locationFilled(
-                        status: SermanosIconStatus.activated,
+                      InkWell(
+                        onTap: () async {
+                          final volunteeringLat = volunteering.lat;
+                          final volunteeringLng = volunteering.lng;
+                          String apiUrl =
+                              'https://www.google.com/maps/search/?api=1&query=$volunteeringLat,$volunteeringLng';
+
+                          if (await canLaunchUrl(Uri.parse(apiUrl))) {
+                            await launchUrl(
+                              Uri.parse(apiUrl),
+                              mode: LaunchMode.externalApplication,
+                            );
+                          } else {
+                            throw 'Could not launch $apiUrl';
+                          }
+                        },
+                        child: SermanosIcons.locationFilled(
+                          status: SermanosIconStatus.activated,
+                        ),
                       ),
                     ],
                   ),

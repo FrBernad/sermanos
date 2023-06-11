@@ -7,8 +7,8 @@ class Volunteering extends Equatable {
   final String description;
   final String schedule;
   final String address;
-  final String lat;
-  final String lng;
+  final double lat;
+  final double lng;
   final String imageUrl;
   final int capacity;
   final int volunteersQty;
