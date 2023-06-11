@@ -1,17 +1,19 @@
 import 'package:equatable/equatable.dart';
 
 class News extends Equatable {
-  final String title;
   final String id;
+  final String title;
   final String subtitle;
-  final String description;
+  final String source;
+  final String content;
   final String imageUrl;
 
   const News({
+    required this.id,
     required this.title,
     required this.subtitle,
-    required this.id,
-    required this.description,
+    required this.source,
+    required this.content,
     required this.imageUrl,
   });
 

@@ -15,6 +15,16 @@ class SermanosIcons extends Icon {
           size: size,
         );
 
+  /// Near Me Icon
+  SermanosIcons.nearMeFilled({
+    Key? key,
+    required SermanosIconStatus status,
+  }) : this(
+          key: key,
+          icon: Icons.near_me,
+          status: status,
+        );
+
   /// Show Icon
   SermanosIcons.showFilled({
     Key? key,

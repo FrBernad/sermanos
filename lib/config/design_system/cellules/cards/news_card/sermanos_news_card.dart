@@ -34,9 +34,7 @@ class SermanosNewsCard extends StatelessWidget {
               ),
               Expanded(
                 child: SermanosNewsCardInformation(
-                  title: news.title,
-                  subtitle: news.subtitle,
-                  description: news.description,
+                  news: news,
                 ),
               )
             ],

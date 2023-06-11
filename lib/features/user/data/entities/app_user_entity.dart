@@ -27,7 +27,8 @@ class AppUserEntity {
     this.emailContact,
   });
 
-  factory AppUserEntity.fromJson(final String key, Map<String, dynamic> json) {
+  factory AppUserEntity.fromJson(
+      final String userId, Map<String, dynamic> json) {
     Gender? gender;
 
     if (json['gender'] != null) {
@@ -48,7 +49,7 @@ class AppUserEntity {
     }
 
     return AppUserEntity(
-      id: key,
+      id: userId,
       name: json['name'],
       surname: json['surname'],
       email: json['email'],

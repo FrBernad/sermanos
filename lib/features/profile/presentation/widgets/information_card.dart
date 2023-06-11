@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_grid.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
-import 'package:sermanos/features/core/utils/pair.dart';
 
 class InformationCard extends StatelessWidget {
   final String title;
-  final List<Pair<String, String>> information;
+
+  final List<(String, String)> information;
 
   const InformationCard({
     Key? key,
@@ -60,13 +60,13 @@ class InformationCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      information[index].key.toUpperCase(),
+                      information[index].$1.toUpperCase(),
                       style: const SermanosTypography.overline(
                         color: SermanosColors.neutral75,
                       ),
                     ),
                     Text(
-                      information[index].value,
+                      information[index].$2,
                       style: const SermanosTypography.body01(
                         color: SermanosColors.neutral100,
                       ),

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 import 'package:sermanos/features/auth/application/controllers/sign_up_controller.dart';
 
+import '../../../../features/core/utils/firebase_auth_error_translator.dart';
 import '../../molecules/inputs/sermanos_text_field.dart';
 import '../../tokens/sermanos_colors.dart';
 
@@ -19,8 +21,8 @@ class SermanosSignUpForm extends ConsumerWidget {
 
     ref.watch(signUpControllerProvider).maybeWhen(
           orElse: () {},
-          error: (error, __) => errorText = error.toString(),
-          // FirebaseAuthErrorTranslator.translate(context, error.toString()),
+          error: (error, __) => errorText =
+              FirebaseAuthErrorTranslator.translate(context, error.toString()),
           loading: () => isLoading = true,
         );
 
@@ -33,6 +35,9 @@ class SermanosSignUpForm extends ConsumerWidget {
             formField: 'name',
             initialValue: '',
             enabled: !isLoading,
+            validators: [
+              FormBuilderValidators.required(errorText: "Ingrese su nombre"),
+            ],
             label: 'Nombre',
             floatingLabelBehavior: FloatingLabelBehavior.always,
             placeholder: 'Ej: Juan',
@@ -42,6 +47,9 @@ class SermanosSignUpForm extends ConsumerWidget {
             formField: 'surname',
             initialValue: '',
             enabled: !isLoading,
+            validators: [
+              FormBuilderValidators.required(errorText: "Ingrese su apellido"),
+            ],
             label: 'Apellido',
             floatingLabelBehavior: FloatingLabelBehavior.always,
             placeholder: 'Ej: Barcena',
@@ -51,6 +59,9 @@ class SermanosSignUpForm extends ConsumerWidget {
             formField: 'email',
             initialValue: '',
             enabled: !isLoading,
+            validators: [
+              FormBuilderValidators.required(errorText: "Ingrese su email"),
+            ],
             label: 'Email',
             floatingLabelBehavior: FloatingLabelBehavior.always,
             placeholder: 'Ej: juanbarcena@gmail.com',
@@ -60,6 +71,14 @@ class SermanosSignUpForm extends ConsumerWidget {
             formField: 'password',
             initialValue: '',
             enabled: !isLoading,
+            validators: [
+              FormBuilderValidators.required(
+                  errorText: "Ingrese una contraseña"),
+              FormBuilderValidators.minLength(
+                8,
+                errorText: "La contraseña debe tener al menos 8 caracteres",
+              )
+            ],
             label: 'Contraseña',
             password: true,
             floatingLabelBehavior: FloatingLabelBehavior.always,

@@ -7,7 +7,6 @@ import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_grid.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 import 'package:sermanos/features/auth/application/controllers/sign_out_controller.dart';
-import 'package:sermanos/features/core/utils/pair.dart';
 import 'package:sermanos/features/profile/presentation/screens/form_modal_screen.dart';
 import 'package:sermanos/features/profile/presentation/widgets/information_card.dart';
 import 'package:sermanos/features/user/domain/models/app_user_model.dart';
@@ -59,9 +58,11 @@ class CompleteProfile extends ConsumerWidget {
             InformationCard(
               title: "Información Personal",
               information: [
-                Pair("Fecha de nacimiento",
-                    DateFormat('dd/MM/yyyy').format(user.birthdate!)),
-                Pair("Género", user.gender.toString()),
+                (
+                  "Fecha de nacimiento",
+                  DateFormat('dd/MM/yyyy').format(user.birthdate!)
+                ),
+                ("Género", user.gender.toString()),
               ],
             ),
             const SizedBox(
@@ -70,8 +71,8 @@ class CompleteProfile extends ConsumerWidget {
             InformationCard(
               title: "Datos de contacto",
               information: [
-                Pair("Teléfono", user.phone!),
-                Pair("E-mail", user.emailContact!),
+                ("Teléfono", user.phone!),
+                ("E-mail", user.emailContact!),
               ],
             ),
             const SizedBox(

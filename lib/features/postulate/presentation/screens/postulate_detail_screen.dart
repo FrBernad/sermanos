@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_icons.dart';
 import 'package:sermanos/config/design_system/cellules/modals/modal.dart';
 import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_grid.dart';
 
 import '../../../../config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
@@ -75,9 +76,11 @@ class PostulateDetailScreen extends HookConsumerWidget {
                     ),
                   ),
                   Positioned(
-                    top: 24,
-                    left: 24,
+                    top: 0,
+                    left: 0,
                     child: IconButton(
+                      padding:
+                          const EdgeInsets.all(SermanosGrid.horizontalSpacing),
                       onPressed: () => Navigator.of(context).pop(),
                       icon: SermanosIcons.back(status: SermanosIconStatus.back),
                     ),

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../config/design_system/cellules/cards/sermanos_volunteering_card.dart';
-import '../../../../config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
+import '../../../../config/design_system/cellules/cards/sermanos_volunteering_card_loading_skeleton.dart';
 import '../../../../config/design_system/tokens/sermanos_grid.dart';
 import '../../../core/presentation/widgets/error_message.dart';
 import '../../application/controllers/get_volunteering_controller.dart';
@@ -40,7 +40,22 @@ class PostulateList extends ConsumerWidget {
         }
       },
       error: (error, stackTrace) => const ErrorMessage(),
-      loading: () => const SermanosCircularProgressIndicator(),
+      loading: () => Expanded(
+        child: ListView.separated(
+          padding: const EdgeInsets.fromLTRB(
+            SermanosGrid.horizontalSpacing,
+            0,
+            SermanosGrid.horizontalSpacing,
+            32,
+          ),
+          itemCount: 10,
+          itemBuilder: (context, index) =>
+              const SermanosVolunteeringCardLoadingSkeleton(),
+          separatorBuilder: (context, index) => const SizedBox(
+            height: 24,
+          ),
+        ),
+      ),
     );
   }
 }

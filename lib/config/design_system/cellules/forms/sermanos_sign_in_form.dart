@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:sermanos/features/auth/application/controllers/sign_in_controller.dart';
 
+import '../../../../features/core/utils/firebase_auth_error_translator.dart';
 import '../../molecules/inputs/sermanos_text_field.dart';
 import '../../tokens/sermanos_colors.dart';
 import '../../tokens/sermanos_typography.dart';
@@ -19,8 +21,8 @@ class SermanosSignInForm extends ConsumerWidget {
 
     ref.watch(signInControllerProvider).maybeWhen(
           orElse: () {},
-          error: (error, __) => errorText = error.toString(),
-          // FirebaseAuthErrorTranslator.translate(context, error.toString()),
+          error: (error, __) => errorText =
+              FirebaseAuthErrorTranslator.translate(context, error.toString()),
           loading: () => isLoading = true,
         );
     return FormBuilder(
@@ -29,19 +31,24 @@ class SermanosSignInForm extends ConsumerWidget {
       child: Column(
         children: [
           SermanosTextField(
-            formField: 'email',
-            initialValue: '',
-            label: 'Email',
-            enabled: !isLoading,
-          ),
+              formField: 'email',
+              initialValue: '',
+              label: 'Email',
+              enabled: !isLoading,
+              validators: [
+                FormBuilderValidators.required(errorText: "Ingrese su email")
+              ]),
           const SizedBox(height: 24),
           SermanosTextField(
-            formField: 'password',
-            initialValue: '',
-            label: 'Contraseña',
-            password: true,
-            enabled: !isLoading,
-          ),
+              formField: 'password',
+              initialValue: '',
+              label: 'Contraseña',
+              password: true,
+              enabled: !isLoading,
+              validators: [
+                FormBuilderValidators.required(
+                    errorText: "Ingrese su contraseña")
+              ]),
           if (errorText != null)
             Column(
               children: [

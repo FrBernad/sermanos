@@ -111,28 +111,29 @@ class SermanosTextField extends HookConsumerWidget {
             errorStyle: const SermanosTypography.body01(
               color: SermanosColors.error100,
             ),
+            errorText: field.errorText,
             suffixIcon: !enabled
                 ? null
-                : password
+                : field.hasError
                     ? IconButton(
-                        icon: SermanosIcons.showFilled(
-                          status: SermanosIconStatus.enabledSecondary,
-                          hide: isObscured.value,
+                        icon: SermanosIcons.errorFilled(
+                          status: SermanosIconStatus.error,
                         ),
                         onPressed: () {
-                          isObscured.value = !isObscured.value;
+                          if (!isEmpty) {
+                            controller.clear();
+                            field.reset();
+                          }
                         },
                       )
-                    : field.hasError
+                    : password
                         ? IconButton(
-                            icon: SermanosIcons.errorFilled(
-                              status: SermanosIconStatus.activated,
+                            icon: SermanosIcons.showFilled(
+                              status: SermanosIconStatus.enabledSecondary,
+                              hide: isObscured.value,
                             ),
                             onPressed: () {
-                              if (!isEmpty) {
-                                controller.clear();
-                                field.reset();
-                              }
+                              isObscured.value = !isObscured.value;
                             },
                           )
                         : isEmpty

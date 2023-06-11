@@ -1,39 +1,43 @@
 import 'package:sermanos/features/news/domain/models/news.dart';
 
-class NewsEntity extends News {
+class NewsEntity {
+  final String id;
+  final String title;
+  final String subtitle;
+  final String source;
+  final String content;
+  final String imageUrl;
+
   const NewsEntity({
-    required title,
-    required subtitle,
-    required newsId,
-    required description,
-    required imageUrl,
-  }) : super(
-          subtitle: subtitle,
-          title: title,
-          description: description,
-          id: newsId,
-          imageUrl: imageUrl,
-        );
+    required this.id,
+    required this.title,
+    required this.subtitle,
+    required this.source,
+    required this.content,
+    required this.imageUrl,
+  });
 
   factory NewsEntity.fromJson({
     required String newsId,
     required Map<String, dynamic> json,
   }) {
     return NewsEntity(
+      id: newsId,
       subtitle: json['subtitle'],
       title: json['title'],
-      description: json['description'],
-      newsId: newsId,
+      content: json['content'],
+      source: json['source'],
       imageUrl: json['imageUrl'],
     );
   }
 
   News toModel() {
     return News(
+      id: id,
       subtitle: subtitle,
       title: title,
-      description: description,
-      id: id,
+      content: content,
+      source: source,
       imageUrl: imageUrl,
     );
   }

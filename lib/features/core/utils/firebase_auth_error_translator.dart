@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:sermanos/features/core/utils/extensions/build_context_extensions.dart';
 
 import '../error/firebase_error_codes.dart';
 
@@ -7,20 +6,20 @@ class FirebaseAuthErrorTranslator {
   static String translate(BuildContext context, String errorCode) {
     switch (errorCode) {
       case FirebaseErrorCodes.invalidEmail:
-        return context.tr.invalidEmail;
+        return "Email invalido";
       case FirebaseErrorCodes.userDisabled:
-        return context.tr.userDisabled;
+        return "Usuario deshabilitado";
       case FirebaseErrorCodes.userNotFound:
-        return context.tr.userNotFound;
+        return "Email o constraseña incorrecta.";
       case FirebaseErrorCodes.wrongPassword:
-        return context.tr.wrongPassword;
+        return "Email o constraseña incorrecta";
       case FirebaseErrorCodes.emailAlreadyInUse:
-        return context.tr.emailAlreadyInUse;
+        return "Ya existe un usuario registrado bajo ese email";
       case FirebaseErrorCodes.operationNotAllowed:
-        return context.tr.operationNotAllowed;
+        return "Operacion no habilitada";
       case FirebaseErrorCodes.weakPassword:
-        return context.tr.weakPassword;
+        return "Contraseña debil";
     }
-    return context.tr.unknownAuthError;
+    return "Error desconocido";
   }
 }
