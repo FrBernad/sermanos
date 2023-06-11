@@ -54,6 +54,7 @@ class PostulateMap extends HookConsumerWidget {
       ),
       markers: volunteeringToMarkers(volunteerings),
       myLocationButtonEnabled: false,
+      zoomControlsEnabled: false,
       onMapCreated: (GoogleMapController controller) {
         mapController.value = controller;
       },

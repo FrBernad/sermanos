@@ -26,6 +26,7 @@ class RootNavigationLayout extends HookConsumerWidget {
     useBeamerTabNavigationListener(tabController, currentIndex);
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Image(
           image: AssetImage('assets/images/sermanos_logo_reactangle.png'),
