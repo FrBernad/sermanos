@@ -68,7 +68,7 @@ android {
         applicationId "ar.edu.itba.sermanos"
         // You can update the following values to match your application needs.
         // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
-        minSdkVersion 21 // For Firebase
+        minSdkVersion 21 // For Firebase and 20 for Google Maps
         targetSdkVersion flutter.targetSdkVersion
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
