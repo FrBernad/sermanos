@@ -1,58 +1,58 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sermanos/features/postulate/presentation/widgets/postulate_carousel.dart';
+import 'package:sermanos/features/postulate/presentation/widgets/postulate_map.dart';
 
 import '../../../../config/design_system/molecules/inputs/sermanos_search_bar.dart';
+import '../../../../config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
 import '../../../../config/design_system/tokens/sermanos_grid.dart';
+import '../../../core/presentation/widgets/error_message.dart';
+import '../../application/controllers/get_volunteering_controller.dart';
+import 'no_volunteering_available.dart';
 
-class PostulateMapView extends StatelessWidget {
+class PostulateMapView extends ConsumerWidget {
   const PostulateMapView({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final Completer<GoogleMapController> _controller =
-        Completer<GoogleMapController>();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final volunteeringController = ref.watch(getVolunteeringControllerProvider);
 
-    const CameraPosition _kGooglePlex = CameraPosition(
-      target: LatLng(37.42796133580664, -122.085749655962),
-      zoom: 14.4746,
-    );
-
-    return Stack(
-      children: [
-        Positioned.fill(
-          //FIXME: remove image from assets
-          child: GoogleMap(
-            initialCameraPosition: _kGooglePlex,
-            myLocationButtonEnabled: false,
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-            },
-          ),
-        ),
-        const Positioned.fill(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
+    return volunteeringController.when(
+      data: (volunteerings) {
+        if (volunteerings.isEmpty) {
+          return const NoVolunteeringAvailable();
+        }
+        return Stack(
+          children: [
+            Positioned.fill(
+                child: PostulateMap(
+              volunteerings: volunteerings,
+            )),
+            Positioned.fill(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(height: 24),
-                  SermanosGrid(child: SermanosSearchBar()),
+                  const Column(
+                    children: [
+                      SizedBox(height: 24),
+                      SermanosGrid(child: SermanosSearchBar()),
+                    ],
+                  ),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      PostulateCarousel(volunteerings: volunteerings),
+                      const SizedBox(height: 16),
+                    ],
+                  ),
                 ],
               ),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  PostulateCarousel(),
-                  SizedBox(height: 16),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ],
+            ),
+          ],
+        );
+      },
+      error: (error, stackTrace) => const ErrorMessage(),
+      loading: () => const SermanosCircularProgressIndicator(),
     );
   }
 }

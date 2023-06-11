@@ -1,48 +1,44 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sermanos/features/postulate/presentation/widgets/no_volunteering_available.dart';
+import 'package:sermanos/features/postulate/domain/models/volunteering.dart';
+import 'package:sermanos/features/postulate/providers.dart';
 
 import '../../../../config/design_system/cellules/cards/sermanos_volunteering_card.dart';
-import '../../../../config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
-import '../../../core/presentation/widgets/error_message.dart';
-import '../../application/controllers/get_volunteering_controller.dart';
 
 class PostulateCarousel extends ConsumerWidget {
-  const PostulateCarousel({Key? key}) : super(key: key);
+  const PostulateCarousel({
+    Key? key,
+    required this.volunteerings,
+  }) : super(key: key);
+
+  final List<Volunteering> volunteerings;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final volunteeringController = ref.watch(getVolunteeringControllerProvider);
-
-    return volunteeringController.when(
-      data: (volunteering) {
-        if (volunteering.isEmpty) {
-          return const NoVolunteeringAvailable();
-        }
-        return CarouselSlider.builder(
-          options: CarouselOptions(height: 250),
-          itemCount: volunteering.length,
-          itemBuilder: (
-            BuildContext context,
-            int itemIndex,
-            int pageViewIndex,
-          ) =>
-              Center(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 300),
-                child: SermanosVolunteeringCard(
-                  volunteering: volunteering[itemIndex],
-                ),
-              ),
+    return CarouselSlider.builder(
+      options: CarouselOptions(
+        height: 250,
+        onPageChanged: (index, _) =>
+            ref.read(currentVolunteeringIndexProvider.notifier).set(index),
+      ),
+      itemCount: volunteerings.length,
+      itemBuilder: (
+        BuildContext context,
+        int itemIndex,
+        int pageViewIndex,
+      ) =>
+          Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 300),
+            child: SermanosVolunteeringCard(
+              volunteering: volunteerings[itemIndex],
             ),
           ),
-        );
-      },
-      error: (error, stackTrace) => const ErrorMessage(),
-      loading: () => const SermanosCircularProgressIndicator(),
+        ),
+      ),
     );
   }
 }

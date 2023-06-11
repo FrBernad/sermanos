@@ -26,3 +26,15 @@ VolunteeringRepository volunteeringRepository(VolunteeringRepositoryRef ref) =>
 ///
 /// Application dependencies
 ///
+
+@Riverpod()
+class CurrentVolunteeringIndex extends _$CurrentVolunteeringIndex {
+  @override
+  int build() {
+    return 0;
+  }
+
+  void set(int volunteeringIndex) {
+    state = volunteeringIndex;
+  }
+}
