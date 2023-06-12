@@ -9,6 +9,7 @@ class SermanosColors {
   static const neutral50 = Color(0xFF9E9E9E);
   static const neutral75 = Color(0xFF666666);
   static const neutral100 = Color(0xFF191919);
+  static const neutral200 = Color(0xFF000000);
   static const primary5 = Color(0xFFE7F4EC);
   static const primary10 = Color(0xFFF3F9F5);
   static const primary100 = Color(0xFF14903F);

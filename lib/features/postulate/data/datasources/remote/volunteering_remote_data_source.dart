@@ -28,15 +28,15 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
     required String? searchTerm,
   }) async {
     try {
-      final QuerySnapshot response =
+      final response =
           await _firebaseDatabaseClient.collection("volunteerings").get();
       List<VolunteeringEntity> volunteeringEntities = [];
 
       for (var vol in response.docs) {
         VolunteeringEntity volunteeringEntity = VolunteeringEntity.fromJson(
-            volunteeringId: vol.id,
-            json:
-                Map<String, dynamic>.from(vol.data() as Map<String, dynamic>));
+          volunteeringId: vol.id,
+          json: vol.data(),
+        );
         volunteeringEntities.add(volunteeringEntity);
       }
 

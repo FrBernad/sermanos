@@ -51,41 +51,51 @@ class PostulateDetailScreen extends HookConsumerWidget {
         return Scaffold(
           body: Column(
             children: [
-              Stack(
-                children: [
-                  Image(
-                    image: NetworkImage(volunteering.imageUrl),
-                    height: 243,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
-                  Positioned.fill(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        color: SermanosColors.neutral0,
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            SermanosColors.neutral100,
-                            Colors.transparent,
-                          ],
-                          stops: [0.0, 0.3555],
+              ColoredBox(
+                color: SermanosColors.neutral200,
+                child: SafeArea(
+                  top: true,
+                  bottom: false,
+                  left: false,
+                  right: false,
+                  child: Stack(
+                    children: [
+                      Image(
+                        image: NetworkImage(volunteering.imageUrl),
+                        height: 243,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                      ),
+                      Positioned.fill(
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: SermanosColors.neutral0,
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                SermanosColors.neutral200,
+                                Colors.transparent,
+                              ],
+                              stops: [0.0, 0.3555],
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+                      Positioned(
+                        top: 0,
+                        left: 0,
+                        child: IconButton(
+                          padding: const EdgeInsets.all(
+                              SermanosGrid.horizontalSpacing),
+                          onPressed: () => Navigator.of(context).pop(),
+                          icon: SermanosIcons.back(
+                              status: SermanosIconStatus.back),
+                        ),
+                      ),
+                    ],
                   ),
-                  Positioned(
-                    top: 0,
-                    left: 0,
-                    child: IconButton(
-                      padding:
-                          const EdgeInsets.all(SermanosGrid.horizontalSpacing),
-                      onPressed: () => Navigator.of(context).pop(),
-                      icon: SermanosIcons.back(status: SermanosIconStatus.back),
-                    ),
-                  ),
-                ],
+                ),
               ),
               const SizedBox(height: 32),
               Expanded(

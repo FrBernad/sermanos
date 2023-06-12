@@ -19,9 +19,9 @@ class VolunteeringSearchController extends _$VolunteeringSearchController {
       if (_debounceTimer != null) _debounceTimer!.cancel();
     });
 
-    final emergenciesEither = await _getVolunteering();
+    final volunteeringEither = await _getVolunteering();
 
-    return emergenciesEither.fold(
+    return volunteeringEither.fold(
       (l) => throw l,
       (vols) => vols,
     );
@@ -33,9 +33,9 @@ class VolunteeringSearchController extends _$VolunteeringSearchController {
     if (_debounceTimer != null) _debounceTimer!.cancel();
 
     _debounceTimer = Timer(const Duration(milliseconds: 400), () async {
-      final emergenciesEither = await _getVolunteering(searchTerm: searchTerm);
+      final volunteeringEither = await _getVolunteering(searchTerm: searchTerm);
 
-      state = await emergenciesEither.fold(
+      state = await volunteeringEither.fold(
         (l) => AsyncValue.error(l.toString(), StackTrace.current),
         (vols) => AsyncValue.data(vols),
       );
@@ -45,10 +45,10 @@ class VolunteeringSearchController extends _$VolunteeringSearchController {
   Future<Either<Failure, List<Volunteering>>> _getVolunteering({
     String? searchTerm,
   }) async {
-    final emergenciesEither = await ref
+    final volunteeringEither = await ref
         .read(volunteeringRepositoryProvider)
         .getVolunteering(searchTerm: searchTerm);
 
-    return emergenciesEither;
+    return volunteeringEither;
   }
 }

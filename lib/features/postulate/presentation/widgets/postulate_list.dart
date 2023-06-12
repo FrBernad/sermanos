@@ -21,14 +21,14 @@ class PostulateList extends ConsumerWidget {
         if (volunteering.isEmpty) {
           return const NoVolunteeringAvailable();
         } else {
-          return Expanded(
-            child: ListView.separated(
-              padding: const EdgeInsets.fromLTRB(
-                SermanosGrid.horizontalSpacing,
-                0,
-                SermanosGrid.horizontalSpacing,
-                32,
-              ),
+          return SliverPadding(
+            padding: const EdgeInsets.fromLTRB(
+              SermanosGrid.horizontalSpacing,
+              0,
+              SermanosGrid.horizontalSpacing,
+              32,
+            ),
+            sliver: SliverList.separated(
               itemCount: volunteering.length,
               itemBuilder: (context, index) => SermanosVolunteeringCard(
                 volunteering: volunteering[index],
@@ -40,14 +40,14 @@ class PostulateList extends ConsumerWidget {
           );
         }
       },
-      loading: () => Expanded(
-        child: ListView.separated(
-          padding: const EdgeInsets.fromLTRB(
-            SermanosGrid.horizontalSpacing,
-            0,
-            SermanosGrid.horizontalSpacing,
-            32,
-          ),
+      loading: () => SliverPadding(
+        padding: const EdgeInsets.fromLTRB(
+          SermanosGrid.horizontalSpacing,
+          0,
+          SermanosGrid.horizontalSpacing,
+          32,
+        ),
+        sliver: SliverList.separated(
           itemCount: 10,
           itemBuilder: (context, index) =>
               const SermanosVolunteeringCardLoadingSkeleton(),

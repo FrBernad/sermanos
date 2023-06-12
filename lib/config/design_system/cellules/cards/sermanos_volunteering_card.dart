@@ -26,78 +26,80 @@ class SermanosVolunteeringCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(2),
           boxShadow: SermanosShadows.shadow2,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image(
-              image: NetworkImage(volunteering.imageUrl),
-              fit: BoxFit.cover,
-              height: 138,
-              width: double.infinity,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          volunteering.category.toUpperCase(),
-                          style: const SermanosTypography.overline(
-                            color: SermanosColors.neutral75,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(2),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image(
+                image: NetworkImage(volunteering.imageUrl),
+                fit: BoxFit.cover,
+                height: 138,
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            volunteering.category.toUpperCase(),
+                            style: const SermanosTypography.overline(
+                              color: SermanosColors.neutral75,
+                            ),
                           ),
+                          Text(
+                            volunteering.name,
+                            style: const SermanosTypography.subtitle01(),
+                          ),
+                          const SizedBox(
+                            height: 4,
+                          ),
+                          Vacancies(
+                            vacancy: volunteering.capacity -
+                                volunteering.volunteersQty,
+                          ),
+                        ],
+                      ),
+                    ),
+                    Row(
+                      children: [
+                        SermanosIcons.favoriteOutlined(
+                          status: SermanosIconStatus.activated,
                         ),
-                        Text(
-                          volunteering.name,
-                          style: const SermanosTypography.subtitle01(),
-                        ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        Vacancies(
-                          vacancy: volunteering.capacity -
-                              volunteering.volunteersQty,
+                        const SizedBox(width: 23),
+                        InkWell(
+                          onTap: () async {
+                            final volunteeringLat = volunteering.lat;
+                            final volunteeringLng = volunteering.lng;
+                            String apiUrl =
+                                'https://www.google.com/maps/search/?api=1&query=$volunteeringLat,$volunteeringLng';
+
+                            if (await canLaunchUrl(Uri.parse(apiUrl))) {
+                              await launchUrl(
+                                Uri.parse(apiUrl),
+                                mode: LaunchMode.externalApplication,
+                              );
+                            } else {
+                              throw 'Could not launch $apiUrl';
+                            }
+                          },
+                          child: SermanosIcons.locationFilled(
+                            status: SermanosIconStatus.activated,
+                          ),
                         ),
                       ],
                     ),
-                  ),
-                  Row(
-                    children: [
-                      SermanosIcons.favoriteOutlined(
-                        status: SermanosIconStatus.activated,
-                      ),
-                      const SizedBox(width: 23),
-                      InkWell(
-                        onTap: () async {
-                          final volunteeringLat = volunteering.lat;
-                          final volunteeringLng = volunteering.lng;
-                          String apiUrl =
-                              'https://www.google.com/maps/search/?api=1&query=$volunteeringLat,$volunteeringLng';
-
-                          if (await canLaunchUrl(Uri.parse(apiUrl))) {
-                            await launchUrl(
-                              Uri.parse(apiUrl),
-                              mode: LaunchMode.externalApplication,
-                            );
-                          } else {
-                            throw 'Could not launch $apiUrl';
-                          }
-                        },
-                        child: SermanosIcons.locationFilled(
-                          status: SermanosIconStatus.activated,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
       onTap: () => context.beamToNamed(
