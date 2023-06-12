@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:fpdart/fpdart.dart';
 import 'package:sermanos/features/user/data/entities/app_user_entity.dart';
+import 'package:sermanos/features/user/domain/models/user_data_dto.dart';
 
 import '../../../core/error/failure.dart';
 import '../../../core/platform/network_info.dart';
@@ -27,7 +28,7 @@ class UserRepositoryImpl implements UserRepository {
       return const Left(UserNotFoundFailure());
     }
 
-    return Right(AppUserEntity.toModel(userEntityOpt.toNullable()!));
+    return Right(userEntityOpt.toNullable()!.toModel());
   }
 
   @override
@@ -50,6 +51,28 @@ class UserRepositoryImpl implements UserRepository {
     //   return const Left(ConnectionFailure());
     // }
 
-    return Right(AppUserEntity.toModel(userEntity));
+    return Right(userEntity.toModel());
+  }
+
+  @override
+  Future<Either<Failure, AppUser>> updateUserData({
+    required String userId,
+    required UserDataDto userData,
+  }) async {
+    if (networkInfo.hasConnection) {
+      try {
+        await userRemoteDataSource.updateUser(
+          userId: userId,
+          userData: userData,
+        );
+        Option<AppUserEntity> userEntityOpt =
+            await userRemoteDataSource.getUserById(userId: userId);
+        return Right(userEntityOpt.toNullable()!.toModel());
+      } on Exception {
+        return const Left(ConnectionFailure());
+      }
+    } else {
+      return const Left(ConnectionFailure());
+    }
   }
 }

@@ -7,9 +7,9 @@ import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_grid.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 import 'package:sermanos/features/auth/application/controllers/sign_out_controller.dart';
-import 'package:sermanos/features/profile/presentation/screens/form_modal_screen.dart';
-import 'package:sermanos/features/profile/presentation/widgets/information_card.dart';
 import 'package:sermanos/features/user/domain/models/app_user_model.dart';
+import 'package:sermanos/features/user/presentation/screens/form_modal_screen.dart';
+import 'package:sermanos/features/user/presentation/widgets/information_card.dart';
 
 class CompleteProfile extends ConsumerWidget {
   final AppUser user;

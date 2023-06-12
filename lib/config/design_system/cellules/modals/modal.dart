@@ -59,10 +59,12 @@ class Modal extends StatelessWidget {
                   SermanosCTAButton(
                       text: "Cancelar",
                       onPressed: () => Navigator.of(context).pop(false),
+                      textColor: SermanosColors.primary100,
                       filled: false),
                   SermanosCTAButton(
                       text: "Confirmar",
                       onPressed: () => Navigator.of(context).pop(true),
+                      textColor: SermanosColors.primary100,
                       filled: false),
                 ],
               ),

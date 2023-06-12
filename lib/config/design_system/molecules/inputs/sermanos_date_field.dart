@@ -1,59 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 
 import '../../atoms/icons/sermanos_icons.dart';
 
-class SermanosTextField extends HookConsumerWidget {
-  const SermanosTextField({
+class SermanosDateField extends HookConsumerWidget {
+  const SermanosDateField({
     Key? key,
     required this.formField,
     required this.initialValue,
     this.enabled = true,
-    this.password = false,
+    // this.password = false,
     this.floatingLabelBehavior = FloatingLabelBehavior.auto,
     this.label,
     this.placeholder,
     this.validators,
-    this.keyboardType = TextInputType.text,
   }) : super(key: key);
 
   final String formField;
-  final String? initialValue;
+  final String initialValue;
   final bool enabled;
-  final bool password;
+
+  // final bool password;
   final FloatingLabelBehavior floatingLabelBehavior;
   final String? label;
   final String? placeholder;
   final List<String? Function(String?)>? validators;
-  final TextInputType keyboardType;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final focusNode = useFocusNode();
     useListenable(focusNode);
 
-    final controller = useTextEditingController(text: initialValue);
+    final controller = useTextEditingController(
+      text: initialValue,
+    );
 
     final bool isEmpty =
         useListenableSelector(controller, () => controller.text.isEmpty);
 
-    final isObscured = useState(password);
+    // final isObscured = useState(password);
 
     return FormBuilderField<String>(
       initialValue: initialValue,
       name: formField,
-      onReset: () => controller.text = initialValue ?? '',
+      onReset: () => controller.text = initialValue,
       validator: FormBuilderValidators.compose(validators ?? []),
       builder: (FormFieldState field) {
         return TextField(
-          obscureText: isObscured.value,
+          keyboardType: TextInputType.datetime,
+          inputFormatters: [LengthLimitingTextInputFormatter(10)],
+          // obscureText: isObscured.value,
           enabled: enabled,
-          onChanged: (value) => field.didChange(value),
+          onChanged: (value) {
+            field.didChange(value);
+          },
           focusNode: focusNode,
           controller: controller,
           decoration: InputDecoration(
@@ -128,29 +135,12 @@ class SermanosTextField extends HookConsumerWidget {
                           }
                         },
                       )
-                    : password
-                        ? IconButton(
-                            icon: SermanosIcons.showFilled(
-                              status: SermanosIconStatus.enabledSecondary,
-                              hide: isObscured.value,
-                            ),
-                            onPressed: () {
-                              isObscured.value = !isObscured.value;
-                            },
-                          )
-                        : isEmpty
-                            ? null
-                            : IconButton(
-                                icon: SermanosIcons.close(
-                                  status: SermanosIconStatus.enabled,
-                                ),
-                                onPressed: () {
-                                  if (!isEmpty) {
-                                    controller.clear();
-                                    field.reset();
-                                  }
-                                },
-                              ),
+                    : IconButton(
+                        icon: SermanosIcons.calendarFilled(
+                          status: SermanosIconStatus.activated,
+                        ),
+                        onPressed: () {},
+                      ),
           ),
           onTapOutside: (e) {
             focusNode.unfocus();

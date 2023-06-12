@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sermanos/features/profile/presentation/widgets/complete_profile.dart';
-import 'package:sermanos/features/profile/presentation/widgets/incomplete_profile.dart';
+import 'package:sermanos/features/user/presentation/widgets/complete_profile.dart';
+import 'package:sermanos/features/user/presentation/widgets/incomplete_profile.dart';
 import 'package:sermanos/features/user/providers.dart';
 
 import '../../../user/domain/models/app_user_model.dart';

@@ -42,7 +42,8 @@ class AppUserEntity {
     DateTime? birthdate;
     if (json['birthdate'] != null) {
       try {
-        birthdate = DateTime.parse(json['birthdate']);
+        birthdate =
+            DateTime.fromMillisecondsSinceEpoch(json['birthdate']);
       } on StateError {
         birthdate = null;
       }
@@ -61,17 +62,17 @@ class AppUserEntity {
     );
   }
 
-  static AppUser toModel(AppUserEntity userEntity) {
+  AppUser toModel() {
     return AppUser(
-      id: userEntity.id,
-      name: userEntity.name,
-      surname: userEntity.surname,
-      email: userEntity.email,
-      gender: userEntity.gender,
-      birthdate: userEntity.birthdate,
-      profileImageUrl: userEntity.profileImageUrl,
-      phone: userEntity.phone,
-      emailContact: userEntity.emailContact,
+      id: id,
+      name: name,
+      surname: surname,
+      email: email,
+      gender: gender,
+      birthdate: birthdate,
+      profileImageUrl: profileImageUrl,
+      phone: phone,
+      emailContact: emailContact,
     );
   }
 }

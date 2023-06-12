@@ -25,7 +25,7 @@ class AppUser extends Equatable {
   });
 
   bool isProfileFilled() {
-    return phone != null &&
+    return birthdate != null && phone != null &&
         gender != null &&
         profileImageUrl != null &&
         emailContact != null;

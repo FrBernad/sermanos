@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:sermanos/features/user/domain/models/user_data_dto.dart';
 
 import '../../entities/app_user_entity.dart';
 
@@ -13,6 +14,11 @@ abstract interface class UserRemoteDataSource {
     required String name,
     required String surname,
     required String email,
+  });
+
+  Future<void> updateUser({
+    required String userId,
+    required UserDataDto userData,
   });
 }
 
@@ -67,5 +73,24 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
       userId,
       userDataMap,
     );
+  }
+
+  @override
+  Future<void> updateUser({
+    required String userId,
+    required UserDataDto userData,
+  }) async {
+    final query = _firebaseDatabaseClient
+        .collection(AppUserEntity.collectionName)
+        .doc(userId);
+
+    final userDataMap = {
+      'birthdate': userData.birthdate.millisecondsSinceEpoch,
+      'emailContact': userData.emailContact,
+      'gender': userData.gender.name,
+      'phone': userData.phone,
+    };
+
+    await query.update(userDataMap);
   }
 }

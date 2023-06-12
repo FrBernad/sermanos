@@ -6,13 +6,13 @@ import 'package:sermanos/config/router/guards/unauth_guard.dart';
 import 'package:sermanos/features/auth/presentation/screens/landing_screen.dart';
 import 'package:sermanos/features/auth/presentation/screens/welcome_screen.dart';
 import 'package:sermanos/features/auth/router.dart';
+import 'package:sermanos/features/user/presentation/screens/profile_screen.dart';
 
 import '../../features/news/presentation/screens/news_screen.dart';
 import '../../features/news/router.dart';
 import '../../features/postulate/presentation/screens/postulate_screen.dart';
 import '../../features/postulate/router.dart';
-import '../../features/profile/presentation/screens/profile_screen.dart';
-import '../../features/profile/router.dart';
+import '../../features/user/router.dart';
 import '../../features/welcome/router.dart';
 import 'guards/logger.dart';
 

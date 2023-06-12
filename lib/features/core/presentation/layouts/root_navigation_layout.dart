@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sermanos/features/core/utils/extensions/build_context_extensions.dart';
+import 'package:sermanos/features/user/presentation/screens/profile_screen.dart';
 
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../news/presentation/screens/news_screen.dart';
 import '../../../postulate/presentation/screens/postulate_screen.dart';
-import '../../../profile/presentation/screens/profile_screen.dart';
 
 class RootNavigationLayout extends HookConsumerWidget {
   const RootNavigationLayout({
