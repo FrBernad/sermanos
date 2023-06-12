@@ -35,7 +35,6 @@ class NewsScreen extends ConsumerWidget {
         },
         separatorBuilder: (context, index) => const SizedBox(height: 24),
       ),
-      error: (error, stackTrace) => const ErrorMessage(),
       loading: () => ListView.separated(
         padding: listPadding,
         itemCount: 5,
@@ -44,6 +43,7 @@ class NewsScreen extends ConsumerWidget {
         },
         separatorBuilder: (context, index) => const SizedBox(height: 24),
       ),
+      error: (error, stackTrace) => ErrorMessage(),
     );
   }
 }

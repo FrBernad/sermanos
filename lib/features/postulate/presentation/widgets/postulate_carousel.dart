@@ -1,8 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:sermanos/features/postulate/application/controllers/current_volunteering_lat_lng_controller.dart';
 import 'package:sermanos/features/postulate/domain/models/volunteering.dart';
-import 'package:sermanos/features/postulate/providers.dart';
 
 import '../../../../config/design_system/cellules/cards/sermanos_volunteering_card.dart';
 
@@ -19,8 +20,11 @@ class PostulateCarousel extends ConsumerWidget {
     return CarouselSlider.builder(
       options: CarouselOptions(
         height: 250,
-        onPageChanged: (index, _) =>
-            ref.read(currentVolunteeringIndexProvider.notifier).set(index),
+        enableInfiniteScroll: false,
+        initialPage: 0,
+        onPageChanged: (index, _) => ref
+            .read(currentVolunteeringLatLngControllerProvider.notifier)
+            .set(LatLng(volunteerings[index].lat, volunteerings[index].lng)),
       ),
       itemCount: volunteerings.length,
       itemBuilder: (

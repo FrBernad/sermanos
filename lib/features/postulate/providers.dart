@@ -1,3 +1,4 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sermanos/config/providers.dart';
 import 'package:sermanos/features/postulate/data/datasources/remote/volunteering_remote_data_source.dart';
@@ -26,15 +27,3 @@ VolunteeringRepository volunteeringRepository(VolunteeringRepositoryRef ref) =>
 ///
 /// Application dependencies
 ///
-
-@Riverpod()
-class CurrentVolunteeringIndex extends _$CurrentVolunteeringIndex {
-  @override
-  int build() {
-    return 0;
-  }
-
-  void set(int volunteeringIndex) {
-    state = volunteeringIndex;
-  }
-}

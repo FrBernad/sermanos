@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sermanos/features/postulate/application/controllers/volunteering_search_controller.dart';
 
 import '../../../../config/design_system/cellules/cards/sermanos_volunteering_card.dart';
 import '../../../../config/design_system/cellules/cards/sermanos_volunteering_card_loading_skeleton.dart';
 import '../../../../config/design_system/tokens/sermanos_grid.dart';
 import '../../../core/presentation/widgets/error_message.dart';
-import '../../application/controllers/get_volunteering_controller.dart';
 import 'no_volunteering_available.dart';
 
 class PostulateList extends ConsumerWidget {
@@ -13,7 +13,8 @@ class PostulateList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final volunteeringController = ref.watch(getVolunteeringControllerProvider);
+    final volunteeringController =
+        ref.watch(volunteeringSearchControllerProvider);
 
     return volunteeringController.when(
       data: (volunteering) {
@@ -39,7 +40,6 @@ class PostulateList extends ConsumerWidget {
           );
         }
       },
-      error: (error, stackTrace) => const ErrorMessage(),
       loading: () => Expanded(
         child: ListView.separated(
           padding: const EdgeInsets.fromLTRB(
@@ -56,6 +56,8 @@ class PostulateList extends ConsumerWidget {
           ),
         ),
       ),
+      error: (error, stackTrace) =>
+          const Align(alignment: Alignment.topCenter, child: ErrorMessage()),
     );
   }
 }

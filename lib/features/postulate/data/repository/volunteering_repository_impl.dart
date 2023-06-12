@@ -14,11 +14,13 @@ class VolunteeringRepositoryImpl implements VolunteeringRepository {
   final VolunteeringRemoteDataSource volunteeringDataSource;
 
   @override
-  Future<Either<Failure, List<Volunteering>>> getVolunteering() async {
+  Future<Either<Failure, List<Volunteering>>> getVolunteering({
+    required String? searchTerm,
+  }) async {
     List<Volunteering> volunteering = [];
     try {
       final List<VolunteeringEntity> volunteeringEntities =
-          await volunteeringDataSource.getVolunteering();
+          await volunteeringDataSource.getVolunteering(searchTerm: searchTerm);
 
       volunteering = volunteeringEntities.map((n) => n.toModel()).toList();
     } on Exception {
