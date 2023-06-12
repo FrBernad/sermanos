@@ -44,62 +44,64 @@ class NewsDetailsScreen extends ConsumerWidget {
       body: newsByIdController.when(
         data: (news) {
           return SermanosGrid(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const SizedBox(height: 24),
-                Text(
-                  news.source.toUpperCase(),
-                  style: const SermanosTypography.overline(
-                    color: SermanosColors.neutral75,
-                  ),
-                ),
-                Text(
-                  news.title,
-                  style: const SermanosTypography.headline02(
-                    color: SermanosColors.neutral100,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                CachedNetworkImage(
-                  imageUrl: news.imageUrl,
-                  imageBuilder: (context, imageProvider) => Container(
-                    height: 160,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(
-                        image: imageProvider,
-                        fit: BoxFit.cover,
-                      ),
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 24),
+                  Text(
+                    news.source.toUpperCase(),
+                    style: const SermanosTypography.overline(
+                      color: SermanosColors.neutral75,
                     ),
                   ),
-                  height: 160,
-                  fit: BoxFit.cover,
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  news.subtitle,
-                  style: const SermanosTypography.subtitle01(
-                    color: SermanosColors.secondary200,
+                  Text(
+                    news.title,
+                    style: const SermanosTypography.headline02(
+                      color: SermanosColors.neutral100,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  news.content,
-                  style: const SermanosTypography.body01(),
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  "Comparte esta nota",
-                  style: SermanosTypography.headline01(),
-                ),
-                const SizedBox(height: 16),
-                SermanosCTAButton(
-                  text: "Compartir",
-                  onPressed: () async => await Share.share(news.title),
-                  filled: true,
-                )
-              ],
+                  const SizedBox(height: 16),
+                  CachedNetworkImage(
+                    imageUrl: news.imageUrl,
+                    imageBuilder: (context, imageProvider) => Container(
+                      height: 160,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                          image: imageProvider,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    height: 160,
+                    fit: BoxFit.cover,
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    news.subtitle,
+                    style: const SermanosTypography.subtitle01(
+                      color: SermanosColors.secondary200,
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    news.content,
+                    style: const SermanosTypography.body01(),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    "Comparte esta nota",
+                    style: SermanosTypography.headline01(),
+                  ),
+                  const SizedBox(height: 16),
+                  SermanosCTAButton(
+                    text: "Compartir",
+                    onPressed: () async => await Share.share(news.title),
+                    filled: true,
+                  )
+                ],
+              ),
             ),
           );
         },
