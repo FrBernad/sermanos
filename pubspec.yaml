@@ -67,7 +67,11 @@ dependencies:
   shimmer: ^3.0.0
   fuzzywuzzy: ^0.2.0
   geolocator: ^9.0.2
+  permission_handler: ^10.3.0
+  image_picker: ^0.8.8
   url_launcher: ^6.1.11
+  firebase_storage: ^11.2.2
+  uuid: ^3.0.7
 
 
 dev_dependencies:

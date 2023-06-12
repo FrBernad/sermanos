@@ -56,7 +56,7 @@ class AppUserEntity {
       email: json['email'],
       gender: gender,
       birthdate: birthdate,
-      profileImageUrl: json['profileImageUrl'],
+      profileImageUrl: json['profileImage'],
       phone: json['phone'],
       emailContact: json['emailContact'],
     );

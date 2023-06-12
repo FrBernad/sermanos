@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:sermanos/features/user/domain/models/user_data_dto.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../entities/app_user_entity.dart';
 
@@ -18,16 +21,20 @@ abstract interface class UserRemoteDataSource {
 
   Future<void> updateUser({
     required String userId,
+    required AppUserEntity user,
     required UserDataDto userData,
   });
 }
 
 class UserRemoteDataSourceImpl extends UserRemoteDataSource {
   UserRemoteDataSourceImpl({
-    required firebaseDatabaseClient,
-  }) : _firebaseDatabaseClient = firebaseDatabaseClient;
+    required FirebaseFirestore firebaseDatabaseClient,
+    required FirebaseStorage firebaseStorageClient,
+  })  : _firebaseDatabaseClient = firebaseDatabaseClient,
+        _firebaseStorageClient = firebaseStorageClient;
 
   final FirebaseFirestore _firebaseDatabaseClient;
+  final FirebaseStorage _firebaseStorageClient;
 
   @override
   Future<Option<AppUserEntity>> getUserById({
@@ -78,6 +85,7 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
   @override
   Future<void> updateUser({
     required String userId,
+    required AppUserEntity user,
     required UserDataDto userData,
   }) async {
     final query = _firebaseDatabaseClient
@@ -90,6 +98,25 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
       'gender': userData.gender.name,
       'phone': userData.phone,
     };
+
+    //Hay que borrar la foto de perfil anterior si es que hay y subir una nueva al storage
+
+    if (userData.profileImage != null) {
+      try {
+        final storageRef = _firebaseStorageClient.ref();
+        if (user.profileImageUrl != null) {
+          await storageRef.child(user.profileImageUrl!).delete();
+        }
+
+        String id = const Uuid().v4();
+        final fileReference = storageRef.child("profileImage/$id");
+
+        await fileReference.putFile(userData.profileImage!);
+        userDataMap['profileImage'] = await fileReference.getDownloadURL();
+      } on FirebaseException {
+        throw Exception("Error when uploading file");
+      }
+    }
 
     await query.update(userDataMap);
   }

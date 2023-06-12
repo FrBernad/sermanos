@@ -55,6 +55,7 @@ class ProfileFormModalScreen extends ConsumerWidget {
                   user: user,
                   genderField: 'gender',
                   birthdateField: 'birthdate',
+                  imageField: 'profileImage',
                 ),
                 const SizedBox(
                   height: 32,

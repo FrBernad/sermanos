@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -43,6 +44,11 @@ FirebaseFirestore firebaseDatabase(FirebaseDatabaseRef ref) {
     persistenceEnabled: false,
   );
   return FirebaseFirestore.instance;
+}
+
+@Riverpod(keepAlive: true)
+FirebaseStorage firebaseStorage(FirebaseStorageRef ref) {
+  return FirebaseStorage.instance;
 }
 
 @Riverpod(keepAlive: true)

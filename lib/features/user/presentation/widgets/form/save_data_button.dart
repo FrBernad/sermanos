@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:sermanos/config/design_system/cellules/forms/sermanos_sign_in_form.dart';
 import 'package:sermanos/features/user/application/update_user_data_controller.dart';
@@ -45,13 +48,23 @@ class SaveDataButton extends ConsumerWidget {
     final String emailContact =
         profileFormKey.currentState!.fields['emailContact']!.value;
 
+    final String profileImagePath =
+        profileFormKey.currentState!.fields['profileImage']!.value;
+
+    File? profileImageFile;
+    if (profileImagePath !=
+        profileFormKey.currentState!.fields['profileImage']!.initialValue) {
+      profileImageFile = File(profileImagePath);
+    }
+
     final UserDataDto userData = UserDataDto(
-        phone: phone,
-        gender: gender,
-        birthdate: birthdate,
-        emailContact: emailContact);
-    final success =
-    await ref
+      phone: phone,
+      gender: gender,
+      birthdate: birthdate,
+      emailContact: emailContact,
+      profileImage: profileImageFile,
+    );
+    final success = await ref
         .read(updateUserDataControllerProvider.notifier)
         .updateUser(userData: userData);
     if (context.mounted) {

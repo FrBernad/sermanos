@@ -61,12 +61,21 @@ class UserRepositoryImpl implements UserRepository {
   }) async {
     if (networkInfo.hasConnection) {
       try {
-        await userRemoteDataSource.updateUser(
-          userId: userId,
-          userData: userData,
-        );
         Option<AppUserEntity> userEntityOpt =
             await userRemoteDataSource.getUserById(userId: userId);
+
+        if (userEntityOpt.isNone()) {
+          return const Left(UserNotFoundFailure());
+        }
+
+        await userRemoteDataSource.updateUser(
+          userId: userId,
+          user: userEntityOpt.toNullable()!,
+          userData: userData,
+        );
+
+        userEntityOpt = await userRemoteDataSource.getUserById(userId: userId);
+
         return Right(userEntityOpt.toNullable()!.toModel());
       } on Exception {
         return const Left(ConnectionFailure());

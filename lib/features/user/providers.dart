@@ -18,6 +18,7 @@ UserRemoteDataSource userRemoteDataSource(
   UserRemoteDataSourceRef ref,
 ) =>
     UserRemoteDataSourceImpl(
+      firebaseStorageClient: ref.watch(firebaseStorageProvider),
       firebaseDatabaseClient: ref.watch(firebaseDatabaseProvider),
     );
 

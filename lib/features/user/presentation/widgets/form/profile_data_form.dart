@@ -1,29 +1,39 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:sermanos/config/design_system/cellules/modals/sermanos_dialog.dart';
 import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import 'package:sermanos/config/design_system/molecules/inputs/sermanos_date_field.dart';
+import 'package:sermanos/config/design_system/molecules/inputs/sermanos_photo_field.dart';
 import 'package:sermanos/config/design_system/molecules/inputs/sermanos_text_field.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
+import 'package:sermanos/features/core/providers.dart';
 import 'package:sermanos/features/user/domain/models/app_user_model.dart';
 import 'package:sermanos/features/user/domain/models/gender.dart';
 import 'package:sermanos/config/design_system/molecules/inputs/sermanos_radio_group.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 
-class ProfileDataForm extends StatelessWidget {
+class ProfileDataForm extends ConsumerWidget {
   final AppUser user;
   final String genderField;
   final String birthdateField;
+  final String imageField;
 
   const ProfileDataForm({
     Key? key,
     required this.user,
     required this.genderField,
     required this.birthdateField,
+    required this.imageField,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,7 +49,9 @@ class ProfileDataForm extends StatelessWidget {
           ),
           SermanosDateField(
             formField: birthdateField,
-            initialValue: user.birthdate == null ? '': DateFormat('dd/MM/yyyy').format(user.birthdate!),
+            initialValue: user.birthdate == null
+                ? ''
+                : DateFormat('dd/MM/yyyy').format(user.birthdate!),
             enabled: true,
             validators: [
               FormBuilderValidators.required(
@@ -135,8 +147,10 @@ class ProfileDataForm extends StatelessWidget {
                 const SizedBox(
                   width: 8,
                 ),
-                SermanosCTAButton(
-                    text: "Subir foto", onPressed: () {}, filled: true),
+                SermanosPhotoField(
+                  initialValue: user.profileImageUrl ?? '',
+                  formField: imageField,
+                ),
               ],
             ),
           )
