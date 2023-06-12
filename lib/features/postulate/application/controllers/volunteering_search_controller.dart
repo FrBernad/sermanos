@@ -1,10 +1,7 @@
 import 'dart:async';
 
 import 'package:fpdart/fpdart.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:sermanos/features/postulate/application/controllers/current_volunteering_lat_lng_controller.dart';
-import 'package:sermanos/features/postulate/application/controllers/user_position_controller.dart';
 import 'package:sermanos/features/postulate/providers.dart';
 
 import '../../../core/error/failure.dart';
@@ -22,13 +19,11 @@ class VolunteeringSearchController extends _$VolunteeringSearchController {
       if (_debounceTimer != null) _debounceTimer!.cancel();
     });
 
-    await ref.refresh(userPositionControllerProvider.future);
-
     final emergenciesEither = await _getVolunteering();
 
     return emergenciesEither.fold(
       (l) => throw l,
-      (r) => r,
+      (vols) => vols,
     );
   }
 
@@ -42,17 +37,7 @@ class VolunteeringSearchController extends _$VolunteeringSearchController {
 
       state = await emergenciesEither.fold(
         (l) => AsyncValue.error(l.toString(), StackTrace.current),
-        (vols) async {
-          if (vols.isEmpty) {
-            await ref.refresh(userPositionControllerProvider.future);
-          } else {
-            final coordinates = LatLng(vols[0].lat, vols[0].lng);
-            ref
-                .watch(currentVolunteeringLatLngControllerProvider.notifier)
-                .set(coordinates);
-          }
-          return AsyncValue.data(vols);
-        },
+        (vols) => AsyncValue.data(vols),
       );
     });
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:sermanos/features/postulate/application/controllers/current_volunteering_lat_lng_controller.dart';
+import 'package:sermanos/features/postulate/application/controllers/focused_coordinate_controller.dart';
 import 'package:sermanos/features/postulate/application/controllers/user_position_controller.dart';
 
 import '../../../../config/design_system/atoms/icons/sermanos_icons.dart';
@@ -21,12 +20,8 @@ class UserPositionButton extends ConsumerWidget {
         onPressed: () async {
           final position =
               await ref.refresh(userPositionControllerProvider.future);
-          ref.watch(currentVolunteeringLatLngControllerProvider.notifier).set(
-                LatLng(
-                  position.latitude,
-                  position.longitude,
-                ),
-              );
+
+          ref.read(focusedCoordinateControllerProvider.notifier).set(position);
         },
       ),
     );

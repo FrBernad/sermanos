@@ -23,8 +23,8 @@ class PostulateMapView extends HookConsumerWidget {
       data: (volunteerings) {
         return Stack(
           children: [
-            Positioned.fill(
-              child: PostulateMap(volunteerings: volunteerings),
+            const Positioned.fill(
+              child: PostulateMap(),
             ),
             Positioned.fill(
               child: Column(
@@ -55,7 +55,7 @@ class PostulateMapView extends HookConsumerWidget {
                       const SizedBox(height: 16),
                       volunteerings.isEmpty
                           ? const NoVolunteeringAvailable()
-                          : PostulateCarousel(volunteerings: volunteerings),
+                          : const PostulateCarousel(),
                       const SizedBox(height: 16),
                     ],
                   ),
