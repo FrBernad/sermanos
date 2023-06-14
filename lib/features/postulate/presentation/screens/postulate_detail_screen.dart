@@ -229,7 +229,7 @@ class PostulateDetailScreen extends HookConsumerWidget {
                                   ref
                                       .read(
                                           postulateControllerProvider.notifier)
-                                      .cancelPostulationFromVolunteering(
+                                      .subscribeToVolunteering(
                                           volunteeringId: volunteeringId);
                                 }
                               },
