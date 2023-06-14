@@ -4,17 +4,17 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_icons.dart';
 import 'package:sermanos/config/design_system/cellules/modals/modal.dart';
-import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_grid.dart';
-import 'package:sermanos/features/postulate/application/controllers/postulate_controller.dart';
 import 'package:sermanos/features/postulate/presentation/widgets/postulate_map_card.dart';
 
+import '../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import '../../../../config/design_system/molecules/components/vacancies.dart';
 import '../../../../config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
 import '../../../core/presentation/widgets/error_message.dart';
 import '../../application/controllers/get_volunteering_by_id_controller.dart';
+import '../../application/controllers/postulate_controller.dart';
 import '../../domain/models/volunteering.dart';
 
 class PostulateDetailScreen extends HookConsumerWidget {
@@ -55,42 +55,51 @@ class PostulateDetailScreen extends HookConsumerWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                Stack(
-                  children: [
-                    Image(
-                      image: NetworkImage(volunteering.imageUrl),
-                      height: 243,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
-                    Positioned.fill(
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          color: SermanosColors.neutral0,
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              SermanosColors.neutral100,
-                              Colors.transparent,
-                            ],
-                            stops: [0.0, 0.3555],
+                ColoredBox(
+                  color: SermanosColors.neutral200,
+                  child: SafeArea(
+                    top: true,
+                    bottom: false,
+                    left: false,
+                    right: false,
+                    child: Stack(
+                      children: [
+                        Image(
+                          image: NetworkImage(volunteering.imageUrl),
+                          height: 243,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
+                        Positioned.fill(
+                          child: Container(
+                            decoration: const BoxDecoration(
+                              color: SermanosColors.neutral0,
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  SermanosColors.neutral200,
+                                  Colors.transparent,
+                                ],
+                                stops: [0.0, 0.3555],
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                        Positioned(
+                          top: 0,
+                          left: 0,
+                          child: IconButton(
+                            padding: const EdgeInsets.all(
+                                SermanosGrid.horizontalSpacing),
+                            onPressed: () => Navigator.of(context).pop(),
+                            icon: SermanosIcons.back(
+                                status: SermanosIconStatus.back),
+                          ),
+                        ),
+                      ],
                     ),
-                    Positioned(
-                      top: 0,
-                      left: 0,
-                      child: IconButton(
-                        padding: const EdgeInsets.all(
-                            SermanosGrid.horizontalSpacing),
-                        onPressed: () => Navigator.of(context).pop(),
-                        icon:
-                            SermanosIcons.back(status: SermanosIconStatus.back),
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
                 const SizedBox(height: 32),
                 Padding(
@@ -225,11 +234,9 @@ class PostulateDetailScreen extends HookConsumerWidget {
                                 }
                               },
                               filled: true),
-                          const SizedBox(
-                            height: 56,
-                          ),
                         ],
                       ),
+                      const SizedBox(height: 32),
                     ],
                   ),
                 ),

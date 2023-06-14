@@ -99,7 +99,8 @@ class NewsDetailsScreen extends ConsumerWidget {
                     text: "Compartir",
                     onPressed: () async => await Share.share(news.title),
                     filled: true,
-                  )
+                  ),
+                  const SizedBox(height: 32),
                 ],
               ),
             ),

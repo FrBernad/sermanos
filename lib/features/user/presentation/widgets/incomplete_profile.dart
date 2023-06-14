@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_icons.dart';
@@ -6,7 +5,6 @@ import 'package:sermanos/config/design_system/molecules/buttons/sermanos_short_b
 import 'package:sermanos/config/design_system/molecules/components/profile_image.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
-import 'package:sermanos/features/auth/application/controllers/sign_out_controller.dart';
 import 'package:sermanos/features/user/domain/models/app_user_model.dart';
 import 'package:sermanos/features/user/presentation/screens/form_modal_screen.dart';
 
@@ -62,17 +60,16 @@ class IncompleteProfile extends ConsumerWidget {
         SermanosShortButton(
           icon: SermanosIcons.add(status: SermanosIconStatus.enabled),
           text: "Completar",
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ProfileFormModalScreen(
-                  user: user,
-                ),
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProfileFormModalScreen(
+                user: user,
               ),
             ),
-
+          ),
         ),
-
+        const SizedBox(height: 32),
       ],
     );
   }
