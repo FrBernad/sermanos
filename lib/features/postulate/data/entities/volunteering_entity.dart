@@ -2,6 +2,8 @@ import '../../domain/models/volunteering.dart';
 
 class VolunteeringEntity {
   //FIXME: Sacar campos que no van
+  static const String collectionName = 'volunteerings';
+
   final String id;
   final String name;
   final String category;

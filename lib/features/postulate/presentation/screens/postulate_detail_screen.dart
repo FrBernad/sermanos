@@ -6,6 +6,7 @@ import 'package:sermanos/config/design_system/atoms/icons/sermanos_icons.dart';
 import 'package:sermanos/config/design_system/cellules/modals/modal.dart';
 import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_grid.dart';
+import 'package:sermanos/features/postulate/application/controllers/postulate_controller.dart';
 import 'package:sermanos/features/postulate/presentation/widgets/postulate_map_card.dart';
 
 import '../../../../config/design_system/molecules/components/vacancies.dart';
@@ -208,16 +209,22 @@ class PostulateDetailScreen extends HookConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           SermanosCTAButton(
-                            text: 'Postularme',
-                            onPressed: () async {
-                              final bool? confirmed =
-                                  await _showConfirmationDialog(
-                                context,
-                                volunteering,
-                              );
-                            },
-                            filled: true,
-                          ),
+                              text: 'Postularme',
+                              onPressed: () async {
+                                final bool? confirmed =
+                                    await _showConfirmationDialog(
+                                  context,
+                                  volunteering,
+                                );
+                                if (confirmed != null && confirmed == true) {
+                                  ref
+                                      .read(
+                                          postulateControllerProvider.notifier)
+                                      .subscribeToVolunteering(
+                                          volunteeringId: volunteeringId);
+                                }
+                              },
+                              filled: true),
                           const SizedBox(
                             height: 56,
                           ),

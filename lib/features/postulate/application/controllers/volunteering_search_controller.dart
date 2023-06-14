@@ -47,7 +47,7 @@ class VolunteeringSearchController extends _$VolunteeringSearchController {
   }) async {
     final volunteeringEither = await ref
         .read(volunteeringRepositoryProvider)
-        .getVolunteering(searchTerm: searchTerm);
+        .getVolunteerings(searchTerm: searchTerm);
 
     return volunteeringEither;
   }

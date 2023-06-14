@@ -15,3 +15,7 @@ class CacheException implements Exception {
 }
 
 class UnreachableCodeException implements Exception {}
+
+class NoVacancyAtVolunteeringException implements Exception {}
+
+class AlreadySubscribedInAVolunteeringException implements Exception {}

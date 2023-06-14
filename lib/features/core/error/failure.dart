@@ -45,6 +45,19 @@ class UserNotFoundFailure extends Failure {
   static const _failureMessage = "Invalid user id";
 }
 
-class UnprocessableEntityFailure extends Failure {
-  const UnprocessableEntityFailure({required super.message});
+class NonProcessableEntityFailure extends Failure {
+  const NonProcessableEntityFailure({required super.message});
+}
+
+class NoVacancyAtVolunteeringFailure extends Failure {
+  const NoVacancyAtVolunteeringFailure() : super(message: _failureMessage);
+
+  static const _failureMessage = "No vacancy at volunteering";
+}
+
+class AlreadySubscribedInAVolunteeringFailure extends Failure {
+  const AlreadySubscribedInAVolunteeringFailure()
+      : super(message: _failureMessage);
+
+  static const _failureMessage = "You are already subscribed in a volunteering";
 }

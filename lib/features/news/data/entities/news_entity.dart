@@ -1,6 +1,8 @@
 import 'package:sermanos/features/news/domain/models/news.dart';
 
 class NewsEntity {
+  static const String collectionName = 'news';
+
   final String id;
   final String title;
   final String subtitle;
