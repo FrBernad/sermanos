@@ -14,7 +14,7 @@ import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
 import '../../../core/presentation/widgets/error_message.dart';
 import '../../application/controllers/get_volunteering_by_id_controller.dart';
-import '../../application/controllers/postulate_controller.dart';
+import '../../application/controllers/postulate_user_to_volunteer_controller.dart';
 import '../../domain/models/volunteering.dart';
 
 class PostulateDetailScreen extends HookConsumerWidget {
@@ -228,9 +228,11 @@ class PostulateDetailScreen extends HookConsumerWidget {
                                 if (confirmed != null && confirmed == true) {
                                   ref
                                       .read(
-                                          postulateControllerProvider.notifier)
-                                      .subscribeToVolunteering(
-                                          volunteeringId: volunteeringId);
+                                          postulateUserToVolunteerControllerProvider
+                                              .notifier)
+                                      .postulate(
+                                        volunteeringId: volunteeringId,
+                                      );
                                 }
                               },
                               filled: true),

@@ -42,8 +42,7 @@ class AppUserEntity {
     DateTime? birthdate;
     if (json['birthdate'] != null) {
       try {
-        birthdate =
-            DateTime.fromMillisecondsSinceEpoch(json['birthdate']);
+        birthdate = DateTime.fromMillisecondsSinceEpoch(json['birthdate']);
       } on StateError {
         birthdate = null;
       }

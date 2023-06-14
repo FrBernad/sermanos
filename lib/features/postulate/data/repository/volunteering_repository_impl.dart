@@ -1,12 +1,13 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:sermanos/features/core/error/exception.dart';
-import 'package:sermanos/features/postulate/data/entities/volunteering_entity.dart';
-import 'package:sermanos/features/postulate/domain/models/volunteering.dart';
-import 'package:sermanos/features/user/domain/models/app_user_model.dart';
-
 import 'package:sermanos/features/core/error/failure.dart';
-import 'package:sermanos/features/postulate/domain/repositories/volunteering_repository.dart';
 import 'package:sermanos/features/postulate/data/datasources/remote/volunteering_remote_data_source.dart';
+import 'package:sermanos/features/postulate/data/entities/volunteering_entity.dart';
+import 'package:sermanos/features/postulate/data/entities/volunteering_reduced_entity.dart';
+import 'package:sermanos/features/postulate/domain/models/volunteering.dart';
+import 'package:sermanos/features/postulate/domain/models/volunteering_reduced.dart';
+import 'package:sermanos/features/postulate/domain/repositories/volunteering_repository.dart';
+import 'package:sermanos/features/user/domain/models/app_user_model.dart';
 
 class VolunteeringRepositoryImpl implements VolunteeringRepository {
   VolunteeringRepositoryImpl({
@@ -51,6 +52,25 @@ class VolunteeringRepositoryImpl implements VolunteeringRepository {
     }
   }
 
+  @override
+  Future<Either<Failure, Option<VolunteeringReduced>>> getUserVolunteering({
+    required String userId,
+  }) async {
+    try {
+      final Option<VolunteeringReducedEntity> volunteeringEntity =
+          await volunteeringDataSource.getUserVolunteering(
+        userId: userId,
+      );
+
+      if (volunteeringEntity.isNone()) {
+        return const Right(Option.none());
+      }
+      return Right(Option.of(volunteeringEntity.toNullable()!.toModel()));
+    } on Exception {
+      return const Left(ConnectionFailure());
+    }
+  }
+
 // @override
 // Future<Either<Failure, List<Volunteering>>>
 //     getCurrentSuscribedVolunteeringsByUserId({
@@ -71,27 +91,7 @@ class VolunteeringRepositoryImpl implements VolunteeringRepository {
 //     return const Left(ConnectionFailure());
 //   }
 // }
-//
-// @override
-// Future<Either<Failure, List<Postulation>>> getCurrentPostulationsByUserId({
-//   required String userId,
-//   required String volunteeringId,
-// }) async {
-//   try {
-//     final List<VolunteeringEntity> volunteeringEntity =
-//         await volunteeringDataSource.getVolunteeringById(
-//       volunteeringId: volunteeringId,
-//     );
-//
-//     if (volunteeringEntity.isNone()) {
-//       return const Left(VolunteeringNotFoundFailure());
-//     }
-//     return Right(volunteeringEntity.toNullable()!.toModel());
-//   } on Exception {
-//     return const Left(ConnectionFailure());
-//   }
-// }
-//
+
 // @override
 // Future<Either<Failure, Postulation>> getPostulationByVolunteeringId({
 //   required AppUser user,
@@ -118,13 +118,15 @@ class VolunteeringRepositoryImpl implements VolunteeringRepository {
 //   }
 
   @override
-  Future<Either<Failure, void>> subscribeToVolunteering({
+  Future<Either<Failure, void>> postulateUserToVolunteering({
     required AppUser user,
     required String volunteeringId,
   }) async {
     try {
-      await volunteeringDataSource.subscribeToVolunteering(
-          user: user, volunteeringId: volunteeringId);
+      await volunteeringDataSource.postulateUserToVolunteering(
+        user: user,
+        volunteeringId: volunteeringId,
+      );
       return const Right(null);
     } on NotFoundException {
       return const Left(VolunteeringNotFoundFailure());
@@ -138,13 +140,15 @@ class VolunteeringRepositoryImpl implements VolunteeringRepository {
   }
 
   @override
-  Future<Either<Failure, void>> cancelPostulationFromVolunteering({
+  Future<Either<Failure, void>> cancelUserVolunteeringPostulation({
     required AppUser user,
     required String volunteeringId,
   }) async {
     try {
-      await volunteeringDataSource.cancelPostulationFromVolunteering(
-          user: user, volunteeringId: volunteeringId);
+      await volunteeringDataSource.cancelUserVolunteeringPostulation(
+        user: user,
+        volunteeringId: volunteeringId,
+      );
       return const Right(null);
     } on NotFoundException {
       return const Left(VolunteeringNotFoundFailure());

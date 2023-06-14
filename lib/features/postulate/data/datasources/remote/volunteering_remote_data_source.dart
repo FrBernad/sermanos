@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
-import 'package:sermanos/features/postulate/data/entities/postulation_entity.dart';
-import 'package:sermanos/features/postulate/domain/models/postulation_status.dart';
+import 'package:sermanos/features/postulate/data/entities/volunteering_reduced_entity.dart';
 import 'package:sermanos/features/user/data/entities/app_user_entity.dart';
 import 'package:sermanos/features/user/domain/models/app_user_model.dart';
 
@@ -19,12 +18,16 @@ abstract class VolunteeringRemoteDataSource {
     required String volunteeringId,
   });
 
-  Future<void> subscribeToVolunteering({
+  Future<Option<VolunteeringReducedEntity>> getUserVolunteering({
+    required String userId,
+  });
+
+  Future<void> postulateUserToVolunteering({
     required AppUser user,
     required String volunteeringId,
   });
 
-  Future<void> cancelPostulationFromVolunteering({
+  Future<void> cancelUserVolunteeringPostulation({
     required AppUser user,
     required String volunteeringId,
   });
@@ -47,8 +50,10 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
     required String? searchTerm,
   }) async {
     try {
-      final response =
-          await _firebaseDatabaseClient.collection("volunteerings").get();
+      final response = await _firebaseDatabaseClient
+          .collection(VolunteeringEntity.collectionName)
+          .get();
+
       List<VolunteeringEntity> volunteeringEntities = [];
 
       for (var vol in response.docs) {
@@ -83,7 +88,7 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
     required String volunteeringId,
   }) async {
     try {
-      final DocumentSnapshot response = await _firebaseDatabaseClient
+      final response = await _firebaseDatabaseClient
           .collection("volunteerings")
           .doc(volunteeringId)
           .get();
@@ -95,8 +100,7 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
 
       VolunteeringEntity volunteeringEntity = VolunteeringEntity.fromJson(
         volunteeringId: response.id,
-        json:
-            Map<String, dynamic>.from(response.data() as Map<String, dynamic>),
+        json: response.data()!,
       );
 
       return Option.of(volunteeringEntity);
@@ -107,7 +111,37 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
   }
 
   @override
-  Future<void> subscribeToVolunteering({
+  Future<Option<VolunteeringReducedEntity>> getUserVolunteering({
+    required String userId,
+  }) async {
+    try {
+      final volunteerings = await _firebaseDatabaseClient
+          .collection(AppUserEntity.collectionName)
+          .doc(userId)
+          .collection(VolunteeringReducedEntity.collectionName)
+          .get();
+
+      final currentVolunteering = volunteerings.docs.firstOrNull;
+
+      if (currentVolunteering == null) {
+        return const Option.none();
+      }
+
+      VolunteeringReducedEntity volunteeringEntity =
+          VolunteeringReducedEntity.fromJson(
+        volunteeringId: currentVolunteering.id,
+        json: currentVolunteering.data(),
+      );
+
+      return Option.of(volunteeringEntity);
+    } catch (e) {
+      logger.d(e);
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<void> postulateUserToVolunteering({
     required AppUser user,
     required String volunteeringId,
   }) async {
@@ -125,7 +159,7 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
         final volunteeringPostulationQuery = _firebaseDatabaseClient
             .collection(VolunteeringEntity.collectionName)
             .doc(volunteeringId)
-            .collection(PostulationEntity.collectionName)
+            .collection("postulations")
             .doc(user.id);
 
         await volunteeringPostulationQuery.set({
@@ -135,10 +169,14 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
 
         final userPostulationQuery = _firebaseDatabaseClient
             .collection(AppUserEntity.collectionName)
-            .doc(user.id);
+            .doc(user.id)
+            .collection(VolunteeringEntity.collectionName)
+            .doc(volunteeringId);
 
-        await userPostulationQuery.update({
-          "postulations": FieldValue.arrayUnion([volunteeringId])
+        await userPostulationQuery.set({
+          'name': v.name,
+          'description': v.description,
+          'category': v.category,
         });
       } else {
         throw NoVacancyAtVolunteeringException();
@@ -150,7 +188,7 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
   }
 
   @override
-  Future<void> cancelPostulationFromVolunteering({
+  Future<void> cancelUserVolunteeringPostulation({
     required AppUser user,
     required String volunteeringId,
   }) async {
@@ -158,25 +196,25 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
       final volunteeringPostulationQuery = _firebaseDatabaseClient
           .collection(VolunteeringEntity.collectionName)
           .doc(volunteeringId)
-          .collection(PostulationEntity.collectionName)
+          .collection("postulations")
           .doc(user.id);
 
       await volunteeringPostulationQuery.delete();
 
       final userPostulationQuery = _firebaseDatabaseClient
           .collection(AppUserEntity.collectionName)
-          .doc(user.id);
+          .doc(user.id)
+          .collection(VolunteeringEntity.collectionName)
+          .doc(volunteeringId);
 
-      await userPostulationQuery.update({
-        "postulations": FieldValue.arrayRemove([volunteeringId])
-      });
+      await userPostulationQuery.delete();
     } catch (e) {
       logger.d(e);
       throw ServerException();
     }
   }
 
-  // @override
+// @override
 // Future<void> leaveVolunteering({
 //   required AppUser user,
 //   required String volunteeringId,

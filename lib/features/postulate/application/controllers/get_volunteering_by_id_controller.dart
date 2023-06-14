@@ -13,7 +13,8 @@ Future<Volunteering> getVolunteeringByIdController(
   final volunteeringRepository = ref.read(volunteeringRepositoryProvider);
 
   final volunteeringEither = await volunteeringRepository.getVolunteeringById(
-      volunteeringId: volunteeringId);
+    volunteeringId: volunteeringId,
+  );
 
   return volunteeringEither.fold((l) => throw Exception(l.message), (r) => r);
 }
