@@ -35,8 +35,8 @@ abstract interface class VolunteeringRepository {
     required String volunteeringId,
   });
 
-  // Future<Either<Failure, void>> unsubscribeFromVolunteeringByVolunteeringId({
-  //   required AppUser user,
-  //   required String volunteeringId,
-  // });
+  Future<Either<Failure, void>> cancelPostulationFromVolunteering({
+    required AppUser user,
+    required String volunteeringId,
+  });
 }

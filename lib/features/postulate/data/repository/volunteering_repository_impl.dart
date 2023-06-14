@@ -1,14 +1,12 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:sermanos/features/core/error/exception.dart';
-import 'package:sermanos/features/postulate/data/entities/postulation_entity.dart';
 import 'package:sermanos/features/postulate/data/entities/volunteering_entity.dart';
-import 'package:sermanos/features/postulate/domain/models/postulation.dart';
 import 'package:sermanos/features/postulate/domain/models/volunteering.dart';
 import 'package:sermanos/features/user/domain/models/app_user_model.dart';
 
-import '../../../core/error/failure.dart';
-import '../../domain/repositories/volunteering_repository.dart';
-import '../datasources/remote/volunteering_remote_data_source.dart';
+import 'package:sermanos/features/core/error/failure.dart';
+import 'package:sermanos/features/postulate/domain/repositories/volunteering_repository.dart';
+import 'package:sermanos/features/postulate/data/datasources/remote/volunteering_remote_data_source.dart';
 
 class VolunteeringRepositoryImpl implements VolunteeringRepository {
   VolunteeringRepositoryImpl({
@@ -138,20 +136,20 @@ class VolunteeringRepositoryImpl implements VolunteeringRepository {
       return const Left(ConnectionFailure());
     }
   }
-//
-// @override
-// Future<Either<Failure, void>> unsubscribeFromVolunteeringByVolunteeringId({
-//   required AppUser user,
-//   required String volunteeringId,
-// }) async {
-//   try {
-//     await volunteeringDataSource.unsuscribeFromVolunteeringById(
-//         user, volunteeringId);
-//     return const Right(null);
-//   } on NoVacancyAtVolunteeringException {
-//     return const Left(NoVacancyAtVolunteeringFailure());
-//   } on Exception {
-//     return const Left(ConnectionFailure());
-//   }
-// }
+
+  @override
+  Future<Either<Failure, void>> cancelPostulationFromVolunteering({
+    required AppUser user,
+    required String volunteeringId,
+  }) async {
+    try {
+      await volunteeringDataSource.cancelPostulationFromVolunteering(
+          user: user, volunteeringId: volunteeringId);
+      return const Right(null);
+    } on NotFoundException {
+      return const Left(VolunteeringNotFoundFailure());
+    } on Exception {
+      return const Left(ConnectionFailure());
+    }
+  }
 }

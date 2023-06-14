@@ -23,6 +23,16 @@ abstract class VolunteeringRemoteDataSource {
     required AppUser user,
     required String volunteeringId,
   });
+
+  Future<void> cancelPostulationFromVolunteering({
+    required AppUser user,
+    required String volunteeringId,
+  });
+
+// Future<void> leaveVolunteering({
+//   required AppUser user,
+//   required String volunteeringId,
+// });
 }
 
 class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
@@ -115,10 +125,10 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
         final volunteeringPostulationQuery = _firebaseDatabaseClient
             .collection(VolunteeringEntity.collectionName)
             .doc(volunteeringId)
-            .collection(PostulationEntity.collectionName);
+            .collection(PostulationEntity.collectionName)
+            .doc(user.id);
 
-        await volunteeringPostulationQuery.add({
-          'userId': user.id,
+        await volunteeringPostulationQuery.set({
           'name': user.name,
           'surname': user.surname,
         });
@@ -138,4 +148,58 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
       throw ServerException();
     }
   }
+
+  @override
+  Future<void> cancelPostulationFromVolunteering({
+    required AppUser user,
+    required String volunteeringId,
+  }) async {
+    try {
+      final volunteeringPostulationQuery = _firebaseDatabaseClient
+          .collection(VolunteeringEntity.collectionName)
+          .doc(volunteeringId)
+          .collection(PostulationEntity.collectionName)
+          .doc(user.id);
+
+      await volunteeringPostulationQuery.delete();
+
+      final userPostulationQuery = _firebaseDatabaseClient
+          .collection(AppUserEntity.collectionName)
+          .doc(user.id);
+
+      await userPostulationQuery.update({
+        "postulations": FieldValue.arrayRemove([volunteeringId])
+      });
+    } catch (e) {
+      logger.d(e);
+      throw ServerException();
+    }
+  }
+
+  // @override
+// Future<void> leaveVolunteering({
+//   required AppUser user,
+//   required String volunteeringId,
+// }) async {
+//   try {
+//     final volunteeringPostulationQuery = _firebaseDatabaseClient
+//         .collection(VolunteeringEntity.collectionName)
+//         .doc(volunteeringId)
+//         .collection(PostulationEntity.collectionName)
+//         .doc(user.id);
+//
+//     await volunteeringPostulationQuery.delete();
+//
+//     final userPostulationQuery = _firebaseDatabaseClient
+//         .collection(AppUserEntity.collectionName)
+//         .doc(user.id).collection();
+//
+//     await userPostulationQuery.update({
+//       "postulations": FieldValue.arrayUnion([volunteeringId])
+//     });
+//   } catch (e) {
+//     logger.d(e);
+//     throw ServerException();
+//   }
+// }
 }

@@ -30,26 +30,46 @@ class PostulateController extends _$PostulateController {
       },
     );
   }
-//
-// Future<void> unsuscribeFromVolunteering({
-//   required String volunteeringId,
-// }) async {
-//   state = const AsyncLoading();
-//
-//   final AppUser currentUser = ref.read(currentUserProvider)!;
-//
-//   final userDataEither = await ref
-//       .read(volunteeringRepositoryProvider)
-//       .unsuscribeFromVolunteeringById(
-//           user: currentUser, volunteeringId: volunteeringId);
-//
-//   state = userDataEither.fold(
-//     (l) => AsyncValue.error(l.toString(), StackTrace.current),
-//     (user) {
-//       return const AsyncValue.data(null);
-//     },
-//   );
-// }
+
+  Future<void> cancelPostulationFromVolunteering({
+    required String volunteeringId,
+  }) async {
+    state = const AsyncLoading();
+
+    final AppUser currentUser = ref.read(currentUserProvider)!;
+
+    final userDataEither = await ref
+        .read(volunteeringRepositoryProvider)
+        .cancelPostulationFromVolunteering(
+            user: currentUser, volunteeringId: volunteeringId);
+
+    state = userDataEither.fold(
+      (l) => AsyncValue.error(l.toString(), StackTrace.current),
+      (user) {
+        return const AsyncValue.data(null);
+      },
+    );
+  }
+
+  Future<void> leaveVolunteering({
+    required String volunteeringId,
+  }) async {
+    state = const AsyncLoading();
+
+    final AppUser currentUser = ref.read(currentUserProvider)!;
+
+    final userDataEither = await ref
+        .read(volunteeringRepositoryProvider)
+        .cancelPostulationFromVolunteering(
+        user: currentUser, volunteeringId: volunteeringId);
+
+    state = userDataEither.fold(
+          (l) => AsyncValue.error(l.toString(), StackTrace.current),
+          (user) {
+        return const AsyncValue.data(null);
+      },
+    );
+  }
 //
 // Future<void> getPostulationStatus({
 //   required String volunteeringId,
