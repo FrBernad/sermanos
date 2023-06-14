@@ -120,14 +120,14 @@ class VolunteeringRepositoryImpl implements VolunteeringRepository {
 //   }
 
   @override
-  Future<Either<Failure, Postulation>> subscribeToVolunteering({
+  Future<Either<Failure, void>> subscribeToVolunteering({
     required AppUser user,
     required String volunteeringId,
   }) async {
     try {
-      final PostulationEntity postulation = await volunteeringDataSource
-          .subscribeToVolunteering(user: user, volunteeringId: volunteeringId);
-      return Right(postulation.toModel());
+      await volunteeringDataSource.subscribeToVolunteering(
+          user: user, volunteeringId: volunteeringId);
+      return const Right(null);
     } on NotFoundException {
       return const Left(VolunteeringNotFoundFailure());
     } on AlreadySubscribedInAVolunteeringException {

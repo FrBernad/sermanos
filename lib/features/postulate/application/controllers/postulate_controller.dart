@@ -25,7 +25,7 @@ class PostulateController extends _$PostulateController {
 
     state = userDataEither.fold(
       (l) => AsyncValue.error(l.toString(), StackTrace.current),
-      (user) {
+      (_) {
         return const AsyncValue.data(null);
       },
     );

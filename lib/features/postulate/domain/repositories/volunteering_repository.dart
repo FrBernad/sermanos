@@ -17,26 +17,26 @@ abstract interface class VolunteeringRepository {
     required String volunteeringId,
   });
 
-  //Retorna el voluntariado al que el usuario se suscribió o del que participa.
-  Future<Either<Failure, Postulation>>
-      getCurrentSubscribedVolunteeringByUserId({
-    required String userId,
-  });
+  // //Retorna el voluntariado al que el usuario se suscribió o del que participa.
+  // Future<Either<Failure, Postulation>>
+  //     getCurrentSubscribedVolunteeringByUserId({
+  //   required String userId,
+  // });
+  //
+  // //Retorna el estado de postulation para el  voluntariado con id volunteeringId
+  // Future<Either<Failure, PostulationStatus>>
+  //     getPostulationStatusByVolunteeringId({
+  //   required AppUser user,
+  //   required String volunteeringId,
+  // });
 
-  //Retorna el estado de postulation para el  voluntariado con id volunteeringId
-  Future<Either<Failure, PostulationStatus>>
-      getPostulationStatusByVolunteeringId({
+  Future<Either<Failure, void>> subscribeToVolunteering({
     required AppUser user,
     required String volunteeringId,
   });
 
-  Future<Either<Failure, Postulation>> subscribeToVolunteering({
-    required AppUser user,
-    required String volunteeringId,
-  });
-
-  Future<Either<Failure, void>> unsubscribeFromVolunteeringByVolunteeringId({
-    required AppUser user,
-    required String volunteeringId,
-  });
+  // Future<Either<Failure, void>> unsubscribeFromVolunteeringByVolunteeringId({
+  //   required AppUser user,
+  //   required String volunteeringId,
+  // });
 }

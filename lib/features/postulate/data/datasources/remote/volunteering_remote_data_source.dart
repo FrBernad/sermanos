@@ -19,7 +19,7 @@ abstract class VolunteeringRemoteDataSource {
     required String volunteeringId,
   });
 
-  Future<PostulationEntity> subscribeToVolunteering({
+  Future<void> subscribeToVolunteering({
     required AppUser user,
     required String volunteeringId,
   });
@@ -97,7 +97,7 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
   }
 
   @override
-  Future<PostulationEntity> subscribeToVolunteering({
+  Future<void> subscribeToVolunteering({
     required AppUser user,
     required String volunteeringId,
   }) async {
@@ -117,36 +117,19 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
             .doc(volunteeringId)
             .collection(PostulationEntity.collectionName);
 
-        final volunteeringPostulationQueryResult =
-            await volunteeringPostulationQuery.add({
+        await volunteeringPostulationQuery.add({
           'userId': user.id,
           'name': user.name,
           'surname': user.surname,
         });
 
-        final postulationId = volunteeringPostulationQueryResult.id;
-
         final userPostulationQuery = _firebaseDatabaseClient
             .collection(AppUserEntity.collectionName)
-            .doc(user.id)
-            .collection(PostulationEntity.collectionName)
-            .doc(postulationId);
+            .doc(user.id);
 
-        final postulationMap = {
-          'category': v.category,
-          'volunteeringId': v.id,
-          'name': v.name,
-          'lat': v.lat,
-          'lng': v.lng,
-          'status': PostulationStatus.PENDING.name,
-        };
-
-        await userPostulationQuery.set(postulationMap);
-
-        return PostulationEntity.fromJson(
-          postulationId: postulationId,
-          json: postulationMap,
-        );
+        await userPostulationQuery.update({
+          "postulations": FieldValue.arrayUnion([volunteeringId])
+        });
       } else {
         throw NoVacancyAtVolunteeringException();
       }
