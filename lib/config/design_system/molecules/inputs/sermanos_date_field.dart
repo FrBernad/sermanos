@@ -14,17 +14,24 @@ class SermanosDateField extends HookConsumerWidget {
   const SermanosDateField({
     Key? key,
     required this.formField,
-    required this.initialValue,
+    required this.initialDate,
     this.enabled = true,
     // this.password = false,
     this.floatingLabelBehavior = FloatingLabelBehavior.auto,
     this.label,
     this.placeholder,
     this.validators,
+    required this.minDate,
+    required this.maxDate,
+    required this.actualDate,
   }) : super(key: key);
 
   final String formField;
-  final String initialValue;
+  final DateTime? initialDate;
+  final DateTime minDate;
+  final DateTime actualDate;
+  final DateTime maxDate;
+
   final bool enabled;
 
   // final bool password;
@@ -35,6 +42,10 @@ class SermanosDateField extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final DateFormat dateFormat = DateFormat("dd/MM/yyyy");
+    final String initialValue = initialDate == null
+        ? ''
+        : DateFormat('dd/MM/yyyy').format(initialDate!);
     final focusNode = useFocusNode();
     useListenable(focusNode);
 
@@ -139,7 +150,44 @@ class SermanosDateField extends HookConsumerWidget {
                         icon: SermanosIcons.calendarFilled(
                           status: SermanosIconStatus.activated,
                         ),
-                        onPressed: () {},
+                        onPressed: () async {
+                          DateTime? datetime = await showDatePicker(
+                              context: context,
+                              initialDate: initialDate ?? actualDate,
+                              firstDate: minDate,
+                              lastDate: maxDate,
+                              fieldLabelText: "Seleccionar fecha",
+                              helpText: "Seleccionar fecha",
+                              cancelText: "Cancelar".toUpperCase(),
+                              confirmText: "Ok".toUpperCase(),
+                              builder: (context, child) {
+                                return Theme(
+                                  data: Theme.of(context).copyWith(
+                                    colorScheme: const ColorScheme.light(
+                                      primary: SermanosColors.primary100,
+                                      onPrimary: SermanosColors.neutral0,
+                                      onSurface: SermanosColors.primary100,
+                                    ),
+                                    textButtonTheme: TextButtonThemeData(
+                                      style: TextButton.styleFrom(
+                                        textStyle:
+                                            const SermanosTypography.button(
+                                                color:
+                                                    SermanosColors.primary100),
+                                        // button text color
+                                      ),
+                                    ),
+                                  ),
+                                  child: child!,
+                                );
+                              });
+                          if (datetime != null) {
+                            String date =
+                                DateFormat("dd/MM/yyyy").format(datetime);
+                            field.didChange(date);
+                            controller.text = date;
+                          }
+                        },
                       ),
           ),
           onTapOutside: (e) {

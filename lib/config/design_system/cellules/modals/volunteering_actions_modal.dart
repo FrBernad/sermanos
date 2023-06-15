@@ -11,7 +11,7 @@ class VolunteeringActionsModal extends StatelessWidget {
   const VolunteeringActionsModal({
     Key? key,
     required this.title,
-    required this.highlightText,
+    this.highlightText,
     required this.cancelButtonText,
     required this.confirmationButtonText,
     required this.isLoading,

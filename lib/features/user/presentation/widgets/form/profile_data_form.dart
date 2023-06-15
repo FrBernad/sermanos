@@ -34,6 +34,10 @@ class ProfileDataForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final actualDate = DateTime.now();
+    final minDate =
+        DateTime(actualDate.year - 100, actualDate.month, actualDate.day);
+
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,10 +52,11 @@ class ProfileDataForm extends ConsumerWidget {
             height: 16,
           ),
           SermanosDateField(
+            minDate: minDate,
+            maxDate: actualDate,
+            actualDate: actualDate,
             formField: birthdateField,
-            initialValue: user.birthdate == null
-                ? ''
-                : DateFormat('dd/MM/yyyy').format(user.birthdate!),
+            initialDate: user.birthdate,
             enabled: true,
             validators: [
               FormBuilderValidators.required(
@@ -66,8 +71,11 @@ class ProfileDataForm extends ConsumerWidget {
                     DateFormat dateFormat = DateFormat('dd/MM/yyyy');
                     DateTime birthdate = dateFormat.parse(value);
                     DateTime currentDate =
-                        dateFormat.parse(dateFormat.format(DateTime.now()));
+                        dateFormat.parse(dateFormat.format(actualDate));
                     if (birthdate.isAfter(currentDate)) {
+                      return "Ingrese una fecha válida";
+                    }
+                    if (birthdate.isBefore(minDate)) {
                       return "Ingrese una fecha válida";
                     }
                   }
