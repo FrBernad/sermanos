@@ -1,11 +1,17 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
-import '../../../../config/design_system/tokens/sermanos_colors.dart';
-import '../../../../config/design_system/tokens/sermanos_typography.dart';
+import '../../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
+import '../../../../../config/design_system/tokens/sermanos_colors.dart';
+import '../../../../../config/design_system/tokens/sermanos_typography.dart';
+import '../../../domain/models/volunteering.dart';
 
 class PostulateQuitActualVolunteering extends StatelessWidget {
-  const PostulateQuitActualVolunteering({super.key});
+  const PostulateQuitActualVolunteering({
+    Key? key,
+    required this.volunteering,
+  }) : super(key: key);
+
+  final Volunteering volunteering;
 
   @override
   Widget build(BuildContext context) {

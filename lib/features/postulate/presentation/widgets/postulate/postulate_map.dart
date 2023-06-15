@@ -9,8 +9,8 @@ import 'package:sermanos/features/postulate/application/controllers/focused_coor
 import 'package:sermanos/features/postulate/application/controllers/user_position_controller.dart';
 import 'package:sermanos/features/postulate/application/controllers/volunteering_search_controller.dart';
 
-import '../../../core/presentation/widgets/error_message.dart';
-import '../../domain/models/volunteering.dart';
+import '../../../../core/presentation/widgets/error_message.dart';
+import '../../../domain/models/volunteering.dart';
 
 class PostulateMap extends HookConsumerWidget {
   const PostulateMap({

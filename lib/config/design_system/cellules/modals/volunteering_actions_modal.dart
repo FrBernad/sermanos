@@ -1,23 +1,28 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_shadows.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 
-class Modal extends StatelessWidget {
-  const Modal({
+import '../../molecules/buttons/sermanos_short_button.dart';
+
+class VolunteeringActionsModal extends StatelessWidget {
+  const VolunteeringActionsModal({
     Key? key,
     required this.title,
     required this.highlightText,
     required this.cancelButtonText,
     required this.confirmationButtonText,
+    required this.isLoading,
+    required this.onConfirm,
   }) : super(key: key);
 
   final String title;
   final String? highlightText;
+  final bool isLoading;
   final String cancelButtonText;
+  final Future<void> Function() onConfirm;
   final String confirmationButtonText;
 
   @override
@@ -25,12 +30,9 @@ class Modal extends StatelessWidget {
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
       child: Dialog(
-        elevation: 0,
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
-        insetPadding: EdgeInsets.zero,
         child: Container(
-          width: 280,
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
           decoration: BoxDecoration(
             color: SermanosColors.neutral0,
@@ -59,16 +61,20 @@ class Modal extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  SermanosCTAButton(
+                  SermanosShortButton(
                     text: cancelButtonText,
                     onPressed: () => Navigator.of(context).pop(false),
                     textColor: SermanosColors.primary100,
+                    enabled: !isLoading,
                     filled: false,
                   ),
-                  SermanosCTAButton(
+                  SermanosShortButton(
                     text: confirmationButtonText,
-                    onPressed: () => Navigator.of(context).pop(true),
+                    onPressed: () async {
+                      await onConfirm();
+                    },
                     textColor: SermanosColors.primary100,
+                    loading: isLoading,
                     filled: false,
                   ),
                 ],

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sermanos/features/postulate/presentation/widgets/postulate_list.dart';
-import 'package:sermanos/features/postulate/presentation/widgets/user_activity.dart';
-
-import '../../../../config/design_system/molecules/inputs/sermanos_search_bar.dart';
-import '../../../../config/design_system/tokens/sermanos_colors.dart';
-import '../../../../config/design_system/tokens/sermanos_grid.dart';
-import '../../../../config/design_system/tokens/sermanos_typography.dart';
-import '../../../core/presentation/widgets/sliver_separator.dart';
-import '../../application/controllers/volunteering_search_controller.dart';
+import 'package:sermanos/config/design_system/molecules/inputs/sermanos_search_bar.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_grid.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
+import 'package:sermanos/features/core/presentation/widgets/sliver_separator.dart';
+import 'package:sermanos/features/postulate/application/controllers/volunteering_search_controller.dart';
+import 'package:sermanos/features/postulate/presentation/widgets/postulate/postulate_list.dart';
+import 'package:sermanos/features/postulate/presentation/widgets/postulate/user_activity.dart';
 
 class PostulateListView extends ConsumerWidget {
   const PostulateListView({Key? key}) : super(key: key);

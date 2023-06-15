@@ -5,14 +5,14 @@ import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_shadows.dart';
 import 'package:sermanos/features/postulate/application/controllers/get_user_volunteering_controller.dart';
 
-import '../../../../config/design_system/atoms/icons/sermanos_icons.dart';
-import '../../../../config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
-import '../../../../config/design_system/tokens/sermanos_grid.dart';
-import '../../../../config/design_system/tokens/sermanos_typography.dart';
-import '../../../core/presentation/widgets/error_message.dart';
-import '../../../core/utils/maps_utils.dart';
-import '../../application/controllers/current_user_volunteering_controller.dart';
-import '../screens/postulate_detail_screen.dart';
+import '../../../../../config/design_system/atoms/icons/sermanos_icons.dart';
+import '../../../../../config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
+import '../../../../../config/design_system/tokens/sermanos_grid.dart';
+import '../../../../../config/design_system/tokens/sermanos_typography.dart';
+import '../../../../core/presentation/widgets/error_message.dart';
+import '../../../../core/utils/maps_utils.dart';
+import '../../../application/controllers/current_user_volunteering_controller.dart';
+import '../../screens/postulate_detail_screen.dart';
 
 class UserActivity extends ConsumerWidget {
   const UserActivity({

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sermanos/features/postulate/presentation/widgets/postulate_carousel.dart';
-import 'package:sermanos/features/postulate/presentation/widgets/postulate_map.dart';
-import 'package:sermanos/features/postulate/presentation/widgets/user_position_button.dart';
+import 'package:sermanos/features/postulate/presentation/widgets/postulate/postulate_carousel.dart';
+import 'package:sermanos/features/postulate/presentation/widgets/postulate/postulate_map.dart';
+import 'package:sermanos/features/postulate/presentation/widgets/postulate/user_position_button.dart';
 
-import '../../../../config/design_system/molecules/inputs/sermanos_search_bar.dart';
-import '../../../../config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
-import '../../../../config/design_system/tokens/sermanos_grid.dart';
-import '../../../core/presentation/widgets/error_message.dart';
-import '../../application/controllers/volunteering_search_controller.dart';
+import '../../../../../config/design_system/molecules/inputs/sermanos_search_bar.dart';
+import '../../../../../config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
+import '../../../../../config/design_system/tokens/sermanos_grid.dart';
+import '../../../../core/presentation/widgets/error_message.dart';
+import '../../../application/controllers/volunteering_search_controller.dart';
 import 'no_volunteering_available.dart';
 
 class PostulateMapView extends HookConsumerWidget {

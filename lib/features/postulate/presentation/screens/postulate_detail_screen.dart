@@ -4,8 +4,8 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_icons.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_grid.dart';
-import 'package:sermanos/features/postulate/presentation/widgets/postulate_details_decision.dart';
-import 'package:sermanos/features/postulate/presentation/widgets/postulate_map_card.dart';
+import 'package:sermanos/features/postulate/presentation/widgets/postulate/postulate_map_card.dart';
+import 'package:sermanos/features/postulate/presentation/widgets/postulate_details/postulate_details_decision.dart';
 
 import '../../../../config/design_system/molecules/components/vacancies.dart';
 import '../../../../config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
@@ -47,6 +47,7 @@ class PostulateDetailScreen extends HookConsumerWidget {
     );
 
     return getVolunteeringByIdController.when(
+      skipLoadingOnReload: true,
       data: (volunteering) {
         return Scaffold(
           body: SingleChildScrollView(

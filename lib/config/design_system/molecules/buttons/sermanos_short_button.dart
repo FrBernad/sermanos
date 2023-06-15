@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
@@ -38,11 +37,21 @@ class SermanosShortButton extends StatelessWidget {
                 12.0,
               ),
             ),
-            label: Text(
-              text,
-              style: const TextStyle(
-                color: SermanosColors.neutral0,
-              ),
+            label: Center(
+              child: loading
+                  ? SizedBox(
+                      height: 20.0,
+                      width: 20.0,
+                      child: CircularProgressIndicator(
+                        color: textColor,
+                      ),
+                    )
+                  : Text(
+                      text,
+                      style: SermanosTypography.button(
+                        color: textColor,
+                      ),
+                    ),
             ),
           )
         : filled
@@ -60,11 +69,11 @@ class SermanosShortButton extends StatelessWidget {
                 onPressed: loading | !enabled ? null : onPressed,
                 child: Center(
                   child: loading
-                      ? const SizedBox(
+                      ? SizedBox(
                           height: 20.0,
                           width: 20.0,
                           child: CircularProgressIndicator(
-                            color: SermanosColors.neutral0,
+                            color: textColor,
                           ),
                         )
                       : Text(
@@ -85,11 +94,21 @@ class SermanosShortButton extends StatelessWidget {
                     12.0,
                   ),
                 ),
-                child: Text(
-                  text,
-                  style: SermanosTypography.button(
-                    color: textColor,
-                  ),
+                child: Center(
+                  child: loading
+                      ? SizedBox(
+                          height: 20.0,
+                          width: 20.0,
+                          child: CircularProgressIndicator(
+                            color: textColor,
+                          ),
+                        )
+                      : Text(
+                          text,
+                          style: SermanosTypography.button(
+                            color: textColor,
+                          ),
+                        ),
                 ),
               );
   }

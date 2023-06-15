@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../../config/design_system/tokens/sermanos_colors.dart';
-import '../../../../config/design_system/tokens/sermanos_grid.dart';
-import '../../../../config/design_system/tokens/sermanos_typography.dart';
+import '../../../../../config/design_system/tokens/sermanos_colors.dart';
+import '../../../../../config/design_system/tokens/sermanos_grid.dart';
+import '../../../../../config/design_system/tokens/sermanos_typography.dart';
 
 class NoVolunteeringAvailable extends StatelessWidget {
   const NoVolunteeringAvailable({Key? key}) : super(key: key);

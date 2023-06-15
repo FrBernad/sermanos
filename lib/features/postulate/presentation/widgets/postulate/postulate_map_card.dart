@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:sermanos/features/postulate/domain/models/volunteering.dart';
-import 'package:sermanos/features/postulate/presentation/widgets/postulate_details_map.dart';
+import 'package:sermanos/features/postulate/presentation/widgets/postulate_details/postulate_details_map.dart';
 
-import '../../../../config/design_system/tokens/sermanos_colors.dart';
-import '../../../../config/design_system/tokens/sermanos_typography.dart';
+import '../../../../../config/design_system/tokens/sermanos_colors.dart';
+import '../../../../../config/design_system/tokens/sermanos_typography.dart';
 
 class PostulateMapCard extends StatelessWidget {
   const PostulateMapCard({super.key, required this.volunteering});
