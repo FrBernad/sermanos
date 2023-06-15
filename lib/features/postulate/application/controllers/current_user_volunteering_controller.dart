@@ -1,9 +1,6 @@
-import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:sermanos/features/user/providers.dart';
 
 import '../../domain/models/volunteering_reduced.dart';
-import '../../providers.dart';
 
 part 'generated/current_user_volunteering_controller.g.dart';
 

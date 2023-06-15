@@ -1,17 +1,17 @@
 import 'package:collection/collection.dart';
 
 enum Gender {
-  MALE,
-  FEMALE,
-  NO_BINARY,
-  NOT_SPECIFIED;
+  male("Hombre"),
+  female("Mujer"),
+  noBinary("No binario");
 
-  static Gender getGenderFromString(String value) {
+  const Gender(this.text);
+
+  final String text;
+
+  static Gender? getGenderFromString(String value) {
     Gender? g = Gender.values
         .firstWhereOrNull((Gender element) => element.name == value);
-    if (g == null) {
-      return Gender.NOT_SPECIFIED;
-    }
     return g;
   }
 }

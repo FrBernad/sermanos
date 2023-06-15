@@ -221,18 +221,18 @@ class PostulateDetailScreen extends HookConsumerWidget {
                               text: 'Postularme',
                               onPressed: () async {
                                 final bool? confirmed =
-                                    await _showConfirmationDialog(
+                                await _showConfirmationDialog(
                                   context,
                                   volunteering,
                                 );
                                 if (confirmed != null && confirmed == true) {
                                   ref
                                       .read(
-                                          postulateUserToVolunteerControllerProvider
-                                              .notifier)
+                                      postulateUserToVolunteerControllerProvider
+                                          .notifier)
                                       .postulate(
-                                        volunteeringId: volunteeringId,
-                                      );
+                                    volunteeringId: volunteeringId,
+                                  );
                                 }
                               },
                               filled: true),
@@ -252,19 +252,18 @@ class PostulateDetailScreen extends HookConsumerWidget {
     );
   }
 
-  Future<bool?> _showConfirmationDialog(
-    BuildContext context,
-    Volunteering volunteering,
-  ) async {
+  Future<bool?> _showConfirmationDialog(BuildContext context,
+      Volunteering volunteering,) async {
     return await showDialog<bool?>(
       barrierDismissible: false,
       // barrierColor: AppColors.neutral0.withOpacity(0.1),
       context: context,
       builder: (BuildContext c) {
         return Modal(
-          title: volunteering.name,
-          schedule: volunteering.schedule,
-          location: volunteering.address,
+          title: "Te estas por postular a",
+          highlightText: volunteering.name,
+          cancelButtonText: "Cancelar",
+          confirmationButtonText: "Confirmar",
         );
       },
     );

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
 import 'package:sermanos/features/postulate/data/entities/volunteering_reduced_entity.dart';
+import 'package:sermanos/features/postulate/domain/models/postulation_status.dart';
 import 'package:sermanos/features/user/data/entities/app_user_entity.dart';
 import 'package:sermanos/features/user/domain/models/app_user_model.dart';
 
@@ -31,11 +32,6 @@ abstract class VolunteeringRemoteDataSource {
     required AppUser user,
     required String volunteeringId,
   });
-
-// Future<void> leaveVolunteering({
-//   required AppUser user,
-//   required String volunteeringId,
-// });
 }
 
 class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
@@ -177,6 +173,7 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
           'name': v.name,
           'description': v.description,
           'category': v.category,
+          'status': PostulationStatus.pending.name
         });
       } else {
         throw NoVacancyAtVolunteeringException();
@@ -213,31 +210,4 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
       throw ServerException();
     }
   }
-
-// @override
-// Future<void> leaveVolunteering({
-//   required AppUser user,
-//   required String volunteeringId,
-// }) async {
-//   try {
-//     final volunteeringPostulationQuery = _firebaseDatabaseClient
-//         .collection(VolunteeringEntity.collectionName)
-//         .doc(volunteeringId)
-//         .collection(PostulationEntity.collectionName)
-//         .doc(user.id);
-//
-//     await volunteeringPostulationQuery.delete();
-//
-//     final userPostulationQuery = _firebaseDatabaseClient
-//         .collection(AppUserEntity.collectionName)
-//         .doc(user.id).collection();
-//
-//     await userPostulationQuery.update({
-//       "postulations": FieldValue.arrayUnion([volunteeringId])
-//     });
-//   } catch (e) {
-//     logger.d(e);
-//     throw ServerException();
-//   }
-// }
 }

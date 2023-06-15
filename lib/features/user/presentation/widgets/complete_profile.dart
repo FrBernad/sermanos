@@ -62,7 +62,7 @@ class CompleteProfile extends ConsumerWidget {
                   "Fecha de nacimiento",
                   DateFormat('dd/MM/yyyy').format(user.birthdate!)
                 ),
-                ("Género", user.gender.toString()),
+                ("Género", user.gender!.text),
               ],
             ),
             const SizedBox(

@@ -10,13 +10,15 @@ class Modal extends StatelessWidget {
   const Modal({
     Key? key,
     required this.title,
-    required this.schedule,
-    required this.location,
+    required this.highlightText,
+    required this.cancelButtonText,
+    required this.confirmationButtonText,
   }) : super(key: key);
 
   final String title;
-  final String schedule;
-  final String location;
+  final String? highlightText;
+  final String cancelButtonText;
+  final String confirmationButtonText;
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +44,15 @@ class Modal extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Te estas por postular a',
-                    style: SermanosTypography.subtitle01(),
-                  ),
                   Text(
                     title,
-                    style: const SermanosTypography.headline02(),
+                    style: const SermanosTypography.subtitle01(),
                   ),
+                  if (highlightText != null)
+                    Text(
+                      highlightText!,
+                      style: const SermanosTypography.headline02(),
+                    ),
                 ],
               ),
               const SizedBox(height: 8),
@@ -57,12 +60,12 @@ class Modal extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   SermanosCTAButton(
-                      text: "Cancelar",
+                      text: cancelButtonText,
                       onPressed: () => Navigator.of(context).pop(false),
                       textColor: SermanosColors.primary100,
                       filled: false),
                   SermanosCTAButton(
-                      text: "Confirmar",
+                      text: confirmationButtonText,
                       onPressed: () => Navigator.of(context).pop(true),
                       textColor: SermanosColors.primary100,
                       filled: false),
