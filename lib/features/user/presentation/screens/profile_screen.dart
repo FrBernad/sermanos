@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_grid.dart';
 import 'package:sermanos/features/user/presentation/widgets/complete_profile.dart';
 import 'package:sermanos/features/user/presentation/widgets/incomplete_profile.dart';
 import 'package:sermanos/features/user/providers.dart';
@@ -22,10 +23,10 @@ class ProfileScreen extends ConsumerWidget {
       );
     }
 
-    if (user.isProfileFilled()) {
-      return CompleteProfile(user: user);
-    } else {
-      return IncompleteProfile(user: user);
-    }
+    return SermanosGrid(
+      child: user.isProfileFilled()
+          ? CompleteProfile(user: user)
+          : IncompleteProfile(user: user),
+    );
   }
 }

@@ -25,10 +25,8 @@ class IncompleteProfile extends ConsumerWidget {
         Column(
           children: [
             ProfileImage(imageUrl: user.profileImageUrl),
-            //FIXME: No estoy seguro si el espacio es con un SizedBox o de otra forma
             const SizedBox(height: 8),
             SizedBox(
-              width: 328,
               child: Column(
                 children: [
                   const Text(
@@ -69,7 +67,6 @@ class IncompleteProfile extends ConsumerWidget {
             ),
           ),
         ),
-        const SizedBox(height: 32),
       ],
     );
   }

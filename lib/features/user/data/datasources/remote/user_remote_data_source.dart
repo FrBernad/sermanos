@@ -69,11 +69,9 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
         .doc(userId);
 
     final userDataMap = {
-      'information': {
-        'name': name,
-        'surname': surname,
-        'email': email,
-      }
+      'name': name,
+      'surname': surname,
+      'email': email,
     };
 
     await query.set(userDataMap);
