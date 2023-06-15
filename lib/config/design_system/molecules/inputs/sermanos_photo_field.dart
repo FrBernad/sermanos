@@ -1,13 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:sermanos/config/design_system/cellules/modals/sermanos_dialog.dart';
-import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
+import 'package:sermanos/config/design_system/cellules/modals/sermanos_permission_modal.dart';
 import 'package:sermanos/config/design_system/molecules/buttons/sermanos_short_button.dart';
 import 'package:sermanos/config/design_system/molecules/components/profile_image.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
@@ -145,7 +142,7 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosPhotoField> {
     return await showDialog(
       barrierDismissible: false,
       context: context,
-      builder: (context) => SermanosDialog(
+      builder: (context) => SermanosPermissionModal(
         title: "Acceso a galería",
         content:
             "Sermanos solicita el acceso a la galería para seleccionar la foto de perfil.",
@@ -167,7 +164,7 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosPhotoField> {
     return await showDialog(
       barrierDismissible: false,
       context: context,
-      builder: (context) => SermanosDialog(
+      builder: (context) => SermanosPermissionModal(
         title: "Acceso a galería",
         content:
             "Para poder acceder a tu galería es necesario que brindes permiso a la aplicación desde la configuración de su dispositivo ",
