@@ -10,7 +10,7 @@ class SermanosCTAButton extends StatelessWidget {
     required this.onPressed,
     required this.filled,
     this.textColor = SermanosColors.neutral0,
-    this.enabled = false,
+    this.enabled = true,
     this.loading = false,
   }) : super(key: key);
 
