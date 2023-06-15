@@ -156,4 +156,55 @@ class VolunteeringRepositoryImpl implements VolunteeringRepository {
       return const Left(ConnectionFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, void>> addFavoriteVolunteering({
+    required String userId,
+    required String volunteeringId,
+  }) async {
+    try {
+      await volunteeringDataSource.addFavoriteVolunteering(
+        userId: userId,
+        volunteeringId: volunteeringId,
+      );
+      return const Right(null);
+    } on NotFoundException {
+      return const Left(VolunteeringNotFoundFailure());
+    } on Exception {
+      return const Left(ConnectionFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> removeFavoriteVolunteering({
+    required String userId,
+    required String volunteeringId,
+  }) async {
+    try {
+      await volunteeringDataSource.removeFavoriteVolunteering(
+        userId: userId,
+        volunteeringId: volunteeringId,
+      );
+      return const Right(null);
+    } on NotFoundException {
+      return const Left(VolunteeringNotFoundFailure());
+    } on Exception {
+      return const Left(ConnectionFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<String>>> getFavoriteVolunteerings({
+    required String userId,
+  }) async {
+    List<String> favoriteVolunteerings = [];
+    try {
+      favoriteVolunteerings =
+          await volunteeringDataSource.getFavoriteVolunteerings(userId: userId);
+    } on Exception {
+      return const Left(ConnectionFailure());
+    }
+
+    return Right(favoriteVolunteerings);
+  }
 }

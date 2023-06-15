@@ -27,4 +27,18 @@ abstract interface class VolunteeringRepository {
     required AppUser user,
     required String volunteeringId,
   });
+
+  Future<Either<Failure, void>> addFavoriteVolunteering({
+    required String userId,
+    required String volunteeringId,
+  });
+
+  Future<Either<Failure, void>> removeFavoriteVolunteering({
+    required String userId,
+    required String volunteeringId,
+  });
+
+  Future<Either<Failure, List<String>>> getFavoriteVolunteerings({
+    required String userId,
+  });
 }

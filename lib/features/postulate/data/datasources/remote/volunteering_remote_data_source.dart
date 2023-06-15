@@ -32,6 +32,20 @@ abstract class VolunteeringRemoteDataSource {
     required AppUser user,
     required String volunteeringId,
   });
+
+  Future<void> addFavoriteVolunteering({
+    required String userId,
+    required String volunteeringId,
+  });
+
+  Future<void> removeFavoriteVolunteering({
+    required String userId,
+    required String volunteeringId,
+  });
+
+  Future<List<String>> getFavoriteVolunteerings({
+    required String userId,
+  });
 }
 
 class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
@@ -207,6 +221,82 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
           .doc(volunteeringId);
 
       await userPostulationQuery.delete();
+    } catch (e) {
+      logger.d(e);
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<void> addFavoriteVolunteering(
+      {required String userId, required String volunteeringId}) async {
+    try {
+      final userFavoriteVolunteeringQuery = _firebaseDatabaseClient
+          .collection(AppUserEntity.collectionName)
+          .doc(userId)
+          .collection("favoriteVolunteerings")
+          .doc("favoriteVolunteerings");
+
+      if (!(await userFavoriteVolunteeringQuery.get()).exists) {
+        await userFavoriteVolunteeringQuery.set({
+          'favorites': [],
+        });
+      }
+
+      await userFavoriteVolunteeringQuery.update({
+        'favorites': FieldValue.arrayUnion(
+          [volunteeringId],
+        )
+      });
+    } catch (e) {
+      logger.d(e);
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<void> removeFavoriteVolunteering(
+      {required String userId, required String volunteeringId}) async {
+    try {
+      final userFavoriteVolunteeringQuery = _firebaseDatabaseClient
+          .collection(AppUserEntity.collectionName)
+          .doc(userId)
+          .collection("favoriteVolunteerings")
+          .doc("favoriteVolunteerings");
+
+      await userFavoriteVolunteeringQuery.update({
+        'favorites': FieldValue.arrayRemove(
+          [volunteeringId],
+        )
+      });
+    } catch (e) {
+      logger.d(e);
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<String>> getFavoriteVolunteerings({
+    required String userId,
+  }) async {
+    try {
+      final DocumentSnapshot response = await _firebaseDatabaseClient
+          .collection(AppUserEntity.collectionName)
+          .doc(userId)
+          .collection("favoriteVolunteerings")
+          .doc("favoriteVolunteerings")
+          .get();
+
+      if (!response.exists) {
+        return [];
+      }
+
+      final json =
+          Map<String, dynamic>.from(response.data() as Map<String, dynamic>);
+
+      final favorites = json['favorites'] as List<String>;
+
+      return favorites;
     } catch (e) {
       logger.d(e);
       throw ServerException();
