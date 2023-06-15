@@ -24,5 +24,6 @@ class SermanosDialog extends AlertDialog {
             ),
           ),
           actions: actions,
+          actionsAlignment: MainAxisAlignment.end,
         );
 }

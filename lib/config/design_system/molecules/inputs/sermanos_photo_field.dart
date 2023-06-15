@@ -8,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sermanos/config/design_system/cellules/modals/sermanos_dialog.dart';
 import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
+import 'package:sermanos/config/design_system/molecules/buttons/sermanos_short_button.dart';
 import 'package:sermanos/config/design_system/molecules/components/profile_image.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
@@ -61,7 +62,7 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosPhotoField> {
                   const SizedBox(
                     width: 8,
                   ),
-                  SermanosCTAButton(
+                  SermanosShortButton(
                     text: "Subir foto",
                     onPressed: () =>
                         _onPressedProfileButton(context, ref, field),
@@ -83,7 +84,7 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosPhotoField> {
                       const SizedBox(
                         height: 8,
                       ),
-                      SermanosCTAButton(
+                      SermanosShortButton(
                         text: "Cambiar foto",
                         onPressed: () =>
                             _onPressedProfileButton(context, ref, field),
@@ -149,7 +150,7 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosPhotoField> {
         content:
             "Sermanos solicita el acceso a la galería para seleccionar la foto de perfil.",
         actions: [
-          SermanosCTAButton(
+          SermanosShortButton(
             filled: false,
             onPressed: () async {
               Navigator.of(context).pop();
@@ -171,16 +172,25 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosPhotoField> {
         content:
             "Para poder acceder a tu galería es necesario que brindes permiso a la aplicación desde la configuración de su dispositivo ",
         actions: [
-          SermanosCTAButton(
-              filled: false,
-              onPressed: () async => await openAppSettings(),
-              textColor: SermanosColors.primary100,
-              text: "Configuración".toUpperCase()),
-          SermanosCTAButton(
-            filled: false,
-            onPressed: () => Navigator.of(context).pop(),
-            textColor: SermanosColors.primary100,
-            text: "Ok".toUpperCase(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              SermanosShortButton(
+                filled: false,
+                onPressed: () async {
+                  Navigator.of(context).pop();
+                  await openAppSettings();
+                },
+                textColor: SermanosColors.primary100,
+                text: "Configuración".toUpperCase(),
+              ),
+              SermanosShortButton(
+                filled: false,
+                onPressed: () => Navigator.of(context).pop(),
+                textColor: SermanosColors.primary100,
+                text: "Ok".toUpperCase(),
+              ),
+            ],
           ),
         ],
       ),

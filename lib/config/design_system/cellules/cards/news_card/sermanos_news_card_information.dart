@@ -1,6 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
 import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
+import 'package:sermanos/config/design_system/molecules/buttons/sermanos_short_button.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 
@@ -51,7 +52,8 @@ class SermanosNewsCardInformation extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              SermanosCTAButton(
+              SermanosShortButton(
+                loading: false,
                 filled: false,
                 onPressed: () => context.beamToNamed(
                   NewsDetailsScreen.routeFromId(news.id),
