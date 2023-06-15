@@ -11,12 +11,14 @@ class AppUser extends Equatable {
   final DateTime? birthdate;
   final String? profileImageUrl;
   final String? emailContact;
+  final bool allowEventTrackerPermission;
 
   const AppUser({
     required this.id,
     required this.name,
     required this.surname,
     required this.email,
+    required this.allowEventTrackerPermission,
     this.phone,
     this.gender,
     this.birthdate,

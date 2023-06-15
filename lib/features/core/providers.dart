@@ -3,7 +3,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'generated/providers.g.dart';
 
-
 ///
 /// Application dependencies
 ///
@@ -12,3 +11,9 @@ Future<PermissionStatus> galleryPermission(
   GalleryPermissionRef ref,
 ) async =>
     await Permission.photos.status;
+
+@riverpod
+Future<PermissionStatus> eventPermission(
+  EventPermissionRef ref,
+) async =>
+    await Permission.appTrackingTransparency.status;

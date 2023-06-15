@@ -18,4 +18,8 @@ abstract interface class UserRepository {
     required String userId,
     required UserDataDto userData,
   });
+
+  Future<Either<Failure, AppUser>> allowEventPermission({
+    required String userId,
+  });
 }

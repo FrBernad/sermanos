@@ -12,7 +12,7 @@ class SignUpController extends _$SignUpController {
   @override
   FutureOr<void> build() async {}
 
-  Future<void> signUp({
+  Future<bool> signUp({
     required String name,
     required String surname,
     required String email,
@@ -28,13 +28,15 @@ class SignUpController extends _$SignUpController {
               password: password,
             );
 
+    bool success = false;
     resultEither.fold(
       (l) => state = AsyncError(l.message, StackTrace.current),
       (user) {
         ref.read(currentUserProvider.notifier).set(user);
-        ref.read(mainBeamerDelegateProvider).popToNamed(WelcomeScreen.route);
+        success = true;
         state = const AsyncValue.data(null);
       },
     );
+    return success;
   }
 }

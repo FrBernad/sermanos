@@ -14,12 +14,14 @@ class AppUserEntity {
   final DateTime? birthdate;
   final String? profileImageUrl;
   final String? emailContact;
+  final bool allowEventTrackerPermission;
 
   const AppUserEntity({
     required this.id,
     required this.name,
     required this.surname,
     required this.email,
+    required this.allowEventTrackerPermission,
     this.phone,
     this.gender,
     this.birthdate,
@@ -57,6 +59,7 @@ class AppUserEntity {
       birthdate: birthdate,
       profileImageUrl: json['profileImage'],
       phone: json['phone'],
+      allowEventTrackerPermission: json['allowEventTrackerPermission'],
       emailContact: json['emailContact'],
     );
   }
@@ -72,6 +75,7 @@ class AppUserEntity {
       profileImageUrl: profileImageUrl,
       phone: phone,
       emailContact: emailContact,
+      allowEventTrackerPermission: allowEventTrackerPermission,
     );
   }
 }
