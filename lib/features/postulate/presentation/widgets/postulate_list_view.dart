@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sermanos/features/postulate/presentation/widgets/postulate_list.dart';
+import 'package:sermanos/features/postulate/presentation/widgets/user_activity.dart';
 
 import '../../../../config/design_system/molecules/inputs/sermanos_search_bar.dart';
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
@@ -36,15 +37,7 @@ class PostulateListView extends ConsumerWidget {
             ),
           ),
           const SliverSeparator(height: 32),
-          const SliverToBoxAdapter(
-            child: SermanosGrid(
-              child: Text(
-                "Tu actividad",
-                style: SermanosTypography.headline01(),
-              ),
-            ),
-          ),
-          const SliverSeparator(height: 32),
+          const UserActivity(),
           const SliverToBoxAdapter(
             child: SermanosGrid(
               child: Text(

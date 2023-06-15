@@ -3,19 +3,16 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_icons.dart';
-import 'package:sermanos/config/design_system/cellules/modals/modal.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_grid.dart';
+import 'package:sermanos/features/postulate/presentation/widgets/postulate_details_decision.dart';
 import 'package:sermanos/features/postulate/presentation/widgets/postulate_map_card.dart';
 
-import '../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import '../../../../config/design_system/molecules/components/vacancies.dart';
 import '../../../../config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
 import '../../../core/presentation/widgets/error_message.dart';
 import '../../application/controllers/get_volunteering_by_id_controller.dart';
-import '../../application/controllers/postulate_user_to_volunteer_controller.dart';
-import '../../domain/models/volunteering.dart';
 
 class PostulateDetailScreen extends HookConsumerWidget {
   static const route = "/postulate/:id";
@@ -214,30 +211,7 @@ class PostulateDetailScreen extends HookConsumerWidget {
                           const SizedBox(height: 24),
                         ],
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          SermanosCTAButton(
-                              text: 'Postularme',
-                              onPressed: () async {
-                                final bool? confirmed =
-                                await _showConfirmationDialog(
-                                  context,
-                                  volunteering,
-                                );
-                                if (confirmed != null && confirmed == true) {
-                                  ref
-                                      .read(
-                                      postulateUserToVolunteerControllerProvider
-                                          .notifier)
-                                      .postulate(
-                                    volunteeringId: volunteeringId,
-                                  );
-                                }
-                              },
-                              filled: true),
-                        ],
-                      ),
+                      PostulateDetailDecision(volunteering: volunteering),
                       const SizedBox(height: 32),
                     ],
                   ),
@@ -249,23 +223,6 @@ class PostulateDetailScreen extends HookConsumerWidget {
       },
       error: (error, stackTrace) => const ErrorMessage(),
       loading: () => const SermanosCircularProgressIndicator(),
-    );
-  }
-
-  Future<bool?> _showConfirmationDialog(BuildContext context,
-      Volunteering volunteering,) async {
-    return await showDialog<bool?>(
-      barrierDismissible: false,
-      // barrierColor: AppColors.neutral0.withOpacity(0.1),
-      context: context,
-      builder: (BuildContext c) {
-        return Modal(
-          title: "Te estas por postular a",
-          highlightText: volunteering.name,
-          cancelButtonText: "Cancelar",
-          confirmationButtonText: "Confirmar",
-        );
-      },
     );
   }
 }

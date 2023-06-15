@@ -173,6 +173,8 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
           'name': v.name,
           'description': v.description,
           'category': v.category,
+          'lat': v.lat,
+          'lng': v.lng,
           'status': PostulationStatus.pending.name
         });
       } else {

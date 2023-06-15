@@ -9,4 +9,5 @@ class SermanosGrid extends Padding {
         );
 
   static const double horizontalSpacing = 16;
+  static const double verticalSpacing = 16;
 }

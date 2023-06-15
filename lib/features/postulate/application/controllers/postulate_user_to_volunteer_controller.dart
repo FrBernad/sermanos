@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:sermanos/features/postulate/application/controllers/current_user_volunteering_controller.dart';
+import 'package:sermanos/features/postulate/application/controllers/get_user_volunteering_controller.dart';
 import 'package:sermanos/features/postulate/providers.dart';
 import 'package:sermanos/features/user/domain/models/app_user_model.dart';
 import 'package:sermanos/features/user/providers.dart';
@@ -29,7 +29,7 @@ class PostulateUserToVolunteerController
     state = userDataEither.fold(
       (l) => AsyncValue.error(l.toString(), StackTrace.current),
       (_) {
-        ref.read(currentUserVolunteeringControllerProvider.notifier).set(null);
+        ref.invalidate(getUserVolunteeringControllerProvider);
         return const AsyncValue.data(null);
       },
     );
