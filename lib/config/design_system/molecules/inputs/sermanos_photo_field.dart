@@ -8,10 +8,12 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:sermanos/config/design_system/cellules/modals/sermanos_dialog.dart';
 import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
+import 'package:sermanos/config/design_system/molecules/components/profile_image.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 import 'package:sermanos/features/core/providers.dart';
 
-class SermanosPhotoField extends HookConsumerWidget {
+class SermanosPhotoField extends ConsumerStatefulWidget {
   const SermanosPhotoField({
     Key? key,
     required this.formField,
@@ -21,23 +23,84 @@ class SermanosPhotoField extends HookConsumerWidget {
   }) : super(key: key);
 
   final String formField;
-  final String initialValue;
+  final String? initialValue;
   final bool enabled;
 
   final List<String? Function(String?)>? validators;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<SermanosPhotoField> createState() => _SermanosPhotoFieldState();
+}
+
+class _SermanosPhotoFieldState extends ConsumerState<SermanosPhotoField> {
+  String? _image;
+
+  @override
+  void initState() {
+    super.initState();
+    _image = widget.initialValue;
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return FormBuilderField<String>(
-      initialValue: initialValue,
-      name: formField,
-      validator: FormBuilderValidators.compose(validators ?? []),
+      initialValue: widget.initialValue,
+      name: widget.formField,
+      validator: FormBuilderValidators.compose(widget.validators ?? []),
       builder: (FormFieldState field) {
-        return SermanosCTAButton(
-          text: "Subir foto",
-          onPressed: () => _onPressedProfileButton(context, ref, field),
-          filled: true,
-        );
+        return _image == null
+            ? Row(
+                children: [
+                  const Expanded(
+                    child: Text(
+                      "Foto de perfil",
+                      style: SermanosTypography.subtitle01(
+                          color: SermanosColors.neutral100),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  SermanosCTAButton(
+                    text: "Subir foto",
+                    onPressed: () =>
+                        _onPressedProfileButton(context, ref, field),
+                    filled: true,
+                  )
+                ],
+              )
+            : Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        "Foto de perfil",
+                        style: SermanosTypography.subtitle01(
+                            color: SermanosColors.neutral100),
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      SermanosCTAButton(
+                        text: "Cambiar foto",
+                        onPressed: () =>
+                            _onPressedProfileButton(context, ref, field),
+                        filled: true,
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  ),
+                  ProfileImage(
+                      imageUrl: _image,
+                      height: 84,
+                      width: 84,
+                      fromNetwork: _image == widget.initialValue)
+                ],
+              );
       },
     );
   }
@@ -65,8 +128,10 @@ class SermanosPhotoField extends HookConsumerWidget {
             await picker.pickImage(source: ImageSource.gallery);
         if (image != null) {
           field.didChange(image.path);
+          setState(() {
+            _image = image.path;
+          });
         }
-        print("hola");
       }
     } else {
       if (context.mounted) {

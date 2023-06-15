@@ -35,8 +35,8 @@ class SermanosCTAButton extends StatelessWidget {
               ),
               padding: MaterialStateProperty.all(
                 const EdgeInsets.symmetric(
-                  vertical: 12,
-                  horizontal: 8,
+                  vertical: 8,
+                  horizontal: 12,
                 ),
               ),
             ),

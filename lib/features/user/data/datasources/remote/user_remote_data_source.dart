@@ -105,17 +105,19 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
 
     if (userData.profileImage != null) {
       try {
-        final storageRef = _firebaseStorageClient.ref();
         if (user.profileImageUrl != null) {
-          await storageRef.child(user.profileImageUrl!).delete();
+          final storageRef =
+              _firebaseStorageClient.refFromURL(user.profileImageUrl!);
+          await storageRef.delete();
         }
 
         String id = const Uuid().v4();
-        final fileReference = storageRef.child("profileImage/$id");
+        final fileReference =
+            _firebaseStorageClient.ref().child("profileImage/$id");
 
         await fileReference.putFile(userData.profileImage!);
         userDataMap['profileImage'] = await fileReference.getDownloadURL();
-      } on FirebaseException {
+      } on FirebaseException catch (e) {
         throw Exception("Error when uploading file");
       }
     }
