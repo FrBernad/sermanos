@@ -25,22 +25,18 @@ class SermanosCTAButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return filled
         ? FilledButton(
-            style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all(SermanosColors.primary100),
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4),
-                ),
+            style: FilledButton.styleFrom(
+              minimumSize: const Size.fromWidth(double.infinity),
+              backgroundColor: SermanosColors.primary100,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
               ),
-              padding: MaterialStateProperty.all(
-                const EdgeInsets.symmetric(
-                  vertical: 8,
-                  horizontal: 12,
-                ),
+              padding: const EdgeInsets.symmetric(
+                vertical: 12,
+                horizontal: 8,
               ),
             ),
-            onPressed: loading ? null : onPressed,
+            onPressed: loading | !enabled ? null : onPressed,
             child: Center(
               child: loading
                   ? const SizedBox(
@@ -59,21 +55,18 @@ class SermanosCTAButton extends StatelessWidget {
             ),
           )
         : TextButton(
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.transparent),
-              shape: MaterialStateProperty.all(
-                RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4),
-                ),
+            style: TextButton.styleFrom(
+              minimumSize: const Size.fromWidth(double.infinity),
+              backgroundColor: Colors.transparent,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(4),
               ),
-              padding: MaterialStateProperty.all(
-                const EdgeInsets.symmetric(
-                  vertical: 12,
-                  horizontal: 8,
-                ),
+              padding: const EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 12,
               ),
             ),
-            onPressed: loading ? null : onPressed,
+            onPressed: loading | !enabled ? null : onPressed,
             child: Center(
               child: loading
                   ? const SizedBox(
@@ -93,5 +86,3 @@ class SermanosCTAButton extends StatelessWidget {
           );
   }
 }
-
-
