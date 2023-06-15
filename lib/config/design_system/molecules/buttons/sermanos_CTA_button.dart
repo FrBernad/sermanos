@@ -26,7 +26,7 @@ class SermanosCTAButton extends StatelessWidget {
     return filled
         ? FilledButton(
             style: FilledButton.styleFrom(
-              minimumSize: const Size.fromWidth(double.infinity),
+              minimumSize: const Size.fromHeight(40),
               backgroundColor: SermanosColors.primary100,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
@@ -56,7 +56,7 @@ class SermanosCTAButton extends StatelessWidget {
           )
         : TextButton(
             style: TextButton.styleFrom(
-              minimumSize: const Size.fromWidth(double.infinity),
+              minimumSize: const Size.fromHeight(40),
               backgroundColor: Colors.transparent,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
