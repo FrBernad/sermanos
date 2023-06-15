@@ -1,19 +1,15 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_icons.dart';
+import 'package:sermanos/config/design_system/cellules/cards/volunteering_card/volunteer_favorite_icon.dart';
 import 'package:sermanos/config/design_system/molecules/components/vacancies.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_shadows.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 import 'package:sermanos/features/core/utils/maps_utils.dart';
-import 'package:sermanos/features/postulate/application/controllers/add_favorite_volunteering_controller.dart';
-import 'package:sermanos/features/postulate/application/controllers/remove_favorite_volunteering_controller.dart';
 import 'package:sermanos/features/postulate/domain/models/volunteering.dart';
 import 'package:sermanos/features/postulate/presentation/screens/postulate_detail_screen.dart';
-
-import '../../../../features/postulate/application/controllers/get_favorite_volunteerings_controller.dart';
 
 class SermanosVolunteeringCard extends HookConsumerWidget {
   const SermanosVolunteeringCard({
@@ -25,8 +21,6 @@ class SermanosVolunteeringCard extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isLoading = useState(false);
-
     return InkWell(
       child: Container(
         decoration: BoxDecoration(
@@ -77,55 +71,7 @@ class SermanosVolunteeringCard extends HookConsumerWidget {
                     ),
                     Row(
                       children: [
-                        Consumer(
-                          builder: (
-                            BuildContext context,
-                            WidgetRef ref,
-                            Widget? child,
-                          ) {
-                            final isFavoriteVolunteering = ref.watch(
-                              getFavoriteVolunteeringsControllerProvider.select(
-                                (favoriteVolunteerings) => favoriteVolunteerings
-                                    .value!
-                                    .contains(volunteering.id),
-                              ),
-                            );
-                            return InkWell(
-                              onTap: isLoading.value
-                                  ? null
-                                  : () async {
-                                      isLoading.value = true;
-                                      if (isFavoriteVolunteering) {
-                                        await ref
-                                            .read(
-                                              removeFavoriteVolunteeringControllerProvider
-                                                  .notifier,
-                                            )
-                                            .remove(
-                                              volunteeringId: volunteering.id,
-                                            );
-                                      } else {
-                                        await ref
-                                            .read(
-                                              addFavoriteVolunteeringControllerProvider
-                                                  .notifier,
-                                            )
-                                            .add(
-                                              volunteeringId: volunteering.id,
-                                            );
-                                      }
-                                      isLoading.value = false;
-                                    },
-                              child: isFavoriteVolunteering
-                                  ? SermanosIcons.favoriteFilled(
-                                      status: SermanosIconStatus.activated,
-                                    )
-                                  : SermanosIcons.favoriteOutlined(
-                                      status: SermanosIconStatus.activated,
-                                    ),
-                            );
-                          },
-                        ),
+                        VolunteerFavoriteIcon(volunteering: volunteering),
                         const SizedBox(width: 23),
                         InkWell(
                           onTap: () => openLocationOnGoogleMaps(

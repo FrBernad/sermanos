@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sermanos/features/postulate/application/controllers/volunteering_search_controller.dart';
 
-import '../../../../../config/design_system/cellules/cards/sermanos_volunteering_card.dart';
 import '../../../../../config/design_system/cellules/cards/sermanos_volunteering_card_loading_skeleton.dart';
+import '../../../../../config/design_system/cellules/cards/volunteering_card/sermanos_volunteering_card.dart';
 import '../../../../../config/design_system/tokens/sermanos_grid.dart';
 import '../../../../core/presentation/widgets/error_message.dart';
 import 'no_volunteering_available.dart';

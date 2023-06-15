@@ -158,6 +158,24 @@ class VolunteeringRepositoryImpl implements VolunteeringRepository {
   }
 
   @override
+  Future<Either<Failure, void>> cancelUserVolunteering({
+    required AppUser user,
+    required String volunteeringId,
+  }) async {
+    try {
+      await volunteeringDataSource.cancelUserVolunteering(
+        user: user,
+        volunteeringId: volunteeringId,
+      );
+      return const Right(null);
+    } on NotFoundException {
+      return const Left(VolunteeringNotFoundFailure());
+    } on Exception {
+      return const Left(ConnectionFailure());
+    }
+  }
+
+  @override
   Future<Either<Failure, void>> addFavoriteVolunteering({
     required String userId,
     required String volunteeringId,

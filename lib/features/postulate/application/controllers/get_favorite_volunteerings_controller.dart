@@ -19,5 +19,7 @@ Future<List<String>> getFavoriteVolunteeringsController(
   );
 
   return favoriteVolunteeringsEither.fold(
-      (l) => throw Exception(l.message), (r) => r);
+    (l) => throw Exception(l.message),
+    (r) => r,
+  );
 }

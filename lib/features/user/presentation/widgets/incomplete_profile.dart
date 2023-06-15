@@ -55,17 +55,23 @@ class IncompleteProfile extends ConsumerWidget {
             ),
           ],
         ),
-        SermanosShortButton(
-          icon: SermanosIcons.add(status: SermanosIconStatus.enabled),
-          text: "Completar",
-          onPressed: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ProfileFormModalScreen(
-                user: user,
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SermanosShortButton(
+              icon: SermanosIcons.add(status: SermanosIconStatus.enabled),
+              text: "Completar",
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfileFormModalScreen(
+                    user: user,
+                  ),
+                ),
               ),
             ),
-          ),
+          ],
         ),
       ],
     );

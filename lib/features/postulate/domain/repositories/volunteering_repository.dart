@@ -28,6 +28,11 @@ abstract interface class VolunteeringRepository {
     required String volunteeringId,
   });
 
+  Future<Either<Failure, void>> cancelUserVolunteering({
+    required AppUser user,
+    required String volunteeringId,
+  });
+
   Future<Either<Failure, void>> addFavoriteVolunteering({
     required String userId,
     required String volunteeringId,

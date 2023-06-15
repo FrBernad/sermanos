@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sermanos/features/postulate/application/controllers/cancel_user_volunteering_controller.dart';
 
 import '../../../../../config/design_system/cellules/modals/volunteering_actions_modal.dart';
 import '../../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
@@ -36,7 +37,7 @@ class PostulateQuitVolunteering extends StatelessWidget {
         const SizedBox(height: 20),
         SermanosCTAButton(
           text: 'Abandonar voluntariado',
-          onPressed: () {},
+          onPressed: () => _showConfirmationDialog(context, volunteering),
           textColor: SermanosColors.primary100,
           filled: false,
         ),
@@ -72,8 +73,7 @@ class PostulateQuitVolunteering extends StatelessWidget {
               isLoading: isLoading,
               onConfirm: () async {
                 await ref
-                    .read(cancelUserVolunteeringPostulationControllerProvider
-                        .notifier)
+                    .read(cancelUserVolunteeringControllerProvider.notifier)
                     .cancel(volunteeringId: volunteering.id);
                 if (c.mounted) {
                   Navigator.of(c).pop(true);

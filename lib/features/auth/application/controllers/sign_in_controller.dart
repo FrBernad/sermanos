@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sermanos/config/router/router.dart';
-import 'package:sermanos/features/postulate/presentation/screens/postulate_screen.dart';
+import 'package:sermanos/features/auth/presentation/screens/welcome_screen.dart';
 
 import '../../../user/providers.dart';
 import '../../providers.dart';
@@ -26,7 +26,7 @@ class SignInController extends _$SignInController {
       (l) => state = AsyncError(l, StackTrace.current),
       (user) {
         ref.read(currentUserProvider.notifier).set(user);
-        ref.read(mainBeamerDelegateProvider).popToNamed(PostulateScreen.route);
+        ref.read(mainBeamerDelegateProvider).popToNamed(WelcomeScreen.route);
         state = const AsyncValue.data(null);
       },
     );

@@ -33,6 +33,11 @@ abstract class VolunteeringRemoteDataSource {
     required String volunteeringId,
   });
 
+  Future<void> cancelUserVolunteering({
+    required AppUser user,
+    required String volunteeringId,
+  });
+
   Future<void> addFavoriteVolunteering({
     required String userId,
     required String volunteeringId,
@@ -228,6 +233,49 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
   }
 
   @override
+  Future<void> cancelUserVolunteering({
+    required AppUser user,
+    required String volunteeringId,
+  }) async {
+    try {
+      // Remove from user
+      final userPostulationQuery = _firebaseDatabaseClient
+          .collection(AppUserEntity.collectionName)
+          .doc(user.id)
+          .collection(VolunteeringEntity.collectionName)
+          .doc(volunteeringId);
+
+      await userPostulationQuery.delete();
+
+      // Reduce volunteers qty
+      final volunteersQty =
+          (await getVolunteeringById(volunteeringId: volunteeringId))
+              .toNullable()!
+              .volunteersQty;
+
+      final volunteeringQtyQuery = _firebaseDatabaseClient
+          .collection(VolunteeringEntity.collectionName)
+          .doc(volunteeringId);
+
+      await volunteeringQtyQuery.update({
+        volunteersQty: volunteersQty - 1,
+      });
+
+      // Remove from members
+      final volunteeringMembersQuery = _firebaseDatabaseClient
+          .collection(VolunteeringEntity.collectionName)
+          .doc(volunteeringId)
+          .collection("members")
+          .doc(user.id);
+
+      await volunteeringMembersQuery.delete();
+    } catch (e) {
+      logger.d(e);
+      throw ServerException();
+    }
+  }
+
+  @override
   Future<void> addFavoriteVolunteering(
       {required String userId, required String volunteeringId}) async {
     try {
@@ -280,7 +328,7 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
     required String userId,
   }) async {
     try {
-      final DocumentSnapshot response = await _firebaseDatabaseClient
+      final response = await _firebaseDatabaseClient
           .collection(AppUserEntity.collectionName)
           .doc(userId)
           .collection("favoriteVolunteerings")
@@ -291,10 +339,9 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
         return [];
       }
 
-      final json =
-          Map<String, dynamic>.from(response.data() as Map<String, dynamic>);
+      final json = response.data();
 
-      final favorites = json['favorites'] as List<String>;
+      final favorites = List<String>.from(json!['favorites']);
 
       return favorites;
     } catch (e) {

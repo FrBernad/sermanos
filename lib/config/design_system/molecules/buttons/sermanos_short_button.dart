@@ -31,7 +31,7 @@ class SermanosShortButton extends StatelessWidget {
             style: ElevatedButton.styleFrom(
               backgroundColor: SermanosColors.primary100,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(4), // <-- Radius
+                borderRadius: BorderRadius.circular(4),
               ),
               padding: const EdgeInsets.all(
                 12.0,

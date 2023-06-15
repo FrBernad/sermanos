@@ -3,7 +3,7 @@ import 'package:sermanos/features/postulate/providers.dart';
 import 'package:sermanos/features/user/domain/models/app_user_model.dart';
 import 'package:sermanos/features/user/providers.dart';
 
-import 'current_user_volunteering_controller.dart';
+import 'get_favorite_volunteerings_controller.dart';
 
 part 'generated/add_favorite_volunteering_controller.g.dart';
 
@@ -25,10 +25,10 @@ class AddFavoriteVolunteeringController
         .addFavoriteVolunteering(
             userId: currentUser.id, volunteeringId: volunteeringId);
 
-    state = userDataEither.fold(
+    state = await userDataEither.fold(
       (l) => AsyncValue.error(l.toString(), StackTrace.current),
-      (user) {
-        ref.read(currentUserVolunteeringControllerProvider.notifier).set(null);
+      (user) async {
+        await ref.refresh(getFavoriteVolunteeringsControllerProvider.future);
         return const AsyncValue.data(null);
       },
     );
