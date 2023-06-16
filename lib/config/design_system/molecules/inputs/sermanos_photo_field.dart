@@ -95,10 +95,11 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosPhotoField> {
                     width: 8,
                   ),
                   ProfileImage(
-                      imageUrl: _image,
-                      height: 84,
-                      width: 84,
-                      fromNetwork: _image == widget.initialValue)
+                    imageUrl: _image,
+                    height: 84,
+                    width: 84,
+                    fromNetwork: _image == widget.initialValue,
+                  )
                 ],
               );
       },

@@ -40,6 +40,12 @@ class SermanosVolunteeringCard extends ConsumerWidget {
                 image: NetworkImage(volunteering.imageUrl),
                 fit: BoxFit.cover,
                 height: 138,
+                errorBuilder: (BuildContext, Object, StackTrace) {
+                  return Image.asset(
+                    "assets/images/sermanos_image_not_found.png",
+                    height: 138,
+                  );
+                },
               ),
               Padding(
                 padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),

@@ -69,8 +69,13 @@ class PostulateDetailScreen extends HookConsumerWidget {
                           fit: BoxFit.cover,
                           errorBuilder: (BuildContext context, Object exception,
                               StackTrace? stackTrace) {
-                            return const Text(
-                                "No fue posible encontrar la imagen");
+                            return Container(
+                              color: SermanosColors.neutral0,
+                              child: Image.asset(
+                                "assets/images/sermanos_image_not_found.png",
+                                height: 243,
+                              ),
+                            );
                           },
                         ),
                         Positioned.fill(

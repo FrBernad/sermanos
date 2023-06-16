@@ -34,6 +34,10 @@ class SermanosNewsCard extends ConsumerWidget {
                 imageUrl: news.imageUrl,
                 width: 118,
                 fit: BoxFit.cover,
+                errorWidget: (BuildContext context, String s, dynamic) {
+                  return Image.asset(
+                      "assets/images/sermanos_image_not_found.png");
+                },
               ),
               Expanded(
                 child: SermanosNewsCardInformation(

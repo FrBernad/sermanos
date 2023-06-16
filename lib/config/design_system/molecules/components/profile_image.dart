@@ -31,11 +31,8 @@ class ProfileImage extends StatelessWidget {
                       fit: BoxFit.cover,
                       errorWidget:
                           (BuildContext context, String url, dynamic error) {
-                        return SizedBox(
-                          child: SermanosIcons.account(
-                            status: SermanosIconStatus.activatedTerciary,
-                          ),
-                        );
+                        return Image.asset(
+                            "assets/images/sermanos_image_not_found.png");
                       },
                     )
                   : Image.file(
@@ -45,11 +42,8 @@ class ProfileImage extends StatelessWidget {
                       fit: BoxFit.cover,
                       errorBuilder: (BuildContext context, Object error,
                           StackTrace? stackTrace) {
-                        return SizedBox(
-                          child: SermanosIcons.account(
-                            status: SermanosIconStatus.activatedTerciary,
-                          ),
-                        );
+                        return Image.asset(
+                            "assets/images/sermanos_image_not_found.png");
                       },
                     ),
             ),

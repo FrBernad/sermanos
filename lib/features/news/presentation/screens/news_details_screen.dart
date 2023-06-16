@@ -77,6 +77,13 @@ class NewsDetailsScreen extends ConsumerWidget {
                     ),
                     height: 160,
                     fit: BoxFit.cover,
+                    errorWidget:
+                        (BuildContext context, String url, dynamic error) {
+                      return Image.asset(
+                        "assets/images/sermanos_image_not_found.png",
+                        height: 160,
+                      );
+                    },
                   ),
                   const SizedBox(height: 16),
                   Text(
