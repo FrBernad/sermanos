@@ -69,7 +69,7 @@ class SaveDataButton extends ConsumerWidget {
         .updateUser(userData: userData);
     if (context.mounted) {
       if (success) {
-        Navigator.of(context).pop();
+        Navigator.of(context).pop(true);
       }
     }
   }

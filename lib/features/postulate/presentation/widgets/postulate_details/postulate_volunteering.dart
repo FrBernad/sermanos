@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sermanos/features/user/domain/models/app_user_model.dart';
+import 'package:sermanos/features/user/presentation/screens/form_modal_screen.dart';
+import 'package:sermanos/features/user/providers.dart';
 
 import '../../../../../config/design_system/cellules/modals/volunteering_actions_modal.dart';
 import '../../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
@@ -33,13 +36,64 @@ class PostulateVolunteering extends ConsumerWidget {
           text: 'Postularme',
           enabled: !isFull,
           filled: true,
-          onPressed: () => _showConfirmationDialog(context, volunteering),
+          onPressed: () async {
+            AppUser user = ref.read(currentUserProvider)!;
+            if (user.isProfileFilled() ||
+                await _showCompleteProfileDialog(context)) {
+              if (context.mounted) {
+                _showPostulateConfirmationDialog(context, volunteering);
+              }
+            }
+          },
         ),
       ],
     );
   }
 
-  void _showConfirmationDialog(
+  Future<bool> _showCompleteProfileDialog(
+    BuildContext context,
+  ) async {
+    bool isCompleted = false;
+    await showDialog<bool?>(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext c) {
+        return Consumer(
+          builder: (BuildContext context, WidgetRef ref, Widget? child) {
+            AppUser user = ref.watch(currentUserProvider)!;
+
+            return ActionsModal(
+              title: "Para postularte debes primero completar tus datos",
+              isLoading: false,
+              onConfirm: () async {
+                final isComplete = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileFormModalScreen(
+                      user: user,
+                    ),
+                  ),
+                );
+                if (isComplete != null && isComplete) {
+                  if (context.mounted) {
+                    Navigator.of(context).pop();
+                    isCompleted = true;
+                  }
+                } else {
+                  isCompleted = false;
+                }
+              },
+              cancelButtonText: "Cancelar",
+              confirmationButtonText: "Completar datos",
+            );
+          },
+        );
+      },
+    );
+    return isCompleted;
+  }
+
+  void _showPostulateConfirmationDialog(
     BuildContext context,
     Volunteering volunteering,
   ) async {
@@ -60,7 +114,7 @@ class PostulateVolunteering extends ConsumerWidget {
                       error.toString(),
                   loading: () => isLoading = true,
                 );
-            return VolunteeringActionsModal(
+            return ActionsModal(
               title: "Te estas por postular a",
               isLoading: isLoading,
               onConfirm: () async {

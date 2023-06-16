@@ -34,7 +34,7 @@ class ProfileFormModalScreen extends ConsumerWidget {
       appBar: AppBar(
         backgroundColor: SermanosColors.neutral0,
         leading: IconButton(
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () => Navigator.of(context).pop(false),
           icon:
               SermanosIcons.close(status: SermanosIconStatus.enabledSecondary),
         ),

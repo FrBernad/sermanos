@@ -68,7 +68,7 @@ class PostulateQuitVolunteering extends StatelessWidget {
                       error.toString(),
                   loading: () => isLoading = true,
                 );
-            return VolunteeringActionsModal(
+            return ActionsModal(
               title: "¿Estás seguro que querés retirar tu postulación?",
               isLoading: isLoading,
               onConfirm: () async {

@@ -70,7 +70,7 @@ class PostulateQuitPostulation extends StatelessWidget {
                 );
 
             logger.d(isLoading.toString());
-            return VolunteeringActionsModal(
+            return ActionsModal(
               title: "¿Estás seguro que querés abandonar tu voluntariado?",
               isLoading: isLoading,
               onConfirm: () async {

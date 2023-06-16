@@ -7,8 +7,8 @@ import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 
 import '../../molecules/buttons/sermanos_short_button.dart';
 
-class VolunteeringActionsModal extends StatelessWidget {
-  const VolunteeringActionsModal({
+class ActionsModal extends StatelessWidget {
+  const ActionsModal({
     Key? key,
     required this.title,
     this.highlightText,
