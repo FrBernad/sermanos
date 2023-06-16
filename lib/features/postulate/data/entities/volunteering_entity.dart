@@ -8,7 +8,6 @@ class VolunteeringEntity {
   final String category;
   final String description;
   final String about;
-  final String schedule;
   final String address;
   final List<String> requirements;
   final List<String> availability;
@@ -24,7 +23,6 @@ class VolunteeringEntity {
     required this.category,
     required this.description,
     required this.about,
-    required this.schedule,
     required this.address,
     required this.requirements,
     required this.availability,
@@ -45,7 +43,6 @@ class VolunteeringEntity {
       category: json['category'] as String,
       description: json['description'] as String,
       about: json['about'] as String,
-      schedule: json['schedule'] as String,
       address: json['address'] as String,
       requirements: List<String>.from(json['requirements'] as List<dynamic>),
       availability: List<String>.from(json['availability'] as List<dynamic>),
@@ -64,7 +61,6 @@ class VolunteeringEntity {
       category: category,
       description: description,
       about: about,
-      schedule: schedule,
       address: address,
       requirements: requirements,
       availability: availability,

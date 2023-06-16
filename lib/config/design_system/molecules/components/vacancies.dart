@@ -11,7 +11,6 @@ class Vacancies extends StatelessWidget {
 
   final int vacancy;
 
-  //FIXME: en el figma aparece este color #CAE5FB, pero no está definido en los tokens.
   @override
   Widget build(BuildContext context) {
     final hasVacancy = vacancy > 0;

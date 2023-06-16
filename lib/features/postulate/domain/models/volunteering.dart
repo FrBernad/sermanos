@@ -1,13 +1,11 @@
 import 'package:equatable/equatable.dart';
 
 class Volunteering extends Equatable {
-  //FIXME: Sacar campos que no van
   final String id;
   final String name;
   final String category;
   final String description;
   final String about;
-  final String schedule;
   final String address;
   final List<String> requirements;
   final List<String> availability;
@@ -23,7 +21,6 @@ class Volunteering extends Equatable {
     required this.category,
     required this.description,
     required this.about,
-    required this.schedule,
     required this.address,
     required this.requirements,
     required this.availability,
