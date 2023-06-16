@@ -21,6 +21,7 @@ NewsRemoteDataSource newsRemoteDataSource(
 @Riverpod(keepAlive: true)
 NewsRepository newsRepository(NewsRepositoryRef ref) => NewsRepositoryImpl(
       newsRemoteDataSource: ref.watch(newsRemoteDataSourceProvider),
+      networkInfo: ref.watch(networkInfoProvider),
     );
 
 ///

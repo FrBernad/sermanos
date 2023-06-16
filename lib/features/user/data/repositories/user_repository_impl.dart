@@ -21,14 +21,17 @@ class UserRepositoryImpl implements UserRepository {
 
   @override
   Future<Either<Failure, AppUser>> getUserById(String userId) async {
-    final userEntityOpt =
-        await userRemoteDataSource.getUserById(userId: userId);
+    if (networkInfo.hasConnection) {
+      final userEntityOpt =
+          await userRemoteDataSource.getUserById(userId: userId);
 
-    if (userEntityOpt.isNone()) {
-      return const Left(UserNotFoundFailure());
+      if (userEntityOpt.isNone()) {
+        return const Left(UserNotFoundFailure());
+      }
+
+      return Right(userEntityOpt.toNullable()!.toModel());
     }
-
-    return Right(userEntityOpt.toNullable()!.toModel());
+    return const Left(ConnectionFailure());
   }
 
   @override
@@ -40,19 +43,16 @@ class UserRepositoryImpl implements UserRepository {
   }) async {
     final AppUserEntity userEntity;
 
-    // if (networkInfo.hasConnection) {
-    userEntity = await userRemoteDataSource.createUser(
-      userId: userId,
-      name: name,
-      surname: surname,
-      email: email,
-
-    );
-    // } else {
-    //   return const Left(ConnectionFailure());
-    // }
-
-    return Right(userEntity.toModel());
+    if (networkInfo.hasConnection) {
+      userEntity = await userRemoteDataSource.createUser(
+        userId: userId,
+        name: name,
+        surname: surname,
+        email: email,
+      );
+      return Right(userEntity.toModel());
+    }
+    return const Left(ConnectionFailure());
   }
 
   @override
@@ -81,9 +81,8 @@ class UserRepositoryImpl implements UserRepository {
       } on Exception {
         return const Left(ConnectionFailure());
       }
-    } else {
-      return const Left(ConnectionFailure());
     }
+    return const Left(ConnectionFailure());
   }
 
   @override
@@ -102,14 +101,12 @@ class UserRepositoryImpl implements UserRepository {
         await userRemoteDataSource.updateUserEventPermission(
           userId: userId,
         );
-
         userEntityOpt = await userRemoteDataSource.getUserById(userId: userId);
         return Right(userEntityOpt.toNullable()!.toModel());
       } on Exception {
         return const Left(ConnectionFailure());
       }
-    } else {
-      return const Left(ConnectionFailure());
     }
+    return const Left(ConnectionFailure());
   }
 }

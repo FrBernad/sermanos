@@ -23,6 +23,7 @@ VolunteeringRemoteDataSource volunteeringRemoteDataSource(
 VolunteeringRepository volunteeringRepository(VolunteeringRepositoryRef ref) =>
     VolunteeringRepositoryImpl(
       volunteeringDataSource: ref.watch(volunteeringRemoteDataSourceProvider),
+      networkInfo: ref.watch(networkInfoProvider),
     );
 
 ///

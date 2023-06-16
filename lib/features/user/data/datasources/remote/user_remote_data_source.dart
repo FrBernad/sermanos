@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:fpdart/fpdart.dart';
+import 'package:sermanos/features/core/error/exception.dart';
 import 'package:sermanos/features/user/domain/models/user_data_dto.dart';
 import 'package:uuid/uuid.dart';
 
@@ -44,21 +45,25 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
   Future<Option<AppUserEntity>> getUserById({
     required String userId,
   }) async {
-    final query = _firebaseDatabaseClient
-        .collection(AppUserEntity.collectionName)
-        .doc(userId);
+    try {
+      final query = _firebaseDatabaseClient
+          .collection(AppUserEntity.collectionName)
+          .doc(userId);
 
-    final response = await query.get();
-    if (!response.exists) {
-      return const None();
+      final response = await query.get();
+      if (!response.exists) {
+        return const None();
+      }
+
+      return Option.of(
+        AppUserEntity.fromJson(
+          userId,
+          response.data()!,
+        ),
+      );
+    } catch (e) {
+      throw ServerException();
     }
-
-    return Option.of(
-      AppUserEntity.fromJson(
-        userId,
-        response.data()!,
-      ),
-    );
   }
 
   @override
@@ -68,23 +73,27 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
     required String surname,
     required String email,
   }) async {
-    final query = _firebaseDatabaseClient
-        .collection(AppUserEntity.collectionName)
-        .doc(userId);
+    try {
+      final query = _firebaseDatabaseClient
+          .collection(AppUserEntity.collectionName)
+          .doc(userId);
 
-    final userDataMap = {
-      'name': name,
-      'surname': surname,
-      'email': email,
-      'allowEventTrackerPermission': false,
-    };
+      final userDataMap = {
+        'name': name,
+        'surname': surname,
+        'email': email,
+        'allowEventTrackerPermission': false,
+      };
 
-    await query.set(userDataMap);
+      await query.set(userDataMap);
 
-    return AppUserEntity.fromJson(
-      userId,
-      userDataMap,
-    );
+      return AppUserEntity.fromJson(
+        userId,
+        userDataMap,
+      );
+    } catch (e) {
+      throw ServerException();
+    }
   }
 
   @override
@@ -93,50 +102,59 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
     required AppUserEntity user,
     required UserDataDto userData,
   }) async {
-    final query = _firebaseDatabaseClient
-        .collection(AppUserEntity.collectionName)
-        .doc(userId);
+    try {
+      final query = _firebaseDatabaseClient
+          .collection(AppUserEntity.collectionName)
+          .doc(userId);
 
-    final userDataMap = {
-      'birthdate': userData.birthdate.millisecondsSinceEpoch,
-      'emailContact': userData.emailContact,
-      'gender': userData.gender.name,
-      'phone': userData.phone,
-    };
+      final userDataMap = {
+        'birthdate': userData.birthdate.millisecondsSinceEpoch,
+        'emailContact': userData.emailContact,
+        'gender': userData.gender.name,
+        'phone': userData.phone,
+      };
 
-    //Hay que borrar la foto de perfil anterior si es que hay y subir una nueva al storage
+      //Hay que borrar la foto de perfil anterior si es que existía una
+      // y subir una nueva al storage
 
-    if (userData.profileImage != null) {
-      try {
-        if (user.profileImageUrl != null) {
-          final storageRef =
-              _firebaseStorageClient.refFromURL(user.profileImageUrl!);
-          await storageRef.delete();
+      if (userData.profileImage != null) {
+        try {
+          if (user.profileImageUrl != null) {
+            final storageRef =
+                _firebaseStorageClient.refFromURL(user.profileImageUrl!);
+            await storageRef.delete();
+          }
+
+          String id = const Uuid().v4();
+          final fileReference =
+              _firebaseStorageClient.ref().child("profileImage/$id");
+
+          await fileReference.putFile(userData.profileImage!);
+          userDataMap['profileImage'] = await fileReference.getDownloadURL();
+        } on FirebaseException catch (e) {
+          throw Exception("Error when uploading file");
         }
-
-        String id = const Uuid().v4();
-        final fileReference =
-            _firebaseStorageClient.ref().child("profileImage/$id");
-
-        await fileReference.putFile(userData.profileImage!);
-        userDataMap['profileImage'] = await fileReference.getDownloadURL();
-      } on FirebaseException catch (e) {
-        throw Exception("Error when uploading file");
       }
-    }
 
-    await query.update(userDataMap);
+      await query.update(userDataMap);
+    } catch (e) {
+      throw ServerException();
+    }
   }
 
   @override
   Future<void> updateUserEventPermission({
     required String userId,
   }) async {
-    final query = _firebaseDatabaseClient
-        .collection(AppUserEntity.collectionName)
-        .doc(userId);
+    try {
+      final query = _firebaseDatabaseClient
+          .collection(AppUserEntity.collectionName)
+          .doc(userId);
 
-    final userDataMap = {'allowEventTrackerPermission': true};
-    await query.update(userDataMap);
+      final userDataMap = {'allowEventTrackerPermission': true};
+      await query.update(userDataMap);
+    } catch (e) {
+      throw ServerException();
+    }
   }
 }

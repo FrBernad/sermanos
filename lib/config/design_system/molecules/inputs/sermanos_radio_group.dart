@@ -64,15 +64,21 @@ class _SermanosRadioGroupState<T> extends State<SermanosRadioGroup<T>> {
                         padding: const EdgeInsets.all(2),
                         child: Radio(
                           value: widget.values[index],
-                          fillColor: MaterialStateColor.resolveWith(
-                              (states) => SermanosColors.primary100),
+                          fillColor: MaterialStateColor.resolveWith((states) {
+                            if (widget.enabled) {
+                              return SermanosColors.primary100;
+                            }
+                            return SermanosColors.neutral50;
+                          }),
                           groupValue: _gender,
-                          onChanged: (T? value) {
-                            setState(() {
-                              _gender = value;
-                              field.didChange(value);
-                            });
-                          },
+                          onChanged: !widget.enabled
+                              ? null
+                              : (T? value) {
+                                  setState(() {
+                                    _gender = value;
+                                    field.didChange(value);
+                                  });
+                                },
                         ),
                       ),
                       const SizedBox(

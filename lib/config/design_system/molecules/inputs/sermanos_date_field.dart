@@ -16,7 +16,6 @@ class SermanosDateField extends HookConsumerWidget {
     required this.formField,
     required this.initialDate,
     this.enabled = true,
-    // this.password = false,
     this.floatingLabelBehavior = FloatingLabelBehavior.auto,
     this.label,
     this.placeholder,
@@ -34,7 +33,6 @@ class SermanosDateField extends HookConsumerWidget {
 
   final bool enabled;
 
-  // final bool password;
   final FloatingLabelBehavior floatingLabelBehavior;
   final String? label;
   final String? placeholder;
@@ -43,9 +41,8 @@ class SermanosDateField extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final DateFormat dateFormat = DateFormat("dd/MM/yyyy");
-    final String initialValue = initialDate == null
-        ? ''
-        : DateFormat('dd/MM/yyyy').format(initialDate!);
+    final String initialValue =
+        initialDate == null ? '' : dateFormat.format(initialDate!);
     final focusNode = useFocusNode();
     useListenable(focusNode);
 
@@ -56,8 +53,6 @@ class SermanosDateField extends HookConsumerWidget {
     final bool isEmpty =
         useListenableSelector(controller, () => controller.text.isEmpty);
 
-    // final isObscured = useState(password);
-
     return FormBuilderField<String>(
       initialValue: initialValue,
       name: formField,
@@ -67,7 +62,6 @@ class SermanosDateField extends HookConsumerWidget {
         return TextField(
           keyboardType: TextInputType.datetime,
           inputFormatters: [LengthLimitingTextInputFormatter(10)],
-          // obscureText: isObscured.value,
           enabled: enabled,
           onChanged: (value) {
             field.didChange(value);
@@ -147,47 +141,53 @@ class SermanosDateField extends HookConsumerWidget {
                         },
                       )
                     : IconButton(
+                        disabledColor: SermanosColors.neutral25,
                         icon: SermanosIcons.calendarFilled(
-                          status: SermanosIconStatus.activated,
+                          status: enabled
+                              ? SermanosIconStatus.activated
+                              : SermanosIconStatus.disabled,
                         ),
-                        onPressed: () async {
-                          DateTime? datetime = await showDatePicker(
-                              context: context,
-                              initialDate: initialDate ?? actualDate,
-                              firstDate: minDate,
-                              lastDate: maxDate,
-                              fieldLabelText: "Seleccionar fecha",
-                              helpText: "Seleccionar fecha",
-                              cancelText: "Cancelar".toUpperCase(),
-                              confirmText: "Ok".toUpperCase(),
-                              builder: (context, child) {
-                                return Theme(
-                                  data: Theme.of(context).copyWith(
-                                    colorScheme: const ColorScheme.light(
-                                      primary: SermanosColors.primary100,
-                                      onPrimary: SermanosColors.neutral0,
-                                      onSurface: SermanosColors.primary100,
-                                    ),
-                                    textButtonTheme: TextButtonThemeData(
-                                      style: TextButton.styleFrom(
-                                        textStyle:
-                                            const SermanosTypography.button(
-                                                color:
-                                                    SermanosColors.primary100),
-                                        // button text color
-                                      ),
-                                    ),
-                                  ),
-                                  child: child!,
-                                );
-                              });
-                          if (datetime != null) {
-                            String date =
-                                DateFormat("dd/MM/yyyy").format(datetime);
-                            field.didChange(date);
-                            controller.text = date;
-                          }
-                        },
+                        onPressed: !enabled
+                            ? null
+                            : () async {
+                                DateTime? datetime = await showDatePicker(
+                                    context: context,
+                                    initialDate: initialDate ?? actualDate,
+                                    firstDate: minDate,
+                                    lastDate: maxDate,
+                                    fieldLabelText: "Seleccionar fecha",
+                                    helpText: "Seleccionar fecha",
+                                    cancelText: "Cancelar".toUpperCase(),
+                                    confirmText: "Ok".toUpperCase(),
+                                    builder: (context, child) {
+                                      return Theme(
+                                        data: Theme.of(context).copyWith(
+                                          colorScheme: const ColorScheme.light(
+                                            primary: SermanosColors.primary100,
+                                            onPrimary: SermanosColors.neutral0,
+                                            onSurface:
+                                                SermanosColors.primary100,
+                                          ),
+                                          textButtonTheme: TextButtonThemeData(
+                                            style: TextButton.styleFrom(
+                                              textStyle:
+                                                  const SermanosTypography
+                                                          .button(
+                                                      color: SermanosColors
+                                                          .primary100),
+                                              // button text color
+                                            ),
+                                          ),
+                                        ),
+                                        child: child!,
+                                      );
+                                    });
+                                if (datetime != null) {
+                                  String date = dateFormat.format(datetime);
+                                  field.didChange(date);
+                                  controller.text = date;
+                                }
+                              },
                       ),
           ),
           onTapOutside: (e) {

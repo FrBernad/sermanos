@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:sermanos/config/design_system/molecules/inputs/sermanos_text_field.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
+import 'package:sermanos/features/user/application/update_user_data_controller.dart';
 import 'package:sermanos/features/user/domain/models/app_user_model.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 
-class ContactDataForm extends StatelessWidget {
+class ContactDataForm extends ConsumerWidget {
   final AppUser user;
   final String emailContactField;
   final String telephoneField;
@@ -18,7 +20,13 @@ class ContactDataForm extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    bool enabled = true;
+
+    ref.watch(updateUserDataControllerProvider).maybeWhen(
+          loading: () => enabled = false,
+          orElse: () {},
+        );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -44,11 +52,13 @@ class ContactDataForm extends StatelessWidget {
           formField: telephoneField,
           initialValue: user.phone,
           keyboardType: TextInputType.phone,
-          enabled: true,
+          enabled: enabled,
           validators: [
             FormBuilderValidators.required(errorText: "Ingrese su teléfono"),
             FormBuilderValidators.match(
-                r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[0-9]*$'),
+              r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[0-9]*$',
+              errorText: "Ingrese un teléfono válido",
+            ),
           ],
           label: 'Teléfono',
           floatingLabelBehavior: FloatingLabelBehavior.always,
@@ -60,7 +70,7 @@ class ContactDataForm extends StatelessWidget {
         SermanosTextField(
           formField: emailContactField,
           initialValue: user.emailContact,
-          enabled: true,
+          enabled: enabled,
           validators: [
             FormBuilderValidators.required(errorText: "Ingrese su mail"),
             FormBuilderValidators.email(errorText: "Ingrese un mail válido")

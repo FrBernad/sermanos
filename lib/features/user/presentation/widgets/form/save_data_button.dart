@@ -19,18 +19,17 @@ class SaveDataButton extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    bool loading = false;
+    bool isLoading = false;
 
     ref.watch(updateUserDataControllerProvider).maybeWhen(
+          loading: () => isLoading = true,
           orElse: () {},
-          loading: () => loading = true,
         );
 
     return SermanosCTAButton(
       text: 'Guardar datos',
       onPressed: () => _onPressed(ref, context),
-      // loading: loading,
-      loading: false,
+      loading: isLoading,
       filled: true,
     );
   }

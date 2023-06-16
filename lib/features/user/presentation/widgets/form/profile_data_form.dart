@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:sermanos/config/design_system/molecules/inputs/sermanos_date_field.dart';
 import 'package:sermanos/config/design_system/molecules/inputs/sermanos_photo_field.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
+import 'package:sermanos/features/user/application/update_user_data_controller.dart';
 import 'package:sermanos/features/user/domain/models/app_user_model.dart';
 import 'package:sermanos/features/user/domain/models/gender.dart';
 import 'package:sermanos/config/design_system/molecules/inputs/sermanos_radio_group.dart';
@@ -29,6 +30,12 @@ class ProfileDataForm extends ConsumerWidget {
     final actualDate = DateTime.now();
     final minDate =
         DateTime(actualDate.year - 100, actualDate.month, actualDate.day);
+    bool enabled = true;
+
+    ref.watch(updateUserDataControllerProvider).maybeWhen(
+          loading: () => enabled = false,
+          orElse: () {},
+        );
 
     return Container(
       child: Column(
@@ -49,7 +56,7 @@ class ProfileDataForm extends ConsumerWidget {
             actualDate: actualDate,
             formField: birthdateField,
             initialDate: user.birthdate,
-            enabled: true,
+            enabled: enabled,
             validators: [
               FormBuilderValidators.required(
                   errorText: "Ingrese su fecha de nacimiento"),
@@ -117,7 +124,7 @@ class ProfileDataForm extends ConsumerWidget {
                 width: double.infinity,
                 child: SermanosRadioGroup<Gender>(
                   initialValue: user.gender,
-                  enabled: true,
+                  enabled: enabled,
                   formField: genderField,
                   labels: Gender.values.map((g) => g.text).toList(),
                   values: Gender.values,
@@ -136,6 +143,7 @@ class ProfileDataForm extends ConsumerWidget {
             ),
             width: double.infinity,
             child: SermanosPhotoField(
+              enabled: enabled,
               initialValue: user.profileImageUrl,
               formField: imageField,
             ),

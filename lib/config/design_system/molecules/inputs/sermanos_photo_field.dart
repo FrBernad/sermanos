@@ -64,6 +64,7 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosPhotoField> {
                     onPressed: () =>
                         _onPressedProfileButton(context, ref, field),
                     filled: true,
+                    enabled: widget.enabled,
                   )
                 ],
               )
@@ -86,6 +87,7 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosPhotoField> {
                         onPressed: () =>
                             _onPressedProfileButton(context, ref, field),
                         filled: true,
+                        enabled: widget.enabled,
                       )
                     ],
                   ),

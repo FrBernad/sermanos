@@ -35,18 +35,15 @@ class VolunteeringNotFoundFailure extends Failure {
 
 class ConnectionFailure extends Failure {
   const ConnectionFailure() : super(message: _failureMessage);
-  static const _failureMessage =
-      "Failed when trying to connect with remote data source";
+  static const _failureMessage = "Make sure you have internet connection";
 }
 
 class UserNotFoundFailure extends Failure {
-  const UserNotFoundFailure() : super(message: _failureMessage);
+  const UserNotFoundFailure({
+    String? userId,
+  }) : super(message: _failureMessage, description: userId ?? '');
 
-  static const _failureMessage = "Invalid user id";
-}
-
-class NonProcessableEntityFailure extends Failure {
-  const NonProcessableEntityFailure({required super.message});
+  static const _failureMessage = "User not found";
 }
 
 class NoVacancyAtVolunteeringFailure extends Failure {

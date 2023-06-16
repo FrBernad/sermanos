@@ -3,6 +3,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_icons.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
+import 'package:sermanos/features/user/application/update_user_data_controller.dart';
 import 'package:sermanos/features/user/domain/models/app_user_model.dart';
 import 'package:sermanos/features/user/presentation/widgets/form/contact_data_form.dart';
 import 'package:sermanos/features/user/presentation/widgets/form/profile_data_form.dart';
@@ -20,15 +22,14 @@ class ProfileFormModalScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    bool isLoading = false;
     String? errorText;
 
-    // ref.watch(signInControllerProvider).maybeWhen(
-    //   orElse: () {},
-    //   error: (error, __) => errorText = error.toString(),
-    //   // FirebaseAuthErrorTranslator.translate(context, error.toString()),
-    //   loading: () => isLoading = true,
-    // );
+    ref.watch(updateUserDataControllerProvider).maybeWhen(
+          error: (error, __) {
+            errorText = error.toString();
+          },
+          orElse: () {},
+        );
 
     return Scaffold(
       appBar: AppBar(
@@ -50,6 +51,7 @@ class ProfileFormModalScreen extends ConsumerWidget {
           key: profileFormKey,
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ProfileDataForm(
                   user: user,
@@ -69,6 +71,18 @@ class ProfileFormModalScreen extends ConsumerWidget {
                   height: 32,
                 ),
                 const SaveDataButton(),
+                if (errorText != null)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 18, vertical: 8.0),
+                    child: Text(
+                      errorText!,
+                      textAlign: TextAlign.start,
+                      style: const SermanosTypography.body01(
+                        color: SermanosColors.error100,
+                      ),
+                    ),
+                  )
               ],
             ),
           ),

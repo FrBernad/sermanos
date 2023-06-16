@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:sermanos/features/core/error/failure.dart';
 import 'package:sermanos/features/user/domain/models/app_user_model.dart';
 import 'package:sermanos/features/user/domain/models/user_data_dto.dart';
 import 'package:sermanos/features/user/providers.dart';
@@ -23,7 +24,14 @@ class UpdateUserDataController extends _$UpdateUserDataController {
 
     bool success = false;
     state = userDataEither.fold(
-      (l) => AsyncValue.error(l.toString(), StackTrace.current),
+      (l) {
+        String message = l.toString();
+        Type t = l.runtimeType;
+        if (t == UserNotFoundFailure) {
+          message = "No se pudo encontrar tu usuario";
+        }
+        return AsyncValue.error(message, StackTrace.current);
+      },
       (user) {
         ref.read(currentUserProvider.notifier).set(user);
         success = true;
