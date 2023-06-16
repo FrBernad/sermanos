@@ -1,0 +1,1 @@
+String newsIdMock = '1';

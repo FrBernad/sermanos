@@ -87,6 +87,7 @@ dev_dependencies:
   json_serializable: ^6.6.1
   custom_lint: ^0.3.3
   riverpod_lint: ^1.3.0
+  nock: ^1.2.2
 
 flutter:
   uses-material-design: true

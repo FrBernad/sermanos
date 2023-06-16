@@ -43,7 +43,7 @@ class NewsScreen extends ConsumerWidget {
         },
         separatorBuilder: (context, index) => const SizedBox(height: 24),
       ),
-      error: (error, stackTrace) => ErrorMessage(),
+      error: (error, stackTrace) => const ErrorMessage(),
     );
   }
 }

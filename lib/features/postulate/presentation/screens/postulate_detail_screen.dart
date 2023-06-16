@@ -67,6 +67,11 @@ class PostulateDetailScreen extends HookConsumerWidget {
                           height: 243,
                           width: double.infinity,
                           fit: BoxFit.cover,
+                          errorBuilder: (BuildContext context, Object exception,
+                              StackTrace? stackTrace) {
+                            return const Text(
+                                "No fue posible encontrar la imagen");
+                          },
                         ),
                         Positioned.fill(
                           child: Container(

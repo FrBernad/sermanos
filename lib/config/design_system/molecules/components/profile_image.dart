@@ -29,12 +29,28 @@ class ProfileImage extends StatelessWidget {
                   ? CachedNetworkImage(
                       imageUrl: imageUrl!,
                       fit: BoxFit.cover,
+                      errorWidget:
+                          (BuildContext context, String url, dynamic error) {
+                        return SizedBox(
+                          child: SermanosIcons.account(
+                            status: SermanosIconStatus.activatedTerciary,
+                          ),
+                        );
+                      },
                     )
                   : Image.file(
                       File(
                         imageUrl!,
                       ),
                       fit: BoxFit.cover,
+                      errorBuilder: (BuildContext context, Object error,
+                          StackTrace? stackTrace) {
+                        return SizedBox(
+                          child: SermanosIcons.account(
+                            status: SermanosIconStatus.activatedTerciary,
+                          ),
+                        );
+                      },
                     ),
             ),
           )
