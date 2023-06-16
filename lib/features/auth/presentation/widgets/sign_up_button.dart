@@ -8,7 +8,6 @@ import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/router/router.dart';
 import 'package:sermanos/features/auth/presentation/screens/welcome_screen.dart';
 import 'package:sermanos/features/core/providers.dart';
-import 'package:sermanos/features/user/application/update_user_event_permission_controller.dart';
 
 import '../../../../config/design_system/cellules/forms/sermanos_sign_up_form.dart';
 import '../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
@@ -64,15 +63,8 @@ class SignUpButton extends ConsumerWidget {
           }
           if (permission.isGranted) {
             ref.invalidate(eventPermissionProvider);
-            await ref
-                .read(updateUserEventPermissionControllerProvider.notifier)
-                .allowEventPermission();
           }
         }
-      } else {
-        await ref
-            .read(updateUserEventPermissionControllerProvider.notifier)
-            .allowEventPermission();
       }
       ref.read(mainBeamerDelegateProvider).popToNamed(WelcomeScreen.route);
     }

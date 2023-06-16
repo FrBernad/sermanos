@@ -84,29 +84,4 @@ class UserRepositoryImpl implements UserRepository {
     }
     return const Left(ConnectionFailure());
   }
-
-  @override
-  Future<Either<Failure, AppUser>> allowEventPermission({
-    required String userId,
-  }) async {
-    if (networkInfo.hasConnection) {
-      try {
-        Option<AppUserEntity> userEntityOpt =
-            await userRemoteDataSource.getUserById(userId: userId);
-
-        if (userEntityOpt.isNone()) {
-          return const Left(UserNotFoundFailure());
-        }
-
-        await userRemoteDataSource.updateUserEventPermission(
-          userId: userId,
-        );
-        userEntityOpt = await userRemoteDataSource.getUserById(userId: userId);
-        return Right(userEntityOpt.toNullable()!.toModel());
-      } on Exception {
-        return const Left(ConnectionFailure());
-      }
-    }
-    return const Left(ConnectionFailure());
-  }
 }

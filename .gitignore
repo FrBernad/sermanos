@@ -57,3 +57,6 @@ lib/**/generated
 # Flutter version manager
 .fvm/flutter_sdk
 
+#Test
+test/golden/images/*
+

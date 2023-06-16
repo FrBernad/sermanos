@@ -25,10 +25,6 @@ abstract interface class UserRemoteDataSource {
     required AppUserEntity user,
     required UserDataDto userData,
   });
-
-  Future<void> updateUserEventPermission({
-    required String userId,
-  });
 }
 
 class UserRemoteDataSourceImpl extends UserRemoteDataSource {
@@ -82,7 +78,6 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
         'name': name,
         'surname': surname,
         'email': email,
-        'allowEventTrackerPermission': false,
       };
 
       await query.set(userDataMap);
@@ -136,22 +131,6 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
         }
       }
 
-      await query.update(userDataMap);
-    } catch (e) {
-      throw ServerException();
-    }
-  }
-
-  @override
-  Future<void> updateUserEventPermission({
-    required String userId,
-  }) async {
-    try {
-      final query = _firebaseDatabaseClient
-          .collection(AppUserEntity.collectionName)
-          .doc(userId);
-
-      final userDataMap = {'allowEventTrackerPermission': true};
       await query.update(userDataMap);
     } catch (e) {
       throw ServerException();

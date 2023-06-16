@@ -51,6 +51,7 @@ class SermanosTextField extends HookConsumerWidget {
       validator: FormBuilderValidators.compose(validators ?? []),
       builder: (FormFieldState field) {
         return TextField(
+
           obscureText: isObscured.value,
           enabled: enabled,
           onChanged: (value) => field.didChange(value),
