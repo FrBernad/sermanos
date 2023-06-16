@@ -5,6 +5,7 @@ import '../../../../../features/postulate/application/controllers/add_favorite_v
 import '../../../../../features/postulate/application/controllers/get_favorite_volunteerings_controller.dart';
 import '../../../../../features/postulate/application/controllers/remove_favorite_volunteering_controller.dart';
 import '../../../../../features/postulate/domain/models/volunteering.dart';
+import '../../../../providers.dart';
 import '../../../atoms/icons/sermanos_icons.dart';
 
 class VolunteerFavoriteIcon extends ConsumerWidget {
@@ -38,10 +39,22 @@ class VolunteerFavoriteIcon extends ConsumerWidget {
                 await ref
                     .read(removeFavoriteVolunteeringControllerProvider.notifier)
                     .remove(volunteeringId: volunteering.id);
+                await ref.read(firebaseAnalyticsProvider).logEvent(
+                  name: "volunteering_remove_favorite",
+                  parameters: {
+                    "voluteering_id": volunteering.id,
+                  },
+                );
               } else {
                 await ref
                     .read(addFavoriteVolunteeringControllerProvider.notifier)
                     .add(volunteeringId: volunteering.id);
+                await ref.read(firebaseAnalyticsProvider).logEvent(
+                  name: "volunteering_add_favorite",
+                  parameters: {
+                    "voluteering_id": volunteering.id,
+                  },
+                );
               }
             },
       child: isFavoriteVolunteering

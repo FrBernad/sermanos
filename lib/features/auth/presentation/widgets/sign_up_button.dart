@@ -11,6 +11,7 @@ import 'package:sermanos/features/core/providers.dart';
 
 import '../../../../config/design_system/cellules/forms/sermanos_sign_up_form.dart';
 import '../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
+import '../../../../config/providers.dart';
 import '../../application/controllers/sign_up_controller.dart';
 
 class SignUpButton extends ConsumerWidget {
@@ -54,6 +55,9 @@ class SignUpButton extends ConsumerWidget {
         );
 
     if (success) {
+      await ref.read(firebaseAnalyticsProvider).logSignUp(
+            signUpMethod: 'email_and_password',
+          );
       if (defaultTargetPlatform == TargetPlatform.iOS) {
         var permission = await ref.read(eventPermissionProvider.future);
         if (context.mounted) {

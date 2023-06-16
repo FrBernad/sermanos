@@ -10,6 +10,7 @@ import 'package:sermanos/features/news/application/controllers/get_news_by_id_co
 import 'package:share_plus/share_plus.dart';
 
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
+import '../../../../config/providers.dart';
 
 class NewsDetailsScreen extends ConsumerWidget {
   static const route = "/news/:id";
@@ -97,7 +98,14 @@ class NewsDetailsScreen extends ConsumerWidget {
                   const SizedBox(height: 16),
                   SermanosCTAButton(
                     text: "Compartir",
-                    onPressed: () async => await Share.share(news.title),
+                    onPressed: () async {
+                      await ref.read(firebaseAnalyticsProvider).logShare(
+                            contentType: 'News',
+                            itemId: news.id,
+                            method: 'ShareDialog',
+                          );
+                      await Share.share(news.title);
+                    },
                     filled: true,
                   ),
                   const SizedBox(height: 32),

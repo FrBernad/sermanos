@@ -11,7 +11,9 @@ import 'package:sermanos/features/core/utils/maps_utils.dart';
 import 'package:sermanos/features/postulate/domain/models/volunteering.dart';
 import 'package:sermanos/features/postulate/presentation/screens/postulate_detail_screen.dart';
 
-class SermanosVolunteeringCard extends HookConsumerWidget {
+import '../../../../providers.dart';
+
+class SermanosVolunteeringCard extends ConsumerWidget {
   const SermanosVolunteeringCard({
     required this.volunteering,
     Key? key,
@@ -91,9 +93,18 @@ class SermanosVolunteeringCard extends HookConsumerWidget {
           ),
         ),
       ),
-      onTap: () => context.beamToNamed(
-        PostulateDetailScreen.routeFromId(volunteering.id),
-      ),
+      onTap: () async {
+        await ref.read(firebaseAnalyticsProvider).logSelectContent(
+              contentType: 'Volunteering',
+              itemId: volunteering.id,
+            );
+
+        if (context.mounted) {
+          context.beamToNamed(
+            PostulateDetailScreen.routeFromId(volunteering.id),
+          );
+        }
+      },
     );
   }
 }

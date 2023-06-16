@@ -2,15 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:sermanos/config/design_system/cellules/forms/sermanos_sign_in_form.dart';
 import 'package:sermanos/features/user/application/update_user_data_controller.dart';
 import 'package:sermanos/features/user/domain/models/gender.dart';
 import 'package:sermanos/features/user/domain/models/user_data_dto.dart';
 import 'package:sermanos/features/user/presentation/screens/form_modal_screen.dart';
 
 import '../../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
+import '../../../../../config/providers.dart';
 
 class SaveDataButton extends ConsumerWidget {
   const SaveDataButton({
@@ -66,8 +65,11 @@ class SaveDataButton extends ConsumerWidget {
     final success = await ref
         .read(updateUserDataControllerProvider.notifier)
         .updateUser(userData: userData);
-    if (context.mounted) {
-      if (success) {
+    if (success) {
+      await ref
+          .read(firebaseAnalyticsProvider)
+          .logEvent(name: "profile_completion");
+      if (context.mounted) {
         Navigator.of(context).pop(true);
       }
     }

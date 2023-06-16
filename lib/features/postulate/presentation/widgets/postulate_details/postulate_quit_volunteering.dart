@@ -6,6 +6,7 @@ import '../../../../../config/design_system/cellules/modals/sermanos_actions_mod
 import '../../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import '../../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../../config/design_system/tokens/sermanos_typography.dart';
+import '../../../../../config/providers.dart';
 import '../../../domain/models/volunteering.dart';
 
 class PostulateQuitVolunteering extends StatelessWidget {
@@ -72,6 +73,12 @@ class PostulateQuitVolunteering extends StatelessWidget {
                 await ref
                     .read(cancelUserVolunteeringControllerProvider.notifier)
                     .cancel(volunteeringId: volunteering.id);
+                await ref.read(firebaseAnalyticsProvider).logEvent(
+                  name: "volunteering_cancelation",
+                  parameters: {
+                    "voluteering_id": volunteering.id,
+                  },
+                );
                 if (c.mounted) {
                   Navigator.of(c).pop(true);
                 }

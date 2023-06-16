@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -58,6 +59,11 @@ NetworkInfo networkInfo(NetworkInfoRef ref) {
   return networkInfo;
 }
 
+@Riverpod(keepAlive: true)
+FirebaseAnalytics firebaseAnalytics(FirebaseAnalyticsRef ref) {
+  return FirebaseAnalytics.instance;
+}
+
 ///
 /// Providers initialization for boostrap file
 ///
@@ -72,6 +78,9 @@ Future<void> initializeProviders(ProviderContainer container) async {
   /// Network Info Setup
   final networkInfo = container.read(networkInfoProvider);
   await networkInfo.initialize();
+
+  /// Firebase Analytics Setup
+  container.read(firebaseAnalyticsProvider);
 
   /// Firebase Auth Setup
   container.read(firebaseAuthProvider);

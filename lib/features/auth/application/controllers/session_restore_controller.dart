@@ -31,6 +31,10 @@ Future<void> sessionRestoreController(
           .read(userRepositoryProvider)
           .getUserById(firebaseAuthUser.uid);
 
+      await ref
+          .read(firebaseAnalyticsProvider)
+          .logEvent(name: "restored_session");
+
       ref.read(currentUserProvider.notifier).set(user.getRight().toNullable()!);
 
       ref.read(mainBeamerDelegateProvider).popToNamed(PostulateScreen.route);

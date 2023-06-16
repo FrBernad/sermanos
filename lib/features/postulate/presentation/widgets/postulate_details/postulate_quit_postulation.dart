@@ -6,6 +6,7 @@ import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 import 'package:sermanos/features/postulate/application/controllers/cancel_user_volunteering_postulation_controller.dart';
 
 import '../../../../../config/design_system/cellules/modals/sermanos_actions_modal.dart';
+import '../../../../../config/providers.dart';
 import '../../../domain/models/volunteering.dart';
 
 class PostulateQuitPostulation extends StatelessWidget {
@@ -76,6 +77,12 @@ class PostulateQuitPostulation extends StatelessWidget {
                     .read(cancelUserVolunteeringPostulationControllerProvider
                         .notifier)
                     .cancel(volunteeringId: volunteering.id);
+                await ref.read(firebaseAnalyticsProvider).logEvent(
+                  name: "volunteering_postulation_cancelation",
+                  parameters: {
+                    "voluteering_id": volunteering.id,
+                  },
+                );
                 if (c.mounted) {
                   Navigator.of(c).pop(true);
                 }

@@ -7,6 +7,7 @@ import 'package:sermanos/features/user/providers.dart';
 import '../../../../../config/design_system/cellules/modals/sermanos_actions_modal.dart';
 import '../../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import '../../../../../config/design_system/tokens/sermanos_typography.dart';
+import '../../../../../config/providers.dart';
 import '../../../application/controllers/postulate_user_to_volunteer_controller.dart';
 import '../../../domain/models/volunteering.dart';
 
@@ -36,60 +37,78 @@ class PostulateVolunteering extends ConsumerWidget {
           text: 'Postularme',
           enabled: !isFull,
           filled: true,
-          onPressed: () async {
-            AppUser user = ref.read(currentUserProvider)!;
-            if (user.isProfileFilled() ||
-                await _showCompleteProfileDialog(context)) {
-              if (context.mounted) {
-                _showPostulateConfirmationDialog(context, volunteering);
-              }
-            }
-          },
+          onPressed: () => _onPressed(context, ref),
         ),
       ],
     );
   }
 
+  Future<void> _onPressed(
+    BuildContext context,
+    WidgetRef ref,
+  ) async {
+    AppUser user = ref.read(currentUserProvider)!;
+    if (user.isProfileFilled() ||
+        await _showCompleteProfileDialog(context, ref)) {
+      await ref.read(firebaseAnalyticsProvider).logEvent(
+        name: "volunteering_postulation",
+        parameters: {
+          "voluteering_id": volunteering.id,
+        },
+      );
+      if (context.mounted) {
+        _showPostulateConfirmationDialog(context, volunteering);
+      }
+    }
+  }
+
   Future<bool> _showCompleteProfileDialog(
     BuildContext context,
+    WidgetRef ref,
   ) async {
-    bool isCompleted = false;
-    await showDialog<bool?>(
-      barrierDismissible: false,
-      context: context,
-      builder: (BuildContext c) {
-        return Consumer(
-          builder: (BuildContext context, WidgetRef ref, Widget? child) {
-            AppUser user = ref.watch(currentUserProvider)!;
+    await ref
+        .read(firebaseAnalyticsProvider)
+        .logEvent(name: "postulation_try_with_incomplete_profile");
 
-            return SermanosActionsModal(
-              title: "Para postularte debes primero completar tus datos",
-              isLoading: false,
-              onConfirm: () async {
-                final isComplete = await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ProfileFormModalScreen(
-                      user: user,
+    bool isCompleted = false;
+    if (context.mounted) {
+      await showDialog<bool?>(
+        barrierDismissible: false,
+        context: context,
+        builder: (BuildContext c) {
+          return Consumer(
+            builder: (BuildContext context, WidgetRef ref, Widget? child) {
+              AppUser user = ref.watch(currentUserProvider)!;
+
+              return SermanosActionsModal(
+                title: "Para postularte debes primero completar tus datos",
+                isLoading: false,
+                onConfirm: () async {
+                  final isComplete = await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfileFormModalScreen(
+                        user: user,
+                      ),
                     ),
-                  ),
-                );
-                if (isComplete != null && isComplete) {
-                  if (context.mounted) {
-                    Navigator.of(context).pop();
-                    isCompleted = true;
+                  );
+                  if (isComplete != null && isComplete) {
+                    if (context.mounted) {
+                      Navigator.of(context).pop();
+                      isCompleted = true;
+                    }
+                  } else {
+                    isCompleted = false;
                   }
-                } else {
-                  isCompleted = false;
-                }
-              },
-              cancelButtonText: "Cancelar",
-              confirmationButtonText: "Completar datos",
-            );
-          },
-        );
-      },
-    );
+                },
+                cancelButtonText: "Cancelar",
+                confirmationButtonText: "Completar datos",
+              );
+            },
+          );
+        },
+      );
+    }
     return isCompleted;
   }
 
