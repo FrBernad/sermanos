@@ -1,4 +1,5 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sermanos/config/providers.dart';
 import 'package:sermanos/features/postulate/data/datasources/remote/volunteering_remote_data_source.dart';
@@ -27,3 +28,9 @@ VolunteeringRepository volunteeringRepository(VolunteeringRepositoryRef ref) =>
 ///
 /// Application dependencies
 ///
+
+@riverpod
+Future<PermissionStatus> locationPermission(
+  LocationPermissionRef ref,
+) async =>
+    await Permission.locationWhenInUse.status;

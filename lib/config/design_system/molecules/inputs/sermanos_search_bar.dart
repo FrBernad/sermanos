@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_icons.dart';
+import 'package:sermanos/config/design_system/molecules/buttons/sermanos_map_button.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_shadows.dart';
 
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
@@ -58,29 +59,24 @@ class SermanosSearchBar extends HookConsumerWidget {
             status: SermanosIconStatus.enabledSecondary,
           ),
           suffixIcon: isEmpty
-              ? Consumer(builder:
-                  (BuildContext context, WidgetRef ref, Widget? child) {
-                  final viewMode =
-                      ref.watch(postulateViewModeControllerProvider);
-                  return viewMode == PostulateViewMode.map
-                      ? IconButton(
-                          icon: SermanosIcons.list(
-                            status: SermanosIconStatus.activated,
-                          ),
-                          onPressed: () => ref
-                              .watch(
-                                  postulateViewModeControllerProvider.notifier)
-                              .set(PostulateViewMode.list),
-                        )
-                      : IconButton(
-                          icon: SermanosIcons.map(
-                              status: SermanosIconStatus.activated),
-                          onPressed: () => ref
-                              .watch(
-                                  postulateViewModeControllerProvider.notifier)
-                              .set(PostulateViewMode.map),
-                        );
-                })
+              ? Consumer(
+                  builder:
+                      (BuildContext context, WidgetRef ref, Widget? child) {
+                    final viewMode =
+                        ref.watch(postulateViewModeControllerProvider);
+                    return viewMode == PostulateViewMode.map
+                        ? IconButton(
+                            icon: SermanosIcons.list(
+                              status: SermanosIconStatus.activated,
+                            ),
+                            onPressed: () => ref
+                                .watch(postulateViewModeControllerProvider
+                                    .notifier)
+                                .set(PostulateViewMode.list),
+                          )
+                        : const SermanosMapButton();
+                  },
+                )
               : IconButton(
                   icon: SermanosIcons.close(
                     status: SermanosIconStatus.enabledSecondary,
