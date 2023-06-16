@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_icons.dart';
-import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import 'package:sermanos/config/design_system/molecules/buttons/sermanos_short_button.dart';
 import 'package:sermanos/config/design_system/molecules/components/profile_image.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
@@ -9,8 +8,6 @@ import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 import 'package:sermanos/features/auth/application/controllers/sign_out_controller.dart';
 import 'package:sermanos/features/user/domain/models/app_user_model.dart';
 import 'package:sermanos/features/user/presentation/screens/form_modal_screen.dart';
-
-import '../../../auth/application/controllers/sign_out_controller.dart';
 
 class IncompleteProfile extends ConsumerWidget {
   final AppUser user;
@@ -78,16 +75,6 @@ class IncompleteProfile extends ConsumerWidget {
                   ),
                 ),
               ],
-            ),
-            const SizedBox(
-              height: 8,
-            ),
-            SermanosShortButton(
-              text: 'Cerrar sesión',
-              onPressed: () async =>
-                  await ref.watch(signOutControllerProvider.notifier).signOut(),
-              textColor: SermanosColors.error100,
-              filled: false,
             ),
             const SizedBox(
               height: 8,
