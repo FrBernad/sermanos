@@ -4,7 +4,7 @@ import 'package:sermanos/features/user/domain/models/app_user_model.dart';
 import 'package:sermanos/features/user/presentation/screens/form_modal_screen.dart';
 import 'package:sermanos/features/user/providers.dart';
 
-import '../../../../../config/design_system/cellules/modals/volunteering_actions_modal.dart';
+import '../../../../../config/design_system/cellules/modals/sermanos_actions_modal.dart';
 import '../../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import '../../../../../config/design_system/tokens/sermanos_typography.dart';
 import '../../../application/controllers/postulate_user_to_volunteer_controller.dart';
@@ -62,7 +62,7 @@ class PostulateVolunteering extends ConsumerWidget {
           builder: (BuildContext context, WidgetRef ref, Widget? child) {
             AppUser user = ref.watch(currentUserProvider)!;
 
-            return ActionsModal(
+            return SermanosActionsModal(
               title: "Para postularte debes primero completar tus datos",
               isLoading: false,
               onConfirm: () async {
@@ -114,7 +114,7 @@ class PostulateVolunteering extends ConsumerWidget {
                       error.toString(),
                   loading: () => isLoading = true,
                 );
-            return ActionsModal(
+            return SermanosActionsModal(
               title: "Te estas por postular a",
               isLoading: isLoading,
               onConfirm: () async {

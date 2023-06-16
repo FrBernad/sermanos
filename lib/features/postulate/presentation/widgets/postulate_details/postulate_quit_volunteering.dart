@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sermanos/features/postulate/application/controllers/cancel_user_volunteering_controller.dart';
 
-import '../../../../../config/design_system/cellules/modals/volunteering_actions_modal.dart';
+import '../../../../../config/design_system/cellules/modals/sermanos_actions_modal.dart';
 import '../../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import '../../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../../config/design_system/tokens/sermanos_typography.dart';
-import '../../../application/controllers/cancel_user_volunteering_postulation_controller.dart';
 import '../../../domain/models/volunteering.dart';
 
 class PostulateQuitVolunteering extends StatelessWidget {
@@ -58,9 +57,7 @@ class PostulateQuitVolunteering extends StatelessWidget {
             bool isLoading = false;
             String? errorText;
 
-            ref
-                .watch(cancelUserVolunteeringPostulationControllerProvider)
-                .maybeWhen(
+            ref.watch(cancelUserVolunteeringControllerProvider).maybeWhen(
                   orElse: () {},
                   error: (error, __) => errorText =
                       // FirebaseAuthErrorTranslator.translate(
@@ -68,8 +65,8 @@ class PostulateQuitVolunteering extends StatelessWidget {
                       error.toString(),
                   loading: () => isLoading = true,
                 );
-            return ActionsModal(
-              title: "¿Estás seguro que querés retirar tu postulación?",
+            return SermanosActionsModal(
+              title: "¿Estás seguro que querés abandonar tu voluntariado?",
               isLoading: isLoading,
               onConfirm: () async {
                 await ref

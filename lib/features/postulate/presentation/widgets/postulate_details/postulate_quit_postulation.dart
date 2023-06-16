@@ -5,8 +5,7 @@ import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
 import 'package:sermanos/features/postulate/application/controllers/cancel_user_volunteering_postulation_controller.dart';
 
-import '../../../../../config/design_system/cellules/modals/volunteering_actions_modal.dart';
-import '../../../../../config/logger/logger.dart';
+import '../../../../../config/design_system/cellules/modals/sermanos_actions_modal.dart';
 import '../../../domain/models/volunteering.dart';
 
 class PostulateQuitPostulation extends StatelessWidget {
@@ -69,9 +68,8 @@ class PostulateQuitPostulation extends StatelessWidget {
                   loading: () => isLoading = true,
                 );
 
-            logger.d(isLoading.toString());
-            return ActionsModal(
-              title: "¿Estás seguro que querés abandonar tu voluntariado?",
+            return SermanosActionsModal(
+              title: "¿Estás seguro que querés retirar tu postulación?",
               isLoading: isLoading,
               onConfirm: () async {
                 await ref

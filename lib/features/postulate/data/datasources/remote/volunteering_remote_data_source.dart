@@ -258,7 +258,7 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
           .doc(volunteeringId);
 
       await volunteeringQtyQuery.update({
-        volunteersQty: volunteersQty - 1,
+        'volunteersQty': volunteersQty - 1,
       });
 
       // Remove from members
