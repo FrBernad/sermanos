@@ -5,19 +5,20 @@ Future<Volunteering> getVolunteeringByIdControllerMock(
   GetVolunteeringByIdControllerRef ref, {
   required String volunteeringId,
 }) async {
-  return const Volunteering(
+  return Volunteering(
     id: '1',
     name: 'Prueba',
     category: 'Prueba',
     description: 'Prueba',
     about: 'Prueba',
     address: 'Prueba',
-    requirements: ['Prueba', 'Prueba'],
-    availability: ['Prueba', 'Prueba', 'Prueba'],
+    requirements: const ['Prueba', 'Prueba'],
+    availability: const ['Prueba', 'Prueba', 'Prueba'],
     lat: 0.0,
     lng: 0.0,
     imageUrl: '',
     capacity: 10,
     volunteersQty: 10,
+    creationTime: DateTime.now(),
   );
 }

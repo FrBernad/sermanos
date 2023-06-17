@@ -60,5 +60,6 @@ lib/**/generated
 #Test
 test/golden/images/*
 test/golden/failures/*
+coverage/*
 
 

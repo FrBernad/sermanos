@@ -8,6 +8,8 @@ class News extends Equatable {
   final String content;
   final String imageUrl;
 
+  final DateTime creationTime;
+
   const News({
     required this.id,
     required this.title,
@@ -15,6 +17,7 @@ class News extends Equatable {
     required this.source,
     required this.content,
     required this.imageUrl,
+    required this.creationTime,
   });
 
   @override

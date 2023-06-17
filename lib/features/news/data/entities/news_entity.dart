@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sermanos/features/news/domain/models/news.dart';
 
 class NewsEntity {
@@ -9,6 +10,7 @@ class NewsEntity {
   final String source;
   final String content;
   final String imageUrl;
+  final DateTime creationTime;
 
   const NewsEntity({
     required this.id,
@@ -17,12 +19,22 @@ class NewsEntity {
     required this.source,
     required this.content,
     required this.imageUrl,
+    required this.creationTime,
   });
 
   factory NewsEntity.fromJson({
     required String newsId,
     required Map<String, dynamic> json,
   }) {
+    DateTime creationTime = DateTime.now();
+    if (json['creationTime'] != null) {
+      try {
+        creationTime = (json['creationTime'] as Timestamp).toDate();
+      } on StateError {
+        creationTime = DateTime.now();
+      }
+    }
+
     return NewsEntity(
       id: newsId,
       subtitle: json['subtitle'],
@@ -30,6 +42,7 @@ class NewsEntity {
       content: json['content'],
       source: json['source'],
       imageUrl: json['imageUrl'],
+      creationTime: creationTime,
     );
   }
 
@@ -41,6 +54,7 @@ class NewsEntity {
       content: content,
       source: source,
       imageUrl: imageUrl,
+      creationTime: creationTime,
     );
   }
 }

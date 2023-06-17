@@ -79,7 +79,7 @@ class UserRepositoryImpl implements UserRepository {
 
         return Right(userEntityOpt.toNullable()!.toModel());
       } on Exception {
-        return const Left(ConnectionFailure());
+        return const Left(ServerFailure());
       }
     }
     return const Left(ConnectionFailure());

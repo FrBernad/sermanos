@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:sermanos/features/user/domain/models/gender.dart';
 
 import '../../domain/models/app_user_model.dart';
@@ -42,7 +43,7 @@ class AppUserEntity {
     DateTime? birthdate;
     if (json['birthdate'] != null) {
       try {
-        birthdate = DateTime.fromMillisecondsSinceEpoch(json['birthdate']);
+        birthdate = (json['birthdate'] as Timestamp).toDate();
       } on StateError {
         birthdate = null;
       }

@@ -14,6 +14,7 @@ class Volunteering extends Equatable {
   final String imageUrl;
   final int capacity;
   final int volunteersQty;
+  final DateTime creationTime;
 
   const Volunteering({
     required this.id,
@@ -29,6 +30,7 @@ class Volunteering extends Equatable {
     required this.imageUrl,
     required this.capacity,
     required this.volunteersQty,
+    required this.creationTime,
   });
 
   @override

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../../domain/models/volunteering.dart';
 
 class VolunteeringEntity {
@@ -16,6 +18,7 @@ class VolunteeringEntity {
   final String imageUrl;
   final int capacity;
   final int volunteersQty;
+  final DateTime creationTime;
 
   const VolunteeringEntity({
     required this.id,
@@ -31,12 +34,22 @@ class VolunteeringEntity {
     required this.imageUrl,
     required this.capacity,
     required this.volunteersQty,
+    required this.creationTime,
   });
 
   factory VolunteeringEntity.fromJson({
     required String volunteeringId,
     required Map<String, dynamic> json,
   }) {
+    DateTime creationTime = DateTime.now();
+    if (json['creationTime'] != null) {
+      try {
+        creationTime = (json['creationTime'] as Timestamp).toDate();
+      } on StateError {
+        creationTime = DateTime.now();
+      }
+    }
+
     return VolunteeringEntity(
       id: volunteeringId,
       name: json['name'] as String,
@@ -51,6 +64,7 @@ class VolunteeringEntity {
       volunteersQty: json['volunteersQty'] as int,
       capacity: json['capacity'] as int,
       imageUrl: json['imageUrl'] as String,
+      creationTime: creationTime,
     );
   }
 
@@ -69,6 +83,7 @@ class VolunteeringEntity {
       imageUrl: imageUrl,
       volunteersQty: volunteersQty,
       capacity: capacity,
+      creationTime: creationTime,
     );
   }
 }

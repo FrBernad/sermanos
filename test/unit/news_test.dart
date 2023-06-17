@@ -8,22 +8,25 @@ void main() {
   test(
     'Volunteering Entity to Model',
     () {
-      NewsEntity expectedNewsEntity = const NewsEntity(
+      DateTime creationTime = DateTime.now();
+      NewsEntity expectedNewsEntity = NewsEntity(
         id: "1",
         title: "Título 1",
         subtitle: "Subtítulo 1",
         source: "Fuente 1",
         content: "Contenido 1",
         imageUrl: "https://unsplash.com/photos/qQWxYWVKSsc",
+        creationTime: creationTime,
       );
 
-      News expectedNewsModel = const News(
+      News expectedNewsModel = News(
         id: "1",
         title: "Título 1",
         subtitle: "Subtítulo 1",
         source: "Fuente 1",
         content: "Contenido 1",
         imageUrl: "https://unsplash.com/photos/qQWxYWVKSsc",
+        creationTime: creationTime,
       );
 
       expect(
@@ -102,14 +105,16 @@ void main() {
     if (actualNewsModel == null) {
       fail("News model is null");
     }
+    DateTime creationTime = DateTime.now();
 
-    const expectedNewsModel = News(
+    final expectedNewsModel = News(
       id: "1",
       title: "Título 1",
       subtitle: "Subtítulo 1",
       source: "Fuente 1",
       content: "Contenido 1",
       imageUrl: "https://unsplash.com/photos/qQWxYWVKSsc",
+      creationTime: creationTime,
     );
 
     expect(actualNewsModel, expectedNewsModel);

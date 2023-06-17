@@ -13,7 +13,8 @@ void main() {
   test(
     'Volunteering Entity to Model',
     () {
-      VolunteeringEntity expectedVolunteeringEntity = const VolunteeringEntity(
+      DateTime creationTime = DateTime.now();
+      VolunteeringEntity expectedVolunteeringEntity = VolunteeringEntity(
         id: "1",
         name: "Voluntariado 1",
         category: "Categoría 1",
@@ -27,22 +28,24 @@ void main() {
         imageUrl: "https://unsplash.com/photos/qQWxYWVKSsc",
         capacity: 1,
         volunteersQty: 1,
+        creationTime: creationTime,
       );
 
-      Volunteering expectedVolunteeringModel = const Volunteering(
+      Volunteering expectedVolunteeringModel = Volunteering(
         id: "1",
         name: "Voluntariado 1",
         category: "Categoría 1",
         description: "Descripción 1",
         about: "Acerca de 1",
         address: "Dirección 1",
-        requirements: ["Requerimiento 1"],
-        availability: ["Disponibilidad 1"],
+        requirements: const ["Requerimiento 1"],
+        availability: const ["Disponibilidad 1"],
         lat: 1.0,
         lng: 1.0,
         imageUrl: "https://unsplash.com/photos/qQWxYWVKSsc",
         capacity: 1,
         volunteersQty: 1,
+        creationTime: creationTime,
       );
 
       expect(
@@ -63,6 +66,8 @@ void main() {
         .collection(VolunteeringEntity.collectionName)
         .doc("1");
 
+    DateTime creationTime = DateTime.now();
+
     final Map<String, dynamic> mockVolunteeringMap = {
       "name": "Voluntariado 1",
       "category": "Categoría 1",
@@ -76,6 +81,7 @@ void main() {
       "imageUrl": "https://unsplash.com/photos/qQWxYWVKSsc",
       "capacity": 1,
       "volunteersQty": 1,
+      "creationTime": creationTime,
     };
 
     await mockDocumentReference.set(mockVolunteeringMap);
@@ -86,7 +92,7 @@ void main() {
     final actualVolunteeringModelList =
         actualVolunteeringEntityList.map((e) => e.toModel()).toList();
 
-    const expectedVolunteeringModelList = [
+    final expectedVolunteeringModelList = [
       Volunteering(
         id: "1",
         name: "Voluntariado 1",
@@ -94,13 +100,14 @@ void main() {
         description: "Descripción 1",
         about: "Acerca de 1",
         address: "Dirección 1",
-        requirements: ["Requerimiento 1"],
-        availability: ["Disponibilidad 1"],
+        requirements: const ["Requerimiento 1"],
+        availability: const ["Disponibilidad 1"],
         lat: 1.0,
         lng: 1.0,
         imageUrl: "https://unsplash.com/photos/qQWxYWVKSsc",
         capacity: 1,
         volunteersQty: 1,
+        creationTime: creationTime,
       )
     ];
 
@@ -118,6 +125,8 @@ void main() {
         .collection(VolunteeringEntity.collectionName)
         .doc("1");
 
+    DateTime creationTime = DateTime.now();
+
     final Map<String, dynamic> mockVolunteeringMap = {
       "name": "Voluntariado 1",
       "category": "Categoría 1",
@@ -131,6 +140,7 @@ void main() {
       "imageUrl": "https://unsplash.com/photos/qQWxYWVKSsc",
       "capacity": 1,
       "volunteersQty": 1,
+      "creationTime": creationTime,
     };
 
     await mockDocumentReference.set(mockVolunteeringMap);
@@ -147,7 +157,7 @@ void main() {
       fail("Volunteering model is null");
     }
 
-    const expectedVolunteeringModel = Volunteering(
+    final expectedVolunteeringModel = Volunteering(
       id: "1",
       name: "Voluntariado 1",
       category: "Categoría 1",
@@ -161,6 +171,7 @@ void main() {
       imageUrl: "https://unsplash.com/photos/qQWxYWVKSsc",
       capacity: 1,
       volunteersQty: 1,
+      creationTime: creationTime,
     );
 
     expect(actualVolunteeringModel, expectedVolunteeringModel);
@@ -179,6 +190,8 @@ void main() {
         .collection(VolunteeringReducedEntity.collectionName)
         .doc("1");
 
+    DateTime creationTime = DateTime.now();
+
     final Map<String, dynamic> mockVolunteeringMap = {
       "name": "Voluntariado 1",
       "category": "Categoría 1",
@@ -192,6 +205,7 @@ void main() {
       "imageUrl": "https://unsplash.com/photos/qQWxYWVKSsc",
       "capacity": 1,
       "volunteersQty": 1,
+      "creationTime": creationTime,
     };
 
     await mockDocumentReference.set(mockVolunteeringMap);
@@ -232,6 +246,8 @@ void main() {
         .collection(VolunteeringEntity.collectionName)
         .doc("1");
 
+    DateTime creationTime = DateTime.now();
+
     final Map<String, dynamic> mockVolunteeringMap = {
       "name": "Voluntariado 1",
       "category": "Categoría 1",
@@ -245,6 +261,7 @@ void main() {
       "imageUrl": "https://unsplash.com/photos/qQWxYWVKSsc",
       "capacity": 10,
       "volunteersQty": 0,
+      "creationTime": creationTime,
     };
 
     await mockDocumentReference.set(mockVolunteeringMap);
@@ -280,6 +297,8 @@ void main() {
         .collection(VolunteeringEntity.collectionName)
         .doc("1");
 
+    DateTime creationTime = DateTime.now();
+
     final Map<String, dynamic> mockVolunteeringMap = {
       "name": "Voluntariado 1",
       "category": "Categoría 1",
@@ -293,6 +312,7 @@ void main() {
       "imageUrl": "https://unsplash.com/photos/qQWxYWVKSsc",
       "capacity": 10,
       "volunteersQty": 0,
+      "creationTime": creationTime,
     };
 
     await mockDocumentReference.set(mockVolunteeringMap);
@@ -331,6 +351,7 @@ void main() {
     final volunteeringRemoteDataSource = VolunteeringRemoteDataSourceImpl(
       firebaseDatabaseClient: fakeFirebaseFirestore,
     );
+    DateTime creationTime = DateTime.now();
 
     final Map<String, dynamic> mockVolunteeringMap = {
       "name": "Voluntariado 1",
@@ -345,6 +366,7 @@ void main() {
       "imageUrl": "https://unsplash.com/photos/qQWxYWVKSsc",
       "capacity": 10,
       "volunteersQty": 0,
+      "creationTime": creationTime,
     };
 
     const AppUser mockAppUser = AppUser(

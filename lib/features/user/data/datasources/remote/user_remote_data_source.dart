@@ -103,7 +103,7 @@ class UserRemoteDataSourceImpl extends UserRemoteDataSource {
           .doc(userId);
 
       final userDataMap = {
-        'birthdate': userData.birthdate.millisecondsSinceEpoch,
+        'birthdate': userData.birthdate,
         'emailContact': userData.emailContact,
         'gender': userData.gender.name,
         'phone': userData.phone,
