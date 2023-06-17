@@ -135,18 +135,22 @@ class ProfileDataForm extends ConsumerWidget {
           const SizedBox(
             height: 24,
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(4)),
-              color: SermanosColors.secondary25,
-            ),
-            width: double.infinity,
-            child: SermanosPhotoField(
-              enabled: enabled,
-              initialValue: user.profileImageUrl,
-              formField: imageField,
-            ),
+          SermanosPhotoField(
+            enabled: enabled,
+            initialValue: user.profileImageUrl,
+            formField: imageField,
+            validators: [
+              (value) {
+                if (value == null) {
+                  if (user.profileImageUrl == null) {
+                    return "Ingrese una foto de perfil";
+                  } else {
+                    return null;
+                  }
+                }
+                return null;
+              }
+            ],
           ),
         ],
       ),

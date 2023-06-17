@@ -48,62 +48,85 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosPhotoField> {
       name: widget.formField,
       validator: FormBuilderValidators.compose(widget.validators ?? []),
       builder: (FormFieldState field) {
-        return _image == null
-            ? Row(
-                children: [
-                  const Expanded(
-                    child: Text(
-                      "Foto de perfil",
-                      style: SermanosTypography.subtitle01(
-                          color: SermanosColors.neutral100),
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(4)),
+                color: SermanosColors.secondary25,
+              ),
+              width: double.infinity,
+              child: _image == null
+                  ? Row(
+                      children: [
+                        const Expanded(
+                          child: Text(
+                            "Foto de perfil",
+                            style: SermanosTypography.subtitle01(
+                                color: SermanosColors.neutral100),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        SermanosShortButton(
+                          text: "Subir foto",
+                          onPressed: () =>
+                              _onPressedProfileButton(context, ref, field),
+                          filled: true,
+                          enabled: widget.enabled,
+                        )
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Foto de perfil",
+                              style: SermanosTypography.subtitle01(
+                                  color: SermanosColors.neutral100),
+                            ),
+                            const SizedBox(
+                              height: 8,
+                            ),
+                            SermanosShortButton(
+                              text: "Cambiar foto",
+                              onPressed: () =>
+                                  _onPressedProfileButton(context, ref, field),
+                              filled: true,
+                              enabled: widget.enabled,
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        ),
+                        ProfileImage(
+                          imageUrl: _image,
+                          height: 84,
+                          width: 84,
+                          fromNetwork: _image == widget.initialValue,
+                        )
+                      ],
                     ),
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  SermanosShortButton(
-                    text: "Subir foto",
-                    onPressed: () =>
-                        _onPressedProfileButton(context, ref, field),
-                    filled: true,
-                    enabled: widget.enabled,
-                  )
-                ],
+            ),
+            if (field.errorText != null)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 5, 0, 0),
+                child: Text(
+                  field.errorText!,
+                  textAlign: TextAlign.start,
+                  style: const SermanosTypography.body01(
+                      color: SermanosColors.error100),
+                ),
               )
-            : Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Foto de perfil",
-                        style: SermanosTypography.subtitle01(
-                            color: SermanosColors.neutral100),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      SermanosShortButton(
-                        text: "Cambiar foto",
-                        onPressed: () =>
-                            _onPressedProfileButton(context, ref, field),
-                        filled: true,
-                        enabled: widget.enabled,
-                      )
-                    ],
-                  ),
-                  const SizedBox(
-                    width: 8,
-                  ),
-                  ProfileImage(
-                    imageUrl: _image,
-                    height: 84,
-                    width: 84,
-                    fromNetwork: _image == widget.initialValue,
-                  )
-                ],
-              );
+          ],
+        );
       },
     );
   }
@@ -124,7 +147,7 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosPhotoField> {
       if (context.mounted) {
         await _showPermanentlyDeniedPermissionDialog(context);
       }
-    } else if (Platform.isAndroid || permission.isGranted) {
+    } else if (Platform.isAndroid || permission.isGranted || permission.isLimited) {
       if (context.mounted) {
         final ImagePicker picker = ImagePicker();
         final XFile? image =
