@@ -47,52 +47,16 @@ class SignUpButton extends ConsumerWidget {
     final String password =
         signUpFormKey.currentState!.fields['password']!.value;
 
-    final success = await ref.read(signUpControllerProvider.notifier).signUp(
+    await ref.read(signUpControllerProvider.notifier).signUp(
           name: name,
           surname: surname,
           email: email,
           password: password,
         );
 
-    if (success) {
-      await ref.read(firebaseAnalyticsProvider).logSignUp(
-            signUpMethod: 'email_and_password',
-          );
-      if (defaultTargetPlatform == TargetPlatform.iOS) {
-        var permission = await ref.read(eventPermissionProvider.future);
-        if (context.mounted) {
-          if (permission.isDenied) {
-            await _showPermissionEventDialog(context);
-            permission = await Permission.appTrackingTransparency.request();
-          }
-          if (permission.isGranted) {
-            ref.invalidate(eventPermissionProvider);
-          }
-        }
-      }
-      ref.read(mainBeamerDelegateProvider).popToNamed(WelcomeScreen.route);
-    }
-  }
-
-  _showPermissionEventDialog(BuildContext context) async {
-    return await showDialog(
-      barrierDismissible: false,
-      context: context,
-      builder: (context) => SermanosPermissionModal(
-        title: "Monitoreo de eventos",
-        content:
-            "Sermanos solicita permiso para monitorear tu actividad en la aplicación. Esto no será compartido con nadie.",
-        actions: [
-          SermanosShortButton(
-            filled: false,
-            onPressed: () async {
-              Navigator.of(context).pop();
-            },
-            textColor: SermanosColors.primary100,
-            text: "Ok".toUpperCase(),
-          ),
-        ],
-      ),
-    );
+    await ref.read(firebaseAnalyticsProvider).logSignUp(
+          signUpMethod: 'email_and_password',
+        );
+    ref.read(mainBeamerDelegateProvider).popToNamed(WelcomeScreen.route);
   }
 }
