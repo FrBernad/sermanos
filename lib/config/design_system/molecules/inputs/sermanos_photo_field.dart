@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -110,7 +112,7 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosPhotoField> {
       BuildContext context, WidgetRef ref, FormFieldState field) async {
     var permission = await ref.read(galleryPermissionProvider.future);
     if (context.mounted) {
-      if (permission.isDenied) {
+      if (Platform.isIOS && permission.isDenied) {
         await _showPermissionGalleryDialog(context);
         permission = await Permission.photos.request();
         if (!permission.isDenied) {
@@ -118,11 +120,11 @@ class _SermanosPhotoFieldState extends ConsumerState<SermanosPhotoField> {
         }
       }
     }
-    if (permission.isPermanentlyDenied) {
+    if (Platform.isIOS && permission.isPermanentlyDenied) {
       if (context.mounted) {
         await _showPermanentlyDeniedPermissionDialog(context);
       }
-    } else if (permission.isGranted) {
+    } else if (Platform.isAndroid || permission.isGranted) {
       if (context.mounted) {
         final ImagePicker picker = ImagePicker();
         final XFile? image =
