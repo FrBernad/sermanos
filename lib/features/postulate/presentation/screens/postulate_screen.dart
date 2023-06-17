@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sermanos/features/postulate/application/controllers/postulate_view_mode_controller.dart';
 import 'package:sermanos/features/postulate/presentation/widgets/postulate/postulate_list_view.dart';
 
