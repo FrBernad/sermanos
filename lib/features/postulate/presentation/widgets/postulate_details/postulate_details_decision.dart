@@ -34,6 +34,6 @@ class PostulateDetailDecision extends ConsumerWidget {
       return PostulateQuitVolunteering(volunteering: volunteering);
     }
 
-    return PostulateQuitActualVolunteering(volunteering: volunteering);
+    return PostulateQuitActualVolunteering(volunteering: userVolunteering);
   }
 }

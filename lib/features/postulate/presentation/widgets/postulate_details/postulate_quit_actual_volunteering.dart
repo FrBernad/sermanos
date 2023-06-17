@@ -1,13 +1,13 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sermanos/features/postulate/domain/models/volunteering_reduced.dart';
 import 'package:sermanos/features/postulate/presentation/screens/postulate_detail_screen.dart';
 
 import '../../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import '../../../../../config/design_system/tokens/sermanos_colors.dart';
 import '../../../../../config/design_system/tokens/sermanos_typography.dart';
 import '../../../../../config/providers.dart';
-import '../../../domain/models/volunteering.dart';
 
 class PostulateQuitActualVolunteering extends ConsumerWidget {
   const PostulateQuitActualVolunteering({
@@ -15,7 +15,7 @@ class PostulateQuitActualVolunteering extends ConsumerWidget {
     required this.volunteering,
   }) : super(key: key);
 
-  final Volunteering volunteering;
+  final VolunteeringReduced volunteering;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
