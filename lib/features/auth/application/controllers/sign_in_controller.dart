@@ -24,7 +24,7 @@ class SignInController extends _$SignInController {
         .signInWithEmailAndPassword(email: email, password: password);
 
     resultEither.fold(
-      (l) => state = AsyncError(l, StackTrace.current),
+      (l) => state = AsyncError(l.message, StackTrace.current),
       (user) {
         ref
             .read(firebaseAnalyticsProvider)
