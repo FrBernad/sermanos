@@ -1,5 +1,6 @@
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sermanos/features/postulate/data/datasources/remote/volunteering_remote_data_source.dart';
 import 'package:sermanos/features/postulate/data/entities/volunteering_entity.dart';
 import 'package:sermanos/features/postulate/data/entities/volunteering_reduced_entity.dart';
@@ -87,7 +88,10 @@ void main() {
     await mockDocumentReference.set(mockVolunteeringMap);
 
     final actualVolunteeringEntityList =
-        await volunteeringRemoteDataSource.getVolunteerings(searchTerm: null);
+        await volunteeringRemoteDataSource.getVolunteerings(
+      searchTerm: null,
+      userPosition: const LatLng(0, 0),
+    );
 
     final actualVolunteeringModelList =
         actualVolunteeringEntityList.map((e) => e.toModel()).toList();
