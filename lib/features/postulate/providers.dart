@@ -1,4 +1,3 @@
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sermanos/config/providers.dart';
@@ -24,6 +23,7 @@ VolunteeringRepository volunteeringRepository(VolunteeringRepositoryRef ref) =>
     VolunteeringRepositoryImpl(
       volunteeringDataSource: ref.watch(volunteeringRemoteDataSourceProvider),
       networkInfo: ref.watch(networkInfoProvider),
+      ref: ref,
     );
 
 ///

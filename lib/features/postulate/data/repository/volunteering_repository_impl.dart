@@ -1,4 +1,6 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:sermanos/features/core/error/exception.dart';
 import 'package:sermanos/features/core/error/failure.dart';
 import 'package:sermanos/features/core/platform/network_info.dart';
@@ -8,16 +10,21 @@ import 'package:sermanos/features/postulate/data/entities/volunteering_reduced_e
 import 'package:sermanos/features/postulate/domain/models/volunteering.dart';
 import 'package:sermanos/features/postulate/domain/models/volunteering_reduced.dart';
 import 'package:sermanos/features/postulate/domain/repositories/volunteering_repository.dart';
+import 'package:sermanos/features/postulate/providers.dart';
 import 'package:sermanos/features/user/domain/models/app_user_model.dart';
+
+import '../../application/controllers/user_position_controller.dart';
 
 class VolunteeringRepositoryImpl implements VolunteeringRepository {
   VolunteeringRepositoryImpl({
     required this.volunteeringDataSource,
     required this.networkInfo,
+    required this.ref,
   });
 
   final VolunteeringRemoteDataSource volunteeringDataSource;
   final NetworkInfo networkInfo;
+  final VolunteeringRepositoryRef ref;
 
   @override
   Future<Either<Failure, List<Volunteering>>> getVolunteerings({
@@ -26,9 +33,18 @@ class VolunteeringRepositoryImpl implements VolunteeringRepository {
     if (networkInfo.hasConnection) {
       List<Volunteering> volunteering = [];
       try {
+        final locationPermission =
+            await ref.refresh(locationPermissionProvider.future);
+
+        LatLng? userPosition = locationPermission.isGranted
+            ? await ref.refresh(userPositionControllerProvider.future)
+            : null;
+
         final List<VolunteeringEntity> volunteeringEntities =
             await volunteeringDataSource.getVolunteerings(
-                searchTerm: searchTerm);
+          searchTerm: searchTerm,
+          userPosition: userPosition,
+        );
 
         volunteering = volunteeringEntities.map((n) => n.toModel()).toList();
       } on Exception {

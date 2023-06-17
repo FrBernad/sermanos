@@ -18,34 +18,36 @@ class SermanosMapButton extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return IconButton(
       icon: SermanosIcons.map(status: SermanosIconStatus.activated),
-      onPressed: () async {
-        var permission = await ref.read(locationPermissionProvider.future);
-        if (context.mounted) {
-          if (permission.isDenied) {
-            await _showPermissionLocationDialog(context);
-            permission = await Permission.locationWhenInUse.request();
-            if (!permission.isDenied) {
-              ref.invalidate(locationPermissionProvider);
-            }
-          }
-        }
-        if (permission.isPermanentlyDenied) {
-          if (context.mounted) {
-            await _showPermanentlyDeniedPermissionDialog(context);
-          }
-        } else if (permission.isGranted) {
-          if (context.mounted) {
-            ref
-                .watch(postulateViewModeControllerProvider.notifier)
-                .set(PostulateViewMode.map);
-          }
-        } else {
-          if (context.mounted) {
-            await _showPermissionLocationDialog(context);
-          }
-        }
-      },
+      onPressed: () => _onPressed(context, ref),
     );
+  }
+
+  _onPressed(BuildContext context, WidgetRef ref) async {
+    var permission = await ref.read(locationPermissionProvider.future);
+    if (context.mounted) {
+      if (permission.isDenied) {
+        await _showPermissionLocationDialog(context);
+        permission = await Permission.locationWhenInUse.request();
+        if (!permission.isDenied) {
+          ref.invalidate(locationPermissionProvider);
+        }
+      }
+    }
+    if (permission.isPermanentlyDenied) {
+      if (context.mounted) {
+        await _showPermanentlyDeniedPermissionDialog(context);
+      }
+    } else if (permission.isGranted) {
+      if (context.mounted) {
+        ref
+            .watch(postulateViewModeControllerProvider.notifier)
+            .set(PostulateViewMode.map);
+      }
+    } else {
+      if (context.mounted) {
+        await _showPermissionLocationDialog(context);
+      }
+    }
   }
 
   _showPermissionLocationDialog(BuildContext context) async {

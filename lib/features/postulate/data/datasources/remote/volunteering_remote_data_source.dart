@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:fuzzywuzzy/fuzzywuzzy.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:sermanos/features/postulate/data/entities/volunteering_reduced_entity.dart';
 import 'package:sermanos/features/postulate/domain/models/postulation_status.dart';
 import 'package:sermanos/features/user/data/entities/app_user_entity.dart';
@@ -13,6 +15,7 @@ import '../../entities/volunteering_entity.dart';
 abstract class VolunteeringRemoteDataSource {
   Future<List<VolunteeringEntity>> getVolunteerings({
     required String? searchTerm,
+    required LatLng? userPosition,
   });
 
   Future<Option<VolunteeringEntity>> getVolunteeringById({
@@ -63,6 +66,7 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
   @override
   Future<List<VolunteeringEntity>> getVolunteerings({
     required String? searchTerm,
+    required LatLng? userPosition,
   }) async {
     try {
       final response = await _firebaseDatabaseClient
@@ -83,7 +87,7 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
         return volunteeringEntities;
       }
 
-      return volunteeringEntities.where((volunteering) {
+      final matchedVolunteerings = volunteeringEntities.where((volunteering) {
         final result = extractTop(
           choices: [volunteering.name, volunteering.description],
           query: searchTerm,
@@ -92,6 +96,29 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
         );
         return result.isNotEmpty;
       }).toList();
+
+      matchedVolunteerings.sort((a, b) {
+        if (userPosition == null) {
+          return a.creationTime.compareTo(b.creationTime);
+        }
+
+        final distanceA = Geolocator.distanceBetween(
+          a.lat,
+          a.lng,
+          userPosition.latitude,
+          userPosition.longitude,
+        );
+        final distanceB = Geolocator.distanceBetween(
+          b.lat,
+          b.lng,
+          userPosition.latitude,
+          userPosition.longitude,
+        );
+
+        return distanceA.compareTo(distanceB);
+      });
+
+      return matchedVolunteerings;
     } catch (e) {
       logger.d(e);
       throw ServerException();

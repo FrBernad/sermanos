@@ -111,7 +111,9 @@ class NewsDetailsScreen extends ConsumerWidget {
                             itemId: news.id,
                             method: 'ShareDialog',
                           );
-                      await Share.share(news.title);
+                      await Share.share(
+                        'Héchale un ojo a la siguiente noticia:\n\n${news.subtitle}\n\n${news.imageUrl}',
+                      );
                     },
                     filled: true,
                   ),
