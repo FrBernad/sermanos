@@ -1,7 +1,7 @@
 import 'package:beamer/beamer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sermanos/features/postulate/presentation/screens/postulate_screen.dart';
+import 'package:sermanos/features/postulate/presentation/screens/postulate_detail_screen.dart';
 
 import '../../../../../config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import '../../../../../config/design_system/tokens/sermanos_colors.dart';
@@ -32,13 +32,15 @@ class PostulateQuitActualVolunteering extends ConsumerWidget {
           text: "Abandonar voluntariado actual",
           onPressed: () async {
             await ref.read(firebaseAnalyticsProvider).logEvent(
-              name: "redirected_to_postulate_screen_for_cancelation",
+              name: "redirected_to_postulate_for_cancelation",
               parameters: {
                 "voluteering_id": volunteering.id,
               },
             );
             if (context.mounted) {
-              context.beamToNamed(PostulateScreen.route);
+              context.beamToNamed(
+                PostulateDetailScreen.routeFromId(volunteering.id),
+              );
             }
           },
           textColor: SermanosColors.primary100,
