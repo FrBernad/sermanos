@@ -70,4 +70,48 @@ void main() {
 
     expect(actualNewsModelList, expectedNewsModelList);
   });
+
+  test("Get news from firestore", () async {
+    final FakeFirebaseFirestore fakeFirebaseFirestore = FakeFirebaseFirestore();
+
+    final newsRemoteDataSource = NewsRemoteDataSourceImpl(
+      firebaseDatabaseClient: fakeFirebaseFirestore,
+    );
+
+    final mockDocumentReference =
+        fakeFirebaseFirestore.collection(NewsEntity.collectionName).doc("1");
+
+    final Map<String, dynamic> mockNewsMap = {
+      "title": "Título 1",
+      "subtitle": "Subtítulo 1",
+      "source": "Fuente 1",
+      "content": "Contenido 1",
+      "imageUrl": "https://unsplash.com/photos/qQWxYWVKSsc",
+    };
+
+    await mockDocumentReference.set(mockNewsMap);
+
+    final actualNewsEntityList =
+        await newsRemoteDataSource.getNewsById(newsId: "1");
+
+    final actualNewsModel = actualNewsEntityList.fold(
+      () => null,
+      (a) => a.toModel(),
+    );
+
+    if (actualNewsModel == null) {
+      fail("News model is null");
+    }
+
+    const expectedNewsModel = News(
+      id: "1",
+      title: "Título 1",
+      subtitle: "Subtítulo 1",
+      source: "Fuente 1",
+      content: "Contenido 1",
+      imageUrl: "https://unsplash.com/photos/qQWxYWVKSsc",
+    );
+
+    expect(actualNewsModel, expectedNewsModel);
+  });
 }
