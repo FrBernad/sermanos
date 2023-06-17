@@ -32,6 +32,13 @@ class NewsRemoteDataSourceImpl implements NewsRemoteDataSource {
         );
         newsEntities.add(remoteEntity);
       }
+      newsEntities.sort((a, b) {
+        int cmp = b.creationTime.compareTo(a.creationTime);
+        if (cmp == 0) {
+          cmp = a.id.compareTo(b.id);
+        }
+        return cmp;
+      });
       return newsEntities;
     } catch (e) {
       logger.d(e);
