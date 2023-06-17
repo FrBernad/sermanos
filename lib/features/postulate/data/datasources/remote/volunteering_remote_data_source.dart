@@ -98,24 +98,31 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
       }).toList();
 
       matchedVolunteerings.sort((a, b) {
-        if (userPosition == null) {
-          return a.creationTime.compareTo(b.creationTime);
+        int cmp = 0;
+        if (userPosition != null) {
+          final distanceA = Geolocator.distanceBetween(
+            a.lat,
+            a.lng,
+            userPosition.latitude,
+            userPosition.longitude,
+          );
+          final distanceB = Geolocator.distanceBetween(
+            b.lat,
+            b.lng,
+            userPosition.latitude,
+            userPosition.longitude,
+          );
+          cmp = distanceA.compareTo(distanceB);
         }
 
-        final distanceA = Geolocator.distanceBetween(
-          a.lat,
-          a.lng,
-          userPosition.latitude,
-          userPosition.longitude,
-        );
-        final distanceB = Geolocator.distanceBetween(
-          b.lat,
-          b.lng,
-          userPosition.latitude,
-          userPosition.longitude,
-        );
+        if (cmp == 0) {
+          cmp = b.creationTime.compareTo(a.creationTime);
+          if (cmp == 0) {
+            cmp = a.id.compareTo(b.id);
+          }
+        }
 
-        return distanceA.compareTo(distanceB);
+        return cmp;
       });
 
       return matchedVolunteerings;
