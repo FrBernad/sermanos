@@ -111,22 +111,20 @@ class RootNavigationLayout extends HookConsumerWidget {
     ObjectRef<int> currentIndex,
   ) {
     final context = useContext();
-
-    listener() {
-      if (context.beamerPathSegments.length == 1) {
-        final newPathIndex = _getCurrentTabIndex(context.beamerRootPath);
-        if (newPathIndex != -1 && newPathIndex != currentIndex.value) {
-          tabController.animateTo(newPathIndex);
-          currentIndex.value = newPathIndex;
-        }
-      }
-    }
-
     final beamerDelegate = Beamer.of(context);
 
-    beamerDelegate.addListener(listener);
-
     useEffect(() {
+      listener() {
+        if (context.beamerPathSegments.length == 1) {
+          final newPathIndex = _getCurrentTabIndex(context.beamerRootPath);
+          if (newPathIndex != -1 && newPathIndex != currentIndex.value) {
+            tabController.animateTo(newPathIndex);
+            currentIndex.value = newPathIndex;
+          }
+        }
+      }
+
+      beamerDelegate.addListener(listener);
       return () => beamerDelegate.removeListener(listener);
     }, []);
   }
