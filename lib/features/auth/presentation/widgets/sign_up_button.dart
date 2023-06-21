@@ -53,10 +53,5 @@ class SignUpButton extends ConsumerWidget {
           email: email,
           password: password,
         );
-
-    await ref.read(firebaseAnalyticsProvider).logSignUp(
-          signUpMethod: 'email_and_password',
-        );
-    ref.read(mainBeamerDelegateProvider).popToNamed(WelcomeScreen.route);
   }
 }

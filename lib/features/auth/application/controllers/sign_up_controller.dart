@@ -1,4 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:sermanos/config/providers.dart';
 import 'package:sermanos/features/auth/presentation/screens/welcome_screen.dart';
 
 import '../../../../config/router/router.dart';
@@ -30,8 +31,12 @@ class SignUpController extends _$SignUpController {
 
     resultEither.fold(
       (l) => state = AsyncError(l.message, StackTrace.current),
-      (user) {
+      (user) async {
         ref.read(currentUserProvider.notifier).set(user);
+        await ref.read(firebaseAnalyticsProvider).logSignUp(
+              signUpMethod: 'email_and_password',
+            );
+        ref.read(mainBeamerDelegateProvider).popToNamed(WelcomeScreen.route);
         state = const AsyncValue.data(null);
       },
     );
