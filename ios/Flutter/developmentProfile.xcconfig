@@ -3,4 +3,4 @@
 FLUTTER_TARGET=lib/main_development.dart
 ASSET_PREFIX=development
 BUNDLE_NAME=Ser Manos Development
-BUNDLE_DISPLAY_NAME=Ser Manos Development
+BUNDLE_DISPLAY_NAME=Ser Manos

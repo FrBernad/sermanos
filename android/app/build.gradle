@@ -37,7 +37,7 @@ android {
         development {
             dimension "flavor-type"
             applicationId "ar.edu.itba.sermanos.development"
-            resValue "string", "app_name", "Ser Manos Development"
+            resValue "string", "app_name", "Ser Manos"
         }
         production {
             dimension "flavor-type"
