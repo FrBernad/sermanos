@@ -89,7 +89,7 @@ class VolunteeringRemoteDataSourceImpl implements VolunteeringRemoteDataSource {
 
       final matchedVolunteerings = volunteeringEntities.where((volunteering) {
         final result = extractTop(
-          choices: [volunteering.name, volunteering.description],
+          choices: [volunteering.name, volunteering.category],
           query: searchTerm,
           limit: 1,
           cutoff: 70,

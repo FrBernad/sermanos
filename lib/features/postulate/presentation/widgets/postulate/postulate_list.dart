@@ -19,7 +19,7 @@ class PostulateList extends ConsumerWidget {
     return volunteeringController.when(
       data: (volunteering) {
         if (volunteering.isEmpty) {
-          return const NoVolunteeringAvailable();
+          return const SliverToBoxAdapter(child: NoVolunteeringAvailable());
         } else {
           return SliverPadding(
             padding: const EdgeInsets.fromLTRB(
