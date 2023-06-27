@@ -8,7 +8,7 @@ import 'package:sermanos/features/auth/presentation/screens/sign_up_screen.dart'
 import '../../../../config/design_system/cellules/forms/sermanos_sign_in_form.dart';
 import '../widgets/sign_in_button.dart';
 
-final loginFormKey = GlobalKey<FormBuilderState>();
+final signInFormKey = GlobalKey<FormBuilderState>();
 
 class SignInScreen extends StatelessWidget {
   static const route = "/auth/signIn";

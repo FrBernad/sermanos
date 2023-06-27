@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:sermanos/config/design_system/molecules/buttons/sermanos_CTA_button.dart';
 import 'package:sermanos/config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
@@ -111,8 +115,22 @@ class NewsDetailsScreen extends ConsumerWidget {
                             itemId: news.id,
                             method: 'ShareDialog',
                           );
-                      await Share.share(
-                        'Héchale un ojo a la siguiente noticia:\n\n${news.subtitle}\n\n${news.imageUrl}',
+
+                      final response = await Dio().get(
+                        news.imageUrl,
+                        options: Options(
+                          responseType: ResponseType.bytes,
+                        ),
+                      );
+                      final List<int> bytes = response.data;
+                      final temp = await getTemporaryDirectory();
+                      final path = '${temp.path}/image.jpg';
+
+                      File(path).writeAsBytesSync(bytes);
+
+                      await Share.shareXFiles(
+                        [XFile(path)],
+                        text: news.subtitle,
                       );
                     },
                     filled: true,
