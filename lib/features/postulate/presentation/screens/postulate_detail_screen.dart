@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -62,13 +63,13 @@ class PostulateDetailScreen extends HookConsumerWidget {
                     right: false,
                     child: Stack(
                       children: [
-                        Image(
-                          image: NetworkImage(volunteering.imageUrl),
+                        CachedNetworkImage(
+                          imageUrl: volunteering.imageUrl,
                           height: 243,
                           width: double.infinity,
                           fit: BoxFit.cover,
-                          errorBuilder: (BuildContext context, Object exception,
-                              StackTrace? stackTrace) {
+                          errorWidget:
+                              (BuildContext context, String s, dynamic) {
                             return ColoredBox(
                               color: SermanosColors.neutral0,
                               child: Image.asset(

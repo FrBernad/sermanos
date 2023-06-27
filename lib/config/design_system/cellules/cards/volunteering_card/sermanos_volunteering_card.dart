@@ -1,4 +1,5 @@
 import 'package:beamer/beamer.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_icons.dart';
@@ -36,11 +37,11 @@ class SermanosVolunteeringCard extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Image(
-                image: NetworkImage(volunteering.imageUrl),
-                fit: BoxFit.cover,
+              CachedNetworkImage(
+                imageUrl: volunteering.imageUrl,
                 height: 138,
-                errorBuilder: (BuildContext, Object, StackTrace) {
+                fit: BoxFit.cover,
+                errorWidget: (BuildContext context, String s, dynamic) {
                   return Image.asset(
                     "assets/images/sermanos_image_not_found.png",
                     height: 138,
