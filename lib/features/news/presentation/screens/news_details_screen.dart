@@ -13,6 +13,7 @@ import 'package:sermanos/features/core/presentation/widgets/error_message.dart';
 import 'package:sermanos/features/news/application/controllers/get_news_by_id_controller.dart';
 import 'package:share_plus/share_plus.dart';
 
+import '../../../../config/design_system/tokens/sermanos_skeleton.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
 import '../../../../config/providers.dart';
 
@@ -87,6 +88,9 @@ class NewsDetailsScreen extends ConsumerWidget {
                         "assets/images/sermanos_image_not_found.png",
                         height: 160,
                       );
+                    },
+                    placeholder: (BuildContext context, String url) {
+                      return const SermanosSkeleton(rounded: false);
                     },
                   ),
                   const SizedBox(height: 16),

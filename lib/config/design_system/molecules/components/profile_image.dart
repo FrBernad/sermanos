@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sermanos/config/design_system/atoms/icons/sermanos_icons.dart';
+import 'package:sermanos/config/design_system/tokens/sermanos_skeleton.dart';
 
 class ProfileImage extends StatelessWidget {
   const ProfileImage({
@@ -33,6 +34,9 @@ class ProfileImage extends StatelessWidget {
                           (BuildContext context, String url, dynamic error) {
                         return Image.asset(
                             "assets/images/sermanos_image_not_found.png");
+                      },
+                      placeholder: (BuildContext context, String url) {
+                        return const SermanosSkeleton(rounded: false);
                       },
                     )
                   : Image.file(

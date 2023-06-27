@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:fpdart/fpdart.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:sermanos/features/postulate/application/controllers/get_favorite_volunteerings_controller.dart';
 import 'package:sermanos/features/postulate/providers.dart';
 
 import '../../../core/error/failure.dart';
@@ -15,6 +16,9 @@ class VolunteeringSearchController extends _$VolunteeringSearchController {
 
   @override
   Future<List<Volunteering>> build() async {
+    await ref.watch(
+        getFavoriteVolunteeringsControllerProvider.selectAsync((data) => null));
+
     ref.onDispose(() {
       if (_debounceTimer != null) _debounceTimer!.cancel();
     });

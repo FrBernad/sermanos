@@ -11,6 +11,7 @@ import 'package:sermanos/features/postulate/presentation/widgets/postulate_detai
 import '../../../../config/design_system/molecules/components/vacancies.dart';
 import '../../../../config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
 import '../../../../config/design_system/tokens/sermanos_colors.dart';
+import '../../../../config/design_system/tokens/sermanos_skeleton.dart';
 import '../../../../config/design_system/tokens/sermanos_typography.dart';
 import '../../../core/presentation/widgets/error_message.dart';
 import '../../application/controllers/get_volunteering_by_id_controller.dart';
@@ -79,6 +80,9 @@ class PostulateDetailScreen extends HookConsumerWidget {
                                 height: 243,
                               ),
                             );
+                          },
+                          placeholder: (BuildContext context, String url) {
+                            return const SermanosSkeleton(rounded: false);
                           },
                         ),
                         Positioned.fill(

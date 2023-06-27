@@ -6,7 +6,6 @@ import 'package:sermanos/config/design_system/tokens/sermanos_shadows.dart';
 import 'package:sermanos/features/postulate/application/controllers/get_user_volunteering_controller.dart';
 
 import '../../../../../config/design_system/atoms/icons/sermanos_icons.dart';
-import '../../../../../config/design_system/molecules/spinner/ser_manos_circular_progress_indicator.dart';
 import '../../../../../config/design_system/tokens/sermanos_grid.dart';
 import '../../../../../config/design_system/tokens/sermanos_typography.dart';
 import '../../../../core/presentation/widgets/error_message.dart';
@@ -95,7 +94,7 @@ class UserActivity extends ConsumerWidget {
         },
         error: (error, stackTrace) =>
             const Align(alignment: Alignment.topCenter, child: ErrorMessage()),
-        loading: () => const SermanosCircularProgressIndicator(),
+        loading: () => const SizedBox.shrink(),
       ),
     );
   }

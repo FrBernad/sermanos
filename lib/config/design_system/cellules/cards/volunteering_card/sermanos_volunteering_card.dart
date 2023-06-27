@@ -13,6 +13,7 @@ import 'package:sermanos/features/postulate/domain/models/volunteering.dart';
 import 'package:sermanos/features/postulate/presentation/screens/postulate_detail_screen.dart';
 
 import '../../../../providers.dart';
+import '../../../tokens/sermanos_skeleton.dart';
 
 class SermanosVolunteeringCard extends ConsumerWidget {
   const SermanosVolunteeringCard({
@@ -46,6 +47,9 @@ class SermanosVolunteeringCard extends ConsumerWidget {
                     "assets/images/sermanos_image_not_found.png",
                     height: 138,
                   );
+                },
+                placeholder: (BuildContext context, String url) {
+                  return const SermanosSkeleton(rounded: false);
                 },
               ),
               Padding(

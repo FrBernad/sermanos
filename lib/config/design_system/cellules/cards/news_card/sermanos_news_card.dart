@@ -9,6 +9,7 @@ import 'package:sermanos/features/news/domain/models/news.dart';
 import 'package:sermanos/features/news/presentation/screens/news_details_screen.dart';
 
 import '../../../../providers.dart';
+import '../../../tokens/sermanos_skeleton.dart';
 
 class SermanosNewsCard extends ConsumerWidget {
   const SermanosNewsCard({
@@ -37,6 +38,9 @@ class SermanosNewsCard extends ConsumerWidget {
                 errorWidget: (BuildContext context, String s, dynamic) {
                   return Image.asset(
                       "assets/images/sermanos_image_not_found.png");
+                },
+                placeholder: (BuildContext context, String url) {
+                  return const SermanosSkeleton(rounded: false);
                 },
               ),
               Expanded(
