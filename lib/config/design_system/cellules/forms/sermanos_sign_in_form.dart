@@ -36,7 +36,9 @@ class SermanosSignInForm extends ConsumerWidget {
               label: 'Email',
               enabled: !isLoading,
               validators: [
-                FormBuilderValidators.required(errorText: "Ingrese su email")
+                FormBuilderValidators.required(errorText: "Ingrese su email"),
+                FormBuilderValidators.email(errorText: "Ingrese un mail válido"),
+
               ]),
           const SizedBox(height: 24),
           SermanosTextField(

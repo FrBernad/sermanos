@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_typography.dart';
@@ -45,13 +44,27 @@ class SermanosTextField extends HookConsumerWidget {
     final isObscured = useState(password);
 
     return FormBuilderField<String>(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       initialValue: initialValue,
       name: formField,
       onReset: () => controller.text = initialValue ?? '',
-      validator: FormBuilderValidators.compose(validators ?? []),
+      validator: (value) {
+        if (focusNode.hasFocus) {
+          return null;
+        }
+        if (validators != null) {
+          for (final validator in validators!) {
+            final error = validator(value);
+            if (error != null) {
+              return error;
+            }
+          }
+        }
+        return null;
+      },
       builder: (FormFieldState field) {
         return TextField(
-
+          cursorColor: SermanosColors.secondary200,
           obscureText: isObscured.value,
           enabled: enabled,
           onChanged: (value) => field.didChange(value),
@@ -114,36 +127,37 @@ class SermanosTextField extends HookConsumerWidget {
             errorStyle: const SermanosTypography.body01(
               color: SermanosColors.error100,
             ),
+            errorMaxLines: 3,
             errorText: field.errorText,
             suffixIcon: !enabled
                 ? null
-                : field.hasError
+                : password
                     ? IconButton(
-                        icon: SermanosIcons.errorFilled(
-                          status: SermanosIconStatus.error,
+                        icon: SermanosIcons.showFilled(
+                          status: SermanosIconStatus.enabledSecondary,
+                          hide: isObscured.value,
                         ),
                         onPressed: () {
-                          if (!isEmpty) {
-                            controller.clear();
-                            field.reset();
-                          }
+                          isObscured.value = !isObscured.value;
                         },
                       )
-                    : password
+                    : field.hasError
                         ? IconButton(
-                            icon: SermanosIcons.showFilled(
-                              status: SermanosIconStatus.enabledSecondary,
-                              hide: isObscured.value,
+                            icon: SermanosIcons.errorFilled(
+                              status: SermanosIconStatus.error,
                             ),
                             onPressed: () {
-                              isObscured.value = !isObscured.value;
+                              if (!isEmpty) {
+                                controller.clear();
+                                field.reset();
+                              }
                             },
                           )
                         : isEmpty
                             ? null
                             : IconButton(
                                 icon: SermanosIcons.close(
-                                  status: SermanosIconStatus.enabled,
+                                  status: SermanosIconStatus.activated,
                                 ),
                                 onPressed: () {
                                   if (!isEmpty) {

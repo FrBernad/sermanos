@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sermanos/config/design_system/tokens/sermanos_colors.dart';
@@ -54,10 +53,24 @@ class SermanosDateField extends HookConsumerWidget {
         useListenableSelector(controller, () => controller.text.isEmpty);
 
     return FormBuilderField<String>(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       initialValue: initialValue,
       name: formField,
       onReset: () => controller.text = initialValue,
-      validator: FormBuilderValidators.compose(validators ?? []),
+      validator: (value) {
+        if (focusNode.hasFocus) {
+          return null;
+        }
+        if (validators != null) {
+          for (final validator in validators!) {
+            final error = validator(value);
+            if (error != null) {
+              return error;
+            }
+          }
+        }
+        return null;
+      },
       builder: (FormFieldState field) {
         return TextField(
           keyboardType: TextInputType.datetime,
@@ -125,6 +138,7 @@ class SermanosDateField extends HookConsumerWidget {
             errorStyle: const SermanosTypography.body01(
               color: SermanosColors.error100,
             ),
+            errorMaxLines: 3,
             errorText: field.errorText,
             suffixIcon: !enabled
                 ? null
